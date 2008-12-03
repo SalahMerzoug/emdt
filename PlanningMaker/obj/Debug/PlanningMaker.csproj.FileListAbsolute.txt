@@ -1,0 +1,13 @@
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\bin\Debug\PlanningMaker.exe
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\bin\Debug\PlanningMaker.pdb
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\MainWindow.baml
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\MainWindow.g.cs
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\App.g.cs
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\PlanningMaker_MarkupCompile.cache
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\PlanningMaker.g.resources
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\PlanningMaker.exe
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\PlanningMaker.pdb
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\PlanningMaker_MarkupCompile.lref
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\Vues\VueEnseignant.baml
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Debug\Vues\VueEnseignant.g.cs
