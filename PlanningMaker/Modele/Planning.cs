@@ -13,6 +13,10 @@ namespace PlanningMaker.Modele
         private String promotion;
 
         private ObservableCollection<Enseignant> enseignants;
+        private ObservableCollection<Matiere> matieres;
+        private ObservableCollection<Horaire> horaires;
+        private ObservableCollection<Salle> salles;
+        private ObservableCollection<Semaine> semaines;
 
 
         public EAnnees Annee
@@ -52,6 +56,66 @@ namespace PlanningMaker.Modele
                 promotion = value;
                 ObjectChanged("Promotion");
             }
+        }
+
+        public ICollection<Enseignant> Enseignants
+        {
+            get
+            {
+                return enseignants;
+            }
+        }
+
+        public ICollection<Matiere> Matieres
+        {
+            get
+            {
+                return matieres;
+            }
+        }
+
+        public ICollection<Horaire> Horaires
+        {
+            get
+            {
+                return horaires;
+            }
+        }
+
+        public ICollection<Salle> Salles
+        {
+            get
+            {
+                return salles;
+            }
+        }
+
+        public ICollection<Semaine> Semaines
+        {
+            get
+            {
+                return semaines;
+            }
+        }
+
+        public Planning()
+        {
+            promotion = "undefined";
+            enseignants = new ObservableCollection<Enseignant>();
+            matieres = new ObservableCollection<Matiere>();
+            horaires = new ObservableCollection<Horaire>();
+            salles = new ObservableCollection<Salle>();
+            semaines = new ObservableCollection<Semaine>();
+        }
+
+        public Planning(String promotion)
+        {
+            this.promotion = promotion;
+            enseignants = new ObservableCollection<Enseignant>();
+            matieres = new ObservableCollection<Matiere>();
+            horaires = new ObservableCollection<Horaire>();
+            salles = new ObservableCollection<Salle>();
+            semaines = new ObservableCollection<Semaine>();
         }
     }
 }

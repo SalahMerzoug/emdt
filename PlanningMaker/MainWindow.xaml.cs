@@ -20,7 +20,6 @@ namespace PlanningMaker
 	public partial class MainWindow : Window
 	{
         private String nomFichier;
-        private Semaine semaine;
 
 		public MainWindow()
 		{
