@@ -45,8 +45,10 @@
 		</Menu>
 		<TabControl Margin="0,20,0,0" IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="2" x:Name="TabPanel">
 			<TabItem Header="Semaine" x:Name="Semaine">
-				<Grid/>
-			</TabItem>
+                <Grid>
+                    <GroupBox Width="100" Height="100" Header="ElDeniaud"/>
+                </Grid>
+            </TabItem>
 			<TabItem Header="Enseignants" x:Name="Enseignants">
 				<Grid/>
 			</TabItem>

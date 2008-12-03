@@ -9,3 +9,14 @@ C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Proj
 C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\PlanningMaker.g.resources
 C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\PlanningMaker.exe
 C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\PlanningMaker.pdb
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\obj\Release\PlanningMaker.exe
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\obj\Release\PlanningMaker.pdb
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\bin\Release\PlanningMaker.exe
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\bin\Release\PlanningMaker.pdb
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\obj\Release\ResolveAssemblyReference.cache
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\obj\Release\MainWindow.g.cs
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\obj\Release\App.g.cs
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\obj\Release\PlanningMaker_MarkupCompile.cache
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\obj\Release\PlanningMaker_MarkupCompile.lref
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\obj\Release\MainWindow.baml
+D:\MyWorks\MP_MVC_XML\emdt\PlanningMaker\obj\Release\PlanningMaker.g.resources
