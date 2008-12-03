@@ -162,32 +162,77 @@ namespace PlanningMaker.Modele
             promotion = elementPlanning.SelectSingleNode("promotion/text()").Value;
             //enseignants
             Dictionary<string, Enseignant> dicoEnseignants = new Dictionary<string, Enseignant>();
-            foreach (XmlNode elementHoraire in document.SelectNodes("/emploi-du-temps/enseignants/enseignant"))
+            foreach (XmlNode elementEnseignant in document.SelectNodes("/emploi-du-temps/enseignants/enseignant"))
             {
-
+                string id = elementEnseignant.SelectSingleNode("@id/text()").Value;
+                string prenomEnseignant = elementEnseignant.SelectSingleNode("prenom/text()").Value;
+                string nomEnseignant = elementEnseignant.SelectSingleNode("nom/text()").Value;
+                Enseignant enseignant = new Enseignant(nomEnseignant, prenomEnseignant);
+                dicoEnseignants.Add(id, enseignant);
+                enseignants.Add(enseignant);
             }
             //matieres
             Dictionary<string, Matiere> dicoMatieres = new Dictionary<string, Matiere>();
-            foreach (XmlNode elementHoraire in document.SelectNodes("/emploi-du-temps/matieres/matiere"))
+            foreach (XmlNode elementMatiere in document.SelectNodes("/emploi-du-temps/matieres/matiere"))
             {
-
+                string id = elementMatiere.SelectSingleNode("@id/text()").Value;
+                string titreMatiere = elementMatiere.SelectSingleNode("titre/text()").Value;
+                Matiere matiere = new Matiere(titreMatiere);
+                foreach (XmlNode elementEnseignant in elementMatiere.SelectNodes("enseignant"))
+                {
+                    string idEnseignant = elementEnseignant.SelectSingleNode("@ref/text()").Value;
+                    Enseignant enseignant = dicoEnseignants[idEnseignant];
+                    matiere.Enseignants.Add(enseignant);
+                }
+                dicoMatieres.Add(id, matiere);
+                matieres.Add(matiere);
             }
             //horaires
             Dictionary<string, Horaire> dicoHoraires = new Dictionary<string, Horaire>();
             foreach (XmlNode elementHoraire in document.SelectNodes("/emploi-du-temps/horaires/horaire"))
             {
-
+                string id = elementHoraire.SelectSingleNode("@id/text()").Value;
+                string debutHoraire = elementHoraire.SelectSingleNode("debut/text()").Value;
+                string finHoraire = elementHoraire.SelectSingleNode("fin/text()").Value;
+                Horaire horaire = new Horaire(debutHoraire, finHoraire);
+                dicoHoraires.Add(id, horaire);
+                horaires.Add(horaire);
             }
             //salles
             Dictionary<string, Salle> dicoSalles = new Dictionary<string, Salle>();
-            foreach (XmlNode elementHoraire in document.SelectNodes("/emploi-du-temps/salles/salle"))
+            foreach (XmlNode elementSalle in document.SelectNodes("/emploi-du-temps/salles/salle"))
             {
-
+                string id = elementSalle.SelectSingleNode("@id/text()").Value;
+                string nomSalle = elementSalle.SelectSingleNode("nom/text()").Value;
+                string typeSalle = elementSalle.SelectSingleNode("typeSalle/text()").Value;
+                switch (typeSalle)
+                {
+                    case "Labo" :
+                        Labo labo = new Labo(nomSalle);
+                        dicoSalles.Add(id, labo);
+                        salles.Add(labo);
+                        break;
+                    case "Amphi" :
+                        Amphi amphi = new Amphi(nomSalle);
+                        dicoSalles.Add(id, amphi);
+                        salles.Add(amphi);
+                        break;
+                }
             }
             //semaines
-            foreach (XmlNode elementHoraire in document.SelectNodes("/emploi-du-temps/horaires/horaire"))
+            foreach (XmlNode elementSemaine in document.SelectNodes("/emploi-du-temps/semaines/semaine"))
             {
+                int numeroSemaine = System.Int32.Parse(elementSemaine.SelectSingleNode("numero/text()").Value);
+                string dateSemaine = elementSemaine.SelectSingleNode("date/text()").Value;
+                Semaine semaine = new Semaine(numeroSemaine, dateSemaine);
+                foreach (XmlNode elementJour in elementSemaine.SelectNodes("jour"))
+                {
+                    // TODO
+                    foreach (XmlNode elementEnseignement in elementJour.SelectNodes("enseignements/enseignement"))
+                    {
 
+                    }
+                }
             }
         }
 
