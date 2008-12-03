@@ -1,0 +1,11 @@
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\bin\Release\PlanningMaker.exe
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\bin\Release\PlanningMaker.pdb
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\MainWindow.g.cs
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\App.g.cs
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\PlanningMaker_MarkupCompile.cache
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\PlanningMaker_MarkupCompile.lref
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\MainWindow.baml
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\PlanningMaker.g.resources
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\PlanningMaker.exe
+C:\Documents and Settings\Mathieu\Mes documents\Expression\Expression Blend Projects\PlanningMaker\PlanningMaker\obj\Release\PlanningMaker.pdb

@@ -1,0 +1,64 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:c="clr-namespace:PlanningMaker.Vues"
+	x:Class="PlanningMaker.MainWindow"
+	x:Name="Window"
+	Title="Viactisoft PlanningMaker 2008 School Edition"
+	Width="850" Height="480" Background="#FFC0C0C0">
+	
+	<Window.CommandBindings>
+		<CommandBinding Command="ApplicationCommands.Open" Executed="Open"/>
+		<CommandBinding Command="c:PlanningCommands.Exit" Executed="Exit"/>
+	</Window.CommandBindings>
+	
+	<Grid x:Name="LayoutRoot" OpacityMask="#FFFFFFFF">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="0.154*"/>
+			<ColumnDefinition Width="0.846*"/>
+		</Grid.ColumnDefinitions>
+		<Menu VerticalAlignment="Top" Height="20" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Grid.ColumnSpan="2">
+			<Menu.Background>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="#FF000000" Offset="1"/>
+					<GradientStop Color="#FFCCCCCC" Offset="0.898"/>
+				</LinearGradientBrush>
+			</Menu.Background>
+			<MenuItem Header="Fichier" Height="20" HorizontalAlignment="Left">
+				<MenuItem Header="Charger" HorizontalAlignment="Left" Width="160" Command="ApplicationCommands.Open"/>
+				<Separator/>
+				<MenuItem Header="Enregistrer ..." HorizontalAlignment="Left" Width="160"/>
+				<MenuItem Header="Enregistrer sous ..." HorizontalAlignment="Left" Width="160"/>
+				<Separator/>
+				<MenuItem Header="Quitter" HorizontalAlignment="Left" Width="160" Command="c:PlanningCommands.Exit"/>
+			</MenuItem>
+			<MenuItem Header="Vues" Height="20" HorizontalAlignment="Left">
+				<MenuItem Header="Ressources" HorizontalAlignment="Left" Width="130">
+					<MenuItem Header="Enseignants" HorizontalAlignment="Left" Width="120"/>
+					<MenuItem Header="Matières" HorizontalAlignment="Left" Width="120"/>
+					<MenuItem Header="Plages horaires" HorizontalAlignment="Left" Width="120"/>
+					<MenuItem Header="Salles" HorizontalAlignment="Left" Width="120"/>
+				</MenuItem>
+				<Separator/>
+				<MenuItem Header="Emplois du temps" HorizontalAlignment="Left" Width="130"/>
+			</MenuItem>
+		</Menu>
+		<TabControl Margin="0,20,0,0" IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="2" x:Name="TabPanel">
+			<TabItem Header="Semaine" x:Name="Semaine">
+				<Grid/>
+			</TabItem>
+			<TabItem Header="Enseignants" x:Name="Enseignants">
+				<Grid/>
+			</TabItem>
+			<TabItem Header="Matières" x:Name="Matieres">
+				<Grid/>
+			</TabItem>
+			<TabItem Header="Horaires" x:Name="Horaires">
+				<Grid/>
+			</TabItem>
+			<TabItem Header="Salles" x:Name="Salles">
+				<Grid/>
+			</TabItem>
+		</TabControl>
+	</Grid>
+</Window>
