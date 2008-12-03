@@ -50,17 +50,13 @@ namespace PlanningMaker.Modele
 
         public Semaine()
         {
-            promotion = "undefined";
             numero = 0;
             date = "01/01/1900";
             jours = new ObservableCollection<Jour>();
         }
 
-        public Semaine(EAnnees annee, EDivisions division, String promotion, int numero, String date)
-        {
-            this.annee = annee;
-            this.division = division;
-            this.promotion = promotion;
+        public Semaine(int numero, String date)
+        {;
             this.numero = numero;
             this.date = date;
             this.jours = new ObservableCollection<Jour>();
@@ -68,7 +64,7 @@ namespace PlanningMaker.Modele
 
         public override string ToString()
         {
-            return "Semaine " + numero + " du " + date + " : " + annee + " " + division + " - " + promotion;
+            return "Semaine " + numero + " du " + date;
         }
     }
 }
