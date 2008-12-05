@@ -42,5 +42,11 @@ namespace PlanningMaker
                 System.Console.WriteLine(nomFichier);
             }
         }
+
+        private void MenuItemValiderXML_Click(object sender, RoutedEventArgs e)
+        {
+            ValidationXmlXsd validation = new ValidationXmlXsd();
+            MessageBox.Show(this, validation.ValiderFichierXml("Semaine37.xml"), "Validation XMLSchema : Semaine37.xml");
+        }
 	}
 }

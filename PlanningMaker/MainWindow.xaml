@@ -27,8 +27,8 @@
 			<MenuItem Header="Fichier" Height="20">
 				<MenuItem Header="Charger" Command="ApplicationCommands.Open"/>
 				<Separator/>
-				<MenuItem Header="Enregistrer ..."/>
-				<MenuItem Header="Enregistrer sous ..."/>
+				<MenuItem Header="Enregistrer"/>
+				<MenuItem Header="Enregistrer sous..."/>
 				<Separator/>
 				<MenuItem Header="Quitter" Command="c:PlanningCommands.Exit"/>
 			</MenuItem>
@@ -36,18 +36,27 @@
 				<MenuItem Header="Ressources">
 					<MenuItem Header="Enseignants"/>
 					<MenuItem Header="Matières"/>
-					<MenuItem Header="Plages horaires"/>
+					<MenuItem Header="Horaires"/>
 					<MenuItem Header="Salles"/>
 				</MenuItem>
 				<Separator/>
-				<MenuItem Header="Emplois du temps"/>
+				<MenuItem Header="Emploi du temps"/>
 			</MenuItem>
+            <MenuItem Header="Outils" Height="20">
+                <MenuItem Header="Validation XMLSchema" Click="MenuItemValiderXML_Click"/>
+                <MenuItem Header="Transformations XSLT"/>
+            </MenuItem>
+            <MenuItem Header="?" Height="20">
+                <MenuItem Header="Aide"/>
+                <Separator/>
+                <MenuItem Header="Mettre à jour"/>
+                <Separator/>
+                <MenuItem Header="A propos"/>
+            </MenuItem>
 		</Menu>
 		<TabControl Margin="0,20,0,0" IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="2" x:Name="TabPanel">
 			<TabItem Header="Semaine" x:Name="Semaine">
-                <Grid>
-                    <GroupBox Width="100" Height="100" Header="ElDeniaud"/>
-                </Grid>
+                <Grid/>
             </TabItem>
 			<TabItem Header="Enseignants" x:Name="Enseignants">
 				<Grid/>
