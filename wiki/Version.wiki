@@ -2,4 +2,4 @@
 
 == Version courante ==
 La version courante du logiciel est :
- * 0.0.18
+ * 0.0.22
