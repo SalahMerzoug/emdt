@@ -1,4 +1,4 @@
-#Version courante du logiciel.
+#summary Version courante du logiciel.
 
 == Version courante ==
 La version courante du logiciel est :
