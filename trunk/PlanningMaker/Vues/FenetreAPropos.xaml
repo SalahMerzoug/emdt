@@ -22,26 +22,24 @@
             </Rectangle>
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
 	            <StackPanel Margin="0,10,0,10" HorizontalAlignment="Center" VerticalAlignment="Top">
-	                <TextBlock HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" TextDecorations="Underline" Cursor="Hand" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseLeftButtonDown="TextBlockTitre_MouseLeftButtonDown">PlanningMaker 2008</TextBlock>
-					<Separator Visibility="Hidden"/>
-                    <Separator Visibility="Hidden"/>
-                    <Separator Visibility="Hidden"/>
-	                <TextBlock HorizontalAlignment="Center" TextDecorations="Underline">Mini-projet XML/IHM</TextBlock>
+	                <TextBlock x:Name="TextTitre" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" TextDecorations="Underline" Cursor="Hand" MouseEnter="TextBlockTitre_MouseEnter" MouseLeave="TextBlockTitre_MouseLeave" MouseLeftButtonDown="TextBlockTitre_MouseLeftButtonDown">PlanningMaker 2008</TextBlock>
+					<TextBlock x:Name="TextVersion" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+	                <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center" TextDecorations="Underline">Mini-projet XML/IHM</TextBlock>
 					<TextBlock HorizontalAlignment="Center">Gestion d’emplois du temps</TextBlock>
 	                <TextBlock HorizontalAlignment="Center">I3 - option SI</TextBlock>
-	                <TextBlock HorizontalAlignment="Center" Cursor="Hand" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseLeftButtonDown="TextBlockOBeaudoux_MouseLeftButtonDown">Olivier BEAUDOUX</TextBlock>
-					<TextBlock HorizontalAlignment="Center" Cursor="Hand" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseLeftButtonDown="TextBlockEseo_MouseLeftButtonDown">ESEO</TextBlock>
+	                <TextBlock x:Name="TextOBeaudoux" HorizontalAlignment="Center" Cursor="Hand" MouseEnter="TextBlockOBeaudoux_MouseEnter" MouseLeave="TextBlockOBeaudoux_MouseLeave" MouseLeftButtonDown="TextBlockOBeaudoux_MouseLeftButtonDown">Olivier BEAUDOUX</TextBlock>
+					<TextBlock x:Name="TextEseo" HorizontalAlignment="Center" Cursor="Hand" MouseEnter="TextBlockEseo_MouseEnter" MouseLeave="TextBlockEseo_MouseLeave" MouseLeftButtonDown="TextBlockEseo_MouseLeftButtonDown">ESEO</TextBlock>
 	            </StackPanel>
 	            <Separator/>
 	            <TextBlock HorizontalAlignment="Center">2008-2009</TextBlock>
 	            <Separator/>
-	            <StackPanel Margin="0,10,0,10" HorizontalAlignment="Center" VerticalAlignment="Top">
+	            <StackPanel Margin="10,10,0,10" HorizontalAlignment="Left" VerticalAlignment="Top">
 	                <TextBlock HorizontalAlignment="Left" FontWeight="Bold" FontStyle="Italic">Etudiants :</TextBlock>
-	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseLeftButtonDown="TextBlockHDeFleurian_MouseLeftButtonDown">• Hubert DE FLEURIAN</TextBlock>
-	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseLeftButtonDown="TextBlockMDeniaud_MouseLeftButtonDown">• Mathieu DENIAUD</TextBlock>
-	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseLeftButtonDown="TextBlockFDenouille_MouseLeftButtonDown">• Freddy DENOUILLE</TextBlock>
-	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseLeftButtonDown="TextBlockMRuaud_MouseLeftButtonDown">• Mathieu RUAUD</TextBlock>
-	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlock_MouseEnter" MouseLeave="TextBlock_MouseLeave" MouseLeftButtonDown="TextBlockAThomas_MouseLeftButtonDown">• Alexis THOMAS</TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextHDeFleurian" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockHDeFleurian_MouseEnter" MouseLeave="TextBlockHDeFleurian_MouseLeave" MouseLeftButtonDown="TextBlockHDeFleurian_MouseLeftButtonDown">Hubert DE FLEURIAN</TextBlock></TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextMDeniaud" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockMDeniaud_MouseEnter" MouseLeave="TextBlockMDeniaud_MouseLeave" MouseLeftButtonDown="TextBlockMDeniaud_MouseLeftButtonDown">Mathieu DENIAUD</TextBlock></TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextFDenouille" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockFDenouille_MouseEnter" MouseLeave="TextBlockFDenouille_MouseLeave" MouseLeftButtonDown="TextBlockFDenouille_MouseLeftButtonDown">Freddy DENOUILLE</TextBlock></TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextMRuaud" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockMRuaud_MouseEnter" MouseLeave="TextBlockMRuaud_MouseLeave" MouseLeftButtonDown="TextBlockMRuaud_MouseLeftButtonDown">Mathieu RUAUD</TextBlock></TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextAThomas" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockAThomas_MouseEnter" MouseLeave="TextBlockAThomas_MouseLeave" MouseLeftButtonDown="TextBlockAThomas_MouseLeftButtonDown">Alexis THOMAS</TextBlock></TextBlock>
 	            </StackPanel>
 	        </StackPanel>
         </DockPanel>

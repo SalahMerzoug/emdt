@@ -11,13 +11,19 @@ namespace PlanningMaker
 	public partial class MainWindow : Window
 	{
         private String nomFichier;
+        private static string numeroVersion = "0.1.17";
 
 		public MainWindow()
 		{
 			this.InitializeComponent();
 			
 			// Insert code required on object creation below this point.
-		}
+        }
+
+        public static string getNumeroVersion()
+        {
+            return numeroVersion;
+        }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
@@ -27,10 +33,12 @@ namespace PlanningMaker
         private void Open(object sender, RoutedEventArgs e)
         {
             OpenFileDialog dialogue = new OpenFileDialog();
+            dialogue.InitialDirectory = "Desktop";
+            // todo : restreindre aux fichiers .xml
             if (dialogue.ShowDialog() == true)
             {
                 nomFichier = dialogue.FileName;
-                System.Console.WriteLine(nomFichier);
+                MessageBox.Show(nomFichier);
             }
         }
 
@@ -47,8 +55,7 @@ namespace PlanningMaker
             this.Opacity *= 0.8;
             fAPropos.ShowDialog();
             this.Opacity = 1;
-            //this.IsActive = false;
-            /*if (fAPropos.IsMouseOver)
+            /*if (!fAPropos.IsMouseOver)
                 fAPropos.RenderTransform.BeginAnimation(
              * 
              * ... à venir : Alexis.
