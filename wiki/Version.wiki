@@ -1,0 +1,5 @@
+#Version courante du logiciel.
+
+== Version courante ==
+La version courante du logiciel est :
+ * 0.0.18
