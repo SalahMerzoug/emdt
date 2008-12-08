@@ -44,7 +44,7 @@
 			</MenuItem>
             <MenuItem Header="Outils" Height="20">
                 <MenuItem Header="Validation XMLSchema" Click="MenuItemValiderXML_Click"/>
-                <MenuItem Header="Transformations XSLT"/>
+                <MenuItem Header="Transformations XSLT" Click="MenuItemTransfoXSLT_Click"/>
             </MenuItem>
             <MenuItem Header="?" Height="20">
                 <MenuItem Header="Aide"/>
