@@ -11,7 +11,7 @@ namespace PlanningMaker
 	public partial class MainWindow : Window
 	{
         private String nomFichier;
-        private static string numeroVersion = "0.1.17";
+        private static string numeroVersion = "0.1.18";
 
 		public MainWindow()
 		{
@@ -46,6 +46,12 @@ namespace PlanningMaker
         {
             ValidationXmlXsd validation = new ValidationXmlXsd();
             MessageBox.Show(this, validation.ValiderFichierXml("Semaine37.xml"), "Validation XMLSchema : Semaine37.xml");
+        }
+
+        private void MenuItemTransfoXSLT_Click(object sender, RoutedEventArgs e)
+        {
+            TransformationXslt transformation = new TransformationXslt();
+            transformation.TransformerXslt("nomFichierXSL.xsl", "nomFichierXML.xml");
         }
 
         private void MenuItemAPropos_Click(object sender, RoutedEventArgs e)
