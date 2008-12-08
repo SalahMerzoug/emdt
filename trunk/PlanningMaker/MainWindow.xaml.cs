@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using PlanningMaker.Modele;
 using Microsoft.Win32;
+using PlanningMaker.Modele;
 
 namespace PlanningMaker
 {
@@ -47,6 +38,22 @@ namespace PlanningMaker
         {
             ValidationXmlXsd validation = new ValidationXmlXsd();
             MessageBox.Show(this, validation.ValiderFichierXml("Semaine37.xml"), "Validation XMLSchema : Semaine37.xml");
+        }
+
+        private void MenuItemAPropos_Click(object sender, RoutedEventArgs e)
+        {
+            Vues.FenetreAPropos fAPropos = new Vues.FenetreAPropos();
+            fAPropos.Owner = this;
+            this.Opacity *= 0.8;
+            fAPropos.ShowDialog();
+            this.Opacity = 1;
+            //this.IsActive = false;
+            /*if (fAPropos.IsMouseOver)
+                fAPropos.RenderTransform.BeginAnimation(
+             * 
+             * ... à venir : Alexis.
+             * 
+             */
         }
 	}
 }

@@ -5,7 +5,7 @@
 	x:Class="PlanningMaker.MainWindow"
 	x:Name="Window"
 	Title="Viactisoft PlanningMaker 2008 School Edition"
-	Width="850" Height="480" Background="#FFC0C0C0">
+	Width="850" Height="480" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen">
 	
 	<Window.CommandBindings>
 		<CommandBinding Command="ApplicationCommands.Open" Executed="Open"/>
@@ -25,7 +25,7 @@
 				</LinearGradientBrush>
 			</Menu.Background>
 			<MenuItem Header="Fichier" Height="20">
-				<MenuItem Header="Charger" Command="ApplicationCommands.Open"/>
+				<MenuItem Header="Ouvrir" Command="ApplicationCommands.Open"/>
 				<Separator/>
 				<MenuItem Header="Enregistrer"/>
 				<MenuItem Header="Enregistrer sous..."/>
@@ -51,7 +51,7 @@
                 <Separator/>
                 <MenuItem Header="Mettre à jour"/>
                 <Separator/>
-                <MenuItem Header="A propos"/>
+                <MenuItem Header="A propos" Click="MenuItemAPropos_Click"/>
             </MenuItem>
 		</Menu>
 		<TabControl Margin="0,20,0,0" IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="2" x:Name="TabPanel">
