@@ -51,7 +51,13 @@ namespace PlanningMaker
         private void MenuItemTransfoXSLT_Click(object sender, RoutedEventArgs e)
         {
             TransformationXslt transformation = new TransformationXslt();
-            transformation.TransformerXslt("nomFichierXSL.xsl", "nomFichierXML.xml");
+            transformation.TransformerXslt("EdTversSVG.xsl", "Semaine37.xml");
+        }
+
+        private void MenuItemMAJ_Click(object sender, RoutedEventArgs e)
+        {
+            MiseAJour maj = new MiseAJour();
+            maj.VerifierMAJ();
         }
 
         private void MenuItemAPropos_Click(object sender, RoutedEventArgs e)

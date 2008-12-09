@@ -70,6 +70,7 @@
     <Compile Include="Modele\Enseignant.cs" />
     <Compile Include="Modele\Horaire.cs" />
     <Compile Include="Modele\Matiere.cs" />
+    <Compile Include="Modele\MiseAJour.cs" />
     <Compile Include="Modele\ObservableObject.cs" />
     <Compile Include="Modele\Planning.cs" />
     <Compile Include="Modele\Salle.cs" />
@@ -104,6 +105,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Files\SchemaEdT.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\EdTversSVG.xsl" />
+    <Resource Include="Files\Fonctions.xsl" />
+    <Resource Include="Files\ModelesSVG.xsl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
