@@ -8,15 +8,24 @@
 	Width="850" Height="480" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen">
 	
 	<Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="New"/>
 		<CommandBinding Command="ApplicationCommands.Open" Executed="Open"/>
+        <CommandBinding Command="ApplicationCommands.Close" Executed="Close"/>
+        <CommandBinding Command="ApplicationCommands.Save" Executed="Save"/>
+        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs"/>
+        <CommandBinding Command="ApplicationCommands.PrintPreview" Executed="PrintPreview"/>
+        <CommandBinding Command="ApplicationCommands.Print" Executed="Print"/>
 		<CommandBinding Command="c:PlanningCommands.Exit" Executed="Exit"/>
-	</Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Undo" Executed="Undo"/>
+        <CommandBinding Command="ApplicationCommands.Redo" Executed="Redo"/>
+        <CommandBinding Command="ApplicationCommands.Cut" Executed="Cut"/>
+        <CommandBinding Command="ApplicationCommands.Copy" Executed="Copy"/>
+        <CommandBinding Command="ApplicationCommands.Paste" Executed="Paste"/>
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="Delete"/>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="Help"/>
+    </Window.CommandBindings>
 	
-	<Grid x:Name="LayoutRoot" OpacityMask="#FFFFFFFF">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="0.154*"/>
-			<ColumnDefinition Width="0.846*"/>
-		</Grid.ColumnDefinitions>
+	<Grid x:Name="LayoutRoot">
 		<Menu VerticalAlignment="Top" Height="20" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Grid.ColumnSpan="2">
 			<Menu.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -25,14 +34,28 @@
 				</LinearGradientBrush>
 			</Menu.Background>
 			<MenuItem Header="Fichier" Height="20">
+                <MenuItem Header="Nouveau" Command="ApplicationCommands.New"/>
 				<MenuItem Header="Ouvrir" Command="ApplicationCommands.Open"/>
+                <MenuItem Header="Fermer" Command="ApplicationCommands.Close"/>
 				<Separator/>
-				<MenuItem Header="Enregistrer"/>
-				<MenuItem Header="Enregistrer sous..."/>
+				<MenuItem Header="Enregistrer" Command="ApplicationCommands.Save"/>
+				<MenuItem Header="Enregistrer sous..." Command="ApplicationCommands.SaveAs"/>
 				<Separator/>
+                <MenuItem Header="Aperçu" Command="ApplicationCommands.PrintPreview"/>
+                <MenuItem Header="Imprimer" Command="ApplicationCommands.Print"/>
+                <Separator/>
 				<MenuItem Header="Quitter" Command="c:PlanningCommands.Exit"/>
 			</MenuItem>
-			<MenuItem Header="Vues" Height="20">
+            <MenuItem Header="Edition" Height="20">
+                <MenuItem Header="Annuler" Command="ApplicationCommands.Undo"/>
+                <MenuItem Header="Rétablir" Command="ApplicationCommands.Redo"/>
+                <Separator/>
+                <MenuItem Header="Couper" Command="ApplicationCommands.Cut"/>
+                <MenuItem Header="Copier" Command="ApplicationCommands.Copy"/>
+                <MenuItem Header="Coller" Command="ApplicationCommands.Paste"/>
+                <MenuItem Header="Supprimer" Command="ApplicationCommands.Delete"/>
+            </MenuItem>
+            <MenuItem Header="Vues" Height="20">
 				<MenuItem Header="Ressources">
 					<MenuItem Header="Enseignants"/>
 					<MenuItem Header="Matières"/>
@@ -47,7 +70,7 @@
                 <MenuItem Header="Transformations XSLT" Click="MenuItemTransfoXSLT_Click"/>
             </MenuItem>
             <MenuItem Header="?" Height="20">
-                <MenuItem Header="Aide"/>
+                <MenuItem Header="Aide" Command="ApplicationCommands.Help"/>
                 <Separator/>
                 <MenuItem Header="Mettre à jour" Click="MenuItemMAJ_Click"/>
                 <Separator/>
