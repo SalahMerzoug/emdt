@@ -56,14 +56,14 @@
                 <MenuItem Header="Supprimer" Command="ApplicationCommands.Delete"/>
             </MenuItem>
             <MenuItem Header="Vues" Height="20">
+                <MenuItem Header="Emploi du temps" Click="MenuItemEdT_Click"/>
+                <Separator/>
 				<MenuItem Header="Ressources">
-					<MenuItem Header="Enseignants"/>
-					<MenuItem Header="Matières"/>
-					<MenuItem Header="Horaires"/>
-					<MenuItem Header="Salles"/>
+					<MenuItem Header="Enseignants" Click="MenuItemEnseignant_Click"/>
+					<MenuItem Header="Matières" Click="MenuItemMatiere_Click"/>
+					<MenuItem Header="Horaires" Click="MenuItemHoraire_Click"/>
+					<MenuItem Header="Salles" Click="MenuItemSalle_Click"/>
 				</MenuItem>
-				<Separator/>
-				<MenuItem Header="Emploi du temps"/>
 			</MenuItem>
             <MenuItem Header="Outils" Height="20">
                 <MenuItem Header="Validation XMLSchema" Click="MenuItemValiderXML_Click"/>
@@ -78,19 +78,19 @@
             </MenuItem>
 		</Menu>
 		<TabControl Margin="0,20,0,0" IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="2" x:Name="TabPanel">
-			<TabItem Header="Semaine" x:Name="Semaine">
+			<TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps">
                 <Grid/>
             </TabItem>
-			<TabItem Header="Enseignants" x:Name="Enseignants">
+			<TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
 				<Grid/>
 			</TabItem>
-			<TabItem Header="Matières" x:Name="Matieres">
+			<TabItem Header="Matières" x:Name="TabItem_Matieres">
 				<Grid/>
 			</TabItem>
-			<TabItem Header="Horaires" x:Name="Horaires">
+			<TabItem Header="Horaires" x:Name="TabItem_Horaires">
 				<Grid/>
 			</TabItem>
-			<TabItem Header="Salles" x:Name="Salles">
+			<TabItem Header="Salles" x:Name="TabItem_Salles">
 				<Grid/>
 			</TabItem>
 		</TabControl>
