@@ -13,19 +13,16 @@ namespace PlanningMaker.Vues
         {
             InitializeComponent();
             TextVersion.Text = "◈ " + "Version " + MainWindow.getNumeroVersion() + " ◈";
+            ((Storyboard)FindResource("Storyboard1")).Begin();
         }
 
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
-            Storyboard storyB = (Storyboard)(FindResource("Storyboard1"));
-            storyB.Pause();
-            //MessageBox.Show(storyB.Name);
+            ((Storyboard)FindResource("Storyboard1")).Pause();
         }
         private void Window_MouseLeave(object sender, MouseEventArgs e)
         {
-            Storyboard storyB = (Storyboard)(FindResource("Storyboard1"));
-            storyB.Resume();
-            //MessageBox.Show(storyB.Name);
+            ((Storyboard)FindResource("Storyboard1")).Resume();
         }
 
 		// Liens hypertextes cliquables

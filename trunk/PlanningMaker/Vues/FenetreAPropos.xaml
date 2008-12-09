@@ -30,11 +30,6 @@
 			</DoubleAnimationUsingKeyFrames>
 		</Storyboard>
 	</Window.Resources>
-	<Window.Triggers>
-		<EventTrigger RoutedEvent="FrameworkElement.Loaded">
-			<BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
-		</EventTrigger>
-	</Window.Triggers>
     <Grid>
         <DockPanel>
             <Rectangle DockPanel.Dock="Left" Margin="-50,-30,-40,-40" Width="100" x:Name="rectangle" RenderTransformOrigin="0.5,0.5">
