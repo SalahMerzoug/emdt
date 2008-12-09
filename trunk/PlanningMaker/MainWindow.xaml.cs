@@ -24,23 +24,82 @@ namespace PlanningMaker
             return numeroVersion;
         }
 
-        private void Exit(object sender, RoutedEventArgs e)
+        private void New(object sender, RoutedEventArgs e)
         {
-            Close();
+            // TODO
         }
-
         private void Open(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog dialogue = new System.Windows.Forms.OpenFileDialog();
-            dialogue.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            dialogue.Filter = "XML File (*.xml)|*.xml";
+            System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
+            dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            dialogueO.Filter = "Fichier XML (*.xml)|*.xml";
 
-            if (dialogue.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                nomFichier = dialogue.FileName;
-                string nomFichierSansPath = dialogue.SafeFileName;
+                nomFichier = dialogueO.FileName;
+                string nomFichierSansPath = dialogueO.SafeFileName;
                 MessageBox.Show(nomFichierSansPath);
             }
+        }
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void Save(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void SaveAs(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
+            dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            dialogueS.Filter = "Fichier XML (*.xml)|*.xml";
+            dialogueS.DefaultExt = "*.xml";
+
+            if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                // TODO
+            }
+        }
+        private void PrintPreview(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void Print(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        private void Undo(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void Redo(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void Cut(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void Copy(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void Paste(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+            // TODO
+        }
+        private void Help(object sender, RoutedEventArgs e)
+        {
+            // TODO
         }
 
         private void MenuItemValiderXML_Click(object sender, RoutedEventArgs e)
