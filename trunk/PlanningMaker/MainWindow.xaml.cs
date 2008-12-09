@@ -102,6 +102,27 @@ namespace PlanningMaker
             // TODO
         }
 
+        private void MenuItemEdT_Click(object sender, RoutedEventArgs e)
+        {
+            this.TabPanel.SelectedItem = TabItem_Emploi_du_temps;
+        }
+        private void MenuItemEnseignant_Click(object sender, RoutedEventArgs e)
+        {
+            this.TabPanel.SelectedItem = TabItem_Enseignants;
+        }
+        private void MenuItemMatiere_Click(object sender, RoutedEventArgs e)
+        {
+            this.TabPanel.SelectedItem = TabItem_Matieres;
+        }
+        private void MenuItemHoraire_Click(object sender, RoutedEventArgs e)
+        {
+            this.TabPanel.SelectedItem = TabItem_Horaires;
+        }
+        private void MenuItemSalle_Click(object sender, RoutedEventArgs e)
+        {
+            this.TabPanel.SelectedItem = TabItem_Salles;
+        }
+
         private void MenuItemValiderXML_Click(object sender, RoutedEventArgs e)
         {
             ValidationXmlXsd validation = new ValidationXmlXsd();
