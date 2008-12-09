@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace PlanningMaker.Vues
 {
@@ -12,6 +13,19 @@ namespace PlanningMaker.Vues
         {
             InitializeComponent();
             TextVersion.Text = "◈ " + "Version " + MainWindow.getNumeroVersion() + " ◈";
+        }
+
+        private void Window_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Storyboard storyB = (Storyboard)(FindResource("Storyboard1"));
+            storyB.Pause();
+            //MessageBox.Show(storyB.Name);
+        }
+        private void Window_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Storyboard storyB = (Storyboard)(FindResource("Storyboard1"));
+            storyB.Resume();
+            //MessageBox.Show(storyB.Name);
         }
 
 		// Liens hypertextes cliquables
