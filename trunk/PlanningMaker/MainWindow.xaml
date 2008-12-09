@@ -49,7 +49,7 @@
             <MenuItem Header="?" Height="20">
                 <MenuItem Header="Aide"/>
                 <Separator/>
-                <MenuItem Header="Mettre à jour"/>
+                <MenuItem Header="Mettre à jour" Click="MenuItemMAJ_Click"/>
                 <Separator/>
                 <MenuItem Header="A propos" Click="MenuItemAPropos_Click"/>
             </MenuItem>
