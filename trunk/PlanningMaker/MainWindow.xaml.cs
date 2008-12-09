@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using Microsoft.Win32;
 using PlanningMaker.Modele;
 
 namespace PlanningMaker
@@ -32,13 +31,15 @@ namespace PlanningMaker
 
         private void Open(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dialogue = new OpenFileDialog();
-            dialogue.InitialDirectory = "Desktop";
-            // todo : restreindre aux fichiers .xml
-            if (dialogue.ShowDialog() == true)
+            System.Windows.Forms.OpenFileDialog dialogue = new System.Windows.Forms.OpenFileDialog();
+            dialogue.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            dialogue.Filter = "XML File (*.xml)|*.xml";
+
+            if (dialogue.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 nomFichier = dialogue.FileName;
-                MessageBox.Show(nomFichier);
+                string nomFichierSansPath = dialogue.SafeFileName;
+                MessageBox.Show(nomFichierSansPath);
             }
         }
 
@@ -64,15 +65,9 @@ namespace PlanningMaker
         {
             Vues.FenetreAPropos fAPropos = new Vues.FenetreAPropos();
             fAPropos.Owner = this;
-            this.Opacity *= 0.8;
+            this.Opacity = 0.8;
             fAPropos.ShowDialog();
             this.Opacity = 1;
-            /*if (!fAPropos.IsMouseOver)
-                fAPropos.RenderTransform.BeginAnimation(
-             * 
-             * ... à venir : Alexis.
-             * 
-             */
         }
 	}
 }
