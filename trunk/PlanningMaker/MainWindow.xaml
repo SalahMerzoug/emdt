@@ -83,9 +83,28 @@
 		<TabControl Margin="0,20,0,26" IsSynchronizedWithCurrentItem="True" x:Name="TabPanel" d:LayoutOverrides="GridBox">
 			<TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps"/>
 			<TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
-                <Grid>
-                    <c:VueEnseignant VerticalAlignment="Center"/>
-                </Grid>
+                <DockPanel>
+                    <c:VueEnseignant VerticalAlignment="Center" DockPanel.Dock="Left"/>
+                    <Expander DockPanel.Dock="Right" Header="Professeurs" Width="100">
+                        <ListBox>
+                            <ListBoxItem>
+                                <TextBlock Text="Prof 1"/>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <TextBlock Text="Prof 2"/>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <TextBlock Text="Prof 3"/>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <TextBlock Text="Prof 4"/>
+                            </ListBoxItem>
+                            <ListBoxItem>
+                                <TextBlock Text="Prof 5"/>
+                            </ListBoxItem>
+                        </ListBox>
+                    </Expander>
+                </DockPanel>
             </TabItem>
 			<TabItem Header="Matières" x:Name="TabItem_Matieres">
 				<Grid/>

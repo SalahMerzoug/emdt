@@ -20,13 +20,13 @@ namespace PlanningMaker.Vues
     /// </summary>
     public partial class VueEnseignant : UserControl
     {
-        private Enseignant enseigant;
+        private Enseignant enseignant;
 
         public VueEnseignant()
         {
             InitializeComponent();
-            enseigant = new Enseignant();
-            DataContext = enseigant;
+            enseignant = new Enseignant();
+            DataContext = enseignant;
         }
     }
 }
