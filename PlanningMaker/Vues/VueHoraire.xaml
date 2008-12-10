@@ -3,10 +3,8 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	mc:Ignorable="d"
-	x:Class="PlanningMaker.VueHoraire"
-	x:Name="Horaire"
-	d:DesignWidth="640" d:DesignHeight="480" Height="51" Width="175">
+	x:Class="PlanningMaker.Vues.VueHoraire"
+    Height="51" Width="175">
 
 	<Grid x:Name="LayoutRoot">
 		<Label Content="Début" VerticalAlignment="Top" Width="50" HorizontalAlignment="Left"/>
