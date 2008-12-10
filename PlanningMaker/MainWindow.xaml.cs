@@ -44,7 +44,7 @@ namespace PlanningMaker
         private void Open(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
-            dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueO.Filter = "Fichier XML (*.xml)|*.xml";
 
             if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
@@ -65,7 +65,7 @@ namespace PlanningMaker
         private void SaveAs(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
-            dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueS.Filter = "Fichier XML (*.xml)|*.xml";
             dialogueS.DefaultExt = "*.xml";
 
