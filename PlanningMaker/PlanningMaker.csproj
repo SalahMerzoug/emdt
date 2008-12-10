@@ -116,12 +116,15 @@
     <None Include="Files\SchemaEdT.xsd" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\EdTversSVG.xsl" />
+    <Resource Include="Files\EdTversSVG-IE.xsl" />
     <Resource Include="Files\Fonctions.xsl" />
     <Resource Include="Files\ModelesSVG.xsl" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Files\RequetesXPath.xsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\EdTversSVG-FF.xsl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

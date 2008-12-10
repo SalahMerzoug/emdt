@@ -5,7 +5,7 @@
 	<Window.Resources>
 		<Storyboard x:Key="Storyboard1" x:Name="ST" RepeatBehavior="Forever">
 			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
-				<SplineColorKeyFrame KeyTime="00:00:02" Value="Orange"/>
+				<SplineColorKeyFrame KeyTime="00:00:02" Value="OrangeRed"/>
 				<SplineColorKeyFrame KeyTime="00:00:04" Value="Yellow"/>
 			</ColorAnimationUsingKeyFrames>
             <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
@@ -17,7 +17,7 @@
                 <SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
             <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
-				<SplineColorKeyFrame KeyTime="00:00:03" Value="Orange"/>
+				<SplineColorKeyFrame KeyTime="00:00:03" Value="OrangeRed"/>
 				<SplineColorKeyFrame KeyTime="00:00:05" Value="Yellow"/>
 			</ColorAnimationUsingKeyFrames>
 			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
