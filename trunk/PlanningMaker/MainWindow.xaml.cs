@@ -1,7 +1,11 @@
-﻿using System;
+﻿using System.ComponentModel;
+using System;
 using System.Windows;
-using PlanningMaker.Modele;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
+using Microsoft.Win32;
+using PlanningMaker.Modele;
 
 namespace PlanningMaker
 {
@@ -41,6 +45,26 @@ namespace PlanningMaker
         private void New(object sender, RoutedEventArgs e)
         {
             planning = new Planning();
+
+            ICollectionView vueSemaines = CollectionViewSource.GetDefaultView(planning.Semaines);
+            vueSemaines.SortDescriptions.Add(new SortDescription("Numero", ListSortDirection.Ascending));
+            vueSemaines.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Ascending));
+
+            ICollectionView vueEnseignants = CollectionViewSource.GetDefaultView(planning.Enseignants);
+            vueEnseignants.SortDescriptions.Add(new SortDescription("Nom", ListSortDirection.Ascending));
+            vueEnseignants.SortDescriptions.Add(new SortDescription("Prenom", ListSortDirection.Ascending));
+
+            ICollectionView vueSalles = CollectionViewSource.GetDefaultView(planning.Salles);
+            vueSalles.SortDescriptions.Add(new SortDescription("Nom", ListSortDirection.Ascending));
+            vueSalles.SortDescriptions.Add(new SortDescription("Type", ListSortDirection.Ascending));
+
+            ICollectionView vueHoraires = CollectionViewSource.GetDefaultView(planning.Horaires);
+            vueHoraires.SortDescriptions.Add(new SortDescription("Debut", ListSortDirection.Ascending));
+            vueHoraires.SortDescriptions.Add(new SortDescription("Fin", ListSortDirection.Ascending));
+
+            ICollectionView vueMatieres = CollectionViewSource.GetDefaultView(planning.Matieres);
+            vueMatieres.SortDescriptions.Add(new SortDescription("Titre", ListSortDirection.Ascending));
+
         }
 
         private void Open(object sender, RoutedEventArgs e)
