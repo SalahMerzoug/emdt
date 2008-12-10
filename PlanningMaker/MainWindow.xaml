@@ -96,8 +96,10 @@
                 </Grid>
             </TabItem>
 			<TabItem Header="Salles" x:Name="TabItem_Salles">
-				<Grid/>
-			</TabItem>
+                <Grid>
+                    <c:VueSalle/>
+                </Grid>
+            </TabItem>
             <TabItem Header="Requêtes XPath" x:Name="TabItem_XPath">
                 <Grid>
                     <c:VueRequetesXPath VerticalAlignment="Center"></c:VueRequetesXPath>
