@@ -12,18 +12,18 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PlanningMaker.Modele;
 
-namespace PlanningMaker
+namespace PlanningMaker.Vues
 {
 	/// <summary>
 	/// Interaction logic for VueHoraire.xaml
 	/// </summary>
-	public partial class VueHoraire
+	public partial class VueHoraire : UserControl
 	{
         private Horaire horaire;
 
 		public VueHoraire()
 		{
-			this.InitializeComponent();
+            InitializeComponent();
             horaire = new Horaire();
             DataContext = horaire;
 		}

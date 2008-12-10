@@ -5,7 +5,7 @@
 	x:Class="PlanningMaker.MainWindow"
 	x:Name="Window"
 	Title="Viactisoft PlanningMaker 2008 School Edition"
-	Width="850" Height="480" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen">
+	Width="850" Height="506" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
 	
 	<Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="New"/>
@@ -23,10 +23,12 @@
         <CommandBinding Command="ApplicationCommands.Paste" Executed="Paste"/>
         <CommandBinding Command="ApplicationCommands.Delete" Executed="Delete"/>
         <CommandBinding Command="ApplicationCommands.Help" Executed="Help"/>
+		<CommandBinding Command="c:PlanningCommands.AjouterElement" Executed="AjouterElement" CanExecute="AjouterElementPossible"/>
+        <CommandBinding Command="ApplicationCommands.Delete" Executed="SupprimerElement" CanExecute="SupprimerElementPossible"/>
     </Window.CommandBindings>
 	
 	<Grid x:Name="LayoutRoot">
-		<Menu VerticalAlignment="Top" Height="20" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" Grid.ColumnSpan="2">
+		<Menu VerticalAlignment="Top" Height="20" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}" d:LayoutOverrides="GridBox">
 			<Menu.Background>
 				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 					<GradientStop Color="#FF000000" Offset="1"/>
@@ -78,10 +80,8 @@
                 <MenuItem Header="A propos" x:Name="MenuItem_Apropos" Click="MenuItemAPropos_Click"/>
             </MenuItem>
 		</Menu>
-		<TabControl Margin="0,20,0,0" IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="2" x:Name="TabPanel">
-			<TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps">
-                <Grid/>
-            </TabItem>
+		<TabControl Margin="0,20,0,26" IsSynchronizedWithCurrentItem="True" x:Name="TabPanel" d:LayoutOverrides="GridBox">
+			<TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps"/>
 			<TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
                 <Grid>
                     <c:VueEnseignant VerticalAlignment="Center"></c:VueEnseignant>
@@ -91,11 +91,18 @@
 				<Grid/>
 			</TabItem>
 			<TabItem Header="Horaires" x:Name="TabItem_Horaires">
-				<Grid/>
-			</TabItem>
+                <Grid>
+                    <c:VueHoraire></c:VueHoraire>
+                </Grid>
+            </TabItem>
 			<TabItem Header="Salles" x:Name="TabItem_Salles">
 				<Grid/>
 			</TabItem>
+			<Grid/>
 		</TabControl>
+		<ToolBar Name="BarreOutils" VerticalAlignment="Bottom" Height="22">
+			<Button MinWidth="25" Command="c:PlanningCommands.AjouterElement">Ajouter</Button>
+            <Button MinWidth="25" Command="ApplicationCommands.Delete">Supprimer</Button>
+		</ToolBar>
 	</Grid>
 </Window>

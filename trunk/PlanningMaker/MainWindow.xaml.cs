@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using PlanningMaker.Modele;
+using System.Windows.Input;
 
 namespace PlanningMaker
 {
@@ -170,5 +171,24 @@ namespace PlanningMaker
             fAPropos.ShowDialog();
             this.Opacity = 1;
         }
+
+        private void AjouterElement(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void SupprimerElement(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void AjouterElementPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = false;
+        }
+
+        private void SupprimerElementPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = false;
+        }
 	}
+    
 }
