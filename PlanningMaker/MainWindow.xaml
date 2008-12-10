@@ -99,9 +99,9 @@
 				<Grid/>
 			</TabItem>
 		</TabControl>
-		<ToolBar Name="BarreOutils" VerticalAlignment="Bottom" Height="22">
-			<Button MinWidth="25" Command="c:PlanningCommands.AjouterElement">Ajouter</Button>
-            <Button MinWidth="25" Command="ApplicationCommands.Delete">Supprimer</Button>
+		<ToolBar Name="BarreOutils" VerticalAlignment="Bottom">
+			<Button Command="c:PlanningCommands.AjouterElement">Ajouter</Button>
+            <Button Command="ApplicationCommands.Delete">Supprimer</Button>
 		</ToolBar>
 	</Grid>
 </Window>
