@@ -11,8 +11,8 @@
         <CommandBinding Command="ApplicationCommands.New" Executed="New"/>
 		<CommandBinding Command="ApplicationCommands.Open" Executed="Open"/>
         <CommandBinding Command="ApplicationCommands.Close" Executed="Close"/>
-        <CommandBinding Command="ApplicationCommands.Save" Executed="Save"/>
-        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs"/>
+        <CommandBinding Command="ApplicationCommands.Save" Executed="Save" CanExecute="EnregistrementPossible"/>
+        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs" CanExecute="EnregistrementPossible"/>
         <CommandBinding Command="ApplicationCommands.PrintPreview" Executed="PrintPreview"/>
         <CommandBinding Command="ApplicationCommands.Print" Executed="Print"/>
 		<CommandBinding Command="c:PlanningCommands.Exit" Executed="Exit"/>
@@ -90,9 +90,9 @@
 			<TabItem Header="Matières" x:Name="TabItem_Matieres">
 				<Grid/>
 			</TabItem>
-			<TabItem Header="Horaires" x:Name="TabItem_Horaires">
+			<TabItem Header="Horaires" x:Name="TabItem_Horaires" DataContext="{Binding Path=Horaires}">
                 <Grid>
-                    <c:VueHoraire></c:VueHoraire>
+                    <c:VueHoraire/>
                 </Grid>
             </TabItem>
 			<TabItem Header="Salles" x:Name="TabItem_Salles">

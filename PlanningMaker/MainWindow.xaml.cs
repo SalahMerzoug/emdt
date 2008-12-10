@@ -11,11 +11,14 @@ namespace PlanningMaker
 	public partial class MainWindow : Window
 	{
         private String nomFichier;
+        private Planning planning;
         private static string numeroVersion = "0.1.18";
 
 		public MainWindow()
 		{
 			this.InitializeComponent();
+            MessageBox.Show("Creation de la vue");
+            DataContext = planning;
 			
 			// Insert code required on object creation below this point.
 
@@ -40,8 +43,11 @@ namespace PlanningMaker
 
         private void New(object sender, RoutedEventArgs e)
         {
-            // TODO
+            MessageBox.Show("Creation d'un document");
+            planning = new Planning();
+            MessageBox.Show((planning!=null)? "not null" : "null");
         }
+
         private void Open(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
@@ -59,10 +65,12 @@ namespace PlanningMaker
         {
             // TODO
         }
+
         private void Save(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void SaveAs(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
@@ -75,42 +83,57 @@ namespace PlanningMaker
                 // TODO
             }
         }
+
+        private void EnregistrementPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (planning!=null);
+        }
+
         private void PrintPreview(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void Print(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void Exit(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+
         private void Undo(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void Redo(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void Cut(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void Copy(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void Paste(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void Delete(object sender, RoutedEventArgs e)
         {
             // TODO
         }
+
         private void Help(object sender, RoutedEventArgs e)
         {
             // TODO
@@ -120,18 +143,22 @@ namespace PlanningMaker
         {
             this.TabPanel.SelectedItem = TabItem_Emploi_du_temps;
         }
+
         private void MenuItemEnseignant_Click(object sender, RoutedEventArgs e)
         {
             this.TabPanel.SelectedItem = TabItem_Enseignants;
         }
+
         private void MenuItemMatiere_Click(object sender, RoutedEventArgs e)
         {
             this.TabPanel.SelectedItem = TabItem_Matieres;
         }
+
         private void MenuItemHoraire_Click(object sender, RoutedEventArgs e)
         {
             this.TabPanel.SelectedItem = TabItem_Horaires;
         }
+
         private void MenuItemSalle_Click(object sender, RoutedEventArgs e)
         {
             this.TabPanel.SelectedItem = TabItem_Salles;
