@@ -15,7 +15,7 @@ namespace PlanningMaker.Modele
             String nomFichierXMLsansExtension = nomFichierXML.Substring(0, nomFichierXML.LastIndexOf(".xml"));
 
             // Execute the transform and output the results to a file.
-            xslt.Transform(@"..\..\Files\" + nomFichierXML, @"..\..\Files\" + nomFichierXMLsansExtension + ".html");
+            xslt.Transform(@"..\..\Files\" + nomFichierXML, @"..\..\Files\" + nomFichierXMLsansExtension + "-PlanningMaker.html");
         }
     }
 }

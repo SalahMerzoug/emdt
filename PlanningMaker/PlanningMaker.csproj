@@ -119,5 +119,8 @@
     <Resource Include="Files\Fonctions.xsl" />
     <Resource Include="Files\ModelesSVG.xsl" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\RequetesXPath.xsl" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
