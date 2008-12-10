@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PlanningMaker.Modele;
 
 namespace PlanningMaker.Vues
 {
@@ -19,9 +20,13 @@ namespace PlanningMaker.Vues
     /// </summary>
     public partial class VueEnseignant : UserControl
     {
+        private Enseignant enseigant;
+
         public VueEnseignant()
         {
             InitializeComponent();
+            enseigant = new Enseignant();
+            DataContext = enseigant;
         }
     }
 }
