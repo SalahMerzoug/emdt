@@ -12,7 +12,7 @@ namespace PlanningMaker
 	{
         private String nomFichier;
         private Planning planning;
-        private static string numeroVersion = "0.1.18";
+        private static string numeroVersion = "0.1.23";
 
 		public MainWindow()
 		{
@@ -52,8 +52,10 @@ namespace PlanningMaker
             if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 nomFichier = dialogueO.FileName;
-                string nomFichierSansPath = dialogueO.SafeFileName;
-                MessageBox.Show(nomFichierSansPath);
+                New(sender, e);
+                planning.Charger(nomFichier);
+                MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         private void Close(object sender, RoutedEventArgs e)
@@ -63,7 +65,9 @@ namespace PlanningMaker
 
         private void Save(object sender, RoutedEventArgs e)
         {
-            // TODO
+            planning.Sauver(nomFichier);
+            MessageBox.Show("Planning sauvegardé avec succès !", "PlanningMaker",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void SaveAs(object sender, RoutedEventArgs e)
@@ -72,10 +76,10 @@ namespace PlanningMaker
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueS.Filter = "Fichier XML (*.xml)|*.xml";
             dialogueS.DefaultExt = "*.xml";
-
             if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                // TODO
+                nomFichier = dialogueS.FileName;
+                Save(sender, e);
             }
         }
 
@@ -181,8 +185,6 @@ namespace PlanningMaker
             RequetesXPath requetesXPath = new RequetesXPath();
             requetesXPath.ExecRequetesXPath("RequetesXPath.xsl", "Semaine37.xml");
         }
-
-        
 
         private void MenuItemMAJ_Click(object sender, RoutedEventArgs e)
         {
