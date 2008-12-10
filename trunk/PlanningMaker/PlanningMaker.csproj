@@ -57,6 +57,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modele\ETypeSalles.cs" />
+    <Compile Include="Vues\ListeTypeSalles.cs" />
     <Compile Include="Modele\RequetesXPath.cs" />
     <Compile Include="Modele\EAnnees.cs" />
     <Compile Include="Modele\EDivisions.cs" />
@@ -89,6 +91,9 @@
       <DependentUpon>FenetreAPropos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\PlanningCommands.cs" />
+    <Compile Include="Vues\VueSalle.xaml.cs">
+      <DependentUpon>VueSalle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\VueEnseignant.xaml.cs">
       <DependentUpon>VueEnseignant.xaml</DependentUpon>
     </Compile>
@@ -104,6 +109,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Vues\FenetreAPropos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\VueSalle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
