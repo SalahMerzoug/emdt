@@ -3,13 +3,16 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	x:Class="PlanningMaker.Vues.VueHoraire"
-    Height="51" Width="175">
+	x:Class="PlanningMaker.Vues.VueHoraire">
 
-	<Grid x:Name="LayoutRoot">
-		<Label Content="Début" VerticalAlignment="Top" Width="50" HorizontalAlignment="Left"/>
-		<Label Margin="0,0,0,0.1" Content="Fin" Width="50" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="22" />
-		<TextBox Margin="56,0,0.29,0" Text="{Binding Path=Debut}" Height="22.45" VerticalAlignment="Top" />
-		<TextBox Margin="56,0,0.29,0.1" Text="{Binding Path=Fin}" TextWrapping="Wrap" RenderTransformOrigin="0.176,0.492" Height="22.45" VerticalAlignment="Bottom"/>
-	</Grid>
+	<StackPanel x:Name="LayoutRoot">
+        <StackPanel Orientation="Horizontal">
+		    <Label Content="Début" Width="70"/>
+            <TextBox Text="{Binding Path=Debut}" Width="100"/>
+	    </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Fin" Width="70"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+        </StackPanel>
+    </StackPanel>
 </UserControl>
