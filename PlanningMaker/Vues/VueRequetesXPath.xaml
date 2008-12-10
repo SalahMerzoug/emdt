@@ -1,0 +1,47 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	x:Class="PlanningMaker.Vues.VueRequetesXPath"
+    Height="190" Width="470">
+
+    <StackPanel x:Name="LayoutRoot">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Numéro de la semaine ?" Width="300"/>
+            <TextBox Text="{Binding Path=Debut}" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Requête 1 : Enseignants dont le nom contient" Width="300"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Requête 2 : Matières enseignées par" Width="300"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Requête 3 : Professeurs enseignant " Width="300"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Requête 4 : Enseignements de la matière avec l'identifiant " Width="300"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Requête 5 : Enseignements de l'enseignant" Width="300"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Requête 6 : Disponibilités de la salle " Width="250"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <Label Content="le " Width="20"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Requête 7 : Disponibilités de l'enseignant " Width="250"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <Label Content="le " Width="20"/>
+            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

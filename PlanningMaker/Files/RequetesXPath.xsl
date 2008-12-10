@@ -2,11 +2,23 @@
 <xsl:stylesheet version="2.0"	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="html"/>
 
+  <!-- *************************** Paramètres - Valeurs par défaut *************************** -->
+  
+  <xsl:param name="numSemaine">37</xsl:param>
+  <xsl:param name="nom_recherche_1">e</xsl:param>
+  <xsl:param name="id_enseignant_2">kdrouet</xsl:param>
+  <xsl:param name="id_matière_3">anglais</xsl:param>
+  <xsl:param name="id_matière_4">anglais</xsl:param>
+  <xsl:param name="id_enseignant_5">kdrouet</xsl:param>
+  <xsl:param name="id_salle_6">langevin</xsl:param>
+  <xsl:param name="id_jour_6">mardi</xsl:param>
+  <xsl:param name="id_enseignant_7">kdrouet</xsl:param>
+  <xsl:param name="id_jour_7">mardi</xsl:param>
+  
   <!-- *************************** call-template *************************** -->
 
   <xsl:template match="/">
 
-    <xsl:variable name="numSemaine">37</xsl:variable>
     <body bgcolor="#C0C0C0"><font color="gold"><h2>
       <center>Partie II</center>
       <center>Requêtes XPath sur un emploi du temps</center>
@@ -15,37 +27,37 @@
     <body bgcolor="#DDDDDD">
       
     <xsl:call-template name="Requete1">
-      <xsl:with-param name="nom_recherche">o</xsl:with-param>
+      <xsl:with-param name="nom_recherche" select="$nom_recherche_1"/>
     </xsl:call-template>
     
     <xsl:call-template name="Requete2">
-      <xsl:with-param name="id_enseignant">obeaudoux</xsl:with-param>
+      <xsl:with-param name="id_enseignant" select="$id_enseignant_2"/>
     </xsl:call-template>
 
     <xsl:call-template name="Requete3">
-      <xsl:with-param name="id_matière">maths</xsl:with-param>
+      <xsl:with-param name="id_matière" select="$id_matière_3"/>
     </xsl:call-template>
 
     <xsl:call-template name="Requete4">
       <xsl:with-param name="numSemaine" select="$numSemaine"/>
-      <xsl:with-param name="id_matière">anglais</xsl:with-param>
+      <xsl:with-param name="id_matière" select="$id_matière_4"/>
     </xsl:call-template>
 
     <xsl:call-template name="Requete5">
       <xsl:with-param name="numSemaine" select="$numSemaine"/>
-      <xsl:with-param name="id_enseignant">kdrouet</xsl:with-param>
+      <xsl:with-param name="id_enseignant" select="$id_enseignant_5"/>
     </xsl:call-template>
 
     <xsl:call-template name="Requete6">
       <xsl:with-param name="numSemaine" select="$numSemaine"/>
-      <xsl:with-param name="id_salle">langevin</xsl:with-param>
-      <xsl:with-param name="id_jour">mardi</xsl:with-param>
+      <xsl:with-param name="id_salle" select="$id_salle_6"/>
+      <xsl:with-param name="id_jour" select="$id_jour_6"/>
     </xsl:call-template>
 
     <xsl:call-template name="Requete7">
       <xsl:with-param name="numSemaine" select="$numSemaine"/>
-      <xsl:with-param name="id_enseignant">kdrouet</xsl:with-param>
-      <xsl:with-param name="id_jour">mardi</xsl:with-param>
+      <xsl:with-param name="id_enseignant" select="$id_enseignant_7"/>
+      <xsl:with-param name="id_jour" select="$id_jour_7"/>
     </xsl:call-template>
 
     </body>
@@ -73,7 +85,7 @@
     <xsl:param name="id_enseignant"/>
     
     <font color="blue"><h3>
-        Requête 2 : Matières enseigné par "<xsl:value-of select='$id_enseignant'/>" ?
+        Requête 2 : Matières enseignées par "<xsl:value-of select='$id_enseignant'/>" ?
     </h3></font>
     
     <xsl:for-each select='//matiere[enseignant/@ref=$id_enseignant]'>
