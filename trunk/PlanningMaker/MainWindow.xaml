@@ -83,8 +83,10 @@
                 <Grid/>
             </TabItem>
 			<TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
-				<Grid/>
-			</TabItem>
+                <Grid>
+                    <c:VueEnseignant VerticalAlignment="Center"></c:VueEnseignant>
+                </Grid>
+            </TabItem>
 			<TabItem Header="Matières" x:Name="TabItem_Matieres">
 				<Grid/>
 			</TabItem>
