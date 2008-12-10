@@ -13,6 +13,7 @@ namespace PlanningMaker.Modele
             string message_MAJ, chaineVappli, chaineVnet;
             chaineVappli = GetVersionApplication();
             chaineVnet = GetDerniereVersion();
+
             if (chaineVnet.Substring(0, 6).CompareTo("Erreur") == 0)
             {
                 message_MAJ = chaineVnet;
@@ -52,7 +53,7 @@ namespace PlanningMaker.Modele
                 resultat = oSReader.ReadToEnd();
 
                 string chaineAvant = "La version courante du logiciel est : <ul><li>";
-                string chaineApres = "</li></ul>";
+                string chaineApres = " </li></ul>";
                 int longueurChaineVersion = resultat.LastIndexOf(chaineApres) -
                     (resultat.LastIndexOf(chaineAvant) + chaineAvant.Length);
                 resultat = resultat.Substring(resultat.LastIndexOf(chaineAvant) + chaineAvant.Length, longueurChaineVersion);
