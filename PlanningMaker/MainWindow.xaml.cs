@@ -148,6 +148,14 @@ namespace PlanningMaker
             transformation.TransformerXslt("EdTversSVG.xsl", "Semaine37.xml");
         }
 
+        private void MenuItemRequetesXPath_Click(object sender, RoutedEventArgs e)
+        {
+            RequetesXPath requetesXPath = new RequetesXPath();
+            requetesXPath.ExecRequetesXPath("RequetesXPath.xsl", "Semaine37.xml");
+        }
+
+        
+
         private void MenuItemMAJ_Click(object sender, RoutedEventArgs e)
         {
             MiseAJour maj = new MiseAJour();
