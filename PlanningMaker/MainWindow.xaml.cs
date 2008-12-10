@@ -17,10 +17,23 @@ namespace PlanningMaker
 			this.InitializeComponent();
 			
 			// Insert code required on object creation below this point.
+
+            MenuItem_Fermer.IsEnabled = false;
+            MenuItem_Enr.IsEnabled = false;
+            MenuItem_EnrSous.IsEnabled = false;
+            MenuItem_Apercu.IsEnabled = false;
+            MenuItem_Imprimer.IsEnabled = false;
+            MenuItem_Annuler.IsEnabled = false;
+            MenuItem_Rétablir.IsEnabled = false;
+            MenuItem_Couper.IsEnabled = false;
+            MenuItem_Copier.IsEnabled = false;
+            MenuItem_Coller.IsEnabled = false;
+            MenuItem_Supprimer.IsEnabled = false;
         }
 
         public static string getNumeroVersion()
         {
+            // TO CHANGE
             return numeroVersion;
         }
 
