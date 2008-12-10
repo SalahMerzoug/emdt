@@ -4,7 +4,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	x:Class="PlanningMaker.Vues.VueRequetesXPath"
-    Height="190" Width="470">
+    >
 
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
@@ -43,5 +43,12 @@
             <Label Content="le " Width="20"/>
             <TextBox Text="{Binding Path=Fin}" Width="100"/>
         </StackPanel>
+
+        <Button Height="50" Width="100">
+            <Image Source=".\XPath.jpg"/>
+        </Button>
     </StackPanel>
+
+
+
 </UserControl>
