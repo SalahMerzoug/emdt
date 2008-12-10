@@ -10,25 +10,32 @@ namespace PlanningMaker.Modele
 
         public String ValiderFichierXml(String nomDuFichierXml)
         {
-            // Create the XmlSchemaSet class.
-            XmlSchemaSet sc = new XmlSchemaSet();
+            try
+            {
+                // Create the XmlSchemaSet class.
+                XmlSchemaSet sc = new XmlSchemaSet();
 
-            // Add the schema to the collection.
-            sc.Add(null, @"..\..\Files\SchemaEdT.xsd");
+                // Add the schema to the collection.
+                sc.Add(null, @"..\..\Files\SchemaEdT.xsd");
 
-            messageValidation = "Validation OK.";
+                messageValidation = "Validation OK.";
 
-            // Set the validation settings.
-            XmlReaderSettings settings = new XmlReaderSettings();
-            settings.ValidationType = ValidationType.Schema;
-            settings.Schemas = sc;
-            settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBack);
+                // Set the validation settings.
+                XmlReaderSettings settings = new XmlReaderSettings();
+                settings.ValidationType = ValidationType.Schema;
+                settings.Schemas = sc;
+                settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBack);
 
-            // Create the XmlReader object.
-            XmlReader reader = XmlReader.Create(@"..\..\Files\" + nomDuFichierXml, settings);
+                // Create the XmlReader object.
+                XmlReader reader = XmlReader.Create(@"..\..\Files\" + nomDuFichierXml, settings);
 
-            // Parse the file. 
-            while (reader.Read()) ;
+                // Parse the file. 
+                while (reader.Read()) ;
+            }
+            catch (Exception e)
+            {
+                messageValidation = "Erreur ayant interrompu la validation : " + e.Message;
+            }
 
             return messageValidation;
         }
@@ -36,8 +43,7 @@ namespace PlanningMaker.Modele
         // Display any validation errors.
         private void ValidationCallBack(object sender, ValidationEventArgs e)
         {
-            //Console.WriteLine("Validation Error: {0}", e.Message);
-            messageValidation = "Echec de la validation : " + e.Message + ".";
+            messageValidation = "Echec de la validation : " + e.Message;
         }
     }
 }
