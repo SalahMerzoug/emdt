@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PlanningMaker.Modele
 {
-    public class Enseignement : ObservableObject
+    public abstract class Enseignement : ObservableObject
     {
         private int numeroGroupe;
 
@@ -98,14 +98,11 @@ namespace PlanningMaker.Modele
         public Enseignement()
         {
             numeroGroupe = 0;
-
         }
 
         public Enseignement(int numGroupe)
         {
             numeroGroupe = numGroupe;
-
         }
-
     }
 }
