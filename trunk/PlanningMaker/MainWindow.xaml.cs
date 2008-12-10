@@ -173,7 +173,7 @@ namespace PlanningMaker
         private void MenuItemTransfoXSLT_Click(object sender, RoutedEventArgs e)
         {
             TransformationXslt transformation = new TransformationXslt();
-            transformation.TransformerXslt("EdTversSVG.xsl", "Semaine37.xml");
+            transformation.TransformerXslt("EdTversSVG-IE.xsl", "Semaine37.xml");
         }
 
         private void MenuItemRequetesXPath_Click(object sender, RoutedEventArgs e)
