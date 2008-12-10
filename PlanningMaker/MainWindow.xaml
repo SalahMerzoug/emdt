@@ -84,7 +84,7 @@
 			<TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps"/>
 			<TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
                 <Grid>
-                    <c:VueEnseignant VerticalAlignment="Center"></c:VueEnseignant>
+                    <c:VueEnseignant VerticalAlignment="Center"/>
                 </Grid>
             </TabItem>
 			<TabItem Header="Matières" x:Name="TabItem_Matieres">
@@ -92,7 +92,7 @@
 			</TabItem>
 			<TabItem Header="Horaires" x:Name="TabItem_Horaires" DataContext="{Binding Path=Horaires}">
                 <Grid>
-                    <c:VueHoraire/>
+                    <c:VueHoraire VerticalAlignment="Center"/>
                 </Grid>
             </TabItem>
 			<TabItem Header="Salles" x:Name="TabItem_Salles">
