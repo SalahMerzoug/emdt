@@ -38,11 +38,6 @@ namespace PlanningMaker.Modele
             enseignements = new ObservableCollection<Enseignement>();
         }
 
-        public Jour(String nom)
-        {
-            enseignements = new ObservableCollection<Enseignement>();
-        }
-
         public override string ToString()
         {
             return "Jour : " + nom;
