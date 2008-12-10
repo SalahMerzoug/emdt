@@ -133,5 +133,8 @@
   <ItemGroup>
     <Resource Include="Files\EdTversSVG-FF.xsl" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Vues\XPath.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
