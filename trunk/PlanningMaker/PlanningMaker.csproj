@@ -88,6 +88,9 @@
     <Compile Include="Vues\VueEnseignant.xaml.cs">
       <DependentUpon>VueEnseignant.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Vues\VueHoraire.xaml.cs">
+      <DependentUpon>VueHoraire.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -99,6 +102,10 @@
     <Page Include="Vues\VueEnseignant.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\VueHoraire.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
