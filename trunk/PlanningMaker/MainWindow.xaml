@@ -33,48 +33,48 @@
 					<GradientStop Color="#FFCCCCCC" Offset="0.898"/>
 				</LinearGradientBrush>
 			</Menu.Background>
-			<MenuItem Header="Fichier" Height="20">
-                <MenuItem Header="Nouveau" Command="ApplicationCommands.New"/>
-				<MenuItem Header="Ouvrir" Command="ApplicationCommands.Open"/>
-                <MenuItem Header="Fermer" Command="ApplicationCommands.Close"/>
+			<MenuItem Header="Fichier" x:Name="MenuItem_Fichier" Height="20">
+                <MenuItem Header="Nouveau" x:Name="MenuItem_Nouveau" Command="ApplicationCommands.New"/>
+				<MenuItem Header="Ouvrir" x:Name="MenuItem_Ouvrir" Command="ApplicationCommands.Open"/>
+                <MenuItem Header="Fermer" x:Name="MenuItem_Fermer" Command="ApplicationCommands.Close"/>
 				<Separator/>
-				<MenuItem Header="Enregistrer" Command="ApplicationCommands.Save"/>
-				<MenuItem Header="Enregistrer sous..." Command="ApplicationCommands.SaveAs"/>
+				<MenuItem Header="Enregistrer" x:Name="MenuItem_Enr" Command="ApplicationCommands.Save"/>
+				<MenuItem Header="Enregistrer sous..." x:Name="MenuItem_EnrSous" Command="ApplicationCommands.SaveAs"/>
 				<Separator/>
-                <MenuItem Header="Aperçu" Command="ApplicationCommands.PrintPreview"/>
-                <MenuItem Header="Imprimer" Command="ApplicationCommands.Print"/>
+                <MenuItem Header="Aperçu" x:Name="MenuItem_Apercu" Command="ApplicationCommands.PrintPreview"/>
+                <MenuItem Header="Imprimer" x:Name="MenuItem_Imprimer" Command="ApplicationCommands.Print"/>
                 <Separator/>
-				<MenuItem Header="Quitter" Command="c:PlanningCommands.Exit"/>
+				<MenuItem Header="Quitter" x:Name="MenuItem_Quitter" Command="c:PlanningCommands.Exit"/>
 			</MenuItem>
-            <MenuItem Header="Edition" Height="20">
-                <MenuItem Header="Annuler" Command="ApplicationCommands.Undo"/>
-                <MenuItem Header="Rétablir" Command="ApplicationCommands.Redo"/>
+            <MenuItem Header="Edition" x:Name="MenuItem_Edition" Height="20">
+                <MenuItem Header="Annuler" x:Name="MenuItem_Annuler" Command="ApplicationCommands.Undo"/>
+                <MenuItem Header="Rétablir" x:Name="MenuItem_Rétablir" Command="ApplicationCommands.Redo"/>
                 <Separator/>
-                <MenuItem Header="Couper" Command="ApplicationCommands.Cut"/>
-                <MenuItem Header="Copier" Command="ApplicationCommands.Copy"/>
-                <MenuItem Header="Coller" Command="ApplicationCommands.Paste"/>
-                <MenuItem Header="Supprimer" Command="ApplicationCommands.Delete"/>
+                <MenuItem Header="Couper" x:Name="MenuItem_Couper" Command="ApplicationCommands.Cut"/>
+                <MenuItem Header="Copier" x:Name="MenuItem_Copier" Command="ApplicationCommands.Copy"/>
+                <MenuItem Header="Coller" x:Name="MenuItem_Coller" Command="ApplicationCommands.Paste"/>
+                <MenuItem Header="Supprimer" x:Name="MenuItem_Supprimer" Command="ApplicationCommands.Delete"/>
             </MenuItem>
-            <MenuItem Header="Vues" Height="20">
-                <MenuItem Header="Emploi du temps" Click="MenuItemEdT_Click"/>
+            <MenuItem Header="Vues" x:Name="MenuItem_Vues" Height="20">
+                <MenuItem Header="Emploi du temps" x:Name="MenuItem_EdT" Click="MenuItemEdT_Click"/>
                 <Separator/>
-				<MenuItem Header="Ressources">
-					<MenuItem Header="Enseignants" Click="MenuItemEnseignant_Click"/>
-					<MenuItem Header="Matières" Click="MenuItemMatiere_Click"/>
-					<MenuItem Header="Horaires" Click="MenuItemHoraire_Click"/>
-					<MenuItem Header="Salles" Click="MenuItemSalle_Click"/>
+				<MenuItem Header="Ressources" x:Name="MenuItem_Ressources">
+					<MenuItem Header="Enseignants" x:Name="MenuItem_Enseignants" Click="MenuItemEnseignant_Click"/>
+					<MenuItem Header="Matières" x:Name="MenuItem_Matières" Click="MenuItemMatiere_Click"/>
+					<MenuItem Header="Horaires" x:Name="MenuItem_Horaires" Click="MenuItemHoraire_Click"/>
+					<MenuItem Header="Salles" x:Name="MenuItem_Salles" Click="MenuItemSalle_Click"/>
 				</MenuItem>
 			</MenuItem>
-            <MenuItem Header="Outils" Height="20">
-                <MenuItem Header="Validation XMLSchema" Click="MenuItemValiderXML_Click"/>
-                <MenuItem Header="Transformations XSLT" Click="MenuItemTransfoXSLT_Click"/>
+            <MenuItem Header="Outils" x:Name="MenuItem_Outils" Height="20">
+                <MenuItem Header="Validation XMLSchema" x:Name="MenuItem_Validat" Click="MenuItemValiderXML_Click"/>
+                <MenuItem Header="Transformations XSLT" x:Name="MenuItem_Transfo" Click="MenuItemTransfoXSLT_Click"/>
             </MenuItem>
-            <MenuItem Header="?" Height="20">
-                <MenuItem Header="Aide" Command="ApplicationCommands.Help"/>
+            <MenuItem Header="?" x:Name="MenuItem_pointDInterro" Height="20">
+                <MenuItem Header="Aide" x:Name="MenuItem_Aide" Command="ApplicationCommands.Help"/>
                 <Separator/>
-                <MenuItem Header="Mettre à jour" Click="MenuItemMAJ_Click"/>
+                <MenuItem Header="Mettre à jour" x:Name="MenuItem_Maj" Click="MenuItemMAJ_Click"/>
                 <Separator/>
-                <MenuItem Header="A propos" Click="MenuItemAPropos_Click"/>
+                <MenuItem Header="A propos" x:Name="MenuItem_Apropos" Click="MenuItemAPropos_Click"/>
             </MenuItem>
 		</Menu>
 		<TabControl Margin="0,20,0,0" IsSynchronizedWithCurrentItem="True" Grid.ColumnSpan="2" x:Name="TabPanel">
