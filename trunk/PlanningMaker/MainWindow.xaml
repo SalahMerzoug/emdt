@@ -98,7 +98,12 @@
 			<TabItem Header="Salles" x:Name="TabItem_Salles">
 				<Grid/>
 			</TabItem>
-		</TabControl>
+            <TabItem Header="Requêtes XPath" x:Name="TabItem_XPath">
+                <Grid>
+                    <c:VueRequetesXPath VerticalAlignment="Center"></c:VueRequetesXPath>
+                </Grid>
+            </TabItem>
+        </TabControl>
 		<ToolBar Name="BarreOutils" VerticalAlignment="Bottom">
 			<Button Command="c:PlanningCommands.AjouterElement">Ajouter</Button>
             <Button Command="c:PlanningCommands.SupprimerElement">Supprimer</Button>
