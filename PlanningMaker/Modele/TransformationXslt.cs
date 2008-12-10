@@ -1,8 +1,7 @@
-﻿using System.Windows;
+﻿using System;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-using System;
 
 namespace PlanningMaker.Modele
 {
