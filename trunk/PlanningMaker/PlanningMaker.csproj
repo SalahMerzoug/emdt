@@ -57,6 +57,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modele\RequetesXPath.cs" />
     <Compile Include="Modele\EAnnees.cs" />
     <Compile Include="Modele\EDivisions.cs" />
     <Compile Include="Modele\Cours.cs" />

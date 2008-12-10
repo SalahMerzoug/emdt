@@ -68,6 +68,7 @@
             <MenuItem Header="Outils" x:Name="MenuItem_Outils" Height="20">
                 <MenuItem Header="Validation XMLSchema" x:Name="MenuItem_Validat" Click="MenuItemValiderXML_Click"/>
                 <MenuItem Header="Transformations XSLT" x:Name="MenuItem_Transfo" Click="MenuItemTransfoXSLT_Click"/>
+                <MenuItem Header="Requêtes XPath" x:Name="MenuItem_RequetesXPath" Click="MenuItemRequetesXPath_Click"/>
             </MenuItem>
             <MenuItem Header="?" x:Name="MenuItem_pointDInterro" Height="20">
                 <MenuItem Header="Aide" x:Name="MenuItem_Aide" Command="ApplicationCommands.Help"/>
