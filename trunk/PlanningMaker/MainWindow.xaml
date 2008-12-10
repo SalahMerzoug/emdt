@@ -7,6 +7,15 @@
 	Title="Viactisoft PlanningMaker 2008 School Edition"
 	Width="850" Height="506" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
 	
+    <Window.Resources>
+        <c:ListeTypeSalles x:Key="Types"/>
+        <DataTemplate x:Key="ModeleSalle">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=Nom}"/>
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+    
 	<Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="New"/>
 		<CommandBinding Command="ApplicationCommands.Open" Executed="Open"/>
