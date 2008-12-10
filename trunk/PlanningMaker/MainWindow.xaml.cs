@@ -17,14 +17,11 @@ namespace PlanningMaker
 		public MainWindow()
 		{
 			this.InitializeComponent();
-            MessageBox.Show("Creation de la vue");
             DataContext = planning;
 			
 			// Insert code required on object creation below this point.
 
             MenuItem_Fermer.IsEnabled = false;
-            MenuItem_Enr.IsEnabled = false;
-            MenuItem_EnrSous.IsEnabled = false;
             MenuItem_Apercu.IsEnabled = false;
             MenuItem_Imprimer.IsEnabled = false;
             MenuItem_Annuler.IsEnabled = false;
@@ -43,9 +40,7 @@ namespace PlanningMaker
 
         private void New(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Creation d'un document");
             planning = new Planning();
-            MessageBox.Show((planning!=null)? "not null" : "null");
         }
 
         private void Open(object sender, RoutedEventArgs e)
@@ -86,7 +81,12 @@ namespace PlanningMaker
 
         private void EnregistrementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (planning!=null);
+            e.CanExecute = (planning != null) && (nomFichier != null);
+        }
+
+        private void EnregistrementSousPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (planning != null);
         }
 
         private void PrintPreview(object sender, RoutedEventArgs e)
