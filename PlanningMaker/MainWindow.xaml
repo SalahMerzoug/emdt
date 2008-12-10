@@ -24,7 +24,7 @@
         <CommandBinding Command="ApplicationCommands.Delete" Executed="Delete"/>
         <CommandBinding Command="ApplicationCommands.Help" Executed="Help"/>
 		<CommandBinding Command="c:PlanningCommands.AjouterElement" Executed="AjouterElement" CanExecute="AjouterElementPossible"/>
-        <CommandBinding Command="ApplicationCommands.Delete" Executed="SupprimerElement" CanExecute="SupprimerElementPossible"/>
+        <CommandBinding Command="c:PlanningCommands.SupprimerElement" Executed="SupprimerElement" CanExecute="SupprimerElementPossible"/>
     </Window.CommandBindings>
 	
 	<Grid x:Name="LayoutRoot">
@@ -101,7 +101,7 @@
 		</TabControl>
 		<ToolBar Name="BarreOutils" VerticalAlignment="Bottom">
 			<Button Command="c:PlanningCommands.AjouterElement">Ajouter</Button>
-            <Button Command="ApplicationCommands.Delete">Supprimer</Button>
+            <Button Command="c:PlanningCommands.SupprimerElement">Supprimer</Button>
 		</ToolBar>
 	</Grid>
 </Window>
