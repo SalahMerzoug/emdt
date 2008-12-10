@@ -296,8 +296,194 @@ namespace PlanningMaker.Modele
             XmlDocument document = new XmlDocument();
             XmlDeclaration declaration = document.CreateXmlDeclaration("1.0", "ISO-8859-15", null);
             document.AppendChild(declaration);
-            // TODO
+            //structure générale
+            XmlElement planning = document.CreateElement("emploi-du-temps");
+            XmlElement enseignantsPlanning = document.CreateElement("enseignants");
+            XmlElement matieresPlanning = document.CreateElement("matieres");
+            XmlElement horairesPlanning = document.CreateElement("horaires");
+            XmlElement sallesPlanning = document.CreateElement("salles");
+            XmlElement semainesPlanning = document.CreateElement("semaines");
+            XmlElement anneePlanning = document.CreateElement("annee");
+            XmlElement divisionPlanning = document.CreateElement("division");
+            XmlElement promotionPlanning = document.CreateElement("promotion");
+            document.AppendChild(planning);
+            planning.AppendChild(enseignantsPlanning);
+            planning.AppendChild(matieresPlanning);
+            planning.AppendChild(horairesPlanning);
+            planning.AppendChild(sallesPlanning);
+            planning.AppendChild(semainesPlanning);
+            planning.AppendChild(anneePlanning);
+            planning.AppendChild(divisionPlanning);
+            planning.AppendChild(promotionPlanning);
+            anneePlanning.AppendChild(document.CreateTextNode(Enum.Format(typeof(EAnnees), annee, "G")));
+            divisionPlanning.AppendChild(document.CreateTextNode(Enum.Format(typeof(EDivisions), division, "G")));
+            promotionPlanning.AppendChild(document.CreateTextNode(promotion));
+            //enseignants
+            int compteurIdEnseignant = 0;
+            foreach (Enseignant e in enseignants)
+            {
+                XmlElement enseignant = document.CreateElement("enseignant");
+                AjouterEnseignant(e, compteurIdEnseignant, document, enseignantsPlanning, enseignant);
+                compteurIdEnseignant++;
+            }
+            //matieres
+            int compteurIdMatiere = 0;
+            foreach (Matiere m in matieres)
+            {
+                XmlElement matiere = document.CreateElement("matiere");
+                AjouterMatiere(m, compteurIdMatiere, document, matieresPlanning, matiere);
+                compteurIdMatiere++;
+            }
+            //horaires
+            int compteurIdHoraire = 0;
+            foreach (Horaire h in horaires)
+            {
+                XmlElement horaire = document.CreateElement("horaire");
+                AjouterHoraire(h, compteurIdHoraire, document, horairesPlanning, horaire);
+                compteurIdHoraire++;
+            }
+            //salles
+            int compteurIdSalle = 0;
+            foreach (Salle s in salles)
+            {
+                XmlElement salle = document.CreateElement("salle");
+                AjouterSalle(s, compteurIdSalle, document, sallesPlanning, salle);
+                compteurIdSalle++;
+            }
+            //semaines
+            foreach (Semaine sem in semaines)
+            {
+                XmlElement semaine = document.CreateElement("semaine");
+                AjouterSemaine(sem, document, semainesPlanning, semaine);
+            }
             document.Save(nomFichier);
+        }
+
+        private void AjouterEnseignant(Enseignant e, int compteurId, XmlDocument document, XmlElement enseignants, XmlElement enseignant)
+        {
+            XmlAttribute id = document.CreateAttribute("id");
+            XmlElement prenom = document.CreateElement("prenom");
+            XmlElement nom = document.CreateElement("nom");
+            enseignants.AppendChild(enseignant);
+            enseignant.Attributes.Append(id);
+            enseignant.AppendChild(prenom);
+            enseignant.AppendChild(nom);
+            id.Value = "id" + compteurId.ToString();
+            prenom.AppendChild(document.CreateTextNode(e.Prenom));
+            nom.AppendChild(document.CreateTextNode(e.Nom));
+        }
+
+        private void AjouterMatiere(Matiere m, int compteurId, XmlDocument document, XmlElement matieres, XmlElement matiere)
+        {
+            XmlAttribute id = document.CreateAttribute("id");
+            XmlElement titre = document.CreateElement("titre");
+            foreach (Enseignant e in m.Enseignants)
+            {
+                XmlElement enseignant = document.CreateElement("enseignant");
+                matiere.AppendChild(enseignant);
+                XmlAttribute refEnseignant = document.CreateAttribute("ref");
+                matiere.Attributes.Append(refEnseignant);
+                refEnseignant.Value = "id" + enseignants.IndexOf(e).ToString();
+            }
+            XmlElement nom = document.CreateElement("nom");
+            matieres.AppendChild(matiere);
+            matiere.Attributes.Append(id);
+            matiere.AppendChild(titre);
+            id.Value = "id" + compteurId.ToString();
+            titre.AppendChild(document.CreateTextNode(m.Titre));
+        }
+
+        private void AjouterHoraire(Horaire h, int compteurId, XmlDocument document, XmlElement horaires, XmlElement horaire)
+        {
+            XmlAttribute id = document.CreateAttribute("id");
+            XmlElement debut = document.CreateElement("debut");
+            XmlElement fin = document.CreateElement("fin");
+            horaires.AppendChild(horaire);
+            horaire.Attributes.Append(id);
+            horaire.AppendChild(debut);
+            horaire.AppendChild(fin);
+            id.Value = "id" + compteurId.ToString();
+            debut.AppendChild(document.CreateTextNode(h.Debut));
+            fin.AppendChild(document.CreateTextNode(h.Fin));
+        }
+
+        private void AjouterSalle(Salle s, int compteurId, XmlDocument document, XmlElement salles, XmlElement salle)
+        {
+            XmlAttribute id = document.CreateAttribute("id");
+            XmlElement nom = document.CreateElement("nom");
+            XmlElement typeSalle = document.CreateElement("typeSalle");
+            salles.AppendChild(salle);
+            salle.Attributes.Append(id);
+            salle.AppendChild(nom);
+            salle.AppendChild(typeSalle);
+            id.Value = "id" + compteurId.ToString();
+            nom.AppendChild(document.CreateTextNode(s.Nom));
+            typeSalle.AppendChild(document.CreateTextNode(s.GetType().Name)); // A vérifier
+        }
+
+        private void AjouterSemaine(Semaine s, XmlDocument document, XmlElement semaines, XmlElement semaine)
+        {
+            XmlElement numero = document.CreateElement("numero");
+            XmlElement date = document.CreateElement("date");
+            semaines.AppendChild(semaine);
+            semaine.AppendChild(numero);
+            semaine.AppendChild(date);
+            numero.AppendChild(document.CreateTextNode(s.Numero.ToString()));
+            date.AppendChild(document.CreateTextNode(s.Date));
+            foreach (Jour j in s.Jours)
+            {
+                XmlElement jour = document.CreateElement("jour");
+                XmlElement nom = document.CreateElement("nom");
+                XmlElement enseignements = document.CreateElement("enseignements");
+                semaine.AppendChild(jour);
+                jour.AppendChild(nom);
+                jour.AppendChild(enseignements);
+                nom.AppendChild(document.CreateTextNode(Enum.Format(typeof(EJours), j.Nom, "G").ToLower()));
+                foreach (Enseignement e in j.Enseignements)
+	            {
+                    XmlElement enseignement = document.CreateElement("enseignement");
+                    AjouterEnseignement(e, document, enseignements, enseignement);
+	            }
+            }
+        }
+
+        private void AjouterEnseignement(Enseignement e, XmlDocument document, XmlElement enseignements, XmlElement enseignement)
+        {
+            XmlElement type = document.CreateElement("type");
+            XmlElement enseignant = document.CreateElement("enseignant");
+            XmlAttribute refEnseignant = document.CreateAttribute("ref");
+            XmlElement matiere = document.CreateElement("matiere");
+            XmlAttribute refMatiere = document.CreateAttribute("ref");
+            XmlElement horaire1 = document.CreateElement("horaire");
+            XmlAttribute refHoraire1 = document.CreateAttribute("ref");
+            XmlElement horaire2 = document.CreateElement("horaire");
+            XmlAttribute refHoraire2 = document.CreateAttribute("ref");
+            XmlElement salle = document.CreateElement("salle");
+            XmlAttribute refSalle = document.CreateAttribute("ref");
+            enseignements.AppendChild(enseignement);
+            enseignement.AppendChild(type);
+            enseignement.AppendChild(enseignant);
+            enseignant.Attributes.Append(refEnseignant);
+            enseignement.AppendChild(matiere);
+            matiere.Attributes.Append(refMatiere);
+            enseignement.AppendChild(horaire1);
+            horaire1.Attributes.Append(refHoraire1);
+            if (e.Horaire2 != null)
+            {
+                enseignement.AppendChild(horaire2);
+                horaire2.Attributes.Append(refHoraire2);
+            }
+            enseignement.AppendChild(salle);
+            salle.Attributes.Append(refSalle);
+            type.AppendChild(document.CreateTextNode(e.GetType().Name.ToUpper()));
+            refEnseignant.Value = "id" + enseignants.IndexOf(e.Enseignant).ToString();
+            refMatiere.Value = "id" + matieres.IndexOf(e.Matiere).ToString();
+            refHoraire1.Value = "id" + horaires.IndexOf(e.Horaire1).ToString();
+            if (e.Horaire2 != null)
+            {
+                refHoraire2.Value = "id" + horaires.IndexOf(e.Horaire2).ToString();
+            }
+            refSalle.Value = "id" + salles.IndexOf(e.Salle).ToString();
         }
     }
 }
