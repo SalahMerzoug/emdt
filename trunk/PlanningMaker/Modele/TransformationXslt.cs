@@ -2,31 +2,46 @@
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+using System;
 
 namespace PlanningMaker.Modele
 {
     class TransformationXslt
     {
 
-        public void TransformerXslt(string nomFichierXSL, string nomFichierXML)
+        private String messageValidation;
+
+        public string TransformerXslt(string nomFichierXSL, string nomFichierXML)
         {
-            string numeroSemaineEnParametre = "37";
-            string nomFichierXMLsansExtension = nomFichierXML.Substring(0, nomFichierXML.LastIndexOf(".xml"));
+            try
+            {
+                string numeroSemaineEnParametre = "37";
+                string nomFichierXMLsansExtension = nomFichierXML.Substring(0, nomFichierXML.LastIndexOf(".xml"));
+                string extensionEnSortie = ".html";
 
-            XsltArgumentList xslArg = new XsltArgumentList();
-            xslArg.AddParam("numeroSemaine", "", numeroSemaineEnParametre);
+                if (nomFichierXSL.CompareTo("EdTversSVG-FF.xsl") == 0) extensionEnSortie = ".svg";
 
-            XslCompiledTransform xslt = new XslCompiledTransform();
-            xslt.Load(@"..\..\Files\" + nomFichierXSL);
+                XsltArgumentList xslArg = new XsltArgumentList();
+                xslArg.AddParam("numeroSemaine", "", numeroSemaineEnParametre);
 
-            XPathDocument xpathdocument = new XPathDocument(@"..\..\Files\" + nomFichierXML);
+                XslCompiledTransform xslt = new XslCompiledTransform();
+                xslt.Load(@"..\..\Files\" + nomFichierXSL);
 
-            XmlTextWriter writer = new XmlTextWriter(@"..\..\Files\" + nomFichierXMLsansExtension + ".html", null);
+                XPathDocument xpathdocument = new XPathDocument(@"..\..\Files\" + nomFichierXML);
 
-            xslt.Transform(xpathdocument, xslArg, writer);
-            writer.Close();
+                XmlTextWriter writer = new XmlTextWriter(@"..\..\Files\" + nomFichierXMLsansExtension + extensionEnSortie, null);
 
-            MessageBox.Show("OK");
+                xslt.Transform(xpathdocument, xslArg, writer);
+                writer.Close();
+
+                messageValidation = "Transfomation OK.";
+            }
+            catch (Exception e)
+            {
+                messageValidation = "Erreur ayant interrompu la transformation : " + e.Message + ".";
+            }
+
+            return messageValidation;
         }
     }
 }
