@@ -12,7 +12,7 @@
 		<CommandBinding Command="ApplicationCommands.Open" Executed="Open"/>
         <CommandBinding Command="ApplicationCommands.Close" Executed="Close"/>
         <CommandBinding Command="ApplicationCommands.Save" Executed="Save" CanExecute="EnregistrementPossible"/>
-        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs" CanExecute="EnregistrementPossible"/>
+        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs" CanExecute="EnregistrementSousPossible"/>
         <CommandBinding Command="ApplicationCommands.PrintPreview" Executed="PrintPreview"/>
         <CommandBinding Command="ApplicationCommands.Print" Executed="Print"/>
 		<CommandBinding Command="c:PlanningCommands.Exit" Executed="Exit"/>
