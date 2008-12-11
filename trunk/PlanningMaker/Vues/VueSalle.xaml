@@ -10,11 +10,11 @@
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
             <Label Content="Type" Width="70"/>
-            <ComboBox ItemsSource="{Binding Source={StaticResource Types}}" Width="100"/>
+            <ComboBox x:Name="Type" ItemsSource="{Binding Source={StaticResource Types}}" Width="100" SelectionChanged="ChangementSelectionTypeSalle"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Nom" Width="70"/>
-            <TextBox Text="{Binding Path=Name}" Width="100"/>
+            <TextBox x:Name="Nom" Text="{Binding Path=Nom}" Width="100"/>
         </StackPanel>
     </StackPanel>
 

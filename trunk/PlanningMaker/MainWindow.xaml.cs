@@ -58,10 +58,12 @@ namespace PlanningMaker
             ICollectionView vueSalles = CollectionViewSource.GetDefaultView(planning.Salles);
             vueSalles.SortDescriptions.Add(new SortDescription("Nom", ListSortDirection.Ascending));
             vueSalles.SortDescriptions.Add(new SortDescription("Type", ListSortDirection.Ascending));
+            listeSalles.ItemsSource = planning.Salles;
 
             ICollectionView vueHoraires = CollectionViewSource.GetDefaultView(planning.Horaires);
             vueHoraires.SortDescriptions.Add(new SortDescription("Debut", ListSortDirection.Ascending));
             vueHoraires.SortDescriptions.Add(new SortDescription("Fin", ListSortDirection.Ascending));
+            listeHorraires.ItemsSource = planning.Horaires;
 
             ICollectionView vueMatieres = CollectionViewSource.GetDefaultView(planning.Matieres);
             vueMatieres.SortDescriptions.Add(new SortDescription("Titre", ListSortDirection.Ascending));
@@ -228,6 +230,31 @@ namespace PlanningMaker
 
         private void AjouterElement(object sender, RoutedEventArgs e)
         {
+            if (TabItem_Horaires.IsSelected)
+            {
+                String debut = vueHoraire.Debut.Text;
+                String fin = vueHoraire.Fin.Text;
+                planning.Horaires.Add(new Horaire((debut != null) ? debut : "00h00", (fin != null) ? fin : "00h00"));
+            }
+            else if (TabItem_Enseignants.IsSelected)
+            {
+                //planning.Enseignants.Add(new Enseignant());
+            }
+            else if (TabItem_Matieres.IsSelected)
+            {
+                //planning.Matieres.Add(new Matiere());
+            }
+            else if (TabItem_Salles.IsSelected)
+            {
+                string type = vueSalle.Type.Text;
+                string nom = vueSalle.Nom.Text;
+                switch(type){
+                    case "Labo": planning.Salles.Add(new Labo((nom!=null)? nom : ""));
+                        break;
+                    default : planning.Salles.Add(new Amphi((nom!=null)? nom : ""));
+                        break;
+                }
+            }
         }
 
         private void SupprimerElement(object sender, RoutedEventArgs e)
@@ -236,12 +263,26 @@ namespace PlanningMaker
 
         private void AjouterElementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = false;
+            e.CanExecute = (planning!=null)&&(!TabItem_XPath.IsSelected);
         }
 
         private void SupprimerElementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = false;
+        }
+        
+        private void ChangementSelectionHoraire(object sender, SelectionChangedEventArgs e)
+        {
+            vueHoraire.DataContext = listeHorraires.SelectedItem;
+        }
+
+        private void ChangementSelectionSalle(object sender, SelectionChangedEventArgs e)
+        {
+            vueSalle.DataContext = listeSalles.SelectedItem;
+            if (vueSalle.DataContext is Amphi)
+                vueSalle.Type.Text = "Amphi";
+            else
+                vueSalle.Type.Text = "Labo";
         }
 	}
     
