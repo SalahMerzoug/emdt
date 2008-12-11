@@ -11,7 +11,7 @@ namespace PlanningMaker.Modele
         public void VerifierMAJ()
         {
             string message_MAJ, chaineVappli, chaineVnet;
-            chaineVappli = GetVersionApplication();
+            chaineVappli = MainWindow.getNumeroVersion();
             chaineVnet = GetDerniereVersion();
 
             if (chaineVnet.Substring(0, 6).CompareTo("Erreur") == 0)
@@ -30,11 +30,6 @@ namespace PlanningMaker.Modele
             }
 
             MessageBox.Show(message_MAJ);
-        }
-
-        private string GetVersionApplication()
-        {
-            return MainWindow.getNumeroVersion();
         }
 
         private string GetDerniereVersion()
