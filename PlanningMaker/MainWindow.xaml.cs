@@ -17,7 +17,6 @@ namespace PlanningMaker
 	{
         private String nomFichier;
         private Planning planning;
-        private static string numeroVersion = "0.1.23";
 
 		public MainWindow()
 		{
@@ -39,8 +38,10 @@ namespace PlanningMaker
 
         public static string getNumeroVersion()
         {
-            // TO CHANGE
-            return numeroVersion;
+            Version vrs = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            string stringVersion = String.Format("{0}.{1}.{2}", vrs.Major, vrs.Minor, vrs.Build);
+
+            return stringVersion;
         }
 
         private void New(object sender, RoutedEventArgs e)
