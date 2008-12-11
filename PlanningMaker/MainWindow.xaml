@@ -9,11 +9,6 @@
 	
     <Window.Resources>
         <c:ListeTypeSalles x:Key="Types"/>
-        <DataTemplate x:Key="ModeleSalle">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Path=Nom}"/>
-            </StackPanel>
-        </DataTemplate>
     </Window.Resources>
     
 	<Window.CommandBindings>
@@ -119,14 +114,38 @@
 				<Grid/>
 			</TabItem>
 			<TabItem Header="Horaires" x:Name="TabItem_Horaires" DataContext="{Binding Path=Horaires}">
-                <Grid>
-                    <c:VueHoraire VerticalAlignment="Center"/>
+                <DockPanel>
+                <Grid Width="260">
+                    <c:VueHoraire x:Name="vueHoraire" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
+                <Grid Width="530">
+                        <ListView Name="listeHorraires" SelectionChanged="ChangementSelectionHoraire">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="100" Header="Début" DisplayMemberBinding="{Binding Path=Debut}"/>
+                                    <GridViewColumn Width="100" Header="Fin" DisplayMemberBinding="{Binding Path=Fin}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </DockPanel>
             </TabItem>
 			<TabItem Header="Salles" x:Name="TabItem_Salles">
-                <Grid>
-                    <c:VueSalle/>
-                </Grid>
+                <DockPanel>
+                    <Grid Width="260">
+                        <c:VueSalle x:Name="vueSalle" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Width="530">
+                        <ListView Name="listeSalles" SelectionChanged="ChangementSelectionSalle">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="100" Header="Nom" DisplayMemberBinding="{Binding Path=Nom}"/>
+                                    <GridViewColumn Width="100" Header="Type" DisplayMemberBinding="{Binding Path=TypeOfSalle}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </DockPanel>
             </TabItem>
             <TabItem Header="Requêtes XPath" x:Name="TabItem_XPath">
                 <Grid>

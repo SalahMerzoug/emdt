@@ -29,5 +29,29 @@ namespace PlanningMaker.Vues
             salle = new Amphi();
             DataContext = salle;
         }
+
+        private void ChangementSelectionTypeSalle(object sender, SelectionChangedEventArgs e)
+        {
+            Salle nouvelleSalle;
+
+            if (Type.Text == "Labo" && DataContext is Amphi)
+            {
+                MessageBox.Show("Labo => Amphi");
+                nouvelleSalle = new Labo(salle.Nom);
+                salle = nouvelleSalle;
+            }
+            else if (Type.Text == "Amphi" && DataContext is Labo)
+            {
+                MessageBox.Show("Amphi => Labo");
+                nouvelleSalle = new Amphi(salle.Nom);
+                salle = nouvelleSalle;
+            }
+
+            DataContext = salle;
+
+
+
+        }
+
     }
 }

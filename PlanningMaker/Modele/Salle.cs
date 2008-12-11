@@ -37,5 +37,13 @@ namespace PlanningMaker.Modele
         {
             return "Salle : " + nom;
         }
+
+        public virtual String TypeOfSalle
+        {
+            get
+            {
+                return "Salle";
+            }
+        }
     }
 }

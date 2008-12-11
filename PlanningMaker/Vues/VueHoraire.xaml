@@ -8,11 +8,11 @@
 	<StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
 		    <Label Content="Début" Width="70"/>
-            <TextBox Text="{Binding Path=Debut}" Width="100"/>
+            <TextBox x:Name="Debut" Text="{Binding Path=Debut}" Width="100"/>
 	    </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Fin" Width="70"/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox x:Name="Fin" Text="{Binding Path=Fin}" Width="100"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

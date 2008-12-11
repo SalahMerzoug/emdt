@@ -9,5 +9,13 @@ namespace PlanningMaker.Modele
     {
         public Amphi() : base() { }
         public Amphi(String nom) : base(nom) { }
+
+        public override String TypeOfSalle
+        {
+            get
+            {
+                return "Amphi";
+            }
+        }
     }
 }

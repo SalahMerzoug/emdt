@@ -9,5 +9,13 @@ namespace PlanningMaker.Modele
     {
         public Labo() : base() { }
         public Labo(String nom) : base(nom) { }
+
+        public override String TypeOfSalle
+        {
+            get
+            {
+                return "Labo";
+            }
+        }
     }
 }
