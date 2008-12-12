@@ -17,7 +17,7 @@ using PlanningMaker.Modele;
 namespace PlanningMaker.Vues
 {
     /// <summary>
-    /// Logique d'interaction pour UserControl1.xaml
+    /// Logique d'interaction pour VueSalle.xaml
     /// </summary>
     public partial class VueSalle : UserControl
     {
@@ -48,8 +48,6 @@ namespace PlanningMaker.Vues
             }
 
             DataContext = salle;
-
-
 
         }
 
