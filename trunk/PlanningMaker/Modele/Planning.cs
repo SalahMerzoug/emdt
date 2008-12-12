@@ -164,7 +164,7 @@ namespace PlanningMaker.Modele
             Dictionary<string, Enseignant> dicoEnseignants = new Dictionary<string, Enseignant>();
             foreach (XmlNode elementEnseignant in document.SelectNodes("/emploi-du-temps/enseignants/enseignant"))
             {
-                string id = elementEnseignant.SelectSingleNode("@id/text()").Value;
+                string id = elementEnseignant.SelectSingleNode("@id").Value;
                 string prenomEnseignant = elementEnseignant.SelectSingleNode("prenom/text()").Value;
                 string nomEnseignant = elementEnseignant.SelectSingleNode("nom/text()").Value;
                 Enseignant enseignant = new Enseignant(nomEnseignant, prenomEnseignant);
@@ -175,7 +175,7 @@ namespace PlanningMaker.Modele
             Dictionary<string, Matiere> dicoMatieres = new Dictionary<string, Matiere>();
             foreach (XmlNode elementMatiere in document.SelectNodes("/emploi-du-temps/matieres/matiere"))
             {
-                string id = elementMatiere.SelectSingleNode("@id/text()").Value;
+                string id = elementMatiere.SelectSingleNode("@id").Value;
                 string titreMatiere = elementMatiere.SelectSingleNode("titre/text()").Value;
                 Matiere matiere = new Matiere(titreMatiere);
                 foreach (XmlNode elementEnseignant in elementMatiere.SelectNodes("enseignant"))
@@ -191,7 +191,7 @@ namespace PlanningMaker.Modele
             Dictionary<string, Horaire> dicoHoraires = new Dictionary<string, Horaire>();
             foreach (XmlNode elementHoraire in document.SelectNodes("/emploi-du-temps/horaires/horaire"))
             {
-                string id = elementHoraire.SelectSingleNode("@id/text()").Value;
+                string id = elementHoraire.SelectSingleNode("@id").Value;
                 string debutHoraire = elementHoraire.SelectSingleNode("debut/text()").Value;
                 string finHoraire = elementHoraire.SelectSingleNode("fin/text()").Value;
                 Horaire horaire = new Horaire(debutHoraire, finHoraire);
@@ -202,7 +202,7 @@ namespace PlanningMaker.Modele
             Dictionary<string, Salle> dicoSalles = new Dictionary<string, Salle>();
             foreach (XmlNode elementSalle in document.SelectNodes("/emploi-du-temps/salles/salle"))
             {
-                string id = elementSalle.SelectSingleNode("@id/text()").Value;
+                string id = elementSalle.SelectSingleNode("@id").Value;
                 string nomSalle = elementSalle.SelectSingleNode("nom/text()").Value;
                 string typeSalle = elementSalle.SelectSingleNode("typeSalle/text()").Value;
                 switch (typeSalle)

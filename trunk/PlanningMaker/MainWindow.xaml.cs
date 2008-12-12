@@ -86,6 +86,7 @@ namespace PlanningMaker
                         MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
+
         private void Close(object sender, RoutedEventArgs e)
         {
             // TODO
@@ -280,10 +281,6 @@ namespace PlanningMaker
         private void ChangementSelectionSalle(object sender, SelectionChangedEventArgs e)
         {
             vueSalle.DataContext = listeSalles.SelectedItem;
-            if (vueSalle.DataContext is Amphi)
-                vueSalle.Type.Text = "Amphi";
-            else
-                vueSalle.Type.Text = "Labo";
         }
 	}
     

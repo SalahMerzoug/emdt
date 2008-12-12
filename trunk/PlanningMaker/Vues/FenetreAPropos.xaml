@@ -1,7 +1,7 @@
 ﻿<Window x:Class="PlanningMaker.Vues.FenetreAPropos"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="A propos" Height="300" Width="260" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave">
+    Title="A propos" Height="300" Width="260" ShowInTaskbar="False" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave">
 	<Window.Resources>
 		<Storyboard x:Key="Storyboard1" x:Name="ST" RepeatBehavior="Forever">
 			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">

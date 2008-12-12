@@ -10,7 +10,7 @@ namespace PlanningMaker.Modele
 
         private String nom;
 
-        public String Nom
+        public virtual String Nom
         {
             get
             {
