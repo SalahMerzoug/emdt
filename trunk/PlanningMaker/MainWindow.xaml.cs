@@ -29,6 +29,7 @@ namespace PlanningMaker
             MenuItem_Copier.IsEnabled = false;
             MenuItem_Coller.IsEnabled = false;
             MenuItem_Supprimer.IsEnabled = false;
+            MenuItem_Aide.IsEnabled = false;
         }
 
         public Planning Planning
@@ -73,6 +74,7 @@ namespace PlanningMaker
 
             ICollectionView vueMatieres = CollectionViewSource.GetDefaultView(planning.Matieres);
             vueMatieres.SortDescriptions.Add(new SortDescription("Titre", ListSortDirection.Ascending));
+            vueMatiere.setEnseignantsContext(planning.Enseignants);
 
         }
 
@@ -388,6 +390,11 @@ namespace PlanningMaker
         {
             vueSalle.DataContext = listeSalles.SelectedItem;
         }
+
+        private void ChangementSelectionMatiere(object sender, SelectionChangedEventArgs e)
+        {
+            vueMatiere.DataContext = listeMatieres.SelectedItem;
+        }
         
         private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)
         {
@@ -459,10 +466,6 @@ namespace PlanningMaker
             }
         }
 
-        private void ChangementSelectionUnEnseignant(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
 	}
     
 }

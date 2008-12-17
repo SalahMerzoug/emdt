@@ -112,7 +112,21 @@
                 </DockPanel>
             </TabItem>
 			<TabItem Header="Matières" x:Name="TabItem_Matieres">
-				<Grid/>
+				<DockPanel>
+                    <Grid Width="260">
+                        <c:vueMatiere x:Name="vueMatiere" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Width="530">
+                        <ListView Name="listeMatieres" SelectionChanged="ChangementSelectionMatiere">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="100" Header="Titre" DisplayMemberBinding="{Binding Path=Nom}"/>
+                                    <GridViewColumn Width="100" Header="Enseignants" DisplayMemberBinding="{Binding Path=TypeOfSalle}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </DockPanel>
 			</TabItem>
 			<TabItem Header="Horaires" x:Name="TabItem_Horaires" DataContext="{Binding Path=Horaires}">
                 <DockPanel>

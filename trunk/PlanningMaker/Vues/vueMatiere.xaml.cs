@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PlanningMaker.Modele;
 
 namespace PlanningMaker.Vues
 {
@@ -19,9 +20,21 @@ namespace PlanningMaker.Vues
     /// </summary>
     public partial class vueMatiere : UserControl
     {
+        private Matiere matiere;
+
         public vueMatiere()
         {
             InitializeComponent();
+            matiere = new Matiere();
+            DataContext = matiere;
+        }
+
+        public void setEnseignantsContext(ICollection<Enseignant> enseignants){
+
+            ObjectDataProvider odp = this.FindResource("ComboSource") as ObjectDataProvider;
+            
+            if(odp != null)
+                odp.ObjectInstance = enseignants;
         }
 
         private void ChangementSelectionUnEnseignant(object sender, SelectionChangedEventArgs e)

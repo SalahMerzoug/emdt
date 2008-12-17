@@ -59,6 +59,7 @@
     </Compile>
     <Compile Include="Modele\ETypeEnseignements.cs" />
     <Compile Include="Modele\ETypeSalles.cs" />
+    <Compile Include="Vues\ListeEnseignants.cs" />
     <Compile Include="Vues\ListeTypeSalles.cs" />
     <Compile Include="Modele\RequetesXPath.cs" />
     <Compile Include="Modele\EAnnees.cs" />
