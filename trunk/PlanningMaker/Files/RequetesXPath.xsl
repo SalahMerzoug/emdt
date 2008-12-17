@@ -1,6 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <xsl:stylesheet version="2.0"	xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	<xsl:output method="html"/>
+	<xsl:output method="html" encoding="utf-8"/>
 
   <!-- *************************** Paramètres - Valeurs par défaut *************************** -->
   
@@ -18,49 +19,52 @@
   <!-- *************************** call-template *************************** -->
 
   <xsl:template match="/">
+    <html>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-    <body bgcolor="#C0C0C0"><font color="gold"><h2>
-      <center>Partie II</center>
-      <center>Requêtes XPath sur un emploi du temps</center>
-      <center>(semaine : <xsl:value-of select="$numSemaine"/> )</center>
-    </h2></font></body>
-    <body bgcolor="#DDDDDD">
+      <body bgcolor="#C0C0C0"><font color="gold"><h2>
+        <center>Partie II</center>
+        <center>Requêtes XPath sur un emploi du temps</center>
+        <center>(semaine : <xsl:value-of select="$numSemaine"/> )</center>
+      </h2></font></body>
+      <body bgcolor="#DDDDDD">
+        
+      <xsl:call-template name="Requete1">
+        <xsl:with-param name="nom_recherche" select="$nom_recherche_1"/>
+      </xsl:call-template>
       
-    <xsl:call-template name="Requete1">
-      <xsl:with-param name="nom_recherche" select="$nom_recherche_1"/>
-    </xsl:call-template>
-    
-    <xsl:call-template name="Requete2">
-      <xsl:with-param name="id_enseignant" select="$id_enseignant_2"/>
-    </xsl:call-template>
+      <xsl:call-template name="Requete2">
+        <xsl:with-param name="id_enseignant" select="$id_enseignant_2"/>
+      </xsl:call-template>
 
-    <xsl:call-template name="Requete3">
-      <xsl:with-param name="id_matière" select="$id_matière_3"/>
-    </xsl:call-template>
+      <xsl:call-template name="Requete3">
+        <xsl:with-param name="id_matière" select="$id_matière_3"/>
+      </xsl:call-template>
 
-    <xsl:call-template name="Requete4">
-      <xsl:with-param name="numSemaine" select="$numSemaine"/>
-      <xsl:with-param name="id_matière" select="$id_matière_4"/>
-    </xsl:call-template>
+      <xsl:call-template name="Requete4">
+        <xsl:with-param name="numSemaine" select="$numSemaine"/>
+        <xsl:with-param name="id_matière" select="$id_matière_4"/>
+      </xsl:call-template>
 
-    <xsl:call-template name="Requete5">
-      <xsl:with-param name="numSemaine" select="$numSemaine"/>
-      <xsl:with-param name="id_enseignant" select="$id_enseignant_5"/>
-    </xsl:call-template>
+      <xsl:call-template name="Requete5">
+        <xsl:with-param name="numSemaine" select="$numSemaine"/>
+        <xsl:with-param name="id_enseignant" select="$id_enseignant_5"/>
+      </xsl:call-template>
 
-    <xsl:call-template name="Requete6">
-      <xsl:with-param name="numSemaine" select="$numSemaine"/>
-      <xsl:with-param name="id_salle" select="$id_salle_6"/>
-      <xsl:with-param name="id_jour" select="$id_jour_6"/>
-    </xsl:call-template>
+      <xsl:call-template name="Requete6">
+        <xsl:with-param name="numSemaine" select="$numSemaine"/>
+        <xsl:with-param name="id_salle" select="$id_salle_6"/>
+        <xsl:with-param name="id_jour" select="$id_jour_6"/>
+      </xsl:call-template>
 
-    <xsl:call-template name="Requete7">
-      <xsl:with-param name="numSemaine" select="$numSemaine"/>
-      <xsl:with-param name="id_enseignant" select="$id_enseignant_7"/>
-      <xsl:with-param name="id_jour" select="$id_jour_7"/>
-    </xsl:call-template>
+      <xsl:call-template name="Requete7">
+        <xsl:with-param name="numSemaine" select="$numSemaine"/>
+        <xsl:with-param name="id_enseignant" select="$id_enseignant_7"/>
+        <xsl:with-param name="id_jour" select="$id_jour_7"/>
+      </xsl:call-template>
 
-    </body>
+      </body>
+     </html>
   </xsl:template>
 
   <!-- *************************** template *************************** -->

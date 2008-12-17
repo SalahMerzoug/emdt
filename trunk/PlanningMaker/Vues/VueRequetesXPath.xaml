@@ -6,42 +6,43 @@
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
             <Label Content="Numéro de la semaine ?" Width="350"/>
-            <TextBox Text="{Binding Path=Debut}" Width="100"/>
+            <TextBox Name="champ_numSemaine" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Requête 1 : Enseignants dont le nom contient" Width="350"/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox Name="champ_nom_recherche_1" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Requête 2 : Matières enseignées par" Width="350"/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox Name="champ_id_enseignant_2"  Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Requête 3 : Professeurs enseignant" Width="350"/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox Name="champ_id_matière_3" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Requête 4 : Enseignements de la matière avec l'identifiant" Width="350"/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox Name="champ_id_matière_4" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Requête 5 : Enseignements de l'enseignant" Width="350"/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox Name="champ_id_enseignant_5" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Requête 6 : Disponibilités de la salle" Width="300"/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox Name="champ_id_salle_6" Width="100"/>
             <Label Content=" le "/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox Name="champ_id_jour_6" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Requête 7 : Disponibilités de l'enseignant" Width="300"/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox Name="champ_id_enseignant_7" Width="100"/>
             <Label Content=" le "/>
-            <TextBox Text="{Binding Path=Fin}" Width="100"/>
+            <TextBox Name="champ_id_jour_7" Width="100"/>
         </StackPanel>
-        <Button Height="50" Width="100">
-            <Image Source=".\XPath.png"/>
+        <Button Height="30" Width="70" HorizontalAlignment="Right" Margin="0,0,72,24" 
+            Name="buttonXPath" Click="ButtonXPathClicked">
+            <Image Source=".\XPath.png" />
         </Button>
     </StackPanel>
 </UserControl>
