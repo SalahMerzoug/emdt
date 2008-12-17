@@ -8,28 +8,55 @@ namespace PlanningMaker.Modele
 {
     class MiseAJour
     {
-        public void ThreadMAJ()
+        private SynchronizationContext _context;
+        private string loginMAJ;
+        private string passMAJ;
+
+        public MiseAJour(string login, string pass)
         {
-            // Déclaration du thread
-            Thread myThread;
+            // Mémorisation du context
+            _context = SynchronizationContext.Current;
 
-            // Instanciation du thread, on spécifie dans le 
-            // délégué ThreadStart le nom de la méthode qui
-            // sera exécutée lorsque l'on appele la méthode
-            // Start() de notre thread.
-            myThread = new Thread(new ThreadStart(ThreadLoopMAJ));
-
-            // Lancement du thread
-            myThread.Start();
+            loginMAJ = login;
+            passMAJ = pass;
         }
 
-        private void ThreadLoopMAJ()
+        public Boolean DoWork(Vues.VueMiseAJour winMAJ)
         {
-            VerifierMAJ();
-            Thread.CurrentThread.Abort();
+            if (_context != null)
+            {
+                MiseAJourThreadData data = new MiseAJourThreadData();
+                data.FenetreMAJ = winMAJ;
+                // Appel de la méthode via le context
+                _context.Post(Work, data);
+
+                return data.Retour;
+            }
+            else return false;
         }
 
-        private void VerifierMAJ()
+        private void Work(Object obj)
+        {
+            MiseAJourThreadData data = obj as MiseAJourThreadData;
+            // Faire le job
+            data.FenetreMAJ.TextBoxContenuResultat.Text = VerifierMAJ();
+            data.FenetreMAJ.ProgBar.Value = 100;
+
+            if (data.FenetreMAJ.TextBoxContenuResultat.Text.Contains("nécessaire"))
+            {
+                data.FenetreMAJ.TextBlokTelecharger.Visibility = Visibility.Visible;
+                data.FenetreMAJ.TextBlokTelecharger.IsEnabled = true;
+            }
+            else
+            {
+                data.FenetreMAJ.TextBlokTelecharger.Visibility = Visibility.Hidden;
+                data.FenetreMAJ.TextBlokTelecharger.IsEnabled = true;
+            }
+
+            data.Retour = true;
+        }
+
+        public string VerifierMAJ()
         {
             string message_MAJ, chaineVappli, chaineVnet;
             chaineVappli = MainWindow.getNumeroVersion();
@@ -43,14 +70,14 @@ namespace PlanningMaker.Modele
             {
                 if (chaineVappli.CompareTo(chaineVnet) < 0)
                 {
-                    message_MAJ = "• MAJ nécessaire" + " :\n\tvotre version = " + chaineVappli
-                        + " / dernière version = " + chaineVnet;
+                    message_MAJ = "• MAJ nécessaire" + " :\n\t· votre version = " + chaineVappli
+                        + "\n\t· dernière version = " + chaineVnet;
                 }
-                else message_MAJ = "• NO MAJ" + " :\n\tvotre version = " + chaineVappli
-                        + " / dernière version = " + chaineVnet;
+                else message_MAJ = "• NO MAJ" + " :\n\t· votre version = " + chaineVappli
+                        + "\n\t· dernière version = " + chaineVnet;
             }
 
-            MessageBox.Show(message_MAJ);
+            return message_MAJ;
         }
 
         private string GetDerniereVersion()
@@ -64,21 +91,10 @@ namespace PlanningMaker.Modele
             {
                 webReq = (HttpWebRequest)WebRequest.Create(adresseSiteWeb);
                 webReq.Timeout = 5000;
-                webResp = (HttpWebResponse)webReq.GetResponse();
-            }
-            catch (Exception e)
-            {
-                if (e.Message.Contains("(407)"))
-                {
-                    // identifiants nécessaires pour le proxy
-                    WebRequest.DefaultWebProxy.Credentials = new NetworkCredential("user", "pass");
-                }
-            }
 
-            try
-            {
-                webReq = (HttpWebRequest)WebRequest.Create(adresseSiteWeb);
-                webReq.Timeout = 5000;
+                // identifiants nécessaires pour le proxy
+                WebRequest.DefaultWebProxy.Credentials = new NetworkCredential(loginMAJ, passMAJ);
+
                 webResp = (HttpWebResponse)webReq.GetResponse();
                 Stream oS = webResp.GetResponseStream();
                 StreamReader oSReader = new StreamReader(oS, System.Text.Encoding.ASCII);
@@ -98,12 +114,12 @@ namespace PlanningMaker.Modele
                 if (e2.Message.Contains("(407)"))
                 {
                     resultat = "• Erreur lors de la connexion à internet •\n"
-                    + "\n→ Identifiants proxy incorrects ; veuillez recommencer.";
+                    + "\n→ Identifiants proxy incorrects.";
                 }
                 else
                 {
                     resultat = "• Erreur lors de la connexion à internet •\n" + e2.Message
-                    + "\n\n→ Vérifiez vos configurations de proxy et de firewall.";
+                    + "\n→ Vérifiez vos configurations de proxy et de firewall.";
                 }
             }
 

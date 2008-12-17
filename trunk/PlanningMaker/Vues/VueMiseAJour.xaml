@@ -1,7 +1,7 @@
 ﻿<Window x:Class="PlanningMaker.Vues.VueMiseAJour"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Name="WindowVueMiseAJour" Title="Mise à jour" Height="150" Width="250"
+    Name="WindowVueMiseAJour" Title="Mise à jour" Height="220" Width="300"
     WindowStartupLocation="CenterOwner" ShowInTaskbar="False" ResizeMode="NoResize">
     
     <StackPanel>
@@ -9,27 +9,34 @@
             <StackPanel>
                 <CheckBox Margin="10,10,0,2" Name="CheckBoxProxy" Content="Proxy" Click="CheckBoxProxy_Click"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Margin="20,2,0,2" Name="TextBoxLogin" Width="80"/>
+                    <TextBox Margin="20,2,0,2" IsEnabled="False" Name="TextBoxLogin" Width="80"/>
                     <Label Name="LabelLogin" Content="Login"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Margin="20,2,0,2" Name="TextBoxPass" Width="80"/>
+                    <PasswordBox Margin="20,2,0,2" IsEnabled="False" Name="PasswordBoxPass" Width="80"/>
                     <Label Name="LabelPass" Content="Pass"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel>
-                <Button Margin="10,10,0,0" Name="BoutonConnexion" Content="Connexion" Click="BoutonConnexion_Click"/>
+                <Button Margin="10,10,0,0" Name="BoutonConnexion" Content="Connexion" IsDefault="True" Click="BoutonConnexion_Click"/>
                 <Button Margin="10,10,0,0" Name="BoutonFermer" Content="Fermer" Click="BoutonFermer_Click"/>
             </StackPanel>
         </StackPanel>
-        <Grid Margin="0,8,0,0">
-            <ProgressBar VerticalAlignment="Top" Width="200" Height="15" Name="ProgBar" Value="80"/>
-            <Expander VerticalAlignment="Top" Width="220" BorderBrush="Black" Header="Résultat de la mise à jour :"
-                      Name="ExpanderResultat" Expanded="ExpanderResultat_Expanded" Collapsed="ExpanderResultat_Collapsed">
+        <Grid>
+            <ProgressBar Margin="0,8,0,0" VerticalAlignment="Top" Width="250" Height="15" Name="ProgBar"/>
+            <GroupBox Margin="0,25,0,0" VerticalAlignment="Top" Width="260" Height="80" BorderBrush="LightGray"
+                      Header="Résultat de la mise à jour :" Name="GroupBoxResultat">
                 <Grid>
-                    <TextBox Name="TextBoxContenuResultat" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible"/>
+                    <TextBox Name="TextBoxContenuResultat" TextWrapping="Wrap" AcceptsReturn="True"
+                             BorderThickness="0" VerticalScrollBarVisibility="Visible" IsEnabled="False"/>
                 </Grid>
-            </Expander>
+            </GroupBox>
+            <TextBlock Margin="0,6,0,0" Name="TextBlokTelecharger" HorizontalAlignment="Center" VerticalAlignment="Top"
+                       MouseEnter="TextBlokTelecharger_MouseEnter" MouseLeave="TextBlokTelecharger_MouseLeave"
+                       MouseLeftButtonDown="TextBlokTelecharger_MouseLeftButtonDown"
+                       Visibility="Hidden" IsEnabled="False" Cursor="Hand">
+                <Hyperlink>Télécharger la dernière version</Hyperlink>
+            </TextBlock>
         </Grid>
     </StackPanel>
 </Window>

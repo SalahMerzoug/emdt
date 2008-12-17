@@ -16,9 +16,7 @@ namespace PlanningMaker.Vues
 {
 	public partial class VueRequetesXPath : UserControl
 	{
-        private String numSemaine,nom_recherche_1,id_enseignant_2,id_matière_3,id_matière_4,id_enseignant_5,id_salle_6,id_jour_6,id_enseignant_7,id_jour_7;
-
-		public VueRequetesXPath()
+        public VueRequetesXPath()
 		{
           InitializeComponent();
 		}
