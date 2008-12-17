@@ -279,15 +279,34 @@ namespace PlanningMaker
 
         private void MenuItemValiderXML_Click(object sender, RoutedEventArgs e)
         {
-            ValidationXmlXsd validation = new ValidationXmlXsd();
-            MessageBox.Show(this, validation.ValiderFichierXml("Semaine37.xml"), "Validation XMLSchema : Semaine37.xml");
+            if (OperationSurFichierXMLPossible())
+            {
+                ValidationXmlXsd validation = new ValidationXmlXsd();
+                MessageBox.Show(this, validation.ValiderFichierXml(nomFichier), "Validation XMLSchema");
+            }
+            else
+            {
+                MessageBox.Show(this, "Validation impossible", "Transformation XSLT vers SVG");
+            }
         }
 
         private void MenuItemTransfoXSLT_Click(object sender, RoutedEventArgs e)
         {
-            TransformationXslt transformation = new TransformationXslt();
-            MessageBox.Show(this, transformation.TransformerXslt("EdTversSVG-FF.xsl", "Semaine37.xml"), "Transformation XSLT : Semaine37.xml");
-            StartExternWebBrowser(transformation.FichierEnSortie);
+            string nomFichierSVG = SaveFileSVG();
+            if (OperationSurFichierXMLPossible() && nomFichierSVG != null)
+            {
+                TransformationXslt transformation = new TransformationXslt();
+                string messageValidation = transformation.TransformerXslt("37", "EdTversSVG-FF.xsl", nomFichier, nomFichierSVG);
+                MessageBox.Show(this, messageValidation, "Transformation XSLT vers SVG");
+                if (messageValidation.Equals("Transfomation OK."))
+                {
+                    StartExternWebBrowser(nomFichierSVG);
+                }
+            }
+            else
+            {
+                MessageBox.Show(this, "Transformation impossible", "Transformation XSLT vers SVG");
+            }
         }
 
         private void MenuItemRequetesXPath_Click(object sender, RoutedEventArgs e)
@@ -375,16 +394,69 @@ namespace PlanningMaker
             vueEnseignant.DataContext = listeEnseignants.SelectedItem;
         }
 
+        
+        public bool OperationSurFichierXMLPossible()
+        {
+            if (nomFichier != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static string OpenFileXML()
+        {
+            System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
+            dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialogueO.Filter = "Fichier XML (*.xml)|*.xml";
+
+            if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                return dialogueO.FileName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static string SaveFileSVG()
+        {
+            System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
+            dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialogueS.Filter = "Fichier SVG (*.svg)|*.svg";
+
+            if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                return dialogueS.FileName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public static void StartExternWebBrowser(string filename)
         {
             System.Diagnostics.Process proc = new System.Diagnostics.Process();
             FileInfo info = new FileInfo(filename);
+            // TODO : gestion des espaces dans le chemin absolu du fichier
             string path = info.DirectoryName;
             string name = info.Name;
-            proc.StartInfo.FileName = "firefox.exe";
-            proc.StartInfo.Arguments = "file://" + path + "/" + name;
-            proc.Start();
-            proc.Close();
+            try
+            {
+                proc.StartInfo.FileName = "firefox.exe";
+                proc.StartInfo.Arguments = "file://" + path + "/" + name;
+                proc.Start();
+                proc.Close();
+            }
+            catch (Win32Exception w32ex)
+            {
+                MessageBox.Show("Impossible d'ouvrir le navigateur internet Mozilla Firefox (firefox.exe), vérifiez qu'il est bien installé.\nDétails de l'erreur : " + w32ex.Message, "Transformation XSLT");
+            }
         }
 
         private void ChangementSelectionUnEnseignant(object sender, SelectionChangedEventArgs e)

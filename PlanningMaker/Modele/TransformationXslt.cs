@@ -7,35 +7,20 @@ namespace PlanningMaker.Modele
 {
     class TransformationXslt
     {
-
-        private String messageValidation;
-        private String fichierEnSortie;
-
-        public String FichierEnSortie
+        public string TransformerXslt(string numeroSemaine, string nomFichierXSL, string nomFichierXML, string nomFichierSVG)
         {
-            get { return fichierEnSortie; }
-        }
-
-        public string TransformerXslt(string nomFichierXSL, string nomFichierXML)
-        {
+            string messageValidation = "";
             try
             {
-                string numeroSemaineEnParametre = "37";
-                string nomFichierXMLsansExtension = nomFichierXML.Substring(0, nomFichierXML.LastIndexOf(".xml"));
-                string extensionEnSortie = ".html";
-
-                if (nomFichierXSL.CompareTo("EdTversSVG-FF.xsl") == 0) extensionEnSortie = ".svg";
-
                 XsltArgumentList xslArg = new XsltArgumentList();
-                xslArg.AddParam("numeroSemaine", "", numeroSemaineEnParametre);
+                xslArg.AddParam("numeroSemaine", "", numeroSemaine);
 
                 XslCompiledTransform xslt = new XslCompiledTransform();
                 xslt.Load(@"..\..\Files\" + nomFichierXSL);
 
-                XPathDocument xpathdocument = new XPathDocument(@"..\..\Files\" + nomFichierXML);
+                XPathDocument xpathdocument = new XPathDocument(nomFichierXML);
 
-                fichierEnSortie = @"..\..\Files\" + nomFichierXMLsansExtension + extensionEnSortie;
-                XmlTextWriter writer = new XmlTextWriter(fichierEnSortie, null);
+                XmlTextWriter writer = new XmlTextWriter(nomFichierSVG, null);
 
                 xslt.Transform(xpathdocument, xslArg, writer);
                 writer.Close();
