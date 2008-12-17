@@ -375,7 +375,7 @@ namespace PlanningMaker
             vueEnseignant.DataContext = listeEnseignants.SelectedItem;
         }
 
-        private void StartExternWebBrowser(string filename)
+        public static void StartExternWebBrowser(string filename)
         {
             System.Diagnostics.Process proc = new System.Diagnostics.Process();
             FileInfo info = new FileInfo(filename);

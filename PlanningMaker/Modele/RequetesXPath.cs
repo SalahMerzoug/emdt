@@ -2,31 +2,44 @@
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-
+using PlanningMaker;
 
 namespace PlanningMaker.Modele
 {
     class RequetesXPath
     {
-
+ 
+        // méthodes par défauts
         public void ExecRequetesXPath(string nomFichierXSL, string nomFichierXML)
         {
-
             // Load the style sheet.
             XslCompiledTransform xslt = new XslCompiledTransform();
             xslt.Load(@"..\..\Files\" + nomFichierXSL);
           
             // Create the XsltArgumentList.
-            string numSemaine = "37";
-            string nom_recherche_1 = "oug";
-            string id_enseignant_2 = "obeaudoux";
-            string id_matière_3 = "maths";
-            string id_matière_4 = "anglais";
-            string id_enseignant_5 = "kdrouet";
-            string id_salle_6 = "langevin";
-            string id_jour_6 = "mardi";
-            string id_enseignant_7 = "kdrouet";
-            string id_jour_7 = "mardi";
+            XsltArgumentList xslArg = new XsltArgumentList();
+
+            string nomFichierXMLsansExtension = nomFichierXML.Substring(0, nomFichierXML.LastIndexOf(".xml"));
+            XPathDocument xpathdocument = new XPathDocument(@"..\..\Files\" + nomFichierXML);
+            XmlTextWriter writer = new XmlTextWriter(@"..\..\Files\" + nomFichierXMLsansExtension + "-RequêtesXPath.html", null);
+            
+            // Transform the file.
+            xslt.Transform(xpathdocument, xslArg, writer);
+            writer.Close();
+
+            MessageBox.Show("Génération des requêtes XPath par défaut: OK");
+            MainWindow.StartExternWebBrowser(@"..\..\Files\" + nomFichierXMLsansExtension + "-RequêtesXPath.html");
+       }
+
+        // méthodes avec arguments
+        public void ExecRequetesXPath(string nomFichierXSL, string nomFichierXML,
+            string numSemaine, string nom_recherche_1, string id_enseignant_2, string id_matière_3, string id_matière_4, string id_enseignant_5,
+            string id_salle_6, string id_jour_6, string id_enseignant_7, string id_jour_7)
+        {
+
+            // Load the style sheet.
+            XslCompiledTransform xslt = new XslCompiledTransform();
+            xslt.Load(@"..\..\Files\" + nomFichierXSL);
 
             XsltArgumentList xslArg = new XsltArgumentList();
             xslArg.AddParam("numSemaine", "", numSemaine);
@@ -43,12 +56,14 @@ namespace PlanningMaker.Modele
             string nomFichierXMLsansExtension = nomFichierXML.Substring(0, nomFichierXML.LastIndexOf(".xml"));
             XPathDocument xpathdocument = new XPathDocument(@"..\..\Files\" + nomFichierXML);
             XmlTextWriter writer = new XmlTextWriter(@"..\..\Files\" + nomFichierXMLsansExtension + "-RequêtesXPath.html", null);
-            
+
             // Transform the file.
             xslt.Transform(xpathdocument, xslArg, writer);
             writer.Close();
 
-            MessageBox.Show("Génération des requêtes XPath : OK");
-       }
+            MessageBox.Show("Génération des requêtes XPath paramétrées: OK");
+            MainWindow.StartExternWebBrowser(@"..\..\Files\" + nomFichierXMLsansExtension + "-RequêtesXPath.html");
+ 
+        }
     }
 }
