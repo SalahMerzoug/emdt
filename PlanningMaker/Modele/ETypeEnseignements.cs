@@ -5,9 +5,8 @@ using System.Text;
 
 namespace PlanningMaker.Modele
 {
-    class TP : Enseignement
+    public enum ETypeEnseignements
     {
-        public TP() : base() { }
-        public TP(int numGroup) : base(numGroup) { }
+        Cours, TP, TD
     }
 }

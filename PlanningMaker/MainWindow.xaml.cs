@@ -22,7 +22,6 @@ namespace PlanningMaker
             DataContext = planning;
 			
 			// Insert code required on object creation below this point.
-
             MenuItem_Annuler.IsEnabled = false;
             MenuItem_Rétablir.IsEnabled = false;
             MenuItem_Couper.IsEnabled = false;
@@ -30,6 +29,15 @@ namespace PlanningMaker
             MenuItem_Coller.IsEnabled = false;
             MenuItem_Supprimer.IsEnabled = false;
         }
+
+        public Planning Planning
+        { 
+            get
+            {
+                return Planning;
+            }
+        }
+
 
         public static string getNumeroVersion()
         {
@@ -316,12 +324,14 @@ namespace PlanningMaker
             {
                 string type = vueSalle.Type.Text;
                 string nom = vueSalle.Nom.Text;
+                Salle nouvelleSalle = new Salle(nom);
                 switch(type){
-                    case "Labo": planning.Salles.Add(new Labo((nom!=null)? nom : ""));
+                    case "Labo": nouvelleSalle.Type = ETypeSalles.Labo;
                         break;
-                    default : planning.Salles.Add(new Amphi((nom!=null)? nom : ""));
+                    default: nouvelleSalle.Type = ETypeSalles.Amphi;
                         break;
                 }
+                planning.Salles.Add(nouvelleSalle);
             }
         }
 
@@ -346,7 +356,7 @@ namespace PlanningMaker
 
         private void ChangementSelectionSalle(object sender, SelectionChangedEventArgs e)
         {
-            vueSalle.DataContext = listeSalles.SelectedItem;
+            vueSalle.SetSalleContext((Salle)listeSalles.SelectedItem);
         }
 
         private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)

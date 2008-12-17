@@ -5,8 +5,9 @@ using System.Text;
 
 namespace PlanningMaker.Modele
 {
-    public abstract class Salle : ObservableObject
+    public class Salle : ObservableObject
     {
+        private ETypeSalles type;
 
         private String nom;
 
@@ -20,6 +21,18 @@ namespace PlanningMaker.Modele
             {
                 nom = value;
                 ObjectChanged("Nom");
+            }
+        }
+
+        public ETypeSalles Type
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
             }
         }
 
@@ -38,12 +51,5 @@ namespace PlanningMaker.Modele
             return "Salle : " + nom;
         }
 
-        public virtual String TypeOfSalle
-        {
-            get
-            {
-                return "Salle";
-            }
-        }
     }
 }

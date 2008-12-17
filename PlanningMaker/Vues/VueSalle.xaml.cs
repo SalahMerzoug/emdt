@@ -13,6 +13,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PlanningMaker.Vues;
 using PlanningMaker.Modele;
+using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace PlanningMaker.Vues
 {
@@ -26,29 +28,13 @@ namespace PlanningMaker.Vues
         public VueSalle()
         {
             InitializeComponent();
-            salle = new Amphi();
-            DataContext = salle;
+            salle = new Salle();
+            DataContext = s;
         }
 
         private void ChangementSelectionTypeSalle(object sender, SelectionChangedEventArgs e)
         {
-            Salle nouvelleSalle;
-
-            if (Type.Text == "Labo" && DataContext is Amphi)
-            {
-                MessageBox.Show("Labo => Amphi");
-                nouvelleSalle = new Labo(salle.Nom);
-                salle = nouvelleSalle;
-            }
-            else if (Type.Text == "Amphi" && DataContext is Labo)
-            {
-                MessageBox.Show("Amphi => Labo");
-                nouvelleSalle = new Amphi(salle.Nom);
-                salle = nouvelleSalle;
-            }
-
-            DataContext = salle;
-
+                        
         }
 
     }

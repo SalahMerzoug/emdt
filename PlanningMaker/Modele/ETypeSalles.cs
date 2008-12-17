@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PlanningMaker.Modele
 {
-    enum ETypeSalles
+    public enum ETypeSalles
     {
         Amphi, Labo
     }
