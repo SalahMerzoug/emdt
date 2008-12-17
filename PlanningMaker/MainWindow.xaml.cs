@@ -304,6 +304,9 @@ namespace PlanningMaker
             else if (TabItem_Enseignants.IsSelected)
             {
                 //planning.Enseignants.Add(new Enseignant());
+                String nom = vueEnseignant.nom.Text;
+                String prenom = vueEnseignant.prenom.Text;
+                planning.Enseignants.Add(new Enseignant(nom,prenom));
             }
             else if (TabItem_Matieres.IsSelected)
             {
@@ -328,7 +331,7 @@ namespace PlanningMaker
 
         private void AjouterElementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (planning!=null)&&(!TabItem_XPath.IsSelected);
+            e.CanExecute = (planning!=null)&&(!TabItem_XPath.IsSelected)&&(vueEnseignant.nom.Text!="")&&(vueEnseignant.prenom.Text!="");
         }
 
         private void SupprimerElementPossible(object sender, CanExecuteRoutedEventArgs e)
@@ -344,6 +347,11 @@ namespace PlanningMaker
         private void ChangementSelectionSalle(object sender, SelectionChangedEventArgs e)
         {
             vueSalle.DataContext = listeSalles.SelectedItem;
+        }
+
+        private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)
+        {
+            vueEnseignant.DataContext = listeEnseignants.SelectedItem;
         }
 	}
     
