@@ -6,11 +6,11 @@
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
             <Label Content="Nom" Width="70"/>
-            <TextBox Text="{Binding Path=Nom}" Width="100"/>
+            <TextBox Name="nom" Text="{Binding Path=Nom}" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Prénom" Width="70"/>
-            <TextBox Text="{Binding Path=Prenom}" Width="100"/>
+            <TextBox Name="prenom" Text="{Binding Path=Prenom}" Width="100"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

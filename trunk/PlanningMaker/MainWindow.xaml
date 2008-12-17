@@ -96,26 +96,19 @@
 			<TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps"/>
 			<TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
                 <DockPanel>
-                    <c:VueEnseignant VerticalAlignment="Center" DockPanel.Dock="Left"/>
-                    <Expander DockPanel.Dock="Right" Header="Professeurs" Width="100">
-                        <ListBox>
-                            <ListBoxItem>
-                                <TextBlock Text="Prof 1"/>
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                <TextBlock Text="Prof 2"/>
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                <TextBlock Text="Prof 3"/>
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                <TextBlock Text="Prof 4"/>
-                            </ListBoxItem>
-                            <ListBoxItem>
-                                <TextBlock Text="Prof 5"/>
-                            </ListBoxItem>
-                        </ListBox>
-                    </Expander>
+                    <Grid Width="260">
+                        <c:VueEnseignant x:Name="vueEnseignant" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Width="530">
+                        <ListView x:Name="listeEnseignants" SelectionChanged="ChangementSelectionEnseignant">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="100" Header="Nom" DisplayMemberBinding="{Binding Path=Nom}"/>
+                                    <GridViewColumn Width="100" Header="Prénom" DisplayMemberBinding="{Binding Path=Prenom}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
                 </DockPanel>
             </TabItem>
 			<TabItem Header="Matières" x:Name="TabItem_Matieres">
