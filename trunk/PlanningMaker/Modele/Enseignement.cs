@@ -28,6 +28,7 @@ namespace PlanningMaker.Modele
             set
             {
                 type = value;
+                ObjectChanged("Type");
             }
         }
 

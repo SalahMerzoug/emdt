@@ -98,6 +98,14 @@ namespace PlanningMaker
             // - dans ce cas : proposer de l'enregistrer
             // avant de le passer à null
             planning = null;
+
+            listeSalles.ItemsSource = null;
+            listeHorraires.ItemsSource = null;
+            listeEnseignants.ItemsSource = null;
+            
+            vueSalle.DataContext = null;
+            vueHoraire.DataContext = null;
+            vueEnseignant.DataContext = null;
         }
 
         private void Save(object sender, RoutedEventArgs e)

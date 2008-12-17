@@ -141,7 +141,7 @@
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="100" Header="Nom" DisplayMemberBinding="{Binding Path=Nom}"/>
-                                    <GridViewColumn Width="100" Header="Type" DisplayMemberBinding="{Binding Path=TypeOfSalle}"/>
+                                    <GridViewColumn Width="100" Header="Type" DisplayMemberBinding="{Binding Path=Type}"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
