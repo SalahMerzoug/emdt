@@ -1,11 +1,9 @@
-﻿using System.ComponentModel;
-using System;
+﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
-using Microsoft.Win32;
-using PlanningMaker.Vues;
 using PlanningMaker.Modele;
 
 namespace PlanningMaker
@@ -15,7 +13,7 @@ namespace PlanningMaker
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-        private String nomFichier;
+        private string nomFichier;
         private Planning planning;
 
 		public MainWindow()
@@ -25,9 +23,6 @@ namespace PlanningMaker
 			
 			// Insert code required on object creation below this point.
 
-            MenuItem_Fermer.IsEnabled = false;
-            MenuItem_Apercu.IsEnabled = false;
-            MenuItem_Imprimer.IsEnabled = false;
             MenuItem_Annuler.IsEnabled = false;
             MenuItem_Rétablir.IsEnabled = false;
             MenuItem_Couper.IsEnabled = false;
@@ -89,7 +84,10 @@ namespace PlanningMaker
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            // TODO
+            // TODO : détecter que le planning a été modifié depuis le dernier enregistrement
+            // - dans ce cas : proposer de l'enregistrer
+            // avant de le passer à null
+            planning = null;
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -105,6 +103,7 @@ namespace PlanningMaker
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueS.Filter = "Fichier XML (*.xml)|*.xml";
             dialogueS.DefaultExt = "*.xml";
+
             if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 nomFichier = dialogueS.FileName;
@@ -112,24 +111,87 @@ namespace PlanningMaker
             }
         }
 
+        private void FermeturePossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = planningExiste();
+        }
+
         private void EnregistrementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (planning != null) && (nomFichier != null);
+            e.CanExecute = planningExiste() && (nomFichier != null);
         }
 
         private void EnregistrementSousPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (planning != null);
+            e.CanExecute = planningExiste();
+        }
+
+        private bool planningExiste()
+        {
+            return (planning != null);
+        }
+
+        private void Importer(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
+            dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialogueO.Filter = "iCalendar (*.ics)|*.ics|Valeurs séparées par des virgules Outlook (*csv)|*csv";
+
+            if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                nomFichier = dialogueO.FileName;
+                // TODO : traitements en fonction de l'import choisi
+            }
+        }
+
+        private void Exporter(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
+            dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialogueS.Filter = "iCalendar (*.ics)|*.ics|Valeurs séparées par des virgules Outlook (*csv)|*csv";
+
+            if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                nomFichier = dialogueS.FileName;
+                // TODO : traitements en fonction de l'export choisi
+            }
+        }
+
+        private void ExporterPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = planningExiste();
         }
 
         private void PrintPreview(object sender, RoutedEventArgs e)
         {
-            // TODO
+            System.Windows.Forms.PrintPreviewDialog printPreviewD = new System.Windows.Forms.PrintPreviewDialog();
+            // TODO : mettre notre 'document' dans le PrintPreviewDialog
+            // printPreviewD.Document = ...;
+            printPreviewD.Show();
         }
 
         private void Print(object sender, RoutedEventArgs e)
         {
-            // TODO
+            PrintDialog printDialog = new PrintDialog();
+            printDialog.PageRangeSelection = PageRangeSelection.AllPages;
+            printDialog.UserPageRangeEnabled = true;
+
+            Nullable<bool> result = printDialog.ShowDialog();
+
+            if (result == true)
+            {
+                // TODO : Print document
+            }
+        }
+
+        private void ApercuPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = planningExiste();
+        }
+
+        private void ImprimerPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = planningExiste();
         }
 
         private void Exit(object sender, RoutedEventArgs e)
@@ -217,8 +279,9 @@ namespace PlanningMaker
 
         private void MenuItemMAJ_Click(object sender, RoutedEventArgs e)
         {
-            MiseAJour maj = new MiseAJour();
-            maj.VerifierMAJ();
+            Vues.VueMiseAJour vueMAJ = new Vues.VueMiseAJour();
+            vueMAJ.Owner = this;
+            vueMAJ.ShowDialog();
         }
 
         private void MenuItemAPropos_Click(object sender, RoutedEventArgs e)
