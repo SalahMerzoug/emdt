@@ -205,19 +205,18 @@ namespace PlanningMaker.Modele
                 string id = elementSalle.SelectSingleNode("@id").Value;
                 string nomSalle = elementSalle.SelectSingleNode("nom/text()").Value;
                 string typeSalle = elementSalle.SelectSingleNode("typeSalle/text()").Value;
+                Salle salle = new Salle(nomSalle);
                 switch (typeSalle)
                 {
                     case "Labo" :
-                        Labo labo = new Labo(nomSalle);
-                        dicoSalles.Add(id, labo);
-                        salles.Add(labo);
+                        salle.Type = ETypeSalles.Labo;
                         break;
                     case "Amphi" :
-                        Amphi amphi = new Amphi(nomSalle);
-                        dicoSalles.Add(id, amphi);
-                        salles.Add(amphi);
+                        salle.Type = ETypeSalles.Amphi;
                         break;
                 }
+                dicoSalles.Add(id, salle);
+                salles.Add(salle);
             }
             //semaines
             foreach (XmlNode elementSemaine in document.SelectNodes("/emploi-du-temps/semaines/semaine"))
@@ -256,16 +255,16 @@ namespace PlanningMaker.Modele
                             numeroGroupe = System.Int32.Parse(nodeNumeroGroupe.Value);
                         }
                         string typeEnseignement = elementEnseignement.SelectSingleNode("type/text()").Value;
-                        Enseignement enseignement = null;
+                        Enseignement enseignement = new Enseignement(numeroGroupe);
                         switch(typeEnseignement){
                             case "COURS" :
-                                enseignement = new Cours(numeroGroupe);
+                                enseignement.Type = ETypeEnseignements.Cours;
                                 break;
                             case "TD" :
-                                enseignement = new TD(numeroGroupe);
+                                enseignement.Type = ETypeEnseignements.TD;
                                 break;
                             case "TP" :
-                                enseignement = new TP(numeroGroupe);
+                                enseignement.Type = ETypeEnseignements.TP;
                                 break;
                         }
                         string idEnseignant = elementEnseignement.SelectSingleNode("enseignant/@ref").Value;
@@ -418,7 +417,7 @@ namespace PlanningMaker.Modele
             salle.AppendChild(typeSalle);
             id.Value = "id" + compteurId.ToString();
             nom.AppendChild(document.CreateTextNode(s.Nom));
-            typeSalle.AppendChild(document.CreateTextNode(s.GetType().Name)); // A vérifier
+            typeSalle.AppendChild(document.CreateTextNode(Enum.Format(typeof(ETypeSalles), s.Nom, "G")));
         }
 
         private void AjouterSemaine(Semaine s, XmlDocument document, XmlElement semaines, XmlElement semaine)
@@ -475,8 +474,7 @@ namespace PlanningMaker.Modele
             }
             enseignement.AppendChild(salle);
             salle.Attributes.Append(refSalle);
-            type.AppendChild(document.CreateTextNode(e.GetType().Name.ToUpper()));
-            refEnseignant.Value = "id" + enseignants.IndexOf(e.Enseignant).ToString();
+            type.AppendChild(document.CreateTextNode(Enum.Format(typeof(ETypeEnseignements), e.Type, "G").ToUpper()));
             refMatiere.Value = "id" + matieres.IndexOf(e.Matiere).ToString();
             refHoraire1.Value = "id" + horaires.IndexOf(e.Horaire1).ToString();
             if (e.Horaire2 != null)
