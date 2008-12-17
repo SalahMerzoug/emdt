@@ -9,6 +9,12 @@ namespace PlanningMaker.Modele
     {
 
         private String messageValidation;
+        private String fichierEnSortie;
+
+        public String FichierEnSortie
+        {
+            get { return fichierEnSortie; }
+        }
 
         public string TransformerXslt(string nomFichierXSL, string nomFichierXML)
         {
@@ -28,7 +34,8 @@ namespace PlanningMaker.Modele
 
                 XPathDocument xpathdocument = new XPathDocument(@"..\..\Files\" + nomFichierXML);
 
-                XmlTextWriter writer = new XmlTextWriter(@"..\..\Files\" + nomFichierXMLsansExtension + extensionEnSortie, null);
+                fichierEnSortie = @"..\..\Files\" + nomFichierXMLsansExtension + extensionEnSortie;
+                XmlTextWriter writer = new XmlTextWriter(fichierEnSortie, null);
 
                 xslt.Transform(xpathdocument, xslArg, writer);
                 writer.Close();

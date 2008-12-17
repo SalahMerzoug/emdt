@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using PlanningMaker.Modele;
+using System.IO;
 
 namespace PlanningMaker
 {
@@ -276,7 +277,8 @@ namespace PlanningMaker
         private void MenuItemTransfoXSLT_Click(object sender, RoutedEventArgs e)
         {
             TransformationXslt transformation = new TransformationXslt();
-            MessageBox.Show(this, transformation.TransformerXslt("EdTversSVG-IE.xsl", "Semaine37.xml"), "Transformation XSLT : Semaine37.xml");
+            MessageBox.Show(this, transformation.TransformerXslt("EdTversSVG-FF.xsl", "Semaine37.xml"), "Transformation XSLT : Semaine37.xml");
+            StartExternWebBrowser(transformation.FichierEnSortie);
         }
 
         private void MenuItemRequetesXPath_Click(object sender, RoutedEventArgs e)
@@ -356,13 +358,24 @@ namespace PlanningMaker
 
         private void ChangementSelectionSalle(object sender, SelectionChangedEventArgs e)
         {
-            vueSalle.SetSalleContext((Salle)listeSalles.SelectedItem);
+            vueSalle.DataContext = listeSalles.SelectedItem;
         }
 
         private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)
         {
             vueEnseignant.DataContext = listeEnseignants.SelectedItem;
         }
-	}
-    
+
+        private void StartExternWebBrowser(string filename)
+        {
+            System.Diagnostics.Process proc = new System.Diagnostics.Process();
+            FileInfo info = new FileInfo(filename);
+            string path = info.DirectoryName;
+            string name = info.Name;
+            proc.StartInfo.FileName = "firefox.exe";
+            proc.StartInfo.Arguments = "file://" + path + "/" + name;
+            proc.Start();
+            proc.Close();
+        }
+    }
 }

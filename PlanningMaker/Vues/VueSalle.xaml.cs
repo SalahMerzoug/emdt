@@ -29,7 +29,7 @@ namespace PlanningMaker.Vues
         {
             InitializeComponent();
             salle = new Salle();
-            DataContext = s;
+            DataContext = salle;
         }
 
         private void ChangementSelectionTypeSalle(object sender, SelectionChangedEventArgs e)
