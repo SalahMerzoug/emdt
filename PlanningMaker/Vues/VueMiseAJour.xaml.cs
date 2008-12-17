@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using PlanningMaker.Modele;
 
 namespace PlanningMaker.Vues
 {
@@ -10,15 +12,6 @@ namespace PlanningMaker.Vues
         public VueMiseAJour()
         {
             InitializeComponent();
-
-            CheckBoxProxy.IsChecked = false;
-            TextBoxLogin.IsEnabled = false;
-            TextBoxPass.IsEnabled = false;
-
-            ProgBar.IsEnabled = false;
-            ProgBar.Visibility = Visibility.Hidden;
-
-            TextBoxContenuResultat.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer gravida rutrum nisl. Vestibulum eu eros. Nunc vehicula sapien in nisi. Nunc nec arcu.";
         }
 
         private void CheckBoxProxy_Click(object sender, RoutedEventArgs e)
@@ -31,19 +24,28 @@ namespace PlanningMaker.Vues
             if (CheckBoxProxy.IsChecked == true)
             {
                 TextBoxLogin.IsEnabled = true;
-                TextBoxPass.IsEnabled = true;
+                PasswordBoxPass.IsEnabled = true;
             }
             else
             {
                 TextBoxLogin.IsEnabled = false;
-                TextBoxPass.IsEnabled = false;
+                PasswordBoxPass.IsEnabled = false;
             }
         }
 
         private void BoutonConnexion_Click(object sender, RoutedEventArgs e)
         {
-            Modele.MiseAJour maj = new Modele.MiseAJour();
-            maj.ThreadMAJ();
+            TextBoxContenuResultat.IsEnabled = true;
+
+            string login="", pass="";
+
+            if (CheckBoxProxy.IsChecked == true)
+            {
+                login = TextBoxLogin.Text;
+                pass = PasswordBoxPass.Password;
+            }
+            MiseAJour maj = new MiseAJour(login, pass);
+            maj.DoWork(this);
         }
 
         private void BoutonFermer_Click(object sender, RoutedEventArgs e)
@@ -51,16 +53,19 @@ namespace PlanningMaker.Vues
             this.Close();
         }
 
-        private void ExpanderResultat_Expanded(object sender, RoutedEventArgs e)
+        private void TextBlokTelecharger_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            ExpanderResultat.Height += 100;
-            WindowVueMiseAJour.Height += 100;
+            TextBlokTelecharger.FontStyle = FontStyles.Italic;
         }
 
-        private void ExpanderResultat_Collapsed(object sender, RoutedEventArgs e)
+        private void TextBlokTelecharger_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            ExpanderResultat.Height -= 100;
-            WindowVueMiseAJour.Height -= 100;
+            TextBlokTelecharger.FontStyle = FontStyles.Normal;
+        }
+
+        private void TextBlokTelecharger_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://code.google.com/p/emdt/downloads/list");
         }
     }
 }
