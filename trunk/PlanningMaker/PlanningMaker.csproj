@@ -57,20 +57,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modele\ETypeEnseignements.cs" />
     <Compile Include="Modele\ETypeSalles.cs" />
     <Compile Include="Vues\ListeTypeSalles.cs" />
     <Compile Include="Modele\RequetesXPath.cs" />
     <Compile Include="Modele\EAnnees.cs" />
     <Compile Include="Modele\EDivisions.cs" />
-    <Compile Include="Modele\Cours.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Modele\Amphi.cs" />
     <Compile Include="Modele\Enseignement.cs" />
     <Compile Include="Modele\Jour.cs" />
     <Compile Include="Modele\EJours.cs" />
-    <Compile Include="Modele\Labo.cs" />
     <Compile Include="Modele\Enseignant.cs" />
     <Compile Include="Modele\Horaire.cs" />
     <Compile Include="Modele\Matiere.cs" />
@@ -79,8 +77,6 @@
     <Compile Include="Modele\Planning.cs" />
     <Compile Include="Modele\Salle.cs" />
     <Compile Include="Modele\Semaine.cs" />
-    <Compile Include="Modele\TD.cs" />
-    <Compile Include="Modele\TP.cs" />
     <Compile Include="Modele\TransformationXslt.cs" />
     <Compile Include="Modele\ValidationXmlXsd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

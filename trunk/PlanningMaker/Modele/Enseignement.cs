@@ -5,8 +5,10 @@ using System.Text;
 
 namespace PlanningMaker.Modele
 {
-    public abstract class Enseignement : ObservableObject
+    public class Enseignement : ObservableObject
     {
+        private ETypeEnseignements type;
+
         private int numeroGroupe;
 
         private Enseignant enseignant;
@@ -16,6 +18,18 @@ namespace PlanningMaker.Modele
         private Horaire plage2;
 
         private Salle salle;
+
+        public ETypeEnseignements Type
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                type = value;
+            }
+        }
 
         public int Groupe
         {
