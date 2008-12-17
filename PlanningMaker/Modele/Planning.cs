@@ -180,7 +180,7 @@ namespace PlanningMaker.Modele
                 Matiere matiere = new Matiere(titreMatiere);
                 foreach (XmlNode elementEnseignant in elementMatiere.SelectNodes("enseignant"))
                 {
-                    string idEnseignant = elementEnseignant.SelectSingleNode("@ref/text()").Value;
+                    string idEnseignant = elementEnseignant.SelectSingleNode("@ref").Value;
                     Enseignant enseignant = dicoEnseignants[idEnseignant];
                     matiere.Enseignants.Add(enseignant);
                 }
@@ -268,20 +268,20 @@ namespace PlanningMaker.Modele
                                 enseignement = new TP(numeroGroupe);
                                 break;
                         }
-                        string idEnseignant = elementEnseignement.SelectSingleNode("enseignant/@idref").Value;
+                        string idEnseignant = elementEnseignement.SelectSingleNode("enseignant/@ref").Value;
                         enseignement.Enseignant = dicoEnseignants[idEnseignant];
-                        string idMatiere = elementEnseignement.SelectSingleNode("matiere/@idref").Value;
+                        string idMatiere = elementEnseignement.SelectSingleNode("matiere/@ref").Value;
                         enseignement.Matiere = dicoMatieres[idMatiere];
-                        string idHoraire1 = elementEnseignement.SelectSingleNode("horaire[1]/@idref").Value;
+                        string idHoraire1 = elementEnseignement.SelectSingleNode("horaire[1]/@ref").Value;
                         enseignement.Horaire1 = dicoHoraires[idHoraire1];
                         string idHoraire2 = "";
-                        if(elementEnseignement.SelectSingleNode("horaire[2]/@idref") != null){
-                            idHoraire2 = elementEnseignement.SelectSingleNode("horaire[2]/@idref").Value;
+                        if(elementEnseignement.SelectSingleNode("horaire[2]/@ref") != null){
+                            idHoraire2 = elementEnseignement.SelectSingleNode("horaire[2]/@ref").Value;
                             enseignement.Horaire2 = dicoHoraires[idHoraire2];
                         }else{
                             enseignement.Horaire2 = null;
                         }
-                        string idSalle = elementEnseignement.SelectSingleNode("matiere/@idref").Value;
+                        string idSalle = elementEnseignement.SelectSingleNode("salle/@ref").Value;
                         enseignement.Salle = dicoSalles[idSalle];
                         jour.Enseignements.Add(enseignement);
                     }
