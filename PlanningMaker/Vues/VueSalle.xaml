@@ -10,7 +10,7 @@
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
             <Label Content="Type" Width="70"/>
-            <ComboBox x:Name="Type" ItemsSource="{Binding Source={StaticResource Types}}" Width="100" SelectionChanged="ChangementSelectionTypeSalle"/>
+            <ComboBox x:Name="Type" Text="{Binding Path=Type}" ItemsSource="{Binding Source={StaticResource Types}}" Width="100" SelectionChanged="ChangementSelectionTypeSalle"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Nom" Width="70"/>
