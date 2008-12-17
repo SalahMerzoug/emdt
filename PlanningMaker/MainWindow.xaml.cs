@@ -59,6 +59,7 @@ namespace PlanningMaker
             ICollectionView vueEnseignants = CollectionViewSource.GetDefaultView(planning.Enseignants);
             vueEnseignants.SortDescriptions.Add(new SortDescription("Nom", ListSortDirection.Ascending));
             vueEnseignants.SortDescriptions.Add(new SortDescription("Prenom", ListSortDirection.Ascending));
+            listeEnseignants.ItemsSource = planning.Enseignants;
 
             ICollectionView vueSalles = CollectionViewSource.GetDefaultView(planning.Salles);
             vueSalles.SortDescriptions.Add(new SortDescription("Nom", ListSortDirection.Ascending));
@@ -360,7 +361,7 @@ namespace PlanningMaker
         {
             vueSalle.DataContext = listeSalles.SelectedItem;
         }
-
+        
         private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)
         {
             vueEnseignant.DataContext = listeEnseignants.SelectedItem;
@@ -377,5 +378,11 @@ namespace PlanningMaker
             proc.Start();
             proc.Close();
         }
-    }
+
+        private void ChangementSelectionUnEnseignant(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+	}
+    
 }

@@ -80,6 +80,9 @@
     <Compile Include="Modele\TransformationXslt.cs" />
     <Compile Include="Modele\ValidationXmlXsd.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vues\vueMatiere.xaml.cs">
+      <DependentUpon>vueMatiere.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Vues\VueMiseAJour.xaml.cs">
       <DependentUpon>VueMiseAJour.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vues\vueMatiere.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Vues\VueMiseAJour.xaml">
       <SubType>Designer</SubType>

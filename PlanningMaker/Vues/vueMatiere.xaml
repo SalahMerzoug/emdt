@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="PlanningMaker.Vues.vueMatiere"
+    xmlns:c="clr-namespace:PlanningMaker.Vues"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <UserControl.Resources>
+        <c:ListeTypeSalles x:Key="Type"/>
+    </UserControl.Resources>
+    <StackPanel x:Name="LayoutRoot">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Titre" Width="70"/>
+            <TextBox Name="titre" Text="{Binding Path=Titre}" Width="100"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Enseignants" Width="70"/>
+            <ComboBox x:Name="enseignant" ItemsSource="{Binding Source={StaticResource Type}}" Width="100" SelectionChanged="ChangementSelectionUnEnseignant"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
