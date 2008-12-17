@@ -6,7 +6,9 @@
 	x:Class="PlanningMaker.MainWindow"
 	x:Name="Window"
 	Title="Viactisoft PlanningMaker 2008 School Edition"
-	Width="850" Height="506" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+	Width="850" Height="506" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
 	
     <Window.Resources>
         <c:ListeTypeSalles x:Key="Types"/>
@@ -15,11 +17,13 @@
 	<Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.New" Executed="New"/>
 		<CommandBinding Command="ApplicationCommands.Open" Executed="Open"/>
-        <CommandBinding Command="ApplicationCommands.Close" Executed="Close"/>
+        <CommandBinding Command="ApplicationCommands.Close" Executed="Close" CanExecute="FermeturePossible"/>
         <CommandBinding Command="ApplicationCommands.Save" Executed="Save" CanExecute="EnregistrementPossible"/>
         <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs" CanExecute="EnregistrementSousPossible"/>
-        <CommandBinding Command="ApplicationCommands.PrintPreview" Executed="PrintPreview"/>
-        <CommandBinding Command="ApplicationCommands.Print" Executed="Print"/>
+        <CommandBinding Command="c:PlanningCommands.Importer" Executed="Importer"/>
+        <CommandBinding Command="c:PlanningCommands.Exporter" Executed="Exporter" CanExecute="ExporterPossible"/>
+        <CommandBinding Command="ApplicationCommands.PrintPreview" Executed="PrintPreview" CanExecute="ApercuPossible"/>
+        <CommandBinding Command="ApplicationCommands.Print" Executed="Print" CanExecute="ImprimerPossible"/>
 		<CommandBinding Command="c:PlanningCommands.Exit" Executed="Exit"/>
         <CommandBinding Command="ApplicationCommands.Undo" Executed="Undo"/>
         <CommandBinding Command="ApplicationCommands.Redo" Executed="Redo"/>
@@ -48,6 +52,9 @@
 				<MenuItem Header="Enregistrer" x:Name="MenuItem_Enr" Command="ApplicationCommands.Save"/>
 				<MenuItem Header="Enregistrer sous..." x:Name="MenuItem_EnrSous" Command="ApplicationCommands.SaveAs"/>
 				<Separator/>
+                <MenuItem Header="Importer" x:Name="MenuItem_Imp" Command="c:PlanningCommands.Importer"/>
+                <MenuItem Header="Exporter" x:Name="MenuItem_exp" Command="c:PlanningCommands.Exporter"/>
+                <Separator/>
                 <MenuItem Header="Aperçu" x:Name="MenuItem_Apercu" Command="ApplicationCommands.PrintPreview"/>
                 <MenuItem Header="Imprimer" x:Name="MenuItem_Imprimer" Command="ApplicationCommands.Print"/>
                 <Separator/>
@@ -150,7 +157,7 @@
             </TabItem>
             <TabItem Header="Requêtes XPath" x:Name="TabItem_XPath">
                 <Grid>
-                    <c:VueRequetesXPath VerticalAlignment="Center"></c:VueRequetesXPath>
+                    <c:VueRequetesXPath VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
             </TabItem>
         </TabControl>
