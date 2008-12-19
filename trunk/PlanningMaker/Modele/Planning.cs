@@ -417,7 +417,7 @@ namespace PlanningMaker.Modele
             salle.AppendChild(typeSalle);
             id.Value = "id" + compteurId.ToString();
             nom.AppendChild(document.CreateTextNode(s.Nom));
-            typeSalle.AppendChild(document.CreateTextNode(Enum.Format(typeof(ETypeSalles), s.Nom, "G")));
+            typeSalle.AppendChild(document.CreateTextNode(Enum.Format(typeof(ETypeSalles), s.Type, "G")));
         }
 
         private void AjouterSemaine(Semaine s, XmlDocument document, XmlElement semaines, XmlElement semaine)

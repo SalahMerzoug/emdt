@@ -75,6 +75,7 @@ namespace PlanningMaker
             ICollectionView vueMatieres = CollectionViewSource.GetDefaultView(planning.Matieres);
             vueMatieres.SortDescriptions.Add(new SortDescription("Titre", ListSortDirection.Ascending));
             vueMatiere.setEnseignantsContext(planning.Enseignants);
+            listeMatieres.ItemsSource = planning.Matieres;
 
         }
 
@@ -105,9 +106,9 @@ namespace PlanningMaker
             listeHorraires.ItemsSource = null;
             listeEnseignants.ItemsSource = null;
             
-            vueSalle.DataContext = null;
-            vueHoraire.DataContext = null;
-            vueEnseignant.DataContext = null;
+            vueSalle.DataContext = new Salle();
+            vueHoraire.DataContext = new Horaire();
+            vueEnseignant.DataContext = new Enseignant(); ;
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -337,9 +338,7 @@ namespace PlanningMaker
         {
             if (TabItem_Horaires.IsSelected)
             {
-                String debut = vueHoraire.Debut.Text;
-                String fin = vueHoraire.Fin.Text;
-                planning.Horaires.Add(new Horaire((debut != null) ? debut : "00h00", (fin != null) ? fin : "00h00"));
+                planning.Horaires.Add(new Horaire("00h00","00h00"));
             }
             else if (TabItem_Enseignants.IsSelected)
             {
@@ -354,16 +353,10 @@ namespace PlanningMaker
             }
             else if (TabItem_Salles.IsSelected)
             {
-                string type = vueSalle.Type.Text;
-                string nom = vueSalle.Nom.Text;
-                Salle nouvelleSalle = new Salle(nom);
-                switch(type){
-                    case "Labo": nouvelleSalle.Type = ETypeSalles.Labo;
-                        break;
-                    default: nouvelleSalle.Type = ETypeSalles.Amphi;
-                        break;
-                }
+                Salle nouvelleSalle = new Salle("");
+                nouvelleSalle.Type = ETypeSalles.Amphi;
                 planning.Salles.Add(nouvelleSalle);
+                listeSalles.SelectedItem = nouvelleSalle;
             }
         }
 
@@ -373,7 +366,7 @@ namespace PlanningMaker
 
         private void AjouterElementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (planning!=null)&&(!TabItem_XPath.IsSelected)&&(vueEnseignant.nom.Text!="")&&(vueEnseignant.prenom.Text!="");
+            e.CanExecute = (planning!=null)&&(!TabItem_XPath.IsSelected);
         }
 
         private void SupprimerElementPossible(object sender, CanExecuteRoutedEventArgs e)
