@@ -93,8 +93,21 @@
             </MenuItem>
 		</Menu>
 		<TabControl Margin="0,20,0,26" IsSynchronizedWithCurrentItem="True" x:Name="TabPanel" d:LayoutOverrides="GridBox">
-			<TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps"/>
-			<TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
+            <TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps">
+                <StackPanel>
+                    <StackPanel HorizontalAlignment="Center">
+                        <Label Content="Semaine" FontSize="20" Background="Silver" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="Bouton_PreviousWeek">Prev</Button>
+                        <Label Width="20"/>
+                        <ComboBox Name="selectionSemaime" Width="150" DisplayMemberPath="Numero" HorizontalContentAlignment="Center"/>
+                        <Label Width="20"/>
+                        <Button x:Name="Bouton_NextWeek">Next</Button>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
                 <DockPanel>
                     <Grid Width="260">
                         <c:VueEnseignant x:Name="vueEnseignant" VerticalAlignment="Center" HorizontalAlignment="Center"/>

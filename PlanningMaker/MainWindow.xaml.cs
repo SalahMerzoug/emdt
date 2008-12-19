@@ -56,6 +56,7 @@ namespace PlanningMaker
             ICollectionView vueSemaines = CollectionViewSource.GetDefaultView(planning.Semaines);
             vueSemaines.SortDescriptions.Add(new SortDescription("Numero", ListSortDirection.Ascending));
             vueSemaines.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Ascending));
+            selectionSemaime.ItemsSource = planning.Semaines;
 
             ICollectionView vueEnseignants = CollectionViewSource.GetDefaultView(planning.Enseignants);
             vueEnseignants.SortDescriptions.Add(new SortDescription("Nom", ListSortDirection.Ascending));
@@ -89,9 +90,17 @@ namespace PlanningMaker
             {
                 nomFichier = dialogueO.FileName;
                 New(sender, e);
-                planning.Charger(nomFichier);
-                MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
+                try
+                {
+                    planning.Charger(nomFichier);
+                    MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (NullReferenceException exp)
+                {
+                    MessageBox.Show("Fichier non valide !", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

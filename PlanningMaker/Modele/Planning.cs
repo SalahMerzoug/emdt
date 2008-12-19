@@ -381,7 +381,7 @@ namespace PlanningMaker.Modele
                 XmlElement enseignant = document.CreateElement("enseignant");
                 matiere.AppendChild(enseignant);
                 XmlAttribute refEnseignant = document.CreateAttribute("ref");
-                matiere.Attributes.Append(refEnseignant);
+                enseignant.Attributes.Append(refEnseignant);
                 refEnseignant.Value = "id" + enseignants.IndexOf(e).ToString();
             }
             XmlElement nom = document.CreateElement("nom");
@@ -475,6 +475,7 @@ namespace PlanningMaker.Modele
             enseignement.AppendChild(salle);
             salle.Attributes.Append(refSalle);
             type.AppendChild(document.CreateTextNode(Enum.Format(typeof(ETypeEnseignements), e.Type, "G").ToUpper()));
+            refEnseignant.Value = "id" + enseignants.IndexOf(e.Enseignant).ToString();
             refMatiere.Value = "id" + matieres.IndexOf(e.Matiere).ToString();
             refHoraire1.Value = "id" + horaires.IndexOf(e.Horaire1).ToString();
             if (e.Horaire2 != null)
