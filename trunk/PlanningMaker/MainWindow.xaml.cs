@@ -6,6 +6,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using PlanningMaker.Modele;
 using System.IO;
+using System.Collections.Generic;
 
 namespace PlanningMaker
 {
@@ -52,11 +53,12 @@ namespace PlanningMaker
         private void New(object sender, RoutedEventArgs e)
         {
             planning = new Planning();
+            DataContext = planning;
 
             ICollectionView vueSemaines = CollectionViewSource.GetDefaultView(planning.Semaines);
             vueSemaines.SortDescriptions.Add(new SortDescription("Numero", ListSortDirection.Ascending));
             vueSemaines.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Ascending));
-            selectionSemaime.ItemsSource = planning.Semaines;
+            selectionSemaine.ItemsSource = planning.Semaines;
 
             ICollectionView vueEnseignants = CollectionViewSource.GetDefaultView(planning.Enseignants);
             vueEnseignants.SortDescriptions.Add(new SortDescription("Nom", ListSortDirection.Ascending));
@@ -71,7 +73,7 @@ namespace PlanningMaker
             ICollectionView vueHoraires = CollectionViewSource.GetDefaultView(planning.Horaires);
             vueHoraires.SortDescriptions.Add(new SortDescription("Debut", ListSortDirection.Ascending));
             vueHoraires.SortDescriptions.Add(new SortDescription("Fin", ListSortDirection.Ascending));
-            listeHorraires.ItemsSource = planning.Horaires;
+            listeHoraires.ItemsSource = planning.Horaires;
 
             ICollectionView vueMatieres = CollectionViewSource.GetDefaultView(planning.Matieres);
             vueMatieres.SortDescriptions.Add(new SortDescription("Titre", ListSortDirection.Ascending));
@@ -95,11 +97,29 @@ namespace PlanningMaker
                     planning.Charger(nomFichier);
                     MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    RadioButton_Lundi.IsChecked = true;
+                    
+                    IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
+                    if (enumSemaine.MoveNext())
+                    {
+                        Semaine firstSemaine = enumSemaine.Current as Semaine;
+                        selectionSemaine.Text = firstSemaine.Numero.ToString();
+                        IEnumerator<Jour> enumJour = firstSemaine.Jours.GetEnumerator();
+                        if (enumJour.MoveNext())
+                        {
+                            Jour lundi = enumJour.Current as Jour;
+                            listeEnseignements.ItemsSource = lundi.Enseignements;
+                        }
+                        
+                    }
+                    
                 }
                 catch (NullReferenceException exp)
                 {
                     MessageBox.Show("Fichier non valide !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Error);
+                    Close();
                 }
             }
         }
@@ -112,7 +132,7 @@ namespace PlanningMaker
             planning = null;
 
             listeSalles.ItemsSource = null;
-            listeHorraires.ItemsSource = null;
+            listeHoraires.ItemsSource = null;
             listeEnseignants.ItemsSource = null;
             
             vueSalle.DataContext = new Salle();
@@ -347,14 +367,15 @@ namespace PlanningMaker
         {
             if (TabItem_Horaires.IsSelected)
             {
-                planning.Horaires.Add(new Horaire("00h00","00h00"));
+                Horaire nouvelHoraire = new Horaire("00h00", "00h00");
+                planning.Horaires.Add(nouvelHoraire);
+                listeHoraires.SelectedItem = nouvelHoraire;
             }
             else if (TabItem_Enseignants.IsSelected)
             {
-                //planning.Enseignants.Add(new Enseignant());
-                String nom = vueEnseignant.nom.Text;
-                String prenom = vueEnseignant.prenom.Text;
-                planning.Enseignants.Add(new Enseignant(nom,prenom));
+                Enseignant nouvelEnseignant = new Enseignant("", "");
+                planning.Enseignants.Add(nouvelEnseignant);
+                listeEnseignants.SelectedItem = nouvelEnseignant;
             }
             else if (TabItem_Matieres.IsSelected)
             {
@@ -371,21 +392,75 @@ namespace PlanningMaker
 
         private void SupprimerElement(object sender, RoutedEventArgs e)
         {
+            if (TabItem_Horaires.IsSelected)
+            {
+                Horaire horaire = listeHoraires.SelectedItem as Horaire;
+                if(horaire!=null)
+                    planning.Horaires.Remove(horaire);
+            }
+            else if (TabItem_Enseignants.IsSelected)
+            {
+                Enseignant enseignant = listeEnseignants.SelectedItem as Enseignant;
+                if (enseignant != null)
+                {
+                    SupprimerEnseignant(enseignant);
+                }
+            }
+            else if (TabItem_Matieres.IsSelected)
+            {
+                // TODO Supprimer la matière selectionnée
+            }
+            else if (TabItem_Salles.IsSelected)
+            {
+                Salle salle = listeSalles.SelectedItem as Salle;
+                if (salle != null)
+                    planning.Salles.Remove(salle);
+            }
+        }
+
+        private void SupprimerEnseignant(Enseignant enseignant)
+        {
+            planning.Enseignants.Remove(enseignant);
+
+            foreach (Matiere m in planning.Matieres)
+            {
+                m.Enseignants.Remove(enseignant);
+            }
+
+            foreach (Semaine s in planning.Semaines)
+            {
+                foreach (Jour j in s.Jours)
+                {
+                    IEnumerator<Enseignement> it = j.Enseignements.GetEnumerator();
+                    bool fin;
+                    do
+                    {
+                        Enseignement enseignement = null;
+                        if (it.Current.Enseignant == enseignant)
+                        {
+                            enseignement = it.Current;
+                        }
+                        fin = !(it.MoveNext());
+                        j.Enseignements.Remove(enseignement);
+                    }
+                    while (!fin);
+                }
+            }
         }
 
         private void AjouterElementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (planning!=null)&&(!TabItem_XPath.IsSelected);
+            e.CanExecute = (planning!=null) && (!TabItem_XPath.IsSelected);
         }
 
         private void SupprimerElementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = false;
+            e.CanExecute = (planning != null) && (!TabItem_XPath.IsSelected);
         }
         
         private void ChangementSelectionHoraire(object sender, SelectionChangedEventArgs e)
         {
-            vueHoraire.DataContext = listeHorraires.SelectedItem;
+            vueHoraire.DataContext = listeHoraires.SelectedItem;
         }
 
         private void ChangementSelectionSalle(object sender, SelectionChangedEventArgs e)
@@ -465,6 +540,58 @@ namespace PlanningMaker
             catch (Win32Exception w32ex)
             {
                 MessageBox.Show("Impossible d'ouvrir le navigateur internet Mozilla Firefox (firefox.exe), vérifiez qu'il est bien installé.\nDétails de l'erreur : " + w32ex.Message, "Transformation XSLT");
+            }
+        }
+
+        private void PreviousWeek(object sender, RoutedEventArgs e)
+        {
+            Int32 nrSemaine = Int32.Parse(selectionSemaine.Text);
+            nrSemaine--;
+            bool semainePresente = false;
+            foreach (Semaine s in planning.Semaines)
+            {
+                if (s.Numero == nrSemaine)
+                {
+                    semainePresente = true;
+                    selectionSemaine.Text = nrSemaine.ToString();
+                    break;
+                }
+            }
+            if (!semainePresente)
+            {
+                MessageBoxResult result = MessageBox.Show("Semaine non crée !\nVoulez-vous en créer une ?", "PlanningMaker",
+                        MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                if (result==MessageBoxResult.Yes)
+                {
+                    planning.Semaines.Add(new Semaine(nrSemaine, ""));
+                    selectionSemaine.Text = nrSemaine.ToString();
+                }
+            }
+        }
+
+        private void NextWeek(object sender, RoutedEventArgs e)
+        {
+            Int32 nrSemaine = Int32.Parse(selectionSemaine.Text);
+            nrSemaine++;
+            bool semainePresente = false;
+            foreach (Semaine s in planning.Semaines)
+            {
+                if (s.Numero == nrSemaine)
+                {
+                    semainePresente = true;
+                    selectionSemaine.Text = nrSemaine.ToString();
+                    break;
+                }
+            }
+            if (!semainePresente)
+            {
+                MessageBoxResult result = MessageBox.Show("Semaine non crée !\nVoulez-vous en créer une ?", "PlanningMaker",
+                        MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                if (result == MessageBoxResult.Yes)
+                {
+                    planning.Semaines.Add(new Semaine(nrSemaine, ""));
+                    selectionSemaine.Text = nrSemaine.ToString();
+                }
             }
         }
 
