@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections.ObjectModel;
 using System.Xml;
+using System.Windows.Forms;
 
 namespace PlanningMaker.Modele
 {
@@ -128,38 +129,38 @@ namespace PlanningMaker.Modele
             switch (valueAnnee)
             {
                 case "P1" :
-                    annee = EAnnees.P1;
+                    Annee = EAnnees.P1;
                     break;
                 case "P2" :
-                    annee = EAnnees.P2;
+                    Annee = EAnnees.P2;
                     break;
                 case "I1" :
-                    annee = EAnnees.I1;
+                    Annee = EAnnees.I1;
                     break;
                 case "I2" :
-                    annee = EAnnees.I2;
+                    Annee = EAnnees.I2;
                     break;
                 case "I3" :
-                    annee = EAnnees.I3;
+                    Annee = EAnnees.I3;
                     break;
             }
             string valueDivision = elementPlanning.SelectSingleNode("division/text()").Value;
             switch (valueDivision)
             {
                 case "A":
-                    division = EDivisions.A;
+                    Division = EDivisions.A;
                     break;
                 case "B":
-                    division = EDivisions.B;
+                    Division = EDivisions.B;
                     break;
                 case "C":
-                    division = EDivisions.C;
+                    Division = EDivisions.C;
                     break;
                 case "D":
-                    division = EDivisions.D;
+                    Division = EDivisions.D;
                     break;
             }
-            promotion = elementPlanning.SelectSingleNode("promotion/text()").Value;
+            Promotion = elementPlanning.SelectSingleNode("promotion/text()").Value;
             //enseignants
             Dictionary<string, Enseignant> dicoEnseignants = new Dictionary<string, Enseignant>();
             foreach (XmlNode elementEnseignant in document.SelectNodes("/emploi-du-temps/enseignants/enseignant"))

@@ -92,18 +92,67 @@
                 <MenuItem Header="A propos" x:Name="MenuItem_Apropos" Click="MenuItemAPropos_Click"/>
             </MenuItem>
 		</Menu>
-		<TabControl Margin="0,20,0,26" IsSynchronizedWithCurrentItem="True" x:Name="TabPanel" d:LayoutOverrides="GridBox">
+		<TabControl Margin="0,20,0,20" IsSynchronizedWithCurrentItem="True" x:Name="TabPanel" d:LayoutOverrides="GridBox">
             <TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps">
                 <StackPanel>
                     <StackPanel HorizontalAlignment="Center">
-                        <Label Content="Semaine" FontSize="20" Background="Silver" />
+                        <Label Content="Semaine" FontSize="20"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="Bouton_PreviousWeek">Prev</Button>
+                        <Button x:Name="Bouton_PreviousWeek" Width="50" Click="PreviousWeek">Prev.</Button>
                         <Label Width="20"/>
-                        <ComboBox Name="selectionSemaime" Width="150" DisplayMemberPath="Numero" HorizontalContentAlignment="Center"/>
+                        <ComboBox Name="selectionSemaine" Width="150" DisplayMemberPath="Numero" HorizontalContentAlignment="Center"/>
                         <Label Width="20"/>
-                        <Button x:Name="Bouton_NextWeek">Next</Button>
+                        <Button x:Name="Bouton_NextWeek" Width="50" Click="NextWeek">Next</Button>
+                    </StackPanel>
+                    <StackPanel Height="10"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Promotion :"/>
+                        <Label Width="20"/>
+                        <TextBox x:Name="TextBox_Promotion" Text="{Binding Path=Promotion}" Width="100" HorizontalAlignment="Center"/>
+                        <Label Width="20"/>
+                        <Label Content="Annee :"/>
+                        <Label Width="20"/>
+                        <TextBox x:Name="TextBox_Annee" Text="{Binding Path=Annee}" Width="100" HorizontalAlignment="Center"/>
+                        <Label Width="20"/>
+                        <Label Content="Division :"/>
+                        <Label Width="20"/>
+                        <TextBox x:Name="TextBox_Division" Text="{Binding Path=Division}" Width="100" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Height="5"/>
+                    <Separator Height="1"/>
+                    <StackPanel Height="10"/>
+                    <StackPanel HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <RadioButton x:Name="RadioButton_Lundi">Lundi</RadioButton>
+                            <Label Width="20"/>
+                            <RadioButton x:Name="RadioButton_Mardi">Mardi</RadioButton>
+                            <Label Width="20"/>
+                            <RadioButton x:Name="RadioButton_Mercredi">Mercredi</RadioButton>
+                            <Label Width="20"/>
+                            <RadioButton x:Name="RadioButton_Jeudi">Jeudi</RadioButton>
+                            <Label Width="20"/>
+                            <RadioButton x:Name="RadioButton_Vendredi">Vendredi</RadioButton>
+                        </StackPanel>
+                        <StackPanel Height="20"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Grid Width="550" Height="250">
+                                <ListView x:Name="listeEnseignements" SelectionChanged="ChangementSelectionHoraire">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Width="100" Header="Début" DisplayMemberBinding="{Binding Path=Horraire1.Debut}"/>
+                                            <GridViewColumn Width="100" Header="Fin" DisplayMemberBinding="{Binding Path=Horraire2.Fin}"/>
+                                            <GridViewColumn Width="100" Header="Matière" DisplayMemberBinding="{Binding Path=Matiere}"/>
+                                            <GridViewColumn Width="100" Header="Enseignant" DisplayMemberBinding="{Binding Path=Enseignant}"/>
+                                            <GridViewColumn Width="100" Header="Salle" DisplayMemberBinding="{Binding Path=Salle}"/>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                            <Grid Width="250" Height="250">
+                                
+                            </Grid>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </TabItem>
@@ -146,7 +195,7 @@
                     <c:VueHoraire x:Name="vueHoraire" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
                 <Grid Width="530">
-                        <ListView x:Name="listeHorraires" SelectionChanged="ChangementSelectionHoraire">
+                        <ListView x:Name="listeHoraires" SelectionChanged="ChangementSelectionHoraire">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="100" Header="Début" DisplayMemberBinding="{Binding Path=Debut}"/>
