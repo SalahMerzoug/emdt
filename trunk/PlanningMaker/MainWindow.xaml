@@ -5,13 +5,14 @@
     xmlns:r="clr-namespace:PlanningMaker.Modele"
 	x:Class="PlanningMaker.MainWindow"
 	x:Name="Window"
-	Title="Viactisoft PlanningMaker 2008 School Edition"
-	Width="850" Height="506" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
+    Title="Viactisoft PlanningMaker 2008 School Edition"
+	Width="850" Height="600" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
+    ResizeMode="NoResize"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
 	
     <Window.Resources>
-        <c:ListeTypeSalles x:Key="Types"/>
+        <c:ListeTypeEnseignements x:Key="TypeEnseignements"/>
     </Window.Resources>
     
 	<Window.CommandBindings>
@@ -34,6 +35,8 @@
         <CommandBinding Command="ApplicationCommands.Help" Executed="Help"/>
 		<CommandBinding Command="c:PlanningCommands.AjouterElement" Executed="AjouterElement" CanExecute="AjouterElementPossible"/>
         <CommandBinding Command="c:PlanningCommands.SupprimerElement" Executed="SupprimerElement" CanExecute="SupprimerElementPossible"/>
+        <CommandBinding Command="c:PlanningCommands.NextWeek" Executed="NextWeek" CanExecute="NextWeekPossible"/>
+        <CommandBinding Command="c:PlanningCommands.PreviousWeek" Executed="PreviousWeek" CanExecute="PreviousWeekPossible"/>
     </Window.CommandBindings>
 	
 	<Grid x:Name="LayoutRoot">
@@ -92,19 +95,22 @@
                 <MenuItem Header="A propos" x:Name="MenuItem_Apropos" Click="MenuItemAPropos_Click"/>
             </MenuItem>
 		</Menu>
-		<TabControl Margin="0,20,0,20" IsSynchronizedWithCurrentItem="True" x:Name="TabPanel" d:LayoutOverrides="GridBox">
+        
+		<TabControl Margin="0,20,0,25" IsSynchronizedWithCurrentItem="True" x:Name="TabPanel" d:LayoutOverrides="GridBox" IsEnabled="False">
             <TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps">
                 <StackPanel>
                     <StackPanel HorizontalAlignment="Center">
                         <Label Content="Semaine" FontSize="20"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="Bouton_PreviousWeek" Width="50" Click="PreviousWeek">Prev.</Button>
+                        <Button x:Name="Bouton_PreviousWeek" Width="50" Command="c:PlanningCommands.PreviousWeek">Prev.</Button>
                         <Label Width="20"/>
                         <ComboBox Name="selectionSemaine" Width="150" DisplayMemberPath="Numero" HorizontalContentAlignment="Center"/>
                         <Label Width="20"/>
-                        <Button x:Name="Bouton_NextWeek" Width="50" Click="NextWeek">Next</Button>
+                        <Button x:Name="Bouton_NextWeek" Width="50" Command="c:PlanningCommands.NextWeek">Next</Button>
                     </StackPanel>
+                    <StackPanel Height="10"/>
+                    <Button x:Name="Bouton_NewWeek" Width="150">Nouvelle Semaine</Button>
                     <StackPanel Height="10"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="Promotion :"/>
@@ -121,35 +127,71 @@
                     </StackPanel>
                     <StackPanel Height="5"/>
                     <Separator Height="1"/>
-                    <StackPanel Height="10"/>
+                    <StackPanel Height="15"/>
                     <StackPanel HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <RadioButton x:Name="RadioButton_Lundi">Lundi</RadioButton>
+                            <RadioButton x:Name="RadioButton_Lundi" GroupName="choixJour" Unchecked="ChangementChoixJour">Lundi</RadioButton>
                             <Label Width="20"/>
-                            <RadioButton x:Name="RadioButton_Mardi">Mardi</RadioButton>
+                            <RadioButton x:Name="RadioButton_Mardi" GroupName="choixJour" Unchecked="ChangementChoixJour">Mardi</RadioButton>
                             <Label Width="20"/>
-                            <RadioButton x:Name="RadioButton_Mercredi">Mercredi</RadioButton>
+                            <RadioButton x:Name="RadioButton_Mercredi" GroupName="choixJour" Unchecked="ChangementChoixJour">Mercredi</RadioButton>
                             <Label Width="20"/>
-                            <RadioButton x:Name="RadioButton_Jeudi">Jeudi</RadioButton>
+                            <RadioButton x:Name="RadioButton_Jeudi" GroupName="choixJour" Unchecked="ChangementChoixJour">Jeudi</RadioButton>
                             <Label Width="20"/>
-                            <RadioButton x:Name="RadioButton_Vendredi">Vendredi</RadioButton>
+                            <RadioButton x:Name="RadioButton_Vendredi" GroupName="choixJour" Unchecked="ChangementChoixJour">Vendredi</RadioButton>
                         </StackPanel>
                         <StackPanel Height="20"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Grid Width="550" Height="250">
-                                <ListView x:Name="listeEnseignements" SelectionChanged="ChangementSelectionHoraire">
+                            <Grid Width="550" Height="305">
+                                <ListView x:Name="listeEnseignements">
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn Width="100" Header="Début" DisplayMemberBinding="{Binding Path=Horraire1.Debut}"/>
-                                            <GridViewColumn Width="100" Header="Fin" DisplayMemberBinding="{Binding Path=Horraire2.Fin}"/>
-                                            <GridViewColumn Width="100" Header="Matière" DisplayMemberBinding="{Binding Path=Matiere}"/>
-                                            <GridViewColumn Width="100" Header="Enseignant" DisplayMemberBinding="{Binding Path=Enseignant}"/>
-                                            <GridViewColumn Width="100" Header="Salle" DisplayMemberBinding="{Binding Path=Salle}"/>
+                                            <GridView.Columns>
+                                                <GridViewColumn Width="60" Header="Début">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Path=Horaire1.Debut}"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="60" Header="Fin">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Path=Horaire1.Fin}"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="110" Header="Matière">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Path=Matiere.Titre}"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="150" Header="Enseignant">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding Path=Enseignant.Nom}"/>
+                                                                <TextBlock Text=" "/>
+                                                                <TextBlock Text="{Binding Path=Enseignant.Prenom}"/>
+                                                            </StackPanel>
+                                                    </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="110" Header="Salle">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Path=Salle.Nom}"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                            </GridView.Columns>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
                             </Grid>
-                            <Grid Width="250" Height="250">
+                            <Grid Width="250" Height="305">
                                 
                             </Grid>
                         </StackPanel>
@@ -229,7 +271,7 @@
                 </Grid>
             </TabItem>
         </TabControl>
-		<ToolBar Name="BarreOutils" VerticalAlignment="Bottom">
+		<ToolBar Name="BarreOutils" VerticalAlignment="Bottom" Height="23.45" Margin="0,0,0,1">
 			<Button Command="c:PlanningCommands.AjouterElement">Ajouter</Button>
             <Button Command="c:PlanningCommands.SupprimerElement">Supprimer</Button>
 		</ToolBar>

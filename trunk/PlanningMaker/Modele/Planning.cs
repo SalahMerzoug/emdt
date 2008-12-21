@@ -325,19 +325,19 @@ namespace PlanningMaker.Modele
                     switch (nomJour)
                     {
                         case "lundi" :
-                            jour.Nom= EJours.Lundi;
+                            semaine.Lundi = jour;
                             break;
                         case "mardi" :
-                            jour.Nom = EJours.Mardi;
+                            semaine.Mardi = jour;
                             break;
                         case "mercredi" :
-                            jour.Nom = EJours.Mercredi;
+                            semaine.Mercredi = jour;
                             break;
                         case "jeudi" :
-                            jour.Nom = EJours.Jeudi;
+                            semaine.Jeudi = jour;
                             break;
                         case "vendredi" :
-                            jour.Nom = EJours.Vendredi;
+                            semaine.Vendredi = jour;
                             break;
                     }
                     foreach (XmlNode elementEnseignement in elementJour.SelectNodes("enseignements/enseignement"))
@@ -368,19 +368,21 @@ namespace PlanningMaker.Modele
                         string idHoraire1 = elementEnseignement.SelectSingleNode("horaire[1]/@ref").Value;
                         enseignement.Horaire1 = dicoHoraires[idHoraire1];
                         string idHoraire2 = "";
-                        if(elementEnseignement.SelectSingleNode("horaire[2]/@ref") != null){
+                        if(elementEnseignement.SelectSingleNode("horaire[2]/@ref") != null)
+                        {
                             idHoraire2 = elementEnseignement.SelectSingleNode("horaire[2]/@ref").Value;
                             enseignement.Horaire2 = dicoHoraires[idHoraire2];
-                        }else{
+                        }
+                        else
+                        {
                             enseignement.Horaire2 = null;
                         }
                         string idSalle = elementEnseignement.SelectSingleNode("salle/@ref").Value;
                         enseignement.Salle = dicoSalles[idSalle];
                         jour.Enseignements.Add(enseignement);
                     }
-                    semaine.Jours.Add(jour);
                 }
-                semaines.Add(semaine);
+                Semaines.Add(semaine);
             }
         }
 
@@ -523,6 +525,7 @@ namespace PlanningMaker.Modele
             semaine.AppendChild(date);
             numero.AppendChild(document.CreateTextNode(s.Numero.ToString()));
             date.AppendChild(document.CreateTextNode(s.Date));
+
             foreach (Jour j in s.Jours)
             {
                 XmlElement jour = document.CreateElement("jour");
