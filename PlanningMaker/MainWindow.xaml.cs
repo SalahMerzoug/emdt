@@ -7,6 +7,7 @@ using System.Windows.Input;
 using PlanningMaker.Modele;
 using System.IO;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace PlanningMaker
 {
@@ -379,7 +380,9 @@ namespace PlanningMaker
             }
             else if (TabItem_Matieres.IsSelected)
             {
-                //planning.Matieres.Add(new Matiere());
+                Matiere nouvelleMatiere = new Matiere("");
+                planning.Matieres.Add(nouvelleMatiere);
+                listeMatieres.SelectedItem = nouvelleMatiere;
             }
             else if (TabItem_Salles.IsSelected)
             {
@@ -395,55 +398,33 @@ namespace PlanningMaker
             if (TabItem_Horaires.IsSelected)
             {
                 Horaire horaire = listeHoraires.SelectedItem as Horaire;
-                if(horaire!=null)
-                    planning.Horaires.Remove(horaire);
+                if (horaire != null)
+                {
+                    planning.SupprimerHoraire(horaire);
+                }
             }
             else if (TabItem_Enseignants.IsSelected)
             {
                 Enseignant enseignant = listeEnseignants.SelectedItem as Enseignant;
                 if (enseignant != null)
                 {
-                    SupprimerEnseignant(enseignant);
+                    planning.SupprimerEnseignant(enseignant);
                 }
             }
             else if (TabItem_Matieres.IsSelected)
             {
-                // TODO Supprimer la matière selectionnée
+                Matiere matiere = listeMatieres.SelectedItem as Matiere;
+                if (matiere != null)
+                {
+                    planning.SupprimerMatiere(matiere);
+                }
             }
             else if (TabItem_Salles.IsSelected)
             {
                 Salle salle = listeSalles.SelectedItem as Salle;
                 if (salle != null)
-                    planning.Salles.Remove(salle);
-            }
-        }
-
-        private void SupprimerEnseignant(Enseignant enseignant)
-        {
-            planning.Enseignants.Remove(enseignant);
-
-            foreach (Matiere m in planning.Matieres)
-            {
-                m.Enseignants.Remove(enseignant);
-            }
-
-            foreach (Semaine s in planning.Semaines)
-            {
-                foreach (Jour j in s.Jours)
                 {
-                    IEnumerator<Enseignement> it = j.Enseignements.GetEnumerator();
-                    bool fin;
-                    do
-                    {
-                        Enseignement enseignement = null;
-                        if (it.Current.Enseignant == enseignant)
-                        {
-                            enseignement = it.Current;
-                        }
-                        fin = !(it.MoveNext());
-                        j.Enseignements.Remove(enseignement);
-                    }
-                    while (!fin);
+                    planning.SupprimerSalle(salle);
                 }
             }
         }

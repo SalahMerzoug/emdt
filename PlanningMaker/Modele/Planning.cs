@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Windows.Forms;
+using System.Collections;
 
 namespace PlanningMaker.Modele
 {
@@ -118,6 +119,98 @@ namespace PlanningMaker.Modele
             horaires = new ObservableCollection<Horaire>();
             salles = new ObservableCollection<Salle>();
             semaines = new ObservableCollection<Semaine>();
+        }
+
+        public void SupprimerEnseignant(Enseignant enseignant)
+        {
+            Enseignants.Remove(enseignant);
+
+            foreach (Matiere m in Matieres)
+            {
+                m.Enseignants.Remove(enseignant);
+            }
+
+            foreach (Semaine s in Semaines)
+            {
+                foreach (Jour j in s.Jours)
+                {
+                    ArrayList enseignementsASupprimer = new ArrayList();
+                    foreach (Enseignement e in j.Enseignements)
+                    {
+                        if (e.Enseignant == enseignant)
+                            enseignementsASupprimer.Add(e);
+                    }
+                    foreach (Enseignement e in enseignementsASupprimer)
+                    {
+                        j.Enseignements.Remove(e);
+                    }
+                }
+            }
+        }
+
+        public void SupprimerMatiere(Matiere matiere)
+        {
+            Matieres.Remove(matiere);
+
+            foreach (Semaine s in Semaines)
+            {
+                foreach (Jour j in s.Jours)
+                {
+                    ArrayList enseignementsASupprimer = new ArrayList();
+                    foreach (Enseignement e in j.Enseignements)
+                    {
+                        if (e.Matiere == matiere)
+                            enseignementsASupprimer.Add(e);
+                    }
+                    foreach (Enseignement e in enseignementsASupprimer)
+                    {
+                        j.Enseignements.Remove(e);
+                    }
+                }
+            }
+        }
+
+        public void SupprimerHoraire(Horaire horaire)
+        {
+            Horaires.Remove(horaire);
+
+            foreach (Semaine s in Semaines)
+            {
+                foreach (Jour j in s.Jours)
+                {
+                    ArrayList enseignementsASupprimer = new ArrayList();
+                    foreach (Enseignement e in j.Enseignements)
+                    {
+                        if (e.Horaire1 == horaire && e.Horaire2 == null)
+                            enseignementsASupprimer.Add(e);
+                        else if (e.Horaire1 == horaire)
+                        {
+                            e.Horaire1 = e.Horaire2;
+                            e.Horaire2 = null;
+                        }
+                    }
+                    foreach (Enseignement e in enseignementsASupprimer)
+                    {
+                        j.Enseignements.Remove(e);
+                    }
+                }
+            }
+        }
+
+        public void SupprimerSalle(Salle salle)
+        {
+            Salles.Remove(salle);
+            foreach (Semaine s in Semaines)
+            {
+                foreach (Jour j in s.Jours)
+                {
+                    foreach (Enseignement e in j.Enseignements)
+                    {
+                        if (e.Salle == salle)
+                            e.Salle = null;
+                    }
+                }
+            }
         }
 
         public void Charger(string nomFichier)
