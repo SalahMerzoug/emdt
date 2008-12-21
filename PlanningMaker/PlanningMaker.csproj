@@ -155,7 +155,53 @@
     <Resource Include="Files\EdTversSVG-FF.xsl" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Vues\XPath.png" />
+    <Resource Include="Files\Img\XPath.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Clipboard_Copy.ico" />
+    <Resource Include="Files\Img\Clipboard_Cut.ico" />
+    <Resource Include="Files\Img\Clipboard_Paste.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Cancel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Document_New.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Go_In.ico" />
+    <Resource Include="Files\Img\Go_Out.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Printer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Save.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Trash.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Standby.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Player_Next.ico" />
+    <Resource Include="Files\Img\Player_Previous.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Question.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Screen.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Home.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Globe.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Folder2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

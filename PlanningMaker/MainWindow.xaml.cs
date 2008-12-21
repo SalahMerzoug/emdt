@@ -114,7 +114,7 @@ namespace PlanningMaker
                     }
                     
                 }
-                catch (NullReferenceException exp)
+                catch (NullReferenceException)
                 {
                     MessageBox.Show("Fichier non valide !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Error);
@@ -328,7 +328,7 @@ namespace PlanningMaker
             }
             else
             {
-                MessageBox.Show(this, "Validation impossible", "Transformation XSLT vers SVG");
+                MessageBox.Show(this, "Validation impossible", "Validation XMLSchema");
             }
         }
 
