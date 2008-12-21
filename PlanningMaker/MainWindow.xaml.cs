@@ -56,6 +56,9 @@ namespace PlanningMaker
             planning = new Planning();
             DataContext = planning;
 
+            TabItem_Emploi_du_temps.IsSelected = true;
+            TabPanel.IsEnabled = true;
+
             ICollectionView vueSemaines = CollectionViewSource.GetDefaultView(planning.Semaines);
             vueSemaines.SortDescriptions.Add(new SortDescription("Numero", ListSortDirection.Ascending));
             vueSemaines.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Ascending));
@@ -106,12 +109,7 @@ namespace PlanningMaker
                     {
                         Semaine firstSemaine = enumSemaine.Current as Semaine;
                         selectionSemaine.Text = firstSemaine.Numero.ToString();
-                        IEnumerator<Jour> enumJour = firstSemaine.Jours.GetEnumerator();
-                        if (enumJour.MoveNext())
-                        {
-                            Jour lundi = enumJour.Current as Jour;
-                            listeEnseignements.ItemsSource = lundi.Enseignements;
-                        }
+                        listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;
                         
                     }
                     
@@ -132,13 +130,24 @@ namespace PlanningMaker
             // avant de le passer à null
             planning = null;
 
+            selectionSemaine.ItemsSource = null;
+            listeEnseignements.ItemsSource = null;
+            TextBox_Annee.Text = null;
+            TextBox_Division.Text = null;
+            TextBox_Promotion.Text = null;
+
             listeSalles.ItemsSource = null;
+            listeMatieres.ItemsSource = null;
             listeHoraires.ItemsSource = null;
             listeEnseignants.ItemsSource = null;
             
             vueSalle.DataContext = new Salle();
             vueHoraire.DataContext = new Horaire();
-            vueEnseignant.DataContext = new Enseignant(); ;
+            vueMatiere.DataContext = new Matiere();
+            vueEnseignant.DataContext = new Enseignant();
+
+            TabItem_Emploi_du_temps.IsSelected = true;
+            TabPanel.IsEnabled = false;
         }
 
         private void Save(object sender, RoutedEventArgs e)
@@ -546,6 +555,7 @@ namespace PlanningMaker
                 {
                     planning.Semaines.Add(new Semaine(nrSemaine, ""));
                     selectionSemaine.Text = nrSemaine.ToString();
+                    RadioButton_Lundi.IsChecked = true;
                 }
             }
         }
@@ -566,14 +576,53 @@ namespace PlanningMaker
             }
             if (!semainePresente)
             {
-                MessageBoxResult result = MessageBox.Show("Semaine non crée !\nVoulez-vous en créer une ?", "PlanningMaker",
+                MessageBoxResult result = MessageBox.Show("Semaine non créée !\nVoulez-vous en créer une ?", "PlanningMaker",
                         MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (result == MessageBoxResult.Yes)
                 {
                     planning.Semaines.Add(new Semaine(nrSemaine, ""));
                     selectionSemaine.Text = nrSemaine.ToString();
+                    RadioButton_Lundi.IsChecked = true;
                 }
             }
+        }
+
+        private void ChangementChoixJour(object sender, RoutedEventArgs e)
+        {
+            Semaine semaine = selectionSemaine.SelectedItem as Semaine;
+            if (semaine != null)
+            {
+                if (RadioButton_Lundi.IsChecked == true)
+                {
+                    listeEnseignements.ItemsSource = semaine.Lundi.Enseignements;
+                }
+                else if (RadioButton_Mardi.IsChecked == true)
+                {
+                    listeEnseignements.ItemsSource = semaine.Mardi.Enseignements;
+                }
+                else if (RadioButton_Mercredi.IsChecked == true)
+                {
+                    listeEnseignements.ItemsSource = semaine.Mercredi.Enseignements;
+                }
+                else if (RadioButton_Jeudi.IsChecked == true)
+                {
+                    listeEnseignements.ItemsSource = semaine.Jeudi.Enseignements;
+                }
+                else if (RadioButton_Vendredi.IsChecked == true)
+                {
+                    listeEnseignements.ItemsSource = semaine.Vendredi.Enseignements;
+                }
+            }
+        }
+
+        private void NextWeekPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (planning!=null && !(selectionSemaine.Text.Equals("")));
+        }
+
+        private void PreviousWeekPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = ((planning != null) && !(selectionSemaine.Text.Equals("")) && Int32.Parse(selectionSemaine.Text) != 0);
         }
 
 	}
