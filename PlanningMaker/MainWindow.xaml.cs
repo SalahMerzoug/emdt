@@ -58,6 +58,7 @@ namespace PlanningMaker
 
             TabItem_Emploi_du_temps.IsSelected = true;
             TabPanel.IsEnabled = true;
+            vueEnseignement.SetPlanningContext(planning);
 
             ICollectionView vueSemaines = CollectionViewSource.GetDefaultView(planning.Semaines);
             vueSemaines.SortDescriptions.Add(new SortDescription("Numero", ListSortDirection.Ascending));
@@ -623,6 +624,11 @@ namespace PlanningMaker
         private void PreviousWeekPossible(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = ((planning != null) && !(selectionSemaine.Text.Equals("")) && Int32.Parse(selectionSemaine.Text) != 0);
+        }
+
+        private void ChangementSelectionEnseignement(object sender, SelectionChangedEventArgs e)
+        {
+            vueEnseignement.ChangeEnseignement(listeEnseignements.SelectedItem as Enseignement);
         }
 
 	}

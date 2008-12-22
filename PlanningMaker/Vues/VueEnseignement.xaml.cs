@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using PlanningMaker.Modele;
+
+namespace PlanningMaker.Vues
+{
+    /// <summary>
+    /// Logique d'interaction pour VueEnseignant.xaml
+    /// </summary>
+    public partial class VueEnseignement : UserControl
+    {
+        private Enseignement enseignement;
+
+        public VueEnseignement()
+        {
+            InitializeComponent();
+            enseignement = new Enseignement();
+            DataContext = enseignement;
+        }
+
+        public void SetPlanningContext(Planning planning)
+        {
+            ObjectDataProvider odp_matiere = this.FindResource("ComboSource_Matieres") as ObjectDataProvider;
+
+            if (odp_matiere != null)
+                odp_matiere.ObjectInstance = planning.Matieres;
+
+            ObjectDataProvider odp_horaires = this.FindResource("ComboSource_Horaires") as ObjectDataProvider;
+
+            if (odp_horaires != null)
+                odp_horaires.ObjectInstance = planning.Horaires;
+
+        }
+
+        public void ChangeEnseignement(Enseignement enseignement)
+        {
+            this.enseignement = enseignement;
+            DataContext = enseignement;
+
+            ObjectDataProvider odp_enseignants = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
+
+            if (odp_enseignants != null)
+                odp_enseignants.ObjectInstance = enseignement.Matiere.Enseignants;
+
+            Matiere.SelectedItem = enseignement.Matiere;
+            Type.SelectedItem = enseignement.Type;
+            Enseignant.SelectedItem = enseignement.Enseignant;
+                        
+        }
+    }
+}

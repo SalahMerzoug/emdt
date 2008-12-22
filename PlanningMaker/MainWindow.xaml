@@ -12,9 +12,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
 	
     <Window.Resources>
-        <c:ListeTypeEnseignements x:Key="TypeEnseignements"/>
-
-        <Style x:Key="TriggerIcone">
+       <Style x:Key="TriggerIcone">
             <Style.Triggers>
                 <Trigger Property="MenuItem.IsEnabled" Value="false">
                     <Setter Property="Image.Opacity" Value="0.4"/>
@@ -227,7 +225,7 @@
                         <StackPanel Height="20"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Grid Width="550" Height="305">
-                                <ListView x:Name="listeEnseignements">
+                                <ListView x:Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement">
                                     <ListView.View>
                                         <GridView>
                                             <GridView.Columns>
@@ -276,7 +274,7 @@
                                 </ListView>
                             </Grid>
                             <Grid Width="250" Height="305">
-                                
+                                <c:VueEnseignement x:Name="vueEnseignement" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
                         </StackPanel>
                     </StackPanel>
