@@ -35,7 +35,7 @@
                        MouseEnter="TextBlokTelecharger_MouseEnter" MouseLeave="TextBlokTelecharger_MouseLeave"
                        MouseLeftButtonDown="TextBlokTelecharger_MouseLeftButtonDown"
                        Visibility="Hidden" IsEnabled="False" Cursor="Hand">
-                <Hyperlink>Télécharger la dernière version</Hyperlink>
+                <Hyperlink Foreground="Blue">Télécharger la dernière version</Hyperlink>
             </TextBlock>
         </Grid>
     </StackPanel>

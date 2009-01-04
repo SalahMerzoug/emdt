@@ -196,7 +196,7 @@ namespace PlanningMaker
         {
             System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
             dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            dialogueO.Filter = "iCalendar (*.ics)|*.ics|Valeurs séparées par des virgules Outlook (*csv)|*csv";
+            dialogueO.Filter = "iCalendar (*.ics)|*.ics|Valeurs séparées par des virgules Outlook (*.csv)|*.csv";
 
             if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -209,7 +209,7 @@ namespace PlanningMaker
         {
             System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            dialogueS.Filter = "iCalendar (*.ics)|*.ics|Valeurs séparées par des virgules Outlook (*csv)|*csv";
+            dialogueS.Filter = "iCalendar (*.ics)|*.ics|Valeurs séparées par des virgules Outlook (*.csv)|*.csv";
 
             if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

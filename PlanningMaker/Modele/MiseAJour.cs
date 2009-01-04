@@ -119,7 +119,7 @@ namespace PlanningMaker.Modele
                 else
                 {
                     resultat = "• Erreur lors de la connexion à internet •\n" + e2.Message
-                    + "\n→ Vérifiez vos configurations de proxy et de firewall.";
+                    + "\n→ Vérifiez vos configurations de proxy et de pare-feu.";
                 }
             }
 
