@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using PlanningMaker.Modele;
-using System.IO;
-using System.Collections.Generic;
-using System.Collections;
 
 namespace PlanningMaker
 {
@@ -147,7 +147,6 @@ namespace PlanningMaker
             vueMatiere.DataContext = new Matiere();
             vueEnseignant.DataContext = new Enseignant();
 
-            TabItem_Emploi_du_temps.IsSelected = true;
             TabPanel.IsEnabled = false;
         }
 
@@ -293,31 +292,6 @@ namespace PlanningMaker
         private void Help(object sender, RoutedEventArgs e)
         {
             // TODO
-        }
-
-        private void MenuItemEdT_Click(object sender, RoutedEventArgs e)
-        {
-            this.TabPanel.SelectedItem = TabItem_Emploi_du_temps;
-        }
-
-        private void MenuItemEnseignant_Click(object sender, RoutedEventArgs e)
-        {
-            this.TabPanel.SelectedItem = TabItem_Enseignants;
-        }
-
-        private void MenuItemMatiere_Click(object sender, RoutedEventArgs e)
-        {
-            this.TabPanel.SelectedItem = TabItem_Matieres;
-        }
-
-        private void MenuItemHoraire_Click(object sender, RoutedEventArgs e)
-        {
-            this.TabPanel.SelectedItem = TabItem_Horaires;
-        }
-
-        private void MenuItemSalle_Click(object sender, RoutedEventArgs e)
-        {
-            this.TabPanel.SelectedItem = TabItem_Salles;
         }
 
         private void MenuItemValiderXML_Click(object sender, RoutedEventArgs e)
