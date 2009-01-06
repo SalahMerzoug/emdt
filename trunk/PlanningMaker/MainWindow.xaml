@@ -142,16 +142,6 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Vues" x:Name="MenuItem_Vues" Height="20">
-                <MenuItem Header="Emploi du temps" x:Name="MenuItem_EdT" Click="MenuItemEdT_Click"/>
-                <Separator/>
-				<MenuItem Header="Ressources" x:Name="MenuItem_Ressources">
-					<MenuItem Header="Enseignants" x:Name="MenuItem_Enseignants" Click="MenuItemEnseignant_Click"/>
-					<MenuItem Header="Matières" x:Name="MenuItem_Matières" Click="MenuItemMatiere_Click"/>
-					<MenuItem Header="Horaires" x:Name="MenuItem_Horaires" Click="MenuItemHoraire_Click"/>
-					<MenuItem Header="Salles" x:Name="MenuItem_Salles" Click="MenuItemSalle_Click"/>
-				</MenuItem>
-			</MenuItem>
             <MenuItem Header="Outils" x:Name="MenuItem_Outils" Height="20">
                 <MenuItem Header="Validation XMLSchema" x:Name="MenuItem_Validat" Click="MenuItemValiderXML_Click"/>
                 <MenuItem Header="Transformations XSLT" x:Name="MenuItem_Transfo" Click="MenuItemTransfoXSLT_Click"/>
