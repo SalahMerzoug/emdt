@@ -381,7 +381,7 @@ namespace PlanningMaker
 
                 if (listeMatieres.SelectedIndex == -1)
                 {
-                    nouvelleMatiere.Titre = vueMatiere.titre.Text;
+                    nouvelleMatiere.Titre = vueMatiere.Titre.Text;
                 }
                 planning.Matieres.Add(nouvelleMatiere);
                 listeMatieres.SelectedItem = nouvelleMatiere;
@@ -568,7 +568,7 @@ namespace PlanningMaker
                     if (listeMatieres.SelectedIndex >= 0)
                     {
                         Matiere matiere = listeMatieres.SelectedItem as Matiere;
-                        matiere.Titre = vueMatiere.titre.Text;
+                        matiere.Titre = vueMatiere.Titre.Text;
                         foreach (Enseignant enseignant in vueMatiere.EnseignantsAssocies)
                             matiere.Enseignants.Add(enseignant);
                     }
