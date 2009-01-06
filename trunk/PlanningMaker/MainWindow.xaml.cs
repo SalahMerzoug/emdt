@@ -496,7 +496,14 @@ namespace PlanningMaker
 
         private void SupprimerElement(object sender, RoutedEventArgs e)
         {
-            if (TabItem_Horaires.IsSelected)
+            if (TabItem_Emploi_du_temps.IsSelected)
+            {
+                Enseignement enseignement = listeEnseignements.SelectedItem as Enseignement;
+                if (enseignement != null)
+                {
+                }
+            }
+            else if (TabItem_Horaires.IsSelected)
             {
                 Horaire horaire = listeHoraires.SelectedItem as Horaire;
                 if (horaire != null)
