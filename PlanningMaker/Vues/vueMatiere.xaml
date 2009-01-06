@@ -18,10 +18,10 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Enseignant" Width="70"/>
-            <ComboBox x:Name="enseignant" ItemsSource="{Binding Source={StaticResource ComboSource}}" DisplayMemberPath="Nom" Width="100" SelectionChanged="ChangementSelectionUnEnseignant"/>
+            <ComboBox x:Name="ComboEnseignants" ItemsSource="{Binding Source={StaticResource ComboSource}}" DisplayMemberPath="Nom" Width="100" SelectionChanged="ChangementSelectionUnEnseignant"/>
             <Button Command="c:PlanningCommands.AjouterProf"> + </Button>
         </StackPanel>
-        <StackPanel>
+        <StackPanel Height="200">
             <ListView x:Name="ListeProfs" SelectionChanged="ChangementSelectionProf">
                 <ListView.View>
                     <GridView>

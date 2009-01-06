@@ -465,7 +465,7 @@ namespace PlanningMaker
 
         private void ChangementSelectionMatiere(object sender, SelectionChangedEventArgs e)
         {
-            vueMatiere.DataContext = listeMatieres.SelectedItem;
+            vueMatiere.ChangeMatiere(listeMatieres.SelectedItem as Matiere);
         }
         
         private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)
