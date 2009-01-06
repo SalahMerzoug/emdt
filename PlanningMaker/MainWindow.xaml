@@ -6,7 +6,7 @@
 	x:Class="PlanningMaker.MainWindow"
 	x:Name="Window"
     Title="Viactisoft PlanningMaker 2008 School Edition"
-	Width="850" Height="600" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
+	Width="870" Height="600" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
     ResizeMode="CanMinimize"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
@@ -214,7 +214,7 @@
                         </StackPanel>
                         <StackPanel Height="20"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Grid Width="550" Height="305">
+                            <Grid Width="590" Height="305">
                                 <ListView x:Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement" MouseRightButtonUp="DeselectionEnseignement">
                                     <ListView.View>
                                         <GridView>
@@ -237,6 +237,13 @@
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
                                                             <TextBlock Text="{Binding Path=Type}"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="40" Header="N°">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Path=Groupe}"/>
                                                         </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
@@ -270,7 +277,7 @@
                                     </ListView.View>
                                 </ListView>
                             </Grid>
-                            <Grid Width="250" Height="305">
+                            <Grid Width="240" Height="305">
                                 <c:VueEnseignement x:Name="vueEnseignement" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
                         </StackPanel>
