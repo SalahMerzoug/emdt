@@ -1,18 +1,13 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-
-using System;
-
-
-using PlanningMaker;
 
 namespace PlanningMaker.Modele
 {
     class RequetesXPath
     {
- 
         // méthodes par défauts
         public void ExecRequetesXPath(string nomFichierXSL, string nomFichierXML)
         {
@@ -40,14 +35,13 @@ namespace PlanningMaker.Modele
 
             MessageBox.Show("Génération des requêtes XPath par défaut: OK");
             MainWindow.StartExternWebBrowser(nomFichierXpath);
-       }
+        }
 
         // méthodes avec arguments
         public void ExecRequetesXPath(string nomFichierXSL, string nomFichierXML,
             string numSemaine, string nom_recherche_1, string id_enseignant_2, string id_matière_3, string id_matière_4, string id_enseignant_5,
             string id_salle_6, string id_jour_6, string id_enseignant_7, string id_jour_7)
         {
-
             // Load the style sheet.
             XslCompiledTransform xslt = new XslCompiledTransform();
             xslt.Load(@"..\..\Files\" + nomFichierXSL);
@@ -74,14 +68,13 @@ namespace PlanningMaker.Modele
 
             MessageBox.Show("Génération des requêtes XPath paramétrées: OK");
             MainWindow.StartExternWebBrowser(nomFichierXpath);
- 
         }
 
-    public static string SaveFileXpath()
+        public static string SaveFileXpath()
         {
             System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            dialogueS.Filter = "Fichier html (*.html)|*.html";
+            dialogueS.Filter = "Fichier HTML (*.html)|*.html";
 
             if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

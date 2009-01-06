@@ -42,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="UIAutomationProvider">
@@ -60,6 +61,7 @@
     <Compile Include="Modele\MiseAJourThreadData.cs" />
     <Compile Include="Modele\ETypeEnseignements.cs" />
     <Compile Include="Modele\ETypeSalles.cs" />
+    <Compile Include="Modele\Print.cs" />
     <Compile Include="Vues\VueEnseignement.xaml.cs">
       <DependentUpon>VueEnseignement.xaml</DependentUpon>
     </Compile>
