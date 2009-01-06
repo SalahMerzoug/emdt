@@ -375,6 +375,10 @@ namespace PlanningMaker
             else if (TabItem_Matieres.IsSelected)
             {
                 Matiere nouvelleMatiere = new Matiere("");
+                foreach (Enseignant enseignant in vueMatiere.EnseignantsAssocies)
+                    nouvelleMatiere.Enseignants.Add(enseignant);
+
+
                 if (listeMatieres.SelectedIndex == -1)
                 {
                     nouvelleMatiere.Titre = vueMatiere.titre.Text;
