@@ -15,6 +15,7 @@ namespace PlanningMaker.Vues
         private static System.Windows.Input.RoutedUICommand nextWeek;
         private static System.Windows.Input.RoutedUICommand previousWeek;
         private static System.Windows.Input.RoutedUICommand ajouterProf;
+        private static System.Windows.Input.RoutedUICommand supprimerProf;
 
         static PlanningCommands()
         {
@@ -34,6 +35,8 @@ namespace PlanningMaker.Vues
                 "Suivante", "Semaine Suivante", typeof(PlanningCommands));
             ajouterProf = new System.Windows.Input.RoutedUICommand(
                 "Ajouter Professeur", "Ajouter Professeur", typeof(PlanningCommands));
+            supprimerProf = new System.Windows.Input.RoutedUICommand(
+                "Supprimer Professeur", "Supprimer Professeur", typeof(PlanningCommands));
         }
 
         public static System.Windows.Input.RoutedUICommand Importer
@@ -97,6 +100,14 @@ namespace PlanningMaker.Vues
             get
             {
                 return ajouterProf;
+            }
+        }
+
+        public static System.Windows.Input.RoutedUICommand SupprimerProf
+        {
+            get
+            {
+                return supprimerProf;
             }
         }
     }

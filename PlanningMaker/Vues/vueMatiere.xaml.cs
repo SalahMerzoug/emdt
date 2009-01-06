@@ -65,12 +65,33 @@ namespace PlanningMaker.Vues
 
         private void AjouterProf(object sender, RoutedEventArgs e)
         {
-
+            matiere.Enseignants.Add(ComboEnseignants.SelectedItem as Enseignant);
         }
 
-        private void AjouterProfPossible(object sender, RoutedEventArgs e)
+        private void AjouterProfPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-
+            e.CanExecute = (matiere != null);
         }
+
+        private void SupprimerProf(object sender, RoutedEventArgs e)
+        {
+            matiere.Enseignants.Add(ComboEnseignants.SelectedItem as Enseignant);
+        }
+
+        private void SupprimerProfPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = (matiere != null);
+        }
+
+        public void ClearView()
+        {
+            matiere = null;
+            DataContext = null;
+
+            Titre.Text = null;
+            ComboEnseignants.SelectedItem = null;
+            ListeProfs.SelectedItem = null;
+        }
+
     }
 }
