@@ -119,12 +119,34 @@ namespace PlanningMaker.Vues
 
         private void ChangementSelectionHoraire1(object sender, SelectionChangedEventArgs e)
         {
-
+            Horaire horaire = Horaire1.SelectedItem as Horaire;
+            if (horaire != null && enseignement != null)
+            {
+                if (horaire != enseignement.Horaire2)
+                    enseignement.Horaire1 = horaire;
+                else
+                {
+                    MessageBox.Show("Les horaires sont identiques", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Stop);
+                    Horaire1.SelectedItem = enseignement.Horaire1;
+                }
+            }
         }
 
         private void ChangementSelectionHoraire2(object sender, SelectionChangedEventArgs e)
         {
-
+            Horaire horaire = Horaire2.SelectedItem as Horaire;
+            if (enseignement != null)
+            {
+                if (horaire != enseignement.Horaire1)
+                    enseignement.Horaire2 = horaire;
+                else
+                {
+                    MessageBox.Show("Les horaires sont identiques", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Stop);
+                    Horaire2.SelectedItem = enseignement.Horaire2;
+                }
+            }
         }
     }
 }
