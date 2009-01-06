@@ -10,8 +10,8 @@ namespace PlanningMaker.Modele
 
         public String ValiderFichierXml(String nomDuFichierXml)
         {
-            try
-            {
+            //try
+            //{
                 // Create the XmlSchemaSet class.
                 XmlSchemaSet sc = new XmlSchemaSet();
 
@@ -27,15 +27,15 @@ namespace PlanningMaker.Modele
                 settings.ValidationEventHandler += new ValidationEventHandler(ValidationCallBack);
 
                 // Create the XmlReader object.
-                XmlReader reader = XmlReader.Create(@"..\..\Files\" + nomDuFichierXml, settings);
+                XmlReader reader = XmlReader.Create(nomDuFichierXml, settings);
 
                 // Parse the file. 
                 while (reader.Read()) ;
-            }
+            /*}
             catch (Exception e)
             {
                 messageValidation = "Erreur ayant interrompu la validation : " + e.Message;
-            }
+            }*/
 
             return messageValidation;
         }

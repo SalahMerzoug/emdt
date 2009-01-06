@@ -224,34 +224,39 @@ namespace PlanningMaker
 
         private void PrintPreview(object sender, RoutedEventArgs e)
         {
+            // TODO : indiquer d'enregistrer avant de lancer l'opération
+            // + choisir quoi voir : image, texte, multi-semaines ?
+
+            Print print = new Print(nomFichier);
+            //Print print = new Print("ooo");
             System.Windows.Forms.PrintPreviewDialog printPreviewD = new System.Windows.Forms.PrintPreviewDialog();
-            // TODO : mettre notre 'document' dans le PrintPreviewDialog
-            // printPreviewD.Document = ...;
-            printPreviewD.Show();
+            printPreviewD.Document = print.Document;
+            printPreviewD.ShowDialog();
         }
 
         private void Print(object sender, RoutedEventArgs e)
         {
-            PrintDialog printDialog = new PrintDialog();
-            printDialog.PageRangeSelection = PageRangeSelection.AllPages;
-            printDialog.UserPageRangeEnabled = true;
+            // TODO : indiquer d'enregistrer avant de lancer l'opération
+            // + choisir quoi imprimer : image, texte, multi-semaines ?
 
-            Nullable<bool> result = printDialog.ShowDialog();
-
-            if (result == true)
+            Print print = new Print("ooo");
+            System.Windows.Forms.PrintDialog printD = new System.Windows.Forms.PrintDialog();
+            printD.Document = print.Document;
+            
+            if (printD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                // TODO : Print document
+                print.Document.Print();
             }
         }
 
         private void ApercuPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = planningExiste();
+            e.CanExecute = planningExiste() && (nomFichier != null);
         }
 
         private void ImprimerPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = planningExiste();
+            e.CanExecute = planningExiste() && (nomFichier != null);
         }
 
         private void Exit(object sender, RoutedEventArgs e)
