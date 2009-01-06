@@ -33,5 +33,35 @@
             <Label Content="Salle" Width="80"/>
             <ComboBox Name="Salle" ItemsSource="{Binding Source={StaticResource ComboSource_Salles}}" DisplayMemberPath="Nom" Width="140" SelectionChanged="ChangementSelectionSalle"/>
         </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="1er Horaire" Width="80"/>
+            <ComboBox Name="Horaire1" ItemsSource="{Binding Source={StaticResource ComboSource_Horaires}}" Width="140" SelectionChanged="ChangementSelectionHoraire1">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Debut}"/>
+                            <TextBlock Text=" à "/>
+                            <TextBlock Text="{Binding Path=Fin}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="2nd Horaire" Width="80"/>
+            <ComboBox Name="Horaire2" ItemsSource="{Binding Source={StaticResource ComboSource_Horaires}}" Width="140" SelectionChanged="ChangementSelectionHoraire2">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Debut}"/>
+                            <TextBlock Text=" à "/>
+                            <TextBlock Text="{Binding Path=Fin}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
     </StackPanel>
 </UserControl>
