@@ -38,14 +38,19 @@ namespace PlanningMaker.Vues
             matiere = new Matiere();
             enseignantsAssocies = new ObservableCollection<Enseignant>();
             DataContext = matiere;
+            ListeProfs.ItemsSource = matiere.Enseignants;
         }
 
-        public void setEnseignantsContext(ICollection<Enseignant> enseignants){
+        public void ChangeMatiere(Matiere matiere)
+        {
+            this.matiere = matiere;
+            DataContext = matiere;
+            ListeProfs.ItemsSource = matiere.Enseignants;
+        }
 
-            ObjectDataProvider odp = this.FindResource("ComboSource") as ObjectDataProvider;
-            
-            if(odp != null)
-                odp.ObjectInstance = enseignants;
+        public void setEnseignantsContext(ICollection<Enseignant> enseignants)
+        {
+            ComboEnseignants.ItemsSource = enseignants;
         }
 
         private void ChangementSelectionUnEnseignant(object sender, SelectionChangedEventArgs e)
