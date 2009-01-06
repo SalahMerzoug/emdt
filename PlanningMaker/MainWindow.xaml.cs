@@ -43,7 +43,6 @@ namespace PlanningMaker
             }
         }
 
-
         public static string getNumeroVersion()
         {
             Version vrs = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -104,6 +103,9 @@ namespace PlanningMaker
                     MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Information);
 
+                    // Mise à jour du fichier source pour les requêtes XPath
+                    RequetesXPath.NomFichierSemaine = nomFichier;
+
                     RadioButton_Lundi.IsChecked = true;
                     
                     IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
@@ -156,6 +158,9 @@ namespace PlanningMaker
             planning.Sauver(nomFichier);
             MessageBox.Show("Planning sauvegardé avec succès !", "PlanningMaker",
                     MessageBoxButton.OK, MessageBoxImage.Information);
+
+            // Mise à jour du fichier source pour les requêtes XPath
+            RequetesXPath.NomFichierSemaine = nomFichier;
         }
 
         private void SaveAs(object sender, RoutedEventArgs e)
@@ -170,6 +175,9 @@ namespace PlanningMaker
                 nomFichier = dialogueS.FileName;
                 Save(sender, e);
             }
+
+            // Mise à jour du fichier source pour les requêtes XPath
+            RequetesXPath.NomFichierSemaine = nomFichier;
         }
 
         private void FermeturePossible(object sender, CanExecuteRoutedEventArgs e)
@@ -358,6 +366,8 @@ namespace PlanningMaker
         {
             if (TabItem_Emploi_du_temps.IsSelected)
             {
+                Horaire nouvelHoraire = new Horaire("00h00", "00h00");
+
                 Enseignement nouvelEnseignement = new Enseignement();
                 
                 Semaine semaineEnCours = null;
@@ -434,6 +444,8 @@ namespace PlanningMaker
                 Horaire nouvelHoraire = new Horaire();
                 if (listeHoraires.SelectedIndex == -1)
                 {
+                    nouvelHoraire.Debut = vueHoraire.Debut.Text;
+                    nouvelHoraire.Fin = vueHoraire.Fin.Text;
                     if (!vueHoraire.Debut.Text.Equals("") && !vueHoraire.Debut.Text.Equals(""))
                     {
                         if (Horaire.IsHeureValide(vueHoraire.Debut.Text) &&
@@ -449,41 +461,38 @@ namespace PlanningMaker
             }
             else if (TabItem_Enseignants.IsSelected)
             {
-                Enseignant nouvelEnseignant = new Enseignant();
+                Enseignant nouvelEnseignant = new Enseignant("", "");
                 if (listeEnseignants.SelectedIndex == -1)
                 {
-                    if (!vueEnseignant.nom.Text.Equals("") && !vueEnseignant.prenom.Text.Equals(""))
-                    {
-                        nouvelEnseignant.Nom = vueEnseignant.nom.Text;
-                        nouvelEnseignant.Prenom = vueEnseignant.prenom.Text;
-                    }
+                    nouvelEnseignant.Nom = vueEnseignant.nom.Text;
+                    nouvelEnseignant.Prenom = vueEnseignant.prenom.Text;
                 }
                 planning.Enseignants.Add(nouvelEnseignant);
                 listeEnseignants.SelectedItem = nouvelEnseignant;
             }
             else if (TabItem_Matieres.IsSelected)
             {
-                Matiere nouvelleMatiere = new Matiere();
+                Matiere nouvelleMatiere = new Matiere("");
                 foreach (Enseignant enseignant in vueMatiere.EnseignantsAssocies)
                     nouvelleMatiere.Enseignants.Add(enseignant);
+
+
                 if (listeMatieres.SelectedIndex == -1)
                 {
-                    if (!vueMatiere.Titre.Text.Equals(""))
-                    {
-                        nouvelleMatiere.Titre = vueMatiere.Titre.Text;
-                    }
+                    nouvelleMatiere.Titre = vueMatiere.Titre.Text;
                 }
                 planning.Matieres.Add(nouvelleMatiere);
                 listeMatieres.SelectedItem = nouvelleMatiere;
             }
             else if (TabItem_Salles.IsSelected)
             {
-                Salle nouvelleSalle = new Salle();
+                Salle nouvelleSalle = new Salle("");
+                nouvelleSalle.Type = ETypeSalles.Amphi;
                 if (listeSalles.SelectedIndex == -1)
                 {
-                    if (vueSalle.Type.SelectedItem != null && !vueSalle.Nom.Text.Equals(""))
+                    nouvelleSalle.Nom = vueSalle.Nom.Text;
+                    if (vueSalle.Type.SelectedItem != null)
                     {
-                        nouvelleSalle.Nom = vueSalle.Nom.Text;
                         if ((vueSalle.Type.SelectedItem as string).Equals("Amphi"))
                         {
                             nouvelleSalle.Type = ETypeSalles.Amphi;
@@ -492,6 +501,10 @@ namespace PlanningMaker
                         {
                             nouvelleSalle.Type = ETypeSalles.Labo;
                         }
+                    }
+                    else
+                    {
+                        nouvelleSalle.Type = ETypeSalles.Amphi;
                     }
                 }
                 planning.Salles.Add(nouvelleSalle);
@@ -839,10 +852,6 @@ namespace PlanningMaker
                             enseignement.Horaire2 = vueEnseignement.Horaire2.SelectedItem as Horaire;
                         }
                     }
-                    else
-                    {
-                        AjouterElement(null, null);
-                    }
                 }
             }
         }
@@ -1011,5 +1020,7 @@ namespace PlanningMaker
             else
                 vueEnseignement.ClearView();
         }
+
+
 	}    
 }
