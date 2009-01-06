@@ -80,7 +80,7 @@ namespace PlanningMaker.Modele
             set
             {
                 plage1 = value;
-                ObjectChanged("Horraire1");
+                ObjectChanged("Horaire1");
             }
         }
 

@@ -355,7 +355,80 @@ namespace PlanningMaker
 
         private void AjouterElement(object sender, RoutedEventArgs e)
         {
-            if (TabItem_Horaires.IsSelected)
+            if (TabItem_Emploi_du_temps.IsSelected)
+            {
+                Enseignement nouvelEnseignement = new Enseignement();
+                
+                Semaine semaineEnCours = null;
+                int nrSemaine = -1;
+                
+                try
+                {
+                    nrSemaine = Int32.Parse(selectionSemaine.Text);
+                }
+                catch (FormatException) { }
+
+                if (nrSemaine != -1)
+                {
+                    foreach (Semaine s in planning.Semaines)
+                    {
+                        if (s.Numero == nrSemaine)
+                        {
+                            semaineEnCours = s;
+                            break;
+                        }
+                    }
+                }
+
+                if (semaineEnCours != null)
+                {
+                    if (RadioButton_Lundi.IsChecked == true)
+                    {
+                        semaineEnCours.Lundi.Enseignements.Add(nouvelEnseignement);
+                    }
+                    else if (RadioButton_Mardi.IsChecked == true)
+                    {
+                        semaineEnCours.Mardi.Enseignements.Add(nouvelEnseignement);
+                    }
+                    else if (RadioButton_Mercredi.IsChecked == true)
+                    {
+                        semaineEnCours.Mercredi.Enseignements.Add(nouvelEnseignement);
+                    }
+                    else if (RadioButton_Jeudi.IsChecked == true)
+                    {
+                        semaineEnCours.Jeudi.Enseignements.Add(nouvelEnseignement);
+                    }
+                    else if (RadioButton_Vendredi.IsChecked == true)
+                    {
+                        semaineEnCours.Vendredi.Enseignements.Add(nouvelEnseignement);
+                    }
+                    
+                }
+
+                if (listeEnseignements.SelectedIndex == -1)
+                {
+                    nouvelEnseignement.Matiere = vueEnseignement.Matiere.SelectedItem as Matiere;
+                    
+                    String type = vueEnseignement.Type.SelectedItem as String;
+                    if (type.Equals(ETypeEnseignements.TP.ToString()))
+                        nouvelEnseignement.Type = ETypeEnseignements.TP;
+                    else if (type.Equals(ETypeEnseignements.TD.ToString()))
+                        nouvelEnseignement.Type = ETypeEnseignements.TD;
+                    else
+                        nouvelEnseignement.Type = ETypeEnseignements.Cours;
+
+                    nouvelEnseignement.Enseignant = vueEnseignement.Enseignant.SelectedItem as Enseignant;
+
+                    nouvelEnseignement.Salle = vueEnseignement.Salle.SelectedItem as Salle;
+
+                    nouvelEnseignement.Horaire1 = vueEnseignement.Horaire1.SelectedItem as Horaire;
+                    nouvelEnseignement.Horaire2 = vueEnseignement.Horaire2.SelectedItem as Horaire;
+                }
+
+                listeEnseignements.SelectedItem = nouvelEnseignement;
+
+            }
+            else if (TabItem_Horaires.IsSelected)
             {
                 Horaire nouvelHoraire = new Horaire();
                 if (listeHoraires.SelectedIndex == -1)
