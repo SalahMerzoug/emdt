@@ -273,10 +273,10 @@
             <TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
                 <DockPanel>
                     <Grid Width="260">
-                        <c:VueEnseignant x:Name="vueEnseignant" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <c:VueEnseignant x:Name="vueEnseignant" VerticalAlignment="Center" HorizontalAlignment="Center" />
                     </Grid>
                     <Grid Width="530">
-                        <ListView x:Name="listeEnseignants" SelectionChanged="ChangementSelectionEnseignant">
+                        <ListView x:Name="listeEnseignants" SelectionChanged="ChangementSelectionEnseignant" MouseRightButtonUp="DeselectionEnseignant">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="100" Header="Nom" DisplayMemberBinding="{Binding Path=Nom}"/>
@@ -293,7 +293,7 @@
                         <c:vueMatiere x:Name="vueMatiere" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                     <Grid Width="140">
-                        <ListView Name="listeMatieres" SelectionChanged="ChangementSelectionMatiere">
+                        <ListView Name="listeMatieres" SelectionChanged="ChangementSelectionMatiere" MouseRightButtonUp="DeselectionMatiere">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="100" Header="Titre" DisplayMemberBinding="{Binding Path=Titre}"/>
@@ -309,7 +309,7 @@
                     <c:VueHoraire x:Name="vueHoraire" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Grid>
                 <Grid Width="530">
-                        <ListView x:Name="listeHoraires" SelectionChanged="ChangementSelectionHoraire">
+                        <ListView x:Name="listeHoraires" SelectionChanged="ChangementSelectionHoraire" MouseRightButtonUp="DeselectionHoraire">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="100" Header="Début" DisplayMemberBinding="{Binding Path=Debut}"/>
@@ -326,7 +326,7 @@
                         <c:VueSalle x:Name="vueSalle" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                     <Grid Width="530">
-                        <ListView Name="listeSalles" SelectionChanged="ChangementSelectionSalle">
+                        <ListView Name="listeSalles" SelectionChanged="ChangementSelectionSalle" MouseRightButtonUp="DeselectionSalle">
                             <ListView.View>
                                 <GridView>
                                     <GridViewColumn Width="100" Header="Nom" DisplayMemberBinding="{Binding Path=Nom}"/>

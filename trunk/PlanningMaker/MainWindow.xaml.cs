@@ -353,18 +353,32 @@ namespace PlanningMaker
             if (TabItem_Horaires.IsSelected)
             {
                 Horaire nouvelHoraire = new Horaire("00h00", "00h00");
+                if (listeHoraires.SelectedIndex == -1)
+                {
+                    nouvelHoraire.Debut = vueHoraire.Debut.Text;
+                    nouvelHoraire.Fin = vueHoraire.Fin.Text;
+                }
                 planning.Horaires.Add(nouvelHoraire);
                 listeHoraires.SelectedItem = nouvelHoraire;
             }
             else if (TabItem_Enseignants.IsSelected)
             {
                 Enseignant nouvelEnseignant = new Enseignant("", "");
+                if (listeEnseignants.SelectedIndex == -1)
+                {
+                    nouvelEnseignant.Nom = vueEnseignant.nom.Text;
+                    nouvelEnseignant.Prenom = vueEnseignant.prenom.Text;
+                }
                 planning.Enseignants.Add(nouvelEnseignant);
                 listeEnseignants.SelectedItem = nouvelEnseignant;
             }
             else if (TabItem_Matieres.IsSelected)
             {
                 Matiere nouvelleMatiere = new Matiere("");
+                if (listeMatieres.SelectedIndex == -1)
+                {
+                    nouvelleMatiere.Titre = vueMatiere.titre.Text;
+                }
                 planning.Matieres.Add(nouvelleMatiere);
                 listeMatieres.SelectedItem = nouvelleMatiere;
             }
@@ -372,6 +386,18 @@ namespace PlanningMaker
             {
                 Salle nouvelleSalle = new Salle("");
                 nouvelleSalle.Type = ETypeSalles.Amphi;
+                if (listeSalles.SelectedIndex == -1)
+                {
+                    nouvelleSalle.Nom = vueSalle.Nom.Text;
+                    if ((vueSalle.Type.SelectedItem as string).Equals("Amphi"))
+                    {
+                        nouvelleSalle.Type = ETypeSalles.Amphi;
+                    }
+                    else
+                    {
+                        nouvelleSalle.Type = ETypeSalles.Labo;
+                    } 
+                }
                 planning.Salles.Add(nouvelleSalle);
                 listeSalles.SelectedItem = nouvelleSalle;
             }
@@ -443,7 +469,26 @@ namespace PlanningMaker
             vueEnseignant.DataContext = listeEnseignants.SelectedItem;
         }
 
-        
+        private void DeselectionHoraire(object sender, MouseButtonEventArgs e)
+        {
+            listeHoraires.SelectedIndex = -1;
+        }
+
+        private void DeselectionSalle(object sender, MouseButtonEventArgs e)
+        {
+            listeSalles.SelectedIndex = -1;
+        }
+
+        private void DeselectionMatiere(object sender, MouseButtonEventArgs e)
+        {
+            listeMatieres.SelectedIndex = -1;
+        }
+
+        private void DeselectionEnseignant(object sender, MouseButtonEventArgs e)
+        {
+            listeEnseignants.SelectedIndex = -1;
+        }
+
         public bool OperationSurFichierXMLPossible()
         {
             if (nomFichier != null)
@@ -604,7 +649,5 @@ namespace PlanningMaker
         {
             vueEnseignement.ChangeEnseignement(listeEnseignements.SelectedItem as Enseignement);
         }
-
-	}
-    
+	}    
 }
