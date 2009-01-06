@@ -41,6 +41,7 @@
         <CommandBinding Command="ApplicationCommands.Help" Executed="Help"/>
 		<CommandBinding Command="c:PlanningCommands.AjouterElement" Executed="AjouterElement" CanExecute="AjouterElementPossible"/>
         <CommandBinding Command="c:PlanningCommands.SupprimerElement" Executed="SupprimerElement" CanExecute="SupprimerElementPossible"/>
+        <CommandBinding Command="c:PlanningCommands.NewWeek" Executed="NewWeek"/>
         <CommandBinding Command="c:PlanningCommands.NextWeek" Executed="NextWeek" CanExecute="NextWeekPossible"/>
         <CommandBinding Command="c:PlanningCommands.PreviousWeek" Executed="PreviousWeek" CanExecute="PreviousWeekPossible"/>
     </Window.CommandBindings>
@@ -182,7 +183,7 @@
                         <Button x:Name="Bouton_NextWeek" Width="50" Command="c:PlanningCommands.NextWeek">Next</Button>
                     </StackPanel>
                     <StackPanel Height="10"/>
-                    <Button x:Name="Bouton_NewWeek" Width="150">Nouvelle Semaine</Button>
+                    <Button x:Name="Bouton_NewWeek" Width="150" Command="c:PlanningCommands.NewWeek">Nouvelle Semaine</Button>
                     <StackPanel Height="10"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="Promotion :"/>
