@@ -75,12 +75,12 @@ namespace PlanningMaker.Vues
 
         private void SupprimerProf(object sender, RoutedEventArgs e)
         {
-            matiere.Enseignants.Add(ComboEnseignants.SelectedItem as Enseignant);
+            matiere.Enseignants.Remove(ListeProfs.SelectedItem as Enseignant);
         }
 
         private void SupprimerProfPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (matiere != null);
+            e.CanExecute = (ListeProfs.SelectedItem != null);
         }
 
         public void ClearView()
