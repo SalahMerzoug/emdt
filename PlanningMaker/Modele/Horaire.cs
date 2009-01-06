@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace PlanningMaker.Modele
 {
@@ -53,5 +54,17 @@ namespace PlanningMaker.Modele
             return "Horaire : " + debut + " - " + fin;
         }
 
+        public static bool IsHeureValide(string heure)
+        {
+            Regex rx = new Regex(@"^(\d|[1-2]\d|[0]{2})[h][0-5]\d$");
+            if (rx.IsMatch(heure))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

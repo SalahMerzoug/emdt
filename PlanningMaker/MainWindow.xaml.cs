@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using PlanningMaker.Modele;
+using System.Windows.Media;
 
 namespace PlanningMaker
 {
@@ -435,8 +436,12 @@ namespace PlanningMaker
                 {
                     if (!vueHoraire.Debut.Text.Equals("") && !vueHoraire.Debut.Text.Equals(""))
                     {
-                        nouvelHoraire.Debut = vueHoraire.Debut.Text;
-                        nouvelHoraire.Fin = vueHoraire.Fin.Text;
+                        if (Horaire.IsHeureValide(vueHoraire.Debut.Text) &&
+                            Horaire.IsHeureValide(vueHoraire.Fin.Text))
+                        {
+                            nouvelHoraire.Debut = vueHoraire.Debut.Text;
+                            nouvelHoraire.Fin = vueHoraire.Fin.Text;
+                        }
                     }
                 }
                 planning.Horaires.Add(nouvelHoraire);
@@ -605,8 +610,12 @@ namespace PlanningMaker
                     if (listeHoraires.SelectedIndex >= 0)
                     {
                         Horaire horaire = listeHoraires.SelectedItem as Horaire;
-                        horaire.Debut = vueHoraire.Debut.Text;
-                        horaire.Fin = vueHoraire.Fin.Text;
+                        if (Horaire.IsHeureValide(vueHoraire.Debut.Text) &&
+                            Horaire.IsHeureValide(vueHoraire.Fin.Text))
+                        {
+                            horaire.Debut = vueHoraire.Debut.Text;
+                            horaire.Fin = vueHoraire.Fin.Text;
+                        }
                     }
                     else
                     {
