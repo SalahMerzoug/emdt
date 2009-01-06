@@ -2,6 +2,10 @@
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+
+using System;
+
+
 using PlanningMaker;
 
 namespace PlanningMaker.Modele
@@ -19,16 +23,16 @@ namespace PlanningMaker.Modele
             // Create the XsltArgumentList.
             XsltArgumentList xslArg = new XsltArgumentList();
 
-            string nomFichierXMLsansExtension = nomFichierXML.Substring(0, nomFichierXML.LastIndexOf(".xml"));
+            string nomFichierXpath = SaveFileXpath();
             XPathDocument xpathdocument = new XPathDocument(@"..\..\Files\" + nomFichierXML);
-            XmlTextWriter writer = new XmlTextWriter(@"..\..\Files\" + nomFichierXMLsansExtension + "-RequêtesXPath.html", null);
-            
+            XmlTextWriter writer = new XmlTextWriter(nomFichierXpath, null);
+ 
             // Transform the file.
             xslt.Transform(xpathdocument, xslArg, writer);
             writer.Close();
 
             MessageBox.Show("Génération des requêtes XPath par défaut: OK");
-            MainWindow.StartExternWebBrowser(@"..\..\Files\" + nomFichierXMLsansExtension + "-RequêtesXPath.html");
+            MainWindow.StartExternWebBrowser(nomFichierXpath);
        }
 
         // méthodes avec arguments
@@ -53,17 +57,34 @@ namespace PlanningMaker.Modele
             xslArg.AddParam("id_enseignant_7", "", id_enseignant_7);
             xslArg.AddParam("id_jour_7", "", id_jour_7);
 
-            string nomFichierXMLsansExtension = nomFichierXML.Substring(0, nomFichierXML.LastIndexOf(".xml"));
+            string nomFichierXpath = SaveFileXpath();
             XPathDocument xpathdocument = new XPathDocument(@"..\..\Files\" + nomFichierXML);
-            XmlTextWriter writer = new XmlTextWriter(@"..\..\Files\" + nomFichierXMLsansExtension + "-RequêtesXPath.html", null);
+            XmlTextWriter writer = new XmlTextWriter(nomFichierXpath, null);
 
             // Transform the file.
             xslt.Transform(xpathdocument, xslArg, writer);
             writer.Close();
 
             MessageBox.Show("Génération des requêtes XPath paramétrées: OK");
-            MainWindow.StartExternWebBrowser(@"..\..\Files\" + nomFichierXMLsansExtension + "-RequêtesXPath.html");
+            MainWindow.StartExternWebBrowser(nomFichierXpath);
  
         }
+
+    public static string SaveFileXpath()
+        {
+            System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
+            dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            dialogueS.Filter = "Fichier html (*.html)|*.html";
+
+            if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                return dialogueS.FileName;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

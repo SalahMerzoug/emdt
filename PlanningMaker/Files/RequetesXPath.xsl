@@ -77,8 +77,8 @@
     <font color="blue"><h3> 
       Requête 1 : Enseignants dont le nom contient "<xsl:value-of select='$nom_recherche'/>" ? 
     </h3> </font>
-    
-      <xsl:for-each select='//enseignant[contains(@id,$nom_recherche)]'>
+
+      <xsl:for-each select='//enseignants/enseignant[contains(@id,$nom_recherche)]'>
         <b> <xsl:value-of select="position()"/>) </b> <xsl:value-of select="."/><BR/><BR/>
         </xsl:for-each>
     </xsl:template>
