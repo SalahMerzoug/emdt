@@ -41,7 +41,7 @@
             <TextBox Name="champ_id_jour_7" Width="100"/>
         </StackPanel>
         <Button Height="30" Width="70" HorizontalAlignment="Right" Margin="0,0,72,24" 
-            Name="buttonXPath" Click="ButtonXPathClicked">
+            Name="buttonXPath" IsDefault="True" Click="ButtonXPathClicked">
             <Image Source="..\Files\Img\XPath.png"/>
         </Button>
     </StackPanel>
