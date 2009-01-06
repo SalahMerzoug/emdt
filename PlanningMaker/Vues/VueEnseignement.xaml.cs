@@ -55,7 +55,7 @@ namespace PlanningMaker.Vues
 
             ObjectDataProvider odp_enseignants = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
 
-            if (odp_enseignants != null)
+            if (odp_enseignants != null && enseignement.Matiere != null)
                 odp_enseignants.ObjectInstance = enseignement.Matiere.Enseignants;
 
             Matiere.SelectedItem = enseignement.Matiere;
@@ -64,7 +64,6 @@ namespace PlanningMaker.Vues
             Salle.SelectedItem = enseignement.Salle;
             Horaire1.SelectedItem = enseignement.Horaire1;
             Horaire2.SelectedItem = enseignement.Horaire2;
-                        
         }
 
         public void ClearView()
@@ -79,6 +78,7 @@ namespace PlanningMaker.Vues
 
             Matiere.SelectedItem = null;
             Type.SelectedItem = null;
+            Groupe.Text = null;
             Enseignant.SelectedItem = null;
             Salle.SelectedItem = null;
             Horaire1.SelectedItem = null;
@@ -106,14 +106,17 @@ namespace PlanningMaker.Vues
         private void ChangementSelectionMatiere(object sender, SelectionChangedEventArgs e)
         {
             Matiere matiere = Matiere.SelectedItem as Matiere;
-            if (matiere != null && enseignement != null)
+            if (matiere != null)
             {
-                enseignement.Matiere = matiere;
+                if (enseignement != null)
+                    enseignement.Matiere = matiere;
+
                 ObjectDataProvider odp_enseignants = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
 
                 if (odp_enseignants != null)
-                    odp_enseignants.ObjectInstance = enseignement.Matiere.Enseignants;
-                Enseignant.SelectedItem = enseignement.Matiere.Enseignants.First();
+                    odp_enseignants.ObjectInstance = matiere.Enseignants;
+
+                Enseignant.SelectedItem = matiere.Enseignants.First();
             }
         }
 
@@ -136,7 +139,7 @@ namespace PlanningMaker.Vues
         private void ChangementSelectionHoraire2(object sender, SelectionChangedEventArgs e)
         {
             Horaire horaire = Horaire2.SelectedItem as Horaire;
-            if (enseignement != null)
+            if (horaire != null && enseignement != null)
             {
                 if (horaire != enseignement.Horaire1)
                     enseignement.Horaire2 = horaire;

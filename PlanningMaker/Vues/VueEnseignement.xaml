@@ -25,6 +25,11 @@
         </StackPanel>
         <Label Height="10"/>
         <StackPanel Orientation="Horizontal">
+            <Label Content="Groupe" Width="80"/>
+            <TextBox Name="Groupe" Text="{Binding Path=Groupe}" Width="140"/>
+        </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
             <Label Content="Enseignant" Width="80"/>
             <ComboBox Name="Enseignant" ItemsSource="{Binding Source={StaticResource ComboSource_Enseignants}}" DisplayMemberPath="Nom" Width="140" SelectionChanged="ChangementSelectionEnseignant"/>
         </StackPanel>
