@@ -90,7 +90,7 @@ namespace PlanningMaker.Vues
 
             Titre.Text = null;
             ComboEnseignants.SelectedItem = null;
-            ListeProfs.SelectedItem = null;
+            ListeProfs.ItemsSource = null;
         }
 
     }
