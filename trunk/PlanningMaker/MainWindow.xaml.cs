@@ -352,49 +352,55 @@ namespace PlanningMaker
         {
             if (TabItem_Horaires.IsSelected)
             {
-                Horaire nouvelHoraire = new Horaire("00h00", "00h00");
+                Horaire nouvelHoraire = new Horaire();
                 if (listeHoraires.SelectedIndex == -1)
                 {
-                    nouvelHoraire.Debut = vueHoraire.Debut.Text;
-                    nouvelHoraire.Fin = vueHoraire.Fin.Text;
+                    if (!vueHoraire.Debut.Text.Equals("") && !vueHoraire.Debut.Text.Equals(""))
+                    {
+                        nouvelHoraire.Debut = vueHoraire.Debut.Text;
+                        nouvelHoraire.Fin = vueHoraire.Fin.Text;
+                    }
                 }
                 planning.Horaires.Add(nouvelHoraire);
                 listeHoraires.SelectedItem = nouvelHoraire;
             }
             else if (TabItem_Enseignants.IsSelected)
             {
-                Enseignant nouvelEnseignant = new Enseignant("", "");
+                Enseignant nouvelEnseignant = new Enseignant();
                 if (listeEnseignants.SelectedIndex == -1)
                 {
-                    nouvelEnseignant.Nom = vueEnseignant.nom.Text;
-                    nouvelEnseignant.Prenom = vueEnseignant.prenom.Text;
+                    if (!vueEnseignant.nom.Text.Equals("") && !vueEnseignant.prenom.Text.Equals(""))
+                    {
+                        nouvelEnseignant.Nom = vueEnseignant.nom.Text;
+                        nouvelEnseignant.Prenom = vueEnseignant.prenom.Text;
+                    }
                 }
                 planning.Enseignants.Add(nouvelEnseignant);
                 listeEnseignants.SelectedItem = nouvelEnseignant;
             }
             else if (TabItem_Matieres.IsSelected)
             {
-                Matiere nouvelleMatiere = new Matiere("");
+                Matiere nouvelleMatiere = new Matiere();
                 foreach (Enseignant enseignant in vueMatiere.EnseignantsAssocies)
                     nouvelleMatiere.Enseignants.Add(enseignant);
-
-
                 if (listeMatieres.SelectedIndex == -1)
                 {
-                    nouvelleMatiere.Titre = vueMatiere.Titre.Text;
+                    if (!vueMatiere.Titre.Text.Equals(""))
+                    {
+                        nouvelleMatiere.Titre = vueMatiere.Titre.Text;
+                    }
                 }
                 planning.Matieres.Add(nouvelleMatiere);
                 listeMatieres.SelectedItem = nouvelleMatiere;
             }
             else if (TabItem_Salles.IsSelected)
             {
-                Salle nouvelleSalle = new Salle("");
-                nouvelleSalle.Type = ETypeSalles.Amphi;
+                Salle nouvelleSalle = new Salle();
                 if (listeSalles.SelectedIndex == -1)
                 {
-                    nouvelleSalle.Nom = vueSalle.Nom.Text;
-                    if (vueSalle.Type.SelectedItem != null)
+                    if (vueSalle.Type.SelectedItem != null && !vueSalle.Nom.Text.Equals(""))
                     {
+                        nouvelleSalle.Nom = vueSalle.Nom.Text;
                         if ((vueSalle.Type.SelectedItem as string).Equals("Amphi"))
                         {
                             nouvelleSalle.Type = ETypeSalles.Amphi;
@@ -403,10 +409,6 @@ namespace PlanningMaker
                         {
                             nouvelleSalle.Type = ETypeSalles.Labo;
                         }
-                    }
-                    else
-                    {
-                        nouvelleSalle.Type = ETypeSalles.Amphi;
                     }
                 }
                 planning.Salles.Add(nouvelleSalle);
@@ -613,6 +615,10 @@ namespace PlanningMaker
                     if (listeEnseignants.SelectedIndex >= 0)
                     {
                         // TODO
+                    }
+                    else
+                    {
+                        AjouterElement(null, null);
                     }
                 }
             }
