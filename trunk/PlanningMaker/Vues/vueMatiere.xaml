@@ -4,25 +4,26 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <UserControl.Resources>
-        <ObjectDataProvider x:Key="ComboSource"/>
+ 
     </UserControl.Resources>
     
     <UserControl.CommandBindings>
         <CommandBinding Command="c:PlanningCommands.AjouterProf" Executed="AjouterProf" CanExecute="AjouterProfPossible"/>
+        <CommandBinding Command="c:PlanningCommands.SupprimerProf" Executed="SupprimerProf" CanExecute="SupprimerProfPossible"/>
     </UserControl.CommandBindings>
     
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
             <Label Content="Titre" Width="70"/>
-            <TextBox Name="titre" Text="{Binding Path=Titre}" Width="100"/>
+            <TextBox Name="Titre" Text="{Binding Path=Titre}" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <Label Content="Enseignant" Width="70"/>
-            <ComboBox x:Name="ComboEnseignants" ItemsSource="{Binding Source={StaticResource ComboSource}}" DisplayMemberPath="Nom" Width="100" SelectionChanged="ChangementSelectionUnEnseignant"/>
-            <Button Command="c:PlanningCommands.AjouterProf"> + </Button>
+            <ComboBox x:Name="ComboEnseignants" DisplayMemberPath="Nom" Width="100" SelectionChanged="ChangementSelectionUnEnseignant"/>
+            <Button Command="c:PlanningCommands.AjouterProf" Width="25" Margin="10,0,0,0">+</Button>
         </StackPanel>
         <StackPanel Height="200">
-            <ListView x:Name="ListeProfs" SelectionChanged="ChangementSelectionProf">
+            <ListView x:Name="ListeProfs" SelectionChanged="ChangementSelectionProf" Margin="0,20,0,0">
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
@@ -39,6 +40,9 @@
                     </GridView>
                 </ListView.View>
             </ListView>
+        </StackPanel>
+        <StackPanel>
+            <Button Command="c:PlanningCommands.SupprimerProf" Width="25">-</Button>
         </StackPanel>
     </StackPanel>
 </UserControl>
