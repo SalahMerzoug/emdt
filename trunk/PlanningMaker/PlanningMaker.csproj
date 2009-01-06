@@ -58,6 +58,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modele\GroupeValidationRule.cs" />
     <Compile Include="Modele\HoraireValidationRule.cs" />
     <Compile Include="Modele\MiseAJourThreadData.cs" />
     <Compile Include="Modele\ETypeEnseignements.cs" />
