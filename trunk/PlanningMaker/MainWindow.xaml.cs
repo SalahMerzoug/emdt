@@ -506,6 +506,50 @@ namespace PlanningMaker
                 Enseignement enseignement = listeEnseignements.SelectedItem as Enseignement;
                 if (enseignement != null)
                 {
+                    Semaine semaineEnCours = null;
+                    int nrSemaine = -1;
+
+                    try
+                    {
+                        nrSemaine = Int32.Parse(selectionSemaine.Text);
+                    }
+                    catch (FormatException) { }
+
+                    if (nrSemaine != -1)
+                    {
+                        foreach (Semaine s in planning.Semaines)
+                        {
+                            if (s.Numero == nrSemaine)
+                            {
+                                semaineEnCours = s;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (semaineEnCours != null)
+                    {
+                        if (RadioButton_Lundi.IsChecked == true)
+                        {
+                            semaineEnCours.Lundi.Enseignements.Remove(enseignement);
+                        }
+                        else if (RadioButton_Mardi.IsChecked == true)
+                        {
+                            semaineEnCours.Mardi.Enseignements.Remove(enseignement);
+                        }
+                        else if (RadioButton_Mercredi.IsChecked == true)
+                        {
+                            semaineEnCours.Mercredi.Enseignements.Remove(enseignement);
+                        }
+                        else if (RadioButton_Jeudi.IsChecked == true)
+                        {
+                            semaineEnCours.Jeudi.Enseignements.Remove(enseignement);
+                        }
+                        else if (RadioButton_Vendredi.IsChecked == true)
+                        {
+                            semaineEnCours.Vendredi.Enseignements.Remove(enseignement);
+                        }
+                    }
                 }
             }
             else if (TabItem_Horaires.IsSelected)
