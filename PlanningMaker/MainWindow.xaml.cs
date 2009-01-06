@@ -651,7 +651,11 @@ namespace PlanningMaker
 
         private void ChangementSelectionEnseignement(object sender, SelectionChangedEventArgs e)
         {
-            vueEnseignement.ChangeEnseignement(listeEnseignements.SelectedItem as Enseignement);
+            Enseignement enseignement = listeEnseignements.SelectedItem as Enseignement;
+            if (enseignement != null)
+                vueEnseignement.ChangeEnseignement(enseignement);
+            else
+                vueEnseignement.ClearView();
         }
 	}    
 }
