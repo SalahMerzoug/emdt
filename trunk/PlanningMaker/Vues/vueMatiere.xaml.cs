@@ -65,7 +65,7 @@ namespace PlanningMaker.Vues
 
         private void AjouterProf(object sender, RoutedEventArgs e)
         {
-            if(ComboEnseignants.SelectedItem != null)
+            if(ComboEnseignants.SelectedItem != null && !matiere.Enseignants.Contains(ComboEnseignants.SelectedItem as Enseignant))
                 matiere.Enseignants.Add(ComboEnseignants.SelectedItem as Enseignant);
         }
 
