@@ -60,7 +60,7 @@ namespace PlanningMaker.Vues
 
         private void ChangementSelectionProf(object sender, SelectionChangedEventArgs e)
         {
-
+            //ComboEnseignants.SelectedItem = ListeProfs.SelectedItem as Enseignant;
         }
 
         private void AjouterProf(object sender, RoutedEventArgs e)
@@ -80,7 +80,7 @@ namespace PlanningMaker.Vues
 
         private void SupprimerProfPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (ListeProfs.SelectedItem != null);
+            e.CanExecute = true;
         }
 
         public void ClearView()
