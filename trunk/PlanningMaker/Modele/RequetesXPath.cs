@@ -18,13 +18,20 @@ namespace PlanningMaker.Modele
         {
             // Load the style sheet.
             XslCompiledTransform xslt = new XslCompiledTransform();
-            xslt.Load(@"..\..\Files\" + nomFichierXSL);
+
+            // Chemin de l'exécutable
+            // Pour les WinForms, on peut aussi utiliser Application.ExecutablePath
+            string exepath = Environment.GetCommandLineArgs()[0];
+            // Répertoire de l'exécutable
+            string exedir = exepath.Substring(0, exepath.LastIndexOf('\\'));
+
+            xslt.Load(exedir + @"\..\..\Files\" + nomFichierXSL);
           
             // Create the XsltArgumentList.
             XsltArgumentList xslArg = new XsltArgumentList();
 
             string nomFichierXpath = SaveFileXpath();
-            XPathDocument xpathdocument = new XPathDocument(@"..\..\Files\" + nomFichierXML);
+            XPathDocument xpathdocument = new XPathDocument(exedir + @"\..\..\Files\" + nomFichierXML);
             XmlTextWriter writer = new XmlTextWriter(nomFichierXpath, null);
  
             // Transform the file.
