@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PlanningMaker.Modele;
+using System.Collections.ObjectModel;
 
 namespace PlanningMaker.Vues
 {
@@ -21,11 +22,21 @@ namespace PlanningMaker.Vues
     public partial class vueMatiere : UserControl
     {
         private Matiere matiere;
+        private ICollection<Enseignant> enseignantsAssocies;
+
+        public ICollection<Enseignant> EnseignantsAssocies
+        {
+            get
+            {
+                return enseignantsAssocies;
+            }
+        }
 
         public vueMatiere()
         {
             InitializeComponent();
             matiere = new Matiere();
+            enseignantsAssocies = new ObservableCollection<Enseignant>();
             DataContext = matiere;
         }
 
@@ -38,6 +49,21 @@ namespace PlanningMaker.Vues
         }
 
         private void ChangementSelectionUnEnseignant(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ChangementSelectionProf(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void AjouterProf(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AjouterProfPossible(object sender, RoutedEventArgs e)
         {
 
         }

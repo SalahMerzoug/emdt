@@ -7,6 +7,10 @@
         <ObjectDataProvider x:Key="ComboSource"/>
     </UserControl.Resources>
     
+    <UserControl.CommandBindings>
+        <CommandBinding Command="c:PlanningCommands.AjouterProf" Executed="AjouterProf" CanExecute="AjouterProfPossible"/>
+    </UserControl.CommandBindings>
+    
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
             <Label Content="Titre" Width="70"/>
@@ -15,6 +19,26 @@
         <StackPanel Orientation="Horizontal">
             <Label Content="Enseignant" Width="70"/>
             <ComboBox x:Name="enseignant" ItemsSource="{Binding Source={StaticResource ComboSource}}" DisplayMemberPath="Nom" Width="100" SelectionChanged="ChangementSelectionUnEnseignant"/>
+            <Button Command="c:PlanningCommands.AjouterProf"> + </Button>
+        </StackPanel>
+        <StackPanel>
+            <ListView x:Name="ListeProfs" SelectionChanged="ChangementSelectionProf">
+                <ListView.View>
+                    <GridView>
+                        <GridView.Columns>
+                            <GridViewColumn Width="60" Header="Nom">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Nom}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="60" Header="Prénom" DisplayMemberBinding="{Binding Path=Prenom}">
+                            </GridViewColumn>
+                        </GridView.Columns>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </StackPanel>
     </StackPanel>
 </UserControl>
