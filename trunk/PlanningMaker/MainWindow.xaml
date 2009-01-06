@@ -233,6 +233,13 @@
                                                         </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
+                                                <GridViewColumn Width="60" Header="Type">
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding Path=Type}"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
                                                 <GridViewColumn Width="110" Header="Matière">
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
@@ -251,7 +258,7 @@
                                                     </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="110" Header="Salle">
+                                                <GridViewColumn Width="90" Header="Salle">
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
                                                             <TextBlock Text="{Binding Path=Salle.Nom}"/>

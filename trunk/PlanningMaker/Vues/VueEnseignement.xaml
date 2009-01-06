@@ -10,20 +10,28 @@
         <ObjectDataProvider x:Key="ComboSource_Matieres"/>
         <ObjectDataProvider x:Key="ComboSource_Enseignants"/>
         <ObjectDataProvider x:Key="ComboSource_Horaires"/>
+        <ObjectDataProvider x:Key="ComboSource_Salles"/>
     </UserControl.Resources>
     
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
             <Label Content="Matiere" Width="80"/>
-            <ComboBox Name="Matiere" ItemsSource="{Binding Source={StaticResource ComboSource_Matieres}}" DisplayMemberPath="Titre" Width="140"/>
+            <ComboBox Name="Matiere" ItemsSource="{Binding Source={StaticResource ComboSource_Matieres}}" DisplayMemberPath="Titre" Width="140" SelectionChanged="ChangementSelectionMatiere"/>
         </StackPanel>
+        <Label Height="10"/>
         <StackPanel Orientation="Horizontal">
             <Label Content="Type" Width="80"/>
-            <ComboBox Name="Type" ItemsSource="{Binding Source={StaticResource TypeEnseignement}}" Width="140"/>
+            <ComboBox Name="Type" Text="{Binding Path=Type}" ItemsSource="{Binding Source={StaticResource TypeEnseignement}}" Width="140"/>
         </StackPanel>
+        <Label Height="10"/>
         <StackPanel Orientation="Horizontal">
             <Label Content="Enseignant" Width="80"/>
-            <ComboBox Name="Enseignant" ItemsSource="{Binding Source={StaticResource ComboSource_Enseignants}}" DisplayMemberPath="Nom" Width="140"/>
+            <ComboBox Name="Enseignant" ItemsSource="{Binding Source={StaticResource ComboSource_Enseignants}}" DisplayMemberPath="Nom" Width="140" SelectionChanged="ChangementSelectionEnseignant"/>
+        </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Salle" Width="80"/>
+            <ComboBox Name="Salle" ItemsSource="{Binding Source={StaticResource ComboSource_Salles}}" DisplayMemberPath="Nom" Width="140" SelectionChanged="ChangementSelectionSalle"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

@@ -32,10 +32,5 @@ namespace PlanningMaker.Vues
             DataContext = salle;
         }
 
-        private void ChangementSelectionTypeSalle(object sender, SelectionChangedEventArgs e)
-        {
-                        
-        }
-
     }
 }
