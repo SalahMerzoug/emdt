@@ -393,14 +393,21 @@ namespace PlanningMaker
                 if (listeSalles.SelectedIndex == -1)
                 {
                     nouvelleSalle.Nom = vueSalle.Nom.Text;
-                    if ((vueSalle.Type.SelectedItem as string).Equals("Amphi"))
+                    if (vueSalle.Type.SelectedItem != null)
                     {
-                        nouvelleSalle.Type = ETypeSalles.Amphi;
+                        if ((vueSalle.Type.SelectedItem as string).Equals("Amphi"))
+                        {
+                            nouvelleSalle.Type = ETypeSalles.Amphi;
+                        }
+                        else
+                        {
+                            nouvelleSalle.Type = ETypeSalles.Labo;
+                        }
                     }
                     else
                     {
-                        nouvelleSalle.Type = ETypeSalles.Labo;
-                    } 
+                        nouvelleSalle.Type = ETypeSalles.Amphi;
+                    }
                 }
                 planning.Salles.Add(nouvelleSalle);
                 listeSalles.SelectedItem = nouvelleSalle;
@@ -491,6 +498,120 @@ namespace PlanningMaker
         private void DeselectionEnseignant(object sender, MouseButtonEventArgs e)
         {
             listeEnseignants.SelectedIndex = -1;
+        }
+
+        private void DeselectionEnseignement(object sender, MouseButtonEventArgs e)
+        {
+            listeEnseignements.SelectedIndex = -1;
+        }
+
+        private void ValidationHoraire(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (TabItem_Horaires.IsSelected)
+                {
+                    if (listeHoraires.SelectedIndex >= 0)
+                    {
+                        Horaire horaire = listeHoraires.SelectedItem as Horaire;
+                        horaire.Debut = vueHoraire.Debut.Text;
+                        horaire.Fin = vueHoraire.Fin.Text;
+                    }
+                    else
+                    {
+                        AjouterElement(null, null);
+                    }
+                }
+            }
+        }
+
+        private void ValidationSalle(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (TabItem_Salles.IsSelected)
+                {
+                    if (listeSalles.SelectedIndex >= 0)
+                    {
+                        Salle salle = listeSalles.SelectedItem as Salle;
+                        salle.Nom = vueSalle.Nom.Text;
+                        if (vueSalle.Type.SelectedItem != null)
+                        {
+                            if ((vueSalle.Type.SelectedItem as string).Equals("Amphi"))
+                            {
+                                salle.Type = ETypeSalles.Amphi;
+                            }
+                            else
+                            {
+                                salle.Type = ETypeSalles.Labo;
+                            }
+                        }
+                        else
+                        {
+                            salle.Type = ETypeSalles.Amphi;
+                        }
+                    }
+                    else
+                    {
+                        AjouterElement(null, null);
+                    }
+                }
+            }
+        }
+
+        private void ValidationMatiere(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (TabItem_Matieres.IsSelected)
+                {
+                    if (listeMatieres.SelectedIndex >= 0)
+                    {
+                        Matiere matiere = listeMatieres.SelectedItem as Matiere;
+                        matiere.Titre = vueMatiere.titre.Text;
+                        foreach (Enseignant enseignant in vueMatiere.EnseignantsAssocies)
+                            matiere.Enseignants.Add(enseignant);
+                    }
+                    else
+                    {
+                        AjouterElement(null, null);
+                    }
+                }
+            }
+        }
+
+        private void ValidationEnseignant(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (TabItem_Enseignants.IsSelected)
+                {
+                    if (listeEnseignants.SelectedIndex >= 0)
+                    {
+                        Enseignant enseignant = listeEnseignants.SelectedItem as Enseignant;
+                        enseignant.Nom = vueEnseignant.nom.Text;
+                        enseignant.Prenom = vueEnseignant.prenom.Text;
+                    }
+                    else
+                    {
+                        AjouterElement(null, null);
+                    }
+                }
+            }
+        }
+
+        private void ValidationEnseignement(object sender, KeyEventArgs   e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (TabItem_Emploi_du_temps.IsSelected)
+                {
+                    if (listeEnseignants.SelectedIndex >= 0)
+                    {
+                        // TODO
+                    }
+                }
+            }
         }
 
         public bool OperationSurFichierXMLPossible()

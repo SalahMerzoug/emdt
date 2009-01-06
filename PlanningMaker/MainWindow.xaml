@@ -169,7 +169,7 @@
 		</Menu>
         
 		<TabControl Margin="0,20,0,25" IsSynchronizedWithCurrentItem="True" x:Name="TabPanel" d:LayoutOverrides="GridBox" IsEnabled="False">
-            <TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps">
+            <TabItem Header="Emploi du temps" x:Name="TabItem_Emploi_du_temps" KeyUp="ValidationEnseignement">
                 <StackPanel>
                     <StackPanel HorizontalAlignment="Center">
                         <Label Content="Semaine" FontSize="20"/>
@@ -215,7 +215,7 @@
                         <StackPanel Height="20"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Grid Width="550" Height="305">
-                                <ListView x:Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement">
+                                <ListView x:Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement" MouseRightButtonUp="DeselectionEnseignement">
                                     <ListView.View>
                                         <GridView>
                                             <GridView.Columns>
@@ -277,7 +277,7 @@
                     </StackPanel>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Enseignants" x:Name="TabItem_Enseignants">
+            <TabItem Header="Enseignants" x:Name="TabItem_Enseignants" KeyUp="ValidationEnseignant">
                 <DockPanel>
                     <Grid Width="260">
                         <c:VueEnseignant x:Name="vueEnseignant" VerticalAlignment="Center" HorizontalAlignment="Center" />
@@ -294,7 +294,7 @@
                     </Grid>
                 </DockPanel>
             </TabItem>
-			<TabItem Header="Matières" x:Name="TabItem_Matieres">
+			<TabItem Header="Matières" x:Name="TabItem_Matieres" KeyUp="ValidationMatiere">
 				<DockPanel>
                     <Grid Width="260">
                         <c:vueMatiere x:Name="vueMatiere" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -310,7 +310,7 @@
                     </Grid>
                 </DockPanel>
 			</TabItem>
-			<TabItem Header="Horaires" x:Name="TabItem_Horaires" DataContext="{Binding Path=Horaires}">
+			<TabItem Header="Horaires" x:Name="TabItem_Horaires" DataContext="{Binding Path=Horaires}" KeyUp="ValidationHoraire">
                 <DockPanel>
                 <Grid Width="260">
                     <c:VueHoraire x:Name="vueHoraire" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -327,7 +327,7 @@
                     </Grid>
                 </DockPanel>
             </TabItem>
-			<TabItem Header="Salles" x:Name="TabItem_Salles">
+			<TabItem Header="Salles" x:Name="TabItem_Salles" KeyUp="ValidationSalle">
                 <DockPanel>
                     <Grid Width="260">
                         <c:VueSalle x:Name="vueSalle" VerticalAlignment="Center" HorizontalAlignment="Center"/>
