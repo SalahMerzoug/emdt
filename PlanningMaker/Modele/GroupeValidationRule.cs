@@ -23,7 +23,7 @@ namespace PlanningMaker.Modele
                 if (((string)value).Length > 0)
                     groupe = Int32.Parse((String)value);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new ValidationResult(false, "Le groupe doit être un chiffre (0, 1 ou 2).");
             }

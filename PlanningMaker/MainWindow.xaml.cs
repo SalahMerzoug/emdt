@@ -866,6 +866,11 @@ namespace PlanningMaker
             }
         }
 
+        private void NewWeek(object sender, ExecutedRoutedEventArgs e)
+        {
+
+        }
+
         private void NextWeek(object sender, RoutedEventArgs e)
         {
             Int32 nrSemaine = Int32.Parse(selectionSemaine.Text);
@@ -939,7 +944,5 @@ namespace PlanningMaker
             else
                 vueEnseignement.ClearView();
         }
-
-
 	}    
 }
