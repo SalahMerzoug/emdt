@@ -62,6 +62,8 @@ namespace PlanningMaker.Vues
             Type.SelectedItem = enseignement.Type;
             Enseignant.SelectedItem = enseignement.Enseignant;
             Salle.SelectedItem = enseignement.Salle;
+            Horaire1.SelectedItem = enseignement.Horaire1;
+            Horaire2.SelectedItem = enseignement.Horaire2;
                         
         }
 
@@ -79,6 +81,8 @@ namespace PlanningMaker.Vues
             Type.SelectedItem = null;
             Enseignant.SelectedItem = null;
             Salle.SelectedItem = null;
+            Horaire1.SelectedItem = null;
+            Horaire2.SelectedItem = null;
         }
 
         private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)
@@ -111,6 +115,16 @@ namespace PlanningMaker.Vues
                     odp_enseignants.ObjectInstance = enseignement.Matiere.Enseignants;
                 Enseignant.SelectedItem = enseignement.Matiere.Enseignants.First();
             }
+        }
+
+        private void ChangementSelectionHoraire1(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ChangementSelectionHoraire2(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }
