@@ -463,7 +463,7 @@ namespace PlanningMaker.Modele
             enseignant.Attributes.Append(id);
             enseignant.AppendChild(prenom);
             enseignant.AppendChild(nom);
-            id.Value = "id" + compteurId.ToString();
+            id.Value = "idp" + compteurId.ToString();
             prenom.AppendChild(document.CreateTextNode(e.Prenom));
             nom.AppendChild(document.CreateTextNode(e.Nom));
         }
@@ -478,13 +478,13 @@ namespace PlanningMaker.Modele
                 matiere.AppendChild(enseignant);
                 XmlAttribute refEnseignant = document.CreateAttribute("ref");
                 enseignant.Attributes.Append(refEnseignant);
-                refEnseignant.Value = "id" + enseignants.IndexOf(e).ToString();
+                refEnseignant.Value = "idp" + enseignants.IndexOf(e).ToString();
             }
             XmlElement nom = document.CreateElement("nom");
             matieres.AppendChild(matiere);
             matiere.Attributes.Append(id);
             matiere.AppendChild(titre);
-            id.Value = "id" + compteurId.ToString();
+            id.Value = "idm" + compteurId.ToString();
             titre.AppendChild(document.CreateTextNode(m.Titre));
         }
 
@@ -497,7 +497,7 @@ namespace PlanningMaker.Modele
             horaire.Attributes.Append(id);
             horaire.AppendChild(debut);
             horaire.AppendChild(fin);
-            id.Value = "id" + compteurId.ToString();
+            id.Value = "idh" + compteurId.ToString();
             debut.AppendChild(document.CreateTextNode(h.Debut));
             fin.AppendChild(document.CreateTextNode(h.Fin));
         }
@@ -511,7 +511,7 @@ namespace PlanningMaker.Modele
             salle.Attributes.Append(id);
             salle.AppendChild(nom);
             salle.AppendChild(typeSalle);
-            id.Value = "id" + compteurId.ToString();
+            id.Value = "ids" + compteurId.ToString();
             nom.AppendChild(document.CreateTextNode(s.Nom));
             typeSalle.AppendChild(document.CreateTextNode(Enum.Format(typeof(ETypeSalles), s.Type, "G")));
         }
@@ -572,14 +572,14 @@ namespace PlanningMaker.Modele
             enseignement.AppendChild(salle);
             salle.Attributes.Append(refSalle);
             type.AppendChild(document.CreateTextNode(Enum.Format(typeof(ETypeEnseignements), e.Type, "G").ToUpper()));
-            refEnseignant.Value = "id" + enseignants.IndexOf(e.Enseignant).ToString();
-            refMatiere.Value = "id" + matieres.IndexOf(e.Matiere).ToString();
-            refHoraire1.Value = "id" + horaires.IndexOf(e.Horaire1).ToString();
+            refEnseignant.Value = "ide" + enseignants.IndexOf(e.Enseignant).ToString();
+            refMatiere.Value = "idm" + matieres.IndexOf(e.Matiere).ToString();
+            refHoraire1.Value = "idh" + horaires.IndexOf(e.Horaire1).ToString();
             if (e.Horaire2 != null)
             {
-                refHoraire2.Value = "id" + horaires.IndexOf(e.Horaire2).ToString();
+                refHoraire2.Value = "idh" + horaires.IndexOf(e.Horaire2).ToString();
             }
-            refSalle.Value = "id" + salles.IndexOf(e.Salle).ToString();
+            refSalle.Value = "ids" + salles.IndexOf(e.Salle).ToString();
         }
     }
 }

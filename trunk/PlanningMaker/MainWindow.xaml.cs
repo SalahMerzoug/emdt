@@ -236,8 +236,7 @@ namespace PlanningMaker
             // TODO : indiquer d'enregistrer avant de lancer l'opération
             // + choisir quoi voir : image, texte, multi-semaines ?
 
-            Print print = new Print(nomFichier);
-            //Print print = new Print("ooo");
+            Print print = new Print("ooo");
             System.Windows.Forms.PrintPreviewDialog printPreviewD = new System.Windows.Forms.PrintPreviewDialog();
             printPreviewD.Document = print.Document;
             printPreviewD.ShowDialog();
