@@ -472,7 +472,11 @@ namespace PlanningMaker
 
         private void ChangementSelectionMatiere(object sender, SelectionChangedEventArgs e)
         {
-            vueMatiere.ChangeMatiere(listeMatieres.SelectedItem as Matiere);
+            Matiere matiere = listeMatieres.SelectedItem as Matiere;
+            if (matiere != null)
+                vueMatiere.ChangeMatiere(matiere);
+            else
+                vueMatiere.ClearView();
         }
         
         private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)
