@@ -80,7 +80,7 @@
 
       <xsl:for-each select='//enseignants/enseignant[contains(nom,$nom_recherche)]'>
         <b> <xsl:value-of select="position()"/>) </b>    
-        <xsl:value-of select="prenom"/> . <xsl:value-of select="nom"/><BR/><BR/>
+        <xsl:value-of select="prenom"/>&#160;<xsl:value-of select="nom"/><BR/><BR/>
         </xsl:for-each>
     </xsl:template>
   
@@ -116,7 +116,7 @@
         <b>
           <xsl:value-of select="position()"/>)
         </b>
-        <xsl:value-of select="prenom"/> . <xsl:value-of select="nom"/><BR/><BR/>
+        <xsl:value-of select="prenom"/>&#160;<xsl:value-of select="nom"/><BR/><BR/>
         <BR></BR>
       </xsl:for-each>
     </xsl:template>
