@@ -12,9 +12,9 @@ namespace PlanningMaker.Modele
 
         public Print(string st)
         {
-            // PrintDocument
             this._prDoc = new PrintDocument();
-            this._prDoc.OriginAtMargins = true; // Change the origin
+            this._prDoc.OriginAtMargins = true;
+            this._prDoc.DefaultPageSettings.Landscape = true;
             this._prDoc.DocumentName = st + " test " + st;
             this._prDoc.BeginPrint += new PrintEventHandler(this.prDoc_BeginPrint);
             this._prDoc.EndPrint += new PrintEventHandler(this.prDoc_EndPrint);
