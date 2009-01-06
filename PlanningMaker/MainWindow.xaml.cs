@@ -421,10 +421,15 @@ namespace PlanningMaker
                     nouvelEnseignement.Matiere = vueEnseignement.Matiere.SelectedItem as Matiere;
                     
                     String type = vueEnseignement.Type.SelectedItem as String;
-                    if (type.Equals(ETypeEnseignements.TP.ToString()))
-                        nouvelEnseignement.Type = ETypeEnseignements.TP;
-                    else if (type.Equals(ETypeEnseignements.TD.ToString()))
-                        nouvelEnseignement.Type = ETypeEnseignements.TD;
+                    if (type != null)
+                    {
+                        if (type.Equals(ETypeEnseignements.TP.ToString()))
+                            nouvelEnseignement.Type = ETypeEnseignements.TP;
+                        else if (type.Equals(ETypeEnseignements.TD.ToString()))
+                            nouvelEnseignement.Type = ETypeEnseignements.TD;
+                        else
+                            nouvelEnseignement.Type = ETypeEnseignements.Cours;
+                    }
                     else
                         nouvelEnseignement.Type = ETypeEnseignements.Cours;
 
