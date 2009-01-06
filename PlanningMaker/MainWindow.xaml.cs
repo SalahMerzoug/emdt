@@ -752,7 +752,92 @@ namespace PlanningMaker
                 {
                     if (listeEnseignants.SelectedIndex >= 0)
                     {
-                        // TODO
+                        Enseignement enseignement = listeEnseignements.SelectedItem as Enseignement;
+                        Semaine semaineEnCours = null;
+                        int nrSemaine = -1;
+
+                        try
+                        {
+                            nrSemaine = Int32.Parse(selectionSemaine.Text);
+                        }
+                        catch (FormatException) { }
+
+                        if (nrSemaine != -1)
+                        {
+                            foreach (Semaine s in planning.Semaines)
+                            {
+                                if (s.Numero == nrSemaine)
+                                {
+                                    semaineEnCours = s;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (semaineEnCours != null)
+                        {
+                            if (RadioButton_Lundi.IsChecked == true)
+                            {
+                                semaineEnCours.Lundi.Enseignements.Add(enseignement);
+                                semaineEnCours.Mardi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Mercredi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Jeudi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Vendredi.Enseignements.Remove(enseignement);
+                            }
+                            else if (RadioButton_Mardi.IsChecked == true)
+                            {
+                                semaineEnCours.Lundi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Mardi.Enseignements.Add(enseignement);
+                                semaineEnCours.Mercredi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Jeudi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Vendredi.Enseignements.Remove(enseignement);
+                            }
+                            else if (RadioButton_Mercredi.IsChecked == true)
+                            {
+                                semaineEnCours.Lundi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Mardi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Mercredi.Enseignements.Add(enseignement);
+                                semaineEnCours.Jeudi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Vendredi.Enseignements.Remove(enseignement);   
+                            }
+                            else if (RadioButton_Jeudi.IsChecked == true)
+                            {
+                                semaineEnCours.Lundi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Mardi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Mercredi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Jeudi.Enseignements.Add(enseignement);
+                                semaineEnCours.Vendredi.Enseignements.Remove(enseignement);
+                            }
+                            else if (RadioButton_Vendredi.IsChecked == true)
+                            {
+                                semaineEnCours.Lundi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Mardi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Mercredi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Jeudi.Enseignements.Remove(enseignement);
+                                semaineEnCours.Vendredi.Enseignements.Add(enseignement);
+                            }
+
+                        }
+
+                        if (listeEnseignements.SelectedIndex == -1)
+                        {
+                            enseignement.Matiere = vueEnseignement.Matiere.SelectedItem as Matiere;
+
+                            String type = vueEnseignement.Type.SelectedItem as String;
+                            if (type.Equals(ETypeEnseignements.TP.ToString()))
+                                enseignement.Type = ETypeEnseignements.TP;
+                            else if (type.Equals(ETypeEnseignements.TD.ToString()))
+                                enseignement.Type = ETypeEnseignements.TD;
+                            else
+                                enseignement.Type = ETypeEnseignements.Cours;
+
+                            enseignement.Enseignant = vueEnseignement.Enseignant.SelectedItem as Enseignant;
+
+                            enseignement.Salle = vueEnseignement.Salle.SelectedItem as Salle;
+
+                            enseignement.Horaire1 = vueEnseignement.Horaire1.SelectedItem as Horaire;
+                            enseignement.Horaire2 = vueEnseignement.Horaire2.SelectedItem as Horaire;
+                        }
                     }
                     else
                     {
