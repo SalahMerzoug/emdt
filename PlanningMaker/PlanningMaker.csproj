@@ -65,6 +65,7 @@
     <Compile Include="Modele\ETypeSalles.cs" />
     <Compile Include="Modele\Print.cs" />
     <Compile Include="Vues\ListeAnnees.cs" />
+    <Compile Include="Vues\NewWeekCommands.cs" />
     <Compile Include="Vues\VueEnseignement.xaml.cs">
       <DependentUpon>VueEnseignement.xaml</DependentUpon>
     </Compile>
