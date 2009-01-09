@@ -12,6 +12,7 @@
             <Label Content="Type" Width="70"/>
             <ComboBox x:Name="Type" Text="{Binding Path=Type}" ItemsSource="{Binding Source={StaticResource Types}}" Width="100"/>
         </StackPanel>
+        <Label Height="10"/>
         <StackPanel Orientation="Horizontal">
             <Label Content="Nom" Width="70"/>
             <TextBox x:Name="Nom" Text="{Binding Path=Nom}" Width="100"/>

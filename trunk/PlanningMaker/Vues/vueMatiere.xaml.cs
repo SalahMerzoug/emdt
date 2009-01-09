@@ -19,10 +19,18 @@ namespace PlanningMaker.Vues
     /// <summary>
     /// Logique d'interaction pour vueMatiere.xaml
     /// </summary>
-    public partial class vueMatiere : UserControl
+    public partial class VueMatiere : UserControl
     {
         private Matiere matiere;
         private ICollection<Enseignant> enseignantsAssocies;
+
+        public Matiere Matiere
+        {
+            get
+            {
+                return matiere;
+            }
+        }
 
         public ICollection<Enseignant> EnseignantsAssocies
         {
@@ -32,7 +40,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public vueMatiere()
+        public VueMatiere()
         {
             InitializeComponent();
             matiere = new Matiere();
@@ -46,6 +54,7 @@ namespace PlanningMaker.Vues
             this.matiere = matiere;
             DataContext = matiere;
             ListeProfs.ItemsSource = matiere.Enseignants;
+            IsEnabled = true;
         }
 
         public void setEnseignantsContext(ICollection<Enseignant> enseignants)

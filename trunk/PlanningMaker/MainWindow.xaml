@@ -338,7 +338,7 @@
 			<TabItem Header="Matières" x:Name="TabItem_Matieres" KeyUp="ValidationMatiere">
 				<DockPanel>
                     <Grid Width="260">
-                        <c:vueMatiere x:Name="vueMatiere" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <c:VueMatiere x:Name="vueMatiere" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
                     <Grid Width="530">
                         <ListView Name="listeMatieres" SelectionChanged="ChangementSelectionMatiere" MouseRightButtonUp="DeselectionMatiere">

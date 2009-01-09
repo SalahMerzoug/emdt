@@ -22,11 +22,31 @@ namespace PlanningMaker.Vues
     {
         private Enseignant enseignant;
 
+        public Enseignant Enseignant
+        {
+            get
+            {
+                return enseignant;
+            }
+        }
+
         public VueEnseignant()
         {
             InitializeComponent();
-            enseignant = new Enseignant();
+        }
+
+        public void ChangeEnseignant(Enseignant enseignant)
+        {
+            this.enseignant = enseignant;
             DataContext = enseignant;
+            IsEnabled = true;
+        }
+
+        public void ClearView()
+        {
+            this.enseignant = null;
+            DataContext = null;
+            IsEnabled = false;
         }
     }
 }

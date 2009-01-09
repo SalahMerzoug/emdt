@@ -21,11 +21,31 @@ namespace PlanningMaker.Vues
 	{
         private Horaire horaire;
 
+        public Horaire Horaire
+        {
+            get
+            {
+                return horaire;
+            }
+        }
+
 		public VueHoraire()
 		{
             InitializeComponent();
-            horaire = new Horaire();
-            DataContext = horaire;
 		}
+
+        public void ChangeHorraire(Horaire horraire)
+        {
+            this.horaire = horraire;
+            DataContext = horraire;
+            IsEnabled = true;
+        }
+
+        public void ClearView()
+        {
+            this.horaire = null;
+            DataContext = null;
+            IsEnabled = false;
+        }
 	}
 }
