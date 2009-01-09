@@ -315,74 +315,85 @@ namespace PlanningMaker.Modele
             //semaines
             foreach (XmlNode elementSemaine in document.SelectNodes("/emploi-du-temps/semaines/semaine"))
             {
-                int numeroSemaine = System.Int32.Parse(elementSemaine.SelectSingleNode("numero/text()").Value);
-                string dateSemaine = elementSemaine.SelectSingleNode("date/text()").Value;
-                Semaine semaine = new Semaine(numeroSemaine, dateSemaine);
-                foreach (XmlNode elementJour in elementSemaine.SelectNodes("jour"))
+                Semaine semaine = new Semaine();
+                semaine.Numero = System.Int32.Parse(elementSemaine.SelectSingleNode("numero/text()").Value);
+                try
                 {
-                    string nomJour = elementJour.SelectSingleNode("nom/text()").Value;
-                    Jour jour = new Jour();
-                    switch (nomJour)
-                    {
-                        case "lundi" :
-                            semaine.Lundi = jour;
-                            break;
-                        case "mardi" :
-                            semaine.Mardi = jour;
-                            break;
-                        case "mercredi" :
-                            semaine.Mercredi = jour;
-                            break;
-                        case "jeudi" :
-                            semaine.Jeudi = jour;
-                            break;
-                        case "vendredi" :
-                            semaine.Vendredi = jour;
-                            break;
-                    }
-                    foreach (XmlNode elementEnseignement in elementJour.SelectNodes("enseignements/enseignement"))
-                    {
-                        int numeroGroupe = 0;
-                        XmlNode nodeNumeroGroupe = elementEnseignement.SelectSingleNode("numeroGroupe/text()");
-                        if (nodeNumeroGroupe != null)
-                        {
-                            numeroGroupe = System.Int32.Parse(nodeNumeroGroupe.Value);
-                        }
-                        string typeEnseignement = elementEnseignement.SelectSingleNode("type/text()").Value;
-                        Enseignement enseignement = new Enseignement(numeroGroupe);
-                        switch(typeEnseignement){
-                            case "COURS" :
-                                enseignement.Type = ETypeEnseignements.Cours;
-                                break;
-                            case "TD" :
-                                enseignement.Type = ETypeEnseignements.TD;
-                                break;
-                            case "TP" :
-                                enseignement.Type = ETypeEnseignements.TP;
-                                break;
-                        }
-                        string idEnseignant = elementEnseignement.SelectSingleNode("enseignant/@ref").Value;
-                        enseignement.Enseignant = dicoEnseignants[idEnseignant];
-                        string idMatiere = elementEnseignement.SelectSingleNode("matiere/@ref").Value;
-                        enseignement.Matiere = dicoMatieres[idMatiere];
-                        string idHoraire1 = elementEnseignement.SelectSingleNode("horaire[1]/@ref").Value;
-                        enseignement.Horaire1 = dicoHoraires[idHoraire1];
-                        string idHoraire2 = "";
-                        if(elementEnseignement.SelectSingleNode("horaire[2]/@ref") != null)
-                        {
-                            idHoraire2 = elementEnseignement.SelectSingleNode("horaire[2]/@ref").Value;
-                            enseignement.Horaire2 = dicoHoraires[idHoraire2];
-                        }
-                        else
-                        {
-                            enseignement.Horaire2 = null;
-                        }
-                        string idSalle = elementEnseignement.SelectSingleNode("salle/@ref").Value;
-                        enseignement.Salle = dicoSalles[idSalle];
-                        jour.Enseignements.Add(enseignement);
-                    }
+                    semaine.Date = elementSemaine.SelectSingleNode("date/text()").Value;
                 }
-                Semaines.Add(semaine);
+                catch (NullReferenceException e)
+                {
+                    semaine.Date = "";
+                }
+                finally
+                {
+                    foreach (XmlNode elementJour in elementSemaine.SelectNodes("jour"))
+                    {
+                        string nomJour = elementJour.SelectSingleNode("nom/text()").Value;
+                        Jour jour = new Jour();
+                        switch (nomJour)
+                        {
+                            case "lundi":
+                                semaine.Lundi = jour;
+                                break;
+                            case "mardi":
+                                semaine.Mardi = jour;
+                                break;
+                            case "mercredi":
+                                semaine.Mercredi = jour;
+                                break;
+                            case "jeudi":
+                                semaine.Jeudi = jour;
+                                break;
+                            case "vendredi":
+                                semaine.Vendredi = jour;
+                                break;
+                        }
+                        foreach (XmlNode elementEnseignement in elementJour.SelectNodes("enseignements/enseignement"))
+                        {
+                            int numeroGroupe = 0;
+                            XmlNode nodeNumeroGroupe = elementEnseignement.SelectSingleNode("numeroGroupe/text()");
+                            if (nodeNumeroGroupe != null)
+                            {
+                                numeroGroupe = System.Int32.Parse(nodeNumeroGroupe.Value);
+                            }
+                            string typeEnseignement = elementEnseignement.SelectSingleNode("type/text()").Value;
+                            Enseignement enseignement = new Enseignement(numeroGroupe);
+                            switch (typeEnseignement)
+                            {
+                                case "COURS":
+                                    enseignement.Type = ETypeEnseignements.Cours;
+                                    break;
+                                case "TD":
+                                    enseignement.Type = ETypeEnseignements.TD;
+                                    break;
+                                case "TP":
+                                    enseignement.Type = ETypeEnseignements.TP;
+                                    break;
+                            }
+                            string idEnseignant = elementEnseignement.SelectSingleNode("enseignant/@ref").Value;
+                            enseignement.Enseignant = dicoEnseignants[idEnseignant];
+                            string idMatiere = elementEnseignement.SelectSingleNode("matiere/@ref").Value;
+                            enseignement.Matiere = dicoMatieres[idMatiere];
+                            string idHoraire1 = elementEnseignement.SelectSingleNode("horaire[1]/@ref").Value;
+                            enseignement.Horaire1 = dicoHoraires[idHoraire1];
+                            string idHoraire2 = "";
+                            if (elementEnseignement.SelectSingleNode("horaire[2]/@ref") != null)
+                            {
+                                idHoraire2 = elementEnseignement.SelectSingleNode("horaire[2]/@ref").Value;
+                                enseignement.Horaire2 = dicoHoraires[idHoraire2];
+                            }
+                            else
+                            {
+                                enseignement.Horaire2 = null;
+                            }
+                            string idSalle = elementEnseignement.SelectSingleNode("salle/@ref").Value;
+                            enseignement.Salle = dicoSalles[idSalle];
+                            jour.Enseignements.Add(enseignement);
+                        }
+                    }
+                    Semaines.Add(semaine);
+                }
             }
         }
 
@@ -545,6 +556,7 @@ namespace PlanningMaker.Modele
 
         private void AjouterEnseignement(Enseignement e, XmlDocument document, XmlElement enseignements, XmlElement enseignement)
         {
+            XmlElement numeroGroupe = document.CreateElement("numeroGroupe");
             XmlElement type = document.CreateElement("type");
             XmlElement enseignant = document.CreateElement("enseignant");
             XmlAttribute refEnseignant = document.CreateAttribute("ref");
@@ -557,6 +569,10 @@ namespace PlanningMaker.Modele
             XmlElement salle = document.CreateElement("salle");
             XmlAttribute refSalle = document.CreateAttribute("ref");
             enseignements.AppendChild(enseignement);
+            if (e.Groupe != 0)
+            {
+                enseignement.AppendChild(numeroGroupe);
+            }
             enseignement.AppendChild(type);
             enseignement.AppendChild(enseignant);
             enseignant.Attributes.Append(refEnseignant);
@@ -572,6 +588,10 @@ namespace PlanningMaker.Modele
             enseignement.AppendChild(salle);
             salle.Attributes.Append(refSalle);
             type.AppendChild(document.CreateTextNode(Enum.Format(typeof(ETypeEnseignements), e.Type, "G").ToUpper()));
+            if (e.Groupe != 0)
+            {
+                numeroGroupe.AppendChild(document.CreateTextNode(e.Groupe.ToString()));
+            }
             refEnseignant.Value = "idp" + enseignants.IndexOf(e.Enseignant).ToString();
             refMatiere.Value = "idm" + matieres.IndexOf(e.Matiere).ToString();
             refHoraire1.Value = "idh" + horaires.IndexOf(e.Horaire1).ToString();
