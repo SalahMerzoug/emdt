@@ -404,23 +404,25 @@ namespace PlanningMaker.Modele
             document.AppendChild(declaration);
             //structure générale
             XmlElement planning = document.CreateElement("emploi-du-temps");
+            XmlElement anneePlanning = document.CreateElement("annee");
+            XmlElement divisionPlanning = document.CreateElement("division");
+            XmlElement promotionPlanning = document.CreateElement("promotion");
             XmlElement enseignantsPlanning = document.CreateElement("enseignants");
             XmlElement matieresPlanning = document.CreateElement("matieres");
             XmlElement horairesPlanning = document.CreateElement("horaires");
             XmlElement sallesPlanning = document.CreateElement("salles");
             XmlElement semainesPlanning = document.CreateElement("semaines");
-            XmlElement anneePlanning = document.CreateElement("annee");
-            XmlElement divisionPlanning = document.CreateElement("division");
-            XmlElement promotionPlanning = document.CreateElement("promotion");
+            
             document.AppendChild(planning);
+            planning.AppendChild(anneePlanning);
+            planning.AppendChild(divisionPlanning);
+            planning.AppendChild(promotionPlanning);
             planning.AppendChild(enseignantsPlanning);
             planning.AppendChild(matieresPlanning);
             planning.AppendChild(horairesPlanning);
             planning.AppendChild(sallesPlanning);
             planning.AppendChild(semainesPlanning);
-            planning.AppendChild(anneePlanning);
-            planning.AppendChild(divisionPlanning);
-            planning.AppendChild(promotionPlanning);
+            
             anneePlanning.AppendChild(document.CreateTextNode(Enum.Format(typeof(EAnnees), annee, "G")));
             divisionPlanning.AppendChild(document.CreateTextNode(Enum.Format(typeof(EDivisions), division, "G")));
             promotionPlanning.AppendChild(document.CreateTextNode(promotion));
