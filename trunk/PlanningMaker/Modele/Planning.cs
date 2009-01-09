@@ -321,7 +321,7 @@ namespace PlanningMaker.Modele
                 {
                     semaine.Date = elementSemaine.SelectSingleNode("date/text()").Value;
                 }
-                catch (NullReferenceException e)
+                catch (NullReferenceException)
                 {
                     semaine.Date = "";
                 }
