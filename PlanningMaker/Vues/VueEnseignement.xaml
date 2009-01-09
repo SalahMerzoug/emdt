@@ -4,7 +4,8 @@
              xmlns:c="clr-namespace:PlanningMaker.Vues"
              xmlns:f="clr-namespace:PlanningMaker.Modele"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             mc:Ignorable="d">
 
     <UserControl.Resources>
         <c:ListeTypeEnseignements x:Key="TypeEnseignement"/>
@@ -91,6 +92,8 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <Label Width="10"/>
+            <Button Width="30" Click="RemoveHoraire2" >Del</Button>
         </StackPanel>
     </StackPanel>
 </UserControl>

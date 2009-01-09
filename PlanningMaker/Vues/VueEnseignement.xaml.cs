@@ -25,8 +25,6 @@ namespace PlanningMaker.Vues
         public VueEnseignement()
         {
             InitializeComponent();
-            enseignement = new Enseignement();
-            DataContext = enseignement;
         }
 
         public void SetPlanningContext(Planning planning)
@@ -52,6 +50,7 @@ namespace PlanningMaker.Vues
         {
             this.enseignement = enseignement;
             DataContext = enseignement;
+            IsEnabled = true;
 
             ObjectDataProvider odp_enseignants = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
 
@@ -70,6 +69,7 @@ namespace PlanningMaker.Vues
         {
             enseignement = null;
             DataContext = null;
+            IsEnabled = false;
 
             ObjectDataProvider odp_enseignants = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
 
@@ -150,6 +150,12 @@ namespace PlanningMaker.Vues
                     Horaire2.SelectedItem = enseignement.Horaire2;
                 }
             }
+        }
+
+        private void RemoveHoraire2(object sender, RoutedEventArgs e)
+        {
+            enseignement.Horaire2 = null;
+            Horaire2.SelectedIndex = -1;
         }
     }
 }

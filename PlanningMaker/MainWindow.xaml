@@ -6,7 +6,7 @@
 	x:Class="PlanningMaker.MainWindow"
 	x:Name="Window"
     Title="Viactisoft PlanningMaker 2008 School Edition"
-	Width="870" Height="600" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
+	Width="900" Height="600" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
     ResizeMode="CanMinimize"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
@@ -220,17 +220,23 @@
                                     <ListView.View>
                                         <GridView>
                                             <GridView.Columns>
-                                                <GridViewColumn Width="60" Header="Début">
+                                                <GridViewColumn Width="60" Header="H1">
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
-                                                            <TextBlock Text="{Binding Path=Horaire1.Debut}"/>
+                                                            <StackPanel Orientation="Vertical">
+                                                                <TextBlock Text="{Binding Path=Horaire1.Debut}"/>
+                                                                <TextBlock Text="{Binding Path=Horaire1.Fin}"/>
+                                                            </StackPanel>
                                                         </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="60" Header="Fin">
+                                                <GridViewColumn Width="60" Header="H2">
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
-                                                            <TextBlock Text="{Binding Path=Horaire1.Fin}"/>
+                                                            <StackPanel Orientation="Vertical">
+                                                                <TextBlock Text="{Binding Path=Horaire2.Debut}"/>
+                                                                <TextBlock Text="{Binding Path=Horaire2.Fin}"/>
+                                                            </StackPanel>
                                                         </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
@@ -278,7 +284,7 @@
                                     </ListView.View>
                                 </ListView>
                             </Grid>
-                            <Grid Width="240" Height="305">
+                            <Grid Width="270" Height="305">
                                 <c:VueEnseignement x:Name="vueEnseignement" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
                         </StackPanel>

@@ -130,7 +130,7 @@ namespace PlanningMaker.Modele
 
         public Semaine()
         {
-            numero = 0;
+            numero = 1;
             date = "01/01/1900";
             
             lundi = new Jour();
@@ -147,8 +147,9 @@ namespace PlanningMaker.Modele
         }
 
         public Semaine(int numero, String date)
-        {;
-            this.numero = numero;
+        {
+            //Si le numéro est inférieur à un, le numéro de la semaine sera automatiquement assigné à un
+            this.numero = (numero>0) ? numero : 1; 
             this.date = date;
 
             lundi = new Jour();

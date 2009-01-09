@@ -572,7 +572,7 @@ namespace PlanningMaker.Modele
             enseignement.AppendChild(salle);
             salle.Attributes.Append(refSalle);
             type.AppendChild(document.CreateTextNode(Enum.Format(typeof(ETypeEnseignements), e.Type, "G").ToUpper()));
-            refEnseignant.Value = "ide" + enseignants.IndexOf(e.Enseignant).ToString();
+            refEnseignant.Value = "idp" + enseignants.IndexOf(e.Enseignant).ToString();
             refMatiere.Value = "idm" + matieres.IndexOf(e.Matiere).ToString();
             refHoraire1.Value = "idh" + horaires.IndexOf(e.Horaire1).ToString();
             if (e.Horaire2 != null)

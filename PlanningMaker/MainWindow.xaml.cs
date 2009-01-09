@@ -53,11 +53,14 @@ namespace PlanningMaker
 
         private void New(object sender, RoutedEventArgs e)
         {
+            Close(sender,e);
+
             planning = new Planning();
             DataContext = planning;
 
             TabItem_Emploi_du_temps.IsSelected = true;
             TabPanel.IsEnabled = true;
+            vueEnseignement.IsEnabled = false;
             vueEnseignement.SetPlanningContext(planning);
 
             ICollectionView vueSemaines = CollectionViewSource.GetDefaultView(planning.Semaines);
@@ -144,12 +147,15 @@ namespace PlanningMaker
             listeMatieres.ItemsSource = null;
             listeHoraires.ItemsSource = null;
             listeEnseignants.ItemsSource = null;
+            listeEnseignements.ItemsSource = null;
+
             
             vueSalle.DataContext = new Salle();
             vueHoraire.DataContext = new Horaire();
             vueMatiere.DataContext = new Matiere();
             vueEnseignant.DataContext = new Enseignant();
-
+            vueEnseignement.SetPlanningContext(new Planning());
+            vueEnseignement.ChangeEnseignement(new Enseignement());
             TabPanel.IsEnabled = false;
         }
 
@@ -868,7 +874,7 @@ namespace PlanningMaker
 
         private void NewWeek(object sender, ExecutedRoutedEventArgs e)
         {
-
+            
         }
 
         private void NextWeek(object sender, RoutedEventArgs e)
