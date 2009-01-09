@@ -123,14 +123,21 @@ namespace PlanningMaker.Modele
 
         public static string SaveFileXpath()
         {
+            string directory = Environment.CurrentDirectory;
             System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueS.Filter = "Fichier HTML (*.html)|*.html";
 
             if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK) 
-                {return dialogueS.FileName;}
+                {
+                    Environment.CurrentDirectory = directory;
+                    return dialogueS.FileName;
+                }
             else 
-                {return null;}
+                {
+                    Environment.CurrentDirectory = directory;
+                    return null;
+                }
         }
 
     }
