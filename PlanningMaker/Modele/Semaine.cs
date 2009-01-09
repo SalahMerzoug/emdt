@@ -131,7 +131,7 @@ namespace PlanningMaker.Modele
         public Semaine()
         {
             numero = 1;
-            date = "01/01/1900";
+            date = "1990-12-01";
             
             lundi = new Jour();
             mardi = new Jour();

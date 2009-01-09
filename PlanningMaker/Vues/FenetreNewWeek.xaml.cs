@@ -31,8 +31,11 @@ namespace PlanningMaker.Vues
 
         public FenetreNewWeek()
         {
-            semaine = null;
+            semaine = new Semaine();
             InitializeComponent();
+            
+            Numero.DataContext = semaine;
+            Date.DataContext = semaine;
         }
 
         private void OkCommand(object sender, ExecutedRoutedEventArgs e)
