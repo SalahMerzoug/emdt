@@ -17,12 +17,12 @@
             <Label Height="10"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Numero de la semaine" Width="125" />
-                <TextBox x:Name="Numero" Width="100">
+                <TextBox x:Name="Numero" Width="100" Text="{Binding Path=Numero}">
                 </TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Date du premier jour" Width="125" />
-                <TextBox x:Name="Date" Width="100"/>
+                <TextBox x:Name="Date" Width="100" Text="{Binding Path=Date}"/>
             </StackPanel>
             <Label Height="20"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
