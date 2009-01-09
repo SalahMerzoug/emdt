@@ -838,12 +838,10 @@ namespace PlanningMaker
 
         public static void StartExternWebBrowser(string filename)
         {
+            filename = filename.Replace(" ", "%20");
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
-            psi.FileName = "file://" + filename;
-            
-            //Ne gère pas les espaces dans le path
-            //psi.FileName = "firefox.exe";
-            //psi.Arguments = @"file://" + filename;
+            psi.FileName = "firefox.exe";
+            psi.Arguments = @"file://" + filename;
             try
             {
                 System.Diagnostics.Process.Start(psi);
