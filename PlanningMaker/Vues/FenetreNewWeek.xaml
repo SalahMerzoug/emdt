@@ -36,9 +36,17 @@
             <Label Height="10"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="N° de la semaine" Width="125" />
-                <TextBox x:Name="Numero" Width="100" Text="{Binding Path=Numero}">
+                <TextBox x:Name="Numero" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100">
+                    <TextBox.Text>
+                        <Binding Path="Numero" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <r:NumeroValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
                 </TextBox>
             </StackPanel>
+            <Label Height="10"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Date du premier jour" Width="125" />
                 <TextBox x:Name="Date" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100">

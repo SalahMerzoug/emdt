@@ -19,7 +19,16 @@ namespace PlanningMaker.Vues
     /// </summary>
     public partial class FenetreNewWeek : Window
     {
+        private Planning planning;
         private Semaine semaine;
+
+        public Planning Planning
+        {
+            set
+            {
+                planning = value;
+            }
+        }
 
         public Semaine Semaine
         {
@@ -32,6 +41,7 @@ namespace PlanningMaker.Vues
         public FenetreNewWeek()
         {
             semaine = new Semaine();
+            planning = null;
             InitializeComponent();
             
             Numero.DataContext = semaine;
@@ -41,6 +51,7 @@ namespace PlanningMaker.Vues
         private void OkCommand(object sender, ExecutedRoutedEventArgs e)
         {
             semaine = new Semaine(Int32.Parse(Numero.Text), Date.Text);
+            planning.Semaines.Add(semaine);
             DialogResult = true;
             Close();
         }
@@ -54,15 +65,33 @@ namespace PlanningMaker.Vues
 
                 String date = Date.Text;
 
-                if (numero < 1 || numero > 52 || date.Equals(""))
+                DateValidationRule validateurDate = new DateValidationRule();
+                NumeroValidationRule validateurNum = new NumeroValidationRule();
+                
+                bool semainePresente = false;
+                foreach (Semaine s in planning.Semaines)
+                {
+                    if (s.Numero == semaine.Numero)
+                    {
+                        semainePresente = true;
+                        break;
+                    }
+                }
+
+                ValidationResult dateValide = validateurDate.Validate(Date.Text, null);
+                ValidationResult numeroValide = validateurNum.Validate(Numero.Text, null);
+
+                if (!numeroValide.IsValid || semainePresente || !dateValide.IsValid)
                     e.CanExecute = false;
                 else
                     e.CanExecute = true;
+
             }
             catch (Exception)
             {
                 e.CanExecute = false;
             }
+
         }
 
         private void CancelCommand(object sender, ExecutedRoutedEventArgs e)

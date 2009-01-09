@@ -875,18 +875,21 @@ namespace PlanningMaker
         private void NewWeek(object sender, ExecutedRoutedEventArgs e)
         {
             FenetreNewWeek fNewWeek = new FenetreNewWeek();
+            fNewWeek.Planning = planning;
             bool? ok = fNewWeek.ShowDialog();
             if (ok == true)
             {
-                if (fNewWeek.Semaine != null)
-                {
-                    planning.Semaines.Add(fNewWeek.Semaine);
-                    selectionSemaine.SelectedItem = fNewWeek.Semaine;
-                }
+                MessageBox.Show("Semaine créée avec succès !", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                selectionSemaine.SelectedItem = fNewWeek.Semaine;
+				ChangementChoixJour(sender, e);
+            	RadioButton_Lundi.IsChecked = true;
             }
-
-			ChangementChoixJour(sender, e);
-            RadioButton_Lundi.IsChecked = true;
+            else
+            {
+                MessageBox.Show("Création annulée par l'utilisateur !", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void NextWeek(object sender, RoutedEventArgs e)
