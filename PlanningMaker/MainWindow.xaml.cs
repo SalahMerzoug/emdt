@@ -93,8 +93,6 @@ namespace PlanningMaker
 
         private void Open(object sender, RoutedEventArgs e)
         {
-            Close(sender, e);
-
             string directory = Environment.CurrentDirectory;
             System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
             dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -143,13 +141,11 @@ namespace PlanningMaker
             listeEnseignants.ItemsSource = null;
             listeEnseignements.ItemsSource = null;
 
-            
-            vueSalle.DataContext = new Salle();
-            vueHoraire.DataContext = new Horaire();
-            vueMatiere.DataContext = new Matiere();
-            vueEnseignant.DataContext = new Enseignant();
-            vueEnseignement.SetPlanningContext(new Planning());
-            vueEnseignement.ChangeEnseignement(new Enseignement());
+
+            vueSalle.ClearView();
+            vueHoraire.ClearView();
+            vueMatiere.ClearView();
+            vueEnseignant.ClearView();
             TabPanel.IsEnabled = false;
         }
 
@@ -626,12 +622,20 @@ namespace PlanningMaker
         
         private void ChangementSelectionHoraire(object sender, SelectionChangedEventArgs e)
         {
-            vueHoraire.DataContext = listeHoraires.SelectedItem;
+            Horaire horaire = listeHoraires.SelectedItem as Horaire;
+            if (horaire != null)
+                vueHoraire.ChangeHorraire(horaire);
+            else
+                vueHoraire.ClearView();
         }
 
         private void ChangementSelectionSalle(object sender, SelectionChangedEventArgs e)
         {
-            vueSalle.DataContext = listeSalles.SelectedItem;
+            Salle salle = listeSalles.SelectedItem as Salle;
+            if (salle != null)
+                vueSalle.ChangeSalle(salle);
+            else
+                vueSalle.ClearView();
         }
 
         private void ChangementSelectionMatiere(object sender, SelectionChangedEventArgs e)
@@ -645,7 +649,11 @@ namespace PlanningMaker
         
         private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)
         {
-            vueEnseignant.DataContext = listeEnseignants.SelectedItem;
+            Enseignant enseignant = listeEnseignants.SelectedItem as Enseignant;
+            if (enseignant != null)
+                vueEnseignant.ChangeEnseignant(enseignant);
+            else
+                vueEnseignant.ClearView();
         }
 
         private void DeselectionHoraire(object sender, MouseButtonEventArgs e)

@@ -97,7 +97,7 @@ namespace PlanningMaker.Vues
         {
             matiere = null;
             DataContext = null;
-
+            IsEnabled = false;
             Titre.Text = null;
             ComboEnseignants.SelectedItem = null;
             ListeProfs.ItemsSource = null;
