@@ -864,13 +864,12 @@ namespace PlanningMaker
         private void NewWeek(object sender, ExecutedRoutedEventArgs e)
         {
             FenetreNewWeek fNewWeek = new FenetreNewWeek();
-            fNewWeek.Show();
-            if(fNewWeek.Semaine!=null)
-                planning.Semaines.Add(fNewWeek.Semaine);
-            else
-                MessageBox.Show("Annulation par l'utilisateur!", "PlanningMaker",
-                        MessageBoxButton.OK, MessageBoxImage.Exclamation);
-			ChangementChoixJour(sender, e);
+            bool? ok = fNewWeek.ShowDialog();
+            if (ok == true)
+            {
+                if (fNewWeek.Semaine != null)
+                    planning.Semaines.Add(fNewWeek.Semaine);
+            }
         }
 
         private void NextWeek(object sender, RoutedEventArgs e)
