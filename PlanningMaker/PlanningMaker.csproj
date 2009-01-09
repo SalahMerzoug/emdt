@@ -64,7 +64,6 @@
     <Compile Include="Modele\ETypeEnseignements.cs" />
     <Compile Include="Modele\ETypeSalles.cs" />
     <Compile Include="Modele\Print.cs" />
-    <Compile Include="Vues\ListeAnnees.cs" />
     <Compile Include="Vues\VueEnseignement.xaml.cs">
       <DependentUpon>VueEnseignement.xaml</DependentUpon>
     </Compile>
@@ -112,8 +111,8 @@
     <Compile Include="Vues\VueHoraire.xaml.cs">
       <DependentUpon>VueHoraire.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vues\FenetreNewA.xaml.cs">
-      <DependentUpon>FenetreNewA.xaml</DependentUpon>
+    <Compile Include="Vues\FenetreNewWeek.xaml.cs">
+      <DependentUpon>FenetreNewWeek.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -151,7 +150,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vues\FenetreNewA.xaml">
+    <Page Include="Vues\FenetreNewWeek.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
