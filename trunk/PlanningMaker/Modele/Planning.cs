@@ -103,7 +103,7 @@ namespace PlanningMaker.Modele
 
         public Planning()
         {
-            promotion = "undefined";
+            promotion = "Undefined";
             enseignants = new ObservableCollection<Enseignant>();
             matieres = new ObservableCollection<Matiere>();
             horaires = new ObservableCollection<Horaire>();
@@ -485,6 +485,11 @@ namespace PlanningMaker.Modele
         {
             XmlAttribute id = document.CreateAttribute("id");
             XmlElement titre = document.CreateElement("titre");
+            matieres.AppendChild(matiere);
+            matiere.Attributes.Append(id);
+            matiere.AppendChild(titre);
+            id.Value = "idm" + compteurId.ToString();
+            titre.AppendChild(document.CreateTextNode(m.Titre));
             foreach (Enseignant e in m.Enseignants)
             {
                 XmlElement enseignant = document.CreateElement("enseignant");
@@ -492,13 +497,7 @@ namespace PlanningMaker.Modele
                 XmlAttribute refEnseignant = document.CreateAttribute("ref");
                 enseignant.Attributes.Append(refEnseignant);
                 refEnseignant.Value = "idp" + enseignants.IndexOf(e).ToString();
-            }
-            XmlElement nom = document.CreateElement("nom");
-            matieres.AppendChild(matiere);
-            matiere.Attributes.Append(id);
-            matiere.AppendChild(titre);
-            id.Value = "idm" + compteurId.ToString();
-            titre.AppendChild(document.CreateTextNode(m.Titre));
+            }         
         }
 
         private void AjouterHoraire(Horaire h, int compteurId, XmlDocument document, XmlElement horaires, XmlElement horaire)
