@@ -81,6 +81,13 @@ namespace PlanningMaker.Modele
             xslt.Load(exedir + @"\..\..\Files\" + nomFichierXSL);
 
             // Charger le fichier à transformer XML
+            
+            try
+            {
+                XPathDocument test_xpathdocument = new XPathDocument(nomFichierSemaine);
+            }
+            catch { MessageBox.Show("Erreur au chargement du document XPath !");}
+
             XPathDocument xpathdocument = new XPathDocument(nomFichierSemaine);
             
             // Créer le fichier de destination

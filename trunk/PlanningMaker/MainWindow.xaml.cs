@@ -816,18 +816,19 @@ namespace PlanningMaker
 
         public static void StartExternWebBrowser(string filename)
         {
-            System.Diagnostics.Process proc = new System.Diagnostics.Process();
-            FileInfo info = new FileInfo(filename);
-            // TODO : gestion des espaces dans le chemin absolu du fichier
-            string path = info.DirectoryName;
-            string name = info.Name;
+            string fullPath = "file://" + filename;
+            //proc.StartInfo.FileName = "firefox.exe";
+
+            System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
+            psi.FileName = fullPath;
+            //psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            //psi.Arguments = "firefox.exe";
+            //psi.Arguments = "IExplore.exe";
+                
             try
             {
-                proc.StartInfo.FileName = "firefox.exe";
-                proc.StartInfo.Arguments = "file://" + path + "/" + name;
-                proc.Start();
-                proc.Close();
-            }
+                System.Diagnostics.Process.Start(psi);
+            }         
             catch (Win32Exception w32ex)
             {
                 MessageBox.Show("Impossible d'ouvrir le navigateur internet Mozilla Firefox (firefox.exe), vérifiez qu'il est bien installé.\nDétails de l'erreur : " + w32ex.Message, "Transformation XSLT");
