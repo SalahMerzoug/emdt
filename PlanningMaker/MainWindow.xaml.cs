@@ -100,32 +100,21 @@ namespace PlanningMaker
             {
                 nomFichier = dialogueO.FileName;
                 New(sender, e);
-                try
-                {
-                    planning.Charger(nomFichier);
-                    MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
+                planning.Charger(nomFichier);
+                MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
 
-                    // Mise à jour du fichier source pour les requêtes XPath
-                    RequetesXPath.NomFichierSemaine = nomFichier;
+                // Mise à jour du fichier source pour les requêtes XPath
+                RequetesXPath.NomFichierSemaine = nomFichier;
 
-                    RadioButton_Lundi.IsChecked = true;
-                    
-                    IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
-                    if (enumSemaine.MoveNext())
-                    {
-                        Semaine firstSemaine = enumSemaine.Current as Semaine;
-                        selectionSemaine.Text = firstSemaine.Numero.ToString();
-                        listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;
-                        
-                    }
-                    
-                }
-                catch (NullReferenceException)
+                RadioButton_Lundi.IsChecked = true;
+                
+                IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
+                if (enumSemaine.MoveNext())
                 {
-                    MessageBox.Show("Fichier non valide !", "PlanningMaker",
-                        MessageBoxButton.OK, MessageBoxImage.Error);
-                    Close(sender, e);
+                    Semaine firstSemaine = enumSemaine.Current as Semaine;
+                    selectionSemaine.Text = firstSemaine.Numero.ToString();
+                    listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;  
                 }
             }
         }
