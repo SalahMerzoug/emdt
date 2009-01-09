@@ -19,6 +19,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <c:ListeAnnees x:Key="Annees"/>
     </Window.Resources>
     
 	<Window.CommandBindings>
@@ -192,7 +193,7 @@
                         <Label Width="20"/>
                         <Label Content="Annee :"/>
                         <Label Width="20"/>
-                        <TextBox x:Name="TextBox_Annee" Text="{Binding Path=Annee}" Width="100" HorizontalAlignment="Center"/>
+                        <ComboBox x:Name="ComboBox_Annee" Text="{Binding Path=Annee}" ItemsSource="{Binding Source={StaticResource Annees}}" Width="100" HorizontalAlignment="Center"/>
                         <Label Width="20"/>
                         <Label Content="Division :"/>
                         <Label Width="20"/>
@@ -313,7 +314,7 @@
                     <Grid Width="260">
                         <c:vueMatiere x:Name="vueMatiere" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                     </Grid>
-                    <Grid Width="140">
+                    <Grid Width="530">
                         <ListView Name="listeMatieres" SelectionChanged="ChangementSelectionMatiere" MouseRightButtonUp="DeselectionMatiere">
                             <ListView.View>
                                 <GridView>

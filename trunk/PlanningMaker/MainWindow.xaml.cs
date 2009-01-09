@@ -139,7 +139,7 @@ namespace PlanningMaker
 
             selectionSemaine.ItemsSource = null;
             listeEnseignements.ItemsSource = null;
-            TextBox_Annee.Text = null;
+            ComboBox_Annee.Text = null;
             TextBox_Division.Text = null;
             TextBox_Promotion.Text = null;
 
