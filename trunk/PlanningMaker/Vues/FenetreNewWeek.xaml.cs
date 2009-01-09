@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using PlanningMaker.Modele;
 
 namespace PlanningMaker.Vues
 {
@@ -18,10 +19,51 @@ namespace PlanningMaker.Vues
     /// </summary>
     public partial class FenetreNewWeek : Window
     {
+        private Semaine semaine;
+
+        public Semaine Semaine
+        {
+            get
+            {
+                return semaine;
+            }
+        }
+
         public FenetreNewWeek()
         {
+            semaine = null;
             InitializeComponent();
         }
 
+        private void OkCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            semaine = new Semaine(Int32.Parse(Numero.Text), Date.Text);
+            Close();
+        }
+
+        private void OkCommandPossible(object sender, CanExecuteRoutedEventArgs e)
+        {
+            try
+            {
+                int numero = 0;
+                numero = Int32.Parse(Numero.Text);
+
+                String date = Date.Text;
+
+                if (numero < 1 || numero > 52 || date.Equals(""))
+                    e.CanExecute = false;
+                else
+                    e.CanExecute = true;
+            }
+            catch (Exception)
+            {
+                e.CanExecute = false;
+            }
+        }
+
+        private void CancelCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

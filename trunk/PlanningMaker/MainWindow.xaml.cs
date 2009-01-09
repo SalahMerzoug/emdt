@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using PlanningMaker.Modele;
 using System.Windows.Media;
+using PlanningMaker.Vues;
 
 namespace PlanningMaker
 {
@@ -862,8 +863,14 @@ namespace PlanningMaker
 
         private void NewWeek(object sender, ExecutedRoutedEventArgs e)
         {
-            /* ... */
-            ChangementChoixJour(sender, e);
+            FenetreNewWeek fNewWeek = new FenetreNewWeek();
+            fNewWeek.Show();
+            if(fNewWeek.Semaine!=null)
+                planning.Semaines.Add(fNewWeek.Semaine);
+            else
+                MessageBox.Show("Annulation par l'utilisateur!", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Exclamation);
+			ChangementChoixJour(sender, e);
         }
 
         private void NextWeek(object sender, RoutedEventArgs e)

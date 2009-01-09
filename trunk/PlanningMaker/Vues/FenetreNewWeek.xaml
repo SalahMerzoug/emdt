@@ -1,8 +1,35 @@
 ﻿<Window x:Class="PlanningMaker.Vues.FenetreNewWeek"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Création d'une nouvelle semaine" Height="300" Width="300">
+    xmlns:c="clr-namespace:PlanningMaker.Vues"
+    Title="Création d'une nouvelle semaine"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+    ResizeMode="CanMinimize">
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="c:NewWeekCommands.OK" Executed="OkCommand" CanExecute="OkCommandPossible"/>
+        <CommandBinding Command="c:NewWeekCommands.Cancel" Executed="CancelCommand"/>
+    </Window.CommandBindings>
+    
     <Grid>
-        
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Height="10"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Numero de la semaine" Width="125" />
+                <TextBox x:Name="Numero" Width="100">
+                </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Date du premier jour" Width="125" />
+                <TextBox x:Name="Date" Width="100"/>
+            </StackPanel>
+            <Label Height="20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="OK" Height="30" Width="60" Command="c:NewWeekCommands.OK">OK</Button>
+                <Label Width="20"/>
+                <Button x:Name="Annuler" Height="30" Width="60" Command="c:NewWeekCommands.Cancel">Annuler</Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
