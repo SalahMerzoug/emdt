@@ -883,6 +883,7 @@ namespace PlanningMaker
         private void NewWeek(object sender, ExecutedRoutedEventArgs e)
         {
             FenetreNewWeek fNewWeek = new FenetreNewWeek();
+            fNewWeek.Owner = this;
             fNewWeek.Planning = planning;
             bool? ok = fNewWeek.ShowDialog();
             if (ok == true)
