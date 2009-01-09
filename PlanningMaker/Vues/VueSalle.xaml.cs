@@ -25,11 +25,31 @@ namespace PlanningMaker.Vues
     {
         private Salle salle;
 
+        public Salle Salle
+        {
+            get
+            {
+                return salle;
+            }
+        }
+
         public VueSalle()
         {
             InitializeComponent();
-            salle = new Salle();
+        }
+
+        public void ChangeSalle(Salle salle)
+        {
+            this.salle = salle;
             DataContext = salle;
+            IsEnabled = true;
+        }
+
+        public void ClearView()
+        {
+            this.salle = null;
+            DataContext = null;
+            IsEnabled = false;
         }
 
     }

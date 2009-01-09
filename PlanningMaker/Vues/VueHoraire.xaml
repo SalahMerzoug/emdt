@@ -36,6 +36,7 @@
                 </TextBox.Text>
             </TextBox>
 	    </StackPanel>
+        <Label Height="10"/>
         <StackPanel Orientation="Horizontal">
             <Label Content="Fin" Width="70"/>
             <TextBox x:Name="Fin" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100">

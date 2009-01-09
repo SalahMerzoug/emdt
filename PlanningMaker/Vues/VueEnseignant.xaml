@@ -8,6 +8,7 @@
             <Label Content="Nom" Width="70"/>
             <TextBox Name="nom" Text="{Binding Path=Nom}" Width="100"/>
         </StackPanel>
+        <Label/>
         <StackPanel Orientation="Horizontal">
             <Label Content="Prénom" Width="70"/>
             <TextBox Name="prenom" Text="{Binding Path=Prenom}" Width="100"/>

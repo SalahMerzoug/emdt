@@ -22,6 +22,14 @@ namespace PlanningMaker.Vues
     {
         private Enseignement enseignement;
 
+        public Enseignement Enseignement
+        {
+            get
+            {
+                return enseignement;
+            }
+        }
+
         public VueEnseignement()
         {
             InitializeComponent();
