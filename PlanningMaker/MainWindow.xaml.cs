@@ -838,7 +838,7 @@ namespace PlanningMaker
         private void PreviousWeek(object sender, RoutedEventArgs e)
         {
             Int32 nrSemaine = Int32.Parse(selectionSemaine.Text);
-            nrSemaine--;
+            nrSemaine = (nrSemaine-53)%52+52;
             bool semainePresente = false;
             foreach (Semaine s in planning.Semaines)
             {
@@ -860,17 +860,19 @@ namespace PlanningMaker
                     RadioButton_Lundi.IsChecked = true;
                 }
             }
+            ChangementChoixJour(sender, e);
         }
 
         private void NewWeek(object sender, ExecutedRoutedEventArgs e)
         {
-            
+            /* ... */
+            ChangementChoixJour(sender, e);
         }
 
         private void NextWeek(object sender, RoutedEventArgs e)
         {
             Int32 nrSemaine = Int32.Parse(selectionSemaine.Text);
-            nrSemaine++;
+            nrSemaine = nrSemaine%52 +1;
             bool semainePresente = false;
             foreach (Semaine s in planning.Semaines)
             {
@@ -892,6 +894,7 @@ namespace PlanningMaker
                     RadioButton_Lundi.IsChecked = true;
                 }
             }
+            ChangementChoixJour(sender, e);
         }
 
         private void ChangementChoixJour(object sender, RoutedEventArgs e)
@@ -929,7 +932,7 @@ namespace PlanningMaker
 
         private void PreviousWeekPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ((planning != null) && !(selectionSemaine.Text.Equals("")) && Int32.Parse(selectionSemaine.Text) != 0);
+            e.CanExecute = ((planning != null) && !(selectionSemaine.Text.Equals("")));
         }
 
         private void ChangementSelectionEnseignement(object sender, SelectionChangedEventArgs e)
