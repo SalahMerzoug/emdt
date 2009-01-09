@@ -816,15 +816,12 @@ namespace PlanningMaker
 
         public static void StartExternWebBrowser(string filename)
         {
-            string fullPath = "file://" + filename;
-            //proc.StartInfo.FileName = "firefox.exe";
-
             System.Diagnostics.ProcessStartInfo psi = new System.Diagnostics.ProcessStartInfo();
-            psi.FileName = fullPath;
-            //psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            //psi.Arguments = "firefox.exe";
-            //psi.Arguments = "IExplore.exe";
-                
+            psi.FileName = "file://" + filename;
+            
+            //Ne gère pas les espaces dans le path
+            //psi.FileName = "firefox.exe";
+            //psi.Arguments = @"file://" + filename;
             try
             {
                 System.Diagnostics.Process.Start(psi);
