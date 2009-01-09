@@ -125,7 +125,7 @@ namespace PlanningMaker
                 {
                     MessageBox.Show("Fichier non valide !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Error);
-                    Close();
+                    Close(sender, e);
                 }
             }
         }
