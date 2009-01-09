@@ -6,7 +6,7 @@
 	x:Class="PlanningMaker.MainWindow"
 	x:Name="Window"
     Title="Viactisoft PlanningMaker 2008 School Edition"
-	Width="900" Height="600" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
+	Width="900" Height="650" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
     ResizeMode="CanMinimize"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
@@ -196,20 +196,19 @@
                         <Label Width="20"/>
                         <ComboBox Name="selectionSemaine" Width="150" DisplayMemberPath="Numero" HorizontalContentAlignment="Center" SelectionChanged="selectionSemaine_SelectionChanged" />
                         <Label Width="20"/>
-                        <TextBox Name="dateSemaine" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="150" HorizontalAlignment="Center">
-                            <TextBox.Text>
-                                <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <r:DateValidationRule/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </TextBox.Text>
-                        </TextBox>
-                        <Label Width="20"/>
                         <Button x:Name="Bouton_NextWeek" Width="50" Command="c:PlanningCommands.NextWeek">Next</Button>
-                        
                     </StackPanel>
-                    <StackPanel Height="10"/>
+                    <Label Height="10"/>
+                    <TextBox Name="dateSemaine" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="150" HorizontalAlignment="Center">
+                        <TextBox.Text>
+                            <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <r:DateValidationRule/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Height="10"/>
                     <Button x:Name="Bouton_NewWeek" Width="150" Command="c:PlanningCommands.NewWeek" IsDefault="True">Nouvelle Semaine</Button>
                     <StackPanel Height="10"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -242,7 +241,7 @@
                         </StackPanel>
                         <StackPanel Height="20"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Grid Width="590" Height="305">
+                            <Grid Width="590" Height="320">
                                 <ListView x:Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement" MouseRightButtonUp="DeselectionEnseignement">
                                     <ListView.View>
                                         <GridView>
@@ -311,7 +310,7 @@
                                     </ListView.View>
                                 </ListView>
                             </Grid>
-                            <Grid Width="270" Height="305">
+                            <Grid Width="270" Height="320">
                                 <c:VueEnseignement x:Name="vueEnseignement" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
                         </StackPanel>
