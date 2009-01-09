@@ -351,13 +351,13 @@ namespace PlanningMaker.Modele
                         }
                         foreach (XmlNode elementEnseignement in elementJour.SelectNodes("enseignements/enseignement"))
                         {
+                            string typeEnseignement = elementEnseignement.SelectSingleNode("type/text()").Value;
                             int numeroGroupe = 0;
                             XmlNode nodeNumeroGroupe = elementEnseignement.SelectSingleNode("numeroGroupe/text()");
                             if (nodeNumeroGroupe != null)
                             {
                                 numeroGroupe = System.Int32.Parse(nodeNumeroGroupe.Value);
                             }
-                            string typeEnseignement = elementEnseignement.SelectSingleNode("type/text()").Value;
                             Enseignement enseignement = new Enseignement(numeroGroupe);
                             switch (typeEnseignement)
                             {
@@ -570,11 +570,11 @@ namespace PlanningMaker.Modele
             XmlElement salle = document.CreateElement("salle");
             XmlAttribute refSalle = document.CreateAttribute("ref");
             enseignements.AppendChild(enseignement);
+            enseignement.AppendChild(type);
             if (e.Groupe != 0)
             {
                 enseignement.AppendChild(numeroGroupe);
             }
-            enseignement.AppendChild(type);
             enseignement.AppendChild(enseignant);
             enseignant.Attributes.Append(refEnseignant);
             enseignement.AppendChild(matiere);
