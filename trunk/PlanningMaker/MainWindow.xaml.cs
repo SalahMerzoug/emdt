@@ -93,6 +93,7 @@ namespace PlanningMaker
 
         private void Open(object sender, RoutedEventArgs e)
         {
+            string directory = Environment.CurrentDirectory;
             System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
             dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueO.Filter = "Fichier XML (*.xml)|*.xml";
@@ -118,6 +119,7 @@ namespace PlanningMaker
                     listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;  
                 }
             }
+            Environment.CurrentDirectory = directory;
         }
 
         private void Close(object sender, RoutedEventArgs e)
@@ -161,6 +163,7 @@ namespace PlanningMaker
 
         private void SaveAs(object sender, RoutedEventArgs e)
         {
+            string directory = Environment.CurrentDirectory;
             System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueS.Filter = "Fichier XML (*.xml)|*.xml";
@@ -174,6 +177,7 @@ namespace PlanningMaker
 
             // Mise à jour du fichier source pour les requêtes XPath
             RequetesXPath.NomFichierSemaine = nomFichier;
+            Environment.CurrentDirectory = directory;
         }
 
         private void FermeturePossible(object sender, CanExecuteRoutedEventArgs e)
@@ -198,9 +202,12 @@ namespace PlanningMaker
 
         private void Importer(object sender, RoutedEventArgs e)
         {
+            string directory = Environment.CurrentDirectory;
             System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
             dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueO.Filter = "iCalendar (*.ics)|*.ics|Valeurs séparées par des virgules Outlook (*.csv)|*.csv";
+
+            Environment.CurrentDirectory = directory;
 
             if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -211,6 +218,7 @@ namespace PlanningMaker
 
         private void Exporter(object sender, RoutedEventArgs e)
         {
+            string directory = Environment.CurrentDirectory;
             System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueS.Filter = "iCalendar (*.ics)|*.ics|Valeurs séparées par des virgules Outlook (*.csv)|*.csv";
@@ -220,6 +228,7 @@ namespace PlanningMaker
                 nomFichier = dialogueS.FileName;
                 // TODO : traitements en fonction de l'export choisi
             }
+            Environment.CurrentDirectory = directory;
         }
 
         private void ExporterPossible(object sender, CanExecuteRoutedEventArgs e)
@@ -319,10 +328,14 @@ namespace PlanningMaker
         private void MenuItemTransfoXSLT_Click(object sender, RoutedEventArgs e)
         {
             string nomFichierSVG = SaveFileSVG();
+
             if (OperationSurFichierXMLPossible() && nomFichierSVG != null)
             {
+                string directory = Environment.CurrentDirectory;
                 TransformationXslt transformation = new TransformationXslt();
                 string messageValidation = transformation.TransformerXslt("37", "EdTversSVG-FF.xsl", nomFichier, nomFichierSVG);
+                Environment.CurrentDirectory = directory;
+
                 MessageBox.Show(this, messageValidation, "Transformation XSLT vers SVG");
                 if (messageValidation.Equals("Transfomation OK."))
                 {
@@ -785,9 +798,12 @@ namespace PlanningMaker
 
         public static string OpenFileXML()
         {
+            string directory = Environment.CurrentDirectory;
             System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
             dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueO.Filter = "Fichier XML (*.xml)|*.xml";
+
+            Environment.CurrentDirectory = directory;
 
             if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -801,16 +817,21 @@ namespace PlanningMaker
 
         public static string SaveFileSVG()
         {
+            string directory = Environment.CurrentDirectory;
             System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueS.Filter = "Fichier SVG (*.svg)|*.svg";
 
+            
+
             if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                Environment.CurrentDirectory = directory;
                 return dialogueS.FileName;
             }
             else
             {
+                Environment.CurrentDirectory = directory;
                 return null;
             }
         }
