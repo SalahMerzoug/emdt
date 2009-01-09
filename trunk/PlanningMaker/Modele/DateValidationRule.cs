@@ -44,7 +44,7 @@ namespace PlanningMaker.Modele
                     }
                     return new ValidationResult(true, null);
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     return new ValidationResult(false,
                         "Le format de la date est incorrect.\n" +

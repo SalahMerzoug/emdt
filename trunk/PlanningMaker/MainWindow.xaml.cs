@@ -93,6 +93,8 @@ namespace PlanningMaker
 
         private void Open(object sender, RoutedEventArgs e)
         {
+            Close(sender, e);
+
             string directory = Environment.CurrentDirectory;
             System.Windows.Forms.OpenFileDialog dialogueO = new System.Windows.Forms.OpenFileDialog();
             dialogueO.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -770,20 +772,6 @@ namespace PlanningMaker
             }
         }
 
-        private void ValidationEnseignement(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                if (TabItem_Emploi_du_temps.IsSelected)
-                {
-                    if (listeEnseignements.SelectedIndex == -1)
-                    {
-                        AjouterElement(null, null);
-                    }
-                }
-            }
-        }
-
         public bool OperationSurFichierXMLPossible()
         {
             if (nomFichier != null)
@@ -863,6 +851,7 @@ namespace PlanningMaker
                 {
                     semainePresente = true;
                     selectionSemaine.Text = nrSemaine.ToString();
+                    dateSemaine.DataContext = s;
                     break;
                 }
             }
@@ -872,12 +861,15 @@ namespace PlanningMaker
                         MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (result==MessageBoxResult.Yes)
                 {
-                    planning.Semaines.Add(new Semaine(nrSemaine, ""));
+                    Semaine s = new Semaine(nrSemaine, "");
+                    planning.Semaines.Add(s);
+                    dateSemaine.DataContext = s;
                     selectionSemaine.Text = nrSemaine.ToString();
-                    RadioButton_Lundi.IsChecked = true;
                 }
             }
+
             ChangementChoixJour(sender, e);
+            RadioButton_Lundi.IsChecked = true;
         }
 
         private void NewWeek(object sender, ExecutedRoutedEventArgs e)
@@ -887,8 +879,14 @@ namespace PlanningMaker
             if (ok == true)
             {
                 if (fNewWeek.Semaine != null)
+                {
                     planning.Semaines.Add(fNewWeek.Semaine);
+                    selectionSemaine.SelectedItem = fNewWeek.Semaine;
+                }
             }
+
+			ChangementChoixJour(sender, e);
+            RadioButton_Lundi.IsChecked = true;
         }
 
         private void NextWeek(object sender, RoutedEventArgs e)
@@ -902,6 +900,7 @@ namespace PlanningMaker
                 {
                     semainePresente = true;
                     selectionSemaine.Text = nrSemaine.ToString();
+                    dateSemaine.DataContext = s;
                     break;
                 }
             }
@@ -911,12 +910,15 @@ namespace PlanningMaker
                         MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (result == MessageBoxResult.Yes)
                 {
-                    planning.Semaines.Add(new Semaine(nrSemaine, ""));
+                    Semaine s = new Semaine(nrSemaine, "");
+                    planning.Semaines.Add(s);
+                    dateSemaine.DataContext = s;
                     selectionSemaine.Text = nrSemaine.ToString();
-                    RadioButton_Lundi.IsChecked = true;
                 }
             }
+
             ChangementChoixJour(sender, e);
+            RadioButton_Lundi.IsChecked = true;
         }
 
         private void ChangementChoixJour(object sender, RoutedEventArgs e)
@@ -965,5 +967,12 @@ namespace PlanningMaker
             else
                 vueEnseignement.ClearView();
         }
-	}    
+
+        private void selectionSemaine_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            dateSemaine.DataContext = selectionSemaine.SelectedItem as Semaine;
+            ChangementChoixJour(sender, e);
+            RadioButton_Lundi.IsChecked = true;
+        }
+    }    
 }
