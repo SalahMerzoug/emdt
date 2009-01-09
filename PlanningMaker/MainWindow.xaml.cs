@@ -900,6 +900,21 @@ namespace PlanningMaker
             }
         }
 
+        private void DelWeek(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (selectionSemaine.SelectedItem != null)
+            {
+                int position = selectionSemaine.SelectedIndex;
+                planning.Semaines.Remove(selectionSemaine.SelectedItem as Semaine);
+                if (position == 0) position = 1;
+                selectionSemaine.SelectedIndex = position - 1;
+                dateSemaine.DataContext = selectionSemaine.SelectedItem as Semaine;
+            }
+
+            ChangementChoixJour(sender, e);
+            RadioButton_Lundi.IsChecked = true;
+        }
+
         private void NextWeek(object sender, RoutedEventArgs e)
         {
             Int32 nrSemaine = Int32.Parse(selectionSemaine.Text);
@@ -958,6 +973,7 @@ namespace PlanningMaker
                     listeEnseignements.ItemsSource = semaine.Vendredi.Enseignements;
                 }
             }
+            else listeEnseignements.ItemsSource = null;
         }
 
         private void NextWeekPossible(object sender, CanExecuteRoutedEventArgs e)

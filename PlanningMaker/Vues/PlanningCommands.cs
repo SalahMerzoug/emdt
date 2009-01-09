@@ -13,6 +13,7 @@ namespace PlanningMaker.Vues
         private static System.Windows.Input.RoutedUICommand ajouterElement;
         private static System.Windows.Input.RoutedUICommand supprimerElement;
         private static System.Windows.Input.RoutedUICommand newWeek;
+        private static System.Windows.Input.RoutedUICommand delWeek;
         private static System.Windows.Input.RoutedUICommand nextWeek;
         private static System.Windows.Input.RoutedUICommand previousWeek;
         private static System.Windows.Input.RoutedUICommand ajouterProf;
@@ -31,15 +32,17 @@ namespace PlanningMaker.Vues
             supprimerElement = new System.Windows.Input.RoutedUICommand(
                 "Supprimer", "Supprimer une ressource", typeof(PlanningCommands));
             newWeek = new System.Windows.Input.RoutedUICommand(
-                "Nouvelle Semaine", "Ajouter une nouvelle semaine", typeof(PlanningCommands));
+                "Nouvelle semaine", "Ajouter une nouvelle semaine", typeof(PlanningCommands));
+            delWeek = new System.Windows.Input.RoutedUICommand(
+                "Supprimer semaine", "Ajouter une nouvelle semaine", typeof(PlanningCommands));
             previousWeek = new System.Windows.Input.RoutedUICommand(
-                "Precedent", "Semaine Précédente", typeof(PlanningCommands));
+                "Precedent", "Semaine précédente", typeof(PlanningCommands));
             nextWeek = new System.Windows.Input.RoutedUICommand(
-                "Suivante", "Semaine Suivante", typeof(PlanningCommands));
+                "Suivante", "Semaine suivante", typeof(PlanningCommands));
             ajouterProf = new System.Windows.Input.RoutedUICommand(
-                "Ajouter Professeur", "Ajouter Professeur", typeof(PlanningCommands));
+                "Ajouter professeur", "Ajouter professeur", typeof(PlanningCommands));
             supprimerProf = new System.Windows.Input.RoutedUICommand(
-                "Supprimer Professeur", "Supprimer Professeur", typeof(PlanningCommands));
+                "Supprimer professeur", "Supprimer professeur", typeof(PlanningCommands));
         }
 
         public static System.Windows.Input.RoutedUICommand Importer
@@ -87,6 +90,14 @@ namespace PlanningMaker.Vues
             get
             {
                 return newWeek;
+            }
+        }
+
+        public static System.Windows.Input.RoutedUICommand DelWeek
+        {
+            get
+            {
+                return delWeek;
             }
         }
 

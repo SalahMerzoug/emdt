@@ -58,6 +58,7 @@
 		<CommandBinding Command="c:PlanningCommands.AjouterElement" Executed="AjouterElement" CanExecute="AjouterElementPossible"/>
         <CommandBinding Command="c:PlanningCommands.SupprimerElement" Executed="SupprimerElement" CanExecute="SupprimerElementPossible"/>
         <CommandBinding Command="c:PlanningCommands.NewWeek" Executed="NewWeek"/>
+        <CommandBinding Command="c:PlanningCommands.DelWeek" Executed="DelWeek"/>
         <CommandBinding Command="c:PlanningCommands.NextWeek" Executed="NextWeek" CanExecute="NextWeekPossible"/>
         <CommandBinding Command="c:PlanningCommands.PreviousWeek" Executed="PreviousWeek" CanExecute="PreviousWeekPossible"/>
     </Window.CommandBindings>
@@ -194,22 +195,32 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="Bouton_PreviousWeek" Width="50" Command="c:PlanningCommands.PreviousWeek">Prev.</Button>
                         <Label Width="20"/>
-                        <ComboBox Name="selectionSemaine" Width="150" DisplayMemberPath="Numero" HorizontalContentAlignment="Center" SelectionChanged="selectionSemaine_SelectionChanged" />
+                        <TextBlock Height="15">Numéro : </TextBlock>
+                        <Label Width="10"/>
+                        <ComboBox Name="selectionSemaine" Width="50" DisplayMemberPath="Numero" HorizontalContentAlignment="Center" SelectionChanged="selectionSemaine_SelectionChanged" />
                         <Label Width="20"/>
                         <Button x:Name="Bouton_NextWeek" Width="50" Command="c:PlanningCommands.NextWeek">Next</Button>
                     </StackPanel>
                     <Label Height="10"/>
-                    <TextBox Name="dateSemaine" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="150" HorizontalAlignment="Center">
-                        <TextBox.Text>
-                            <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <r:DateValidationRule/>
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Height="15">Date : </TextBlock>
+                        <Label Width="10"/>
+                        <TextBox Name="dateSemaine" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100" HorizontalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <r:DateValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
                     <Label Height="10"/>
-                    <Button x:Name="Bouton_NewWeek" Width="150" Command="c:PlanningCommands.NewWeek" IsDefault="True">Nouvelle Semaine</Button>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="Bouton_NewWeek" Width="120" Command="c:PlanningCommands.NewWeek" IsDefault="True">Nouvelle semaine</Button>
+                        <Label Width="10"/>
+                        <Button x:Name="Bouton_DelWeek" Width="120" Command="c:PlanningCommands.DelWeek">Supprimer semaine</Button>
+                    </StackPanel>
                     <StackPanel Height="10"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="Promotion :"/>
@@ -266,7 +277,7 @@
                                                         </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="60" Header="Type">
+                                                <GridViewColumn Width="50" Header="Type">
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
                                                             <TextBlock Text="{Binding Path=Type}"/>
@@ -385,9 +396,9 @@
                 </DockPanel>
             </TabItem>
             <TabItem Header="Requêtes XPath" x:Name="TabItem_XPath">
-                <Grid>
+                <GroupBox Header="Requêtes XPath" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <c:VueRequetesXPath VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                </Grid>
+                </GroupBox>
             </TabItem>
         </TabControl>
 		<ToolBar Name="BarreOutils" VerticalAlignment="Bottom" Margin="0,0,0,-1">

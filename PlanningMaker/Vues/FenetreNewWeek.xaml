@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:PlanningMaker.Vues"
     xmlns:r="clr-namespace:PlanningMaker.Modele"  
-    Title="Création d'une nouvelle semaine"
+    Title="Ajout d'une semaine"
     Background="#FFC0C0C0"
     SizeToContent="WidthAndHeight"
     WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
