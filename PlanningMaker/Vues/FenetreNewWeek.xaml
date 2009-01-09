@@ -32,7 +32,7 @@
     </Window.Resources>
     
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
             <Label Height="10"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="N° de la semaine" Width="125" />
