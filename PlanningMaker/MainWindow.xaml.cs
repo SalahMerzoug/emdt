@@ -333,7 +333,7 @@ namespace PlanningMaker
             {
                 string directory = Environment.CurrentDirectory;
                 TransformationXslt transformation = new TransformationXslt();
-                string messageValidation = transformation.TransformerXslt("37", "EdTversSVG-FF.xsl", nomFichier, nomFichierSVG);
+                string messageValidation = transformation.TransformerXslt(selectionSemaine.Text, "EdTversSVG-FF.xsl", nomFichier, nomFichierSVG);
                 Environment.CurrentDirectory = directory;
 
                 MessageBox.Show(this, messageValidation, "Transformation XSLT vers SVG");
