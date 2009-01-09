@@ -38,6 +38,7 @@ namespace PlanningMaker.Vues
         private void OkCommand(object sender, ExecutedRoutedEventArgs e)
         {
             semaine = new Semaine(Int32.Parse(Numero.Text), Date.Text);
+            DialogResult = true;
             Close();
         }
 
@@ -63,6 +64,7 @@ namespace PlanningMaker.Vues
 
         private void CancelCommand(object sender, ExecutedRoutedEventArgs e)
         {
+            DialogResult = false;
             Close();
         }
     }
