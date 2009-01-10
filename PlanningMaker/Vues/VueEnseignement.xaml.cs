@@ -141,13 +141,39 @@ namespace PlanningMaker.Vues
             Horaire horaire = Horaire1.SelectedItem as Horaire;
             if (horaire != null && enseignement != null)
             {
-                if (horaire != enseignement.Horaire2)
-                    enseignement.Horaire1 = horaire;
-                else
+                
+                enseignement.Horaire1 = horaire;
+                if (enseignement.Horaire2 != null)
                 {
-                    MessageBox.Show("Les horaires sont identiques", "PlanningMaker",
-                        MessageBoxButton.OK, MessageBoxImage.Stop);
-                    Horaire1.SelectedItem = enseignement.Horaire1;
+                    ObjectDataProvider odp_horaires = this.FindResource("ComboSource_Horaires") as ObjectDataProvider;
+
+                    if (odp_horaires != null)
+                    {
+                        ICollection<Horaire> horaires = odp_horaires.ObjectInstance as ICollection<Horaire>;
+                        if (horaires != null)
+                        {
+                            bool estDernierHorraire = true;
+                            foreach (Horaire h in horaires)
+                            {
+                                if (horaire.EstSuiviPar(h))
+                                {
+                                    enseignement.Horaire2 = h;
+                                    estDernierHorraire = false;
+                                    break;
+                                }
+                            }
+                            if (estDernierHorraire)
+                            {
+                                enseignement.Horaire2 = null;
+                            }
+                        }
+                        else
+                            enseignement.Horaire2 = null;
+                    }
+                    else
+                        enseignement.Horaire2 = null;
+
+                    Horaire2.SelectedItem = enseignement.Horaire2;
                 }
             }
         }
@@ -158,10 +184,19 @@ namespace PlanningMaker.Vues
             if (horaire != null && enseignement != null)
             {
                 if (horaire != enseignement.Horaire1)
-                    enseignement.Horaire2 = horaire;
+                {
+                    if (enseignement.Horaire1.EstSuiviPar(horaire))
+                        enseignement.Horaire2 = horaire;
+                    else
+                    {
+                        MessageBox.Show("Les horaires ne se suivent pas !", "PlanningMaker",
+                            MessageBoxButton.OK, MessageBoxImage.Stop);
+                        Horaire2.SelectedItem = enseignement.Horaire2;
+                    }
+                }
                 else
                 {
-                    MessageBox.Show("Les horaires sont identiques", "PlanningMaker",
+                    MessageBox.Show("Les horaires sont identiques !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Stop);
                     Horaire2.SelectedItem = enseignement.Horaire2;
                 }
