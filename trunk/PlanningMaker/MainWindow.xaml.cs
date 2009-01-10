@@ -20,12 +20,13 @@ namespace PlanningMaker
 	{
         private string nomFichier;
         private Planning planning;
+        private bool changementDepuisEnregistrement = false;
 
 		public MainWindow()
 		{
 			this.InitializeComponent();
             DataContext = planning;
-			
+
 			// Insert code required on object creation below this point.
             MenuItem_Annuler.IsEnabled = false;
             MenuItem_Rétablir.IsEnabled = false;
@@ -50,6 +51,23 @@ namespace PlanningMaker
             string stringVersion = String.Format("{0}.{1}.{2}", vrs.Major, vrs.Minor, vrs.Build);
 
             return stringVersion;
+        }
+
+        private void ProposerEnregistrement(object sender, RoutedEventArgs e)
+        {
+            if (changementDepuisEnregistrement)
+            {
+                MessageBoxResult result = MessageBox.Show("Voulez-vous enregistrer les modifications effectuées ?", "PlanningMaker",
+                        MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (EnrPossible()) Save(sender, e);
+                    else
+                    {
+                        if (EnrSousPossible()) SaveAs(sender, e);
+                    }
+                }
+            }
         }
 
         private void New(object sender, RoutedEventArgs e)
@@ -100,8 +118,8 @@ namespace PlanningMaker
 
             if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                nomFichier = dialogueO.FileName;
                 New(sender, e);
+                nomFichier = dialogueO.FileName;
                 planning.Charger(nomFichier);
                 MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
                     MessageBoxButton.OK, MessageBoxImage.Information);
@@ -124,10 +142,10 @@ namespace PlanningMaker
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            // TODO : détecter que le planning a été modifié depuis le dernier enregistrement
-            // - dans ce cas : proposer de l'enregistrer
-            // avant de le passer à null
+            ProposerEnregistrement(sender, e);
+
             planning = null;
+            nomFichier = null;
 
             selectionSemaine.ItemsSource = null;
             listeEnseignements.ItemsSource = null;
@@ -152,6 +170,7 @@ namespace PlanningMaker
         private void Save(object sender, RoutedEventArgs e)
         {
             planning.Sauver(nomFichier);
+            changementDepuisEnregistrement = false;
             MessageBox.Show("Planning sauvegardé avec succès !", "PlanningMaker",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -185,12 +204,22 @@ namespace PlanningMaker
 
         private void EnregistrementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = planningExiste() && (nomFichier != null);
+            e.CanExecute = EnrPossible();
         }
 
         private void EnregistrementSousPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = planningExiste();
+            e.CanExecute = EnrSousPossible();
+        }
+
+        private bool EnrPossible()
+        {
+            return planningExiste() && (nomFichier != null) && changementDepuisEnregistrement;
+        }
+
+        private bool EnrSousPossible()
+        {
+            return planningExiste();
         }
 
         private bool planningExiste()
@@ -236,8 +265,9 @@ namespace PlanningMaker
 
         private void PrintPreview(object sender, RoutedEventArgs e)
         {
-            // TODO : indiquer d'enregistrer avant de lancer l'opération
-            // + choisir quoi voir : image, texte, multi-semaines ?
+            // TODO : choisir quoi voir : image, texte, multi-semaines ?
+
+            ProposerEnregistrement(sender, e);
 
             Print print = new Print("ooo");
             System.Windows.Forms.PrintPreviewDialog printPreviewD = new System.Windows.Forms.PrintPreviewDialog();
@@ -247,8 +277,9 @@ namespace PlanningMaker
 
         private void Print(object sender, RoutedEventArgs e)
         {
-            // TODO : indiquer d'enregistrer avant de lancer l'opération
-            // + choisir quoi imprimer : image, texte, multi-semaines ?
+            // TODO : choisir quoi imprimer : image, texte, multi-semaines ?
+
+            ProposerEnregistrement(sender, e);
 
             Print print = new Print("ooo");
             System.Windows.Forms.PrintDialog printD = new System.Windows.Forms.PrintDialog();
@@ -272,6 +303,8 @@ namespace PlanningMaker
 
         private void Exit(object sender, RoutedEventArgs e)
         {
+            ProposerEnregistrement(sender, e);
+
             this.Close();
         }
 
@@ -312,6 +345,8 @@ namespace PlanningMaker
 
         private void MenuItemValiderXML_Click(object sender, RoutedEventArgs e)
         {
+            ProposerEnregistrement(sender, e);
+
             if (OperationSurFichierXMLPossible())
             {
                 ValidationXmlXsd validation = new ValidationXmlXsd();
@@ -326,6 +361,8 @@ namespace PlanningMaker
         private void MenuItemTransfoXSLT_Click(object sender, RoutedEventArgs e)
         {
             string nomFichierSVG = SaveFileSVG();
+
+            ProposerEnregistrement(sender, e);
 
             if (OperationSurFichierXMLPossible() && nomFichierSVG != null)
             {
@@ -348,6 +385,8 @@ namespace PlanningMaker
 
         private void MenuItemRequetesXPath_Click(object sender, RoutedEventArgs e)
         {
+            ProposerEnregistrement(sender, e);
+
             RequetesXPath requetesXPath = new RequetesXPath();
             requetesXPath.ExecRequetesXPath("RequetesXPath.xsl", "Semaine37.xml");
         }
@@ -448,7 +487,7 @@ namespace PlanningMaker
                 }
 
                 listeEnseignements.SelectedItem = nouvelEnseignement;
-
+                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Horaires.IsSelected)
             {
@@ -469,6 +508,7 @@ namespace PlanningMaker
                 }
                 planning.Horaires.Add(nouvelHoraire);
                 listeHoraires.SelectedItem = nouvelHoraire;
+                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Enseignants.IsSelected)
             {
@@ -480,6 +520,7 @@ namespace PlanningMaker
                 }
                 planning.Enseignants.Add(nouvelEnseignant);
                 listeEnseignants.SelectedItem = nouvelEnseignant;
+                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Matieres.IsSelected)
             {
@@ -494,6 +535,7 @@ namespace PlanningMaker
                 }
                 planning.Matieres.Add(nouvelleMatiere);
                 listeMatieres.SelectedItem = nouvelleMatiere;
+                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Salles.IsSelected)
             {
@@ -520,6 +562,7 @@ namespace PlanningMaker
                 }
                 planning.Salles.Add(nouvelleSalle);
                 listeSalles.SelectedItem = nouvelleSalle;
+                changementDepuisEnregistrement = true;
             }
         }
 
@@ -575,6 +618,7 @@ namespace PlanningMaker
                         }
                     }
                 }
+                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Horaires.IsSelected)
             {
@@ -583,6 +627,7 @@ namespace PlanningMaker
                 {
                     planning.SupprimerHoraire(horaire);
                 }
+                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Enseignants.IsSelected)
             {
@@ -591,6 +636,7 @@ namespace PlanningMaker
                 {
                     planning.SupprimerEnseignant(enseignant);
                 }
+                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Matieres.IsSelected)
             {
@@ -599,6 +645,7 @@ namespace PlanningMaker
                 {
                     planning.SupprimerMatiere(matiere);
                 }
+                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Salles.IsSelected)
             {
@@ -607,6 +654,7 @@ namespace PlanningMaker
                 {
                     planning.SupprimerSalle(salle);
                 }
+                changementDepuisEnregistrement = true;
             }
         }
 
@@ -818,8 +866,6 @@ namespace PlanningMaker
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueS.Filter = "Fichier SVG (*.svg)|*.svg";
 
-            
-
             if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Environment.CurrentDirectory = directory;
@@ -873,6 +919,7 @@ namespace PlanningMaker
                     planning.Semaines.Add(s);
                     dateSemaine.DataContext = s;
                     selectionSemaine.Text = nrSemaine.ToString();
+                    changementDepuisEnregistrement = true;
                 }
             }
 
@@ -893,6 +940,7 @@ namespace PlanningMaker
                 selectionSemaine.SelectedItem = fNewWeek.Semaine;
 				ChangementChoixJour(sender, e);
             	RadioButton_Lundi.IsChecked = true;
+                changementDepuisEnregistrement = true;
             }
             else
             {
@@ -910,10 +958,11 @@ namespace PlanningMaker
                 if (position == 0) position = 1;
                 selectionSemaine.SelectedIndex = position - 1;
                 dateSemaine.DataContext = selectionSemaine.SelectedItem as Semaine;
-            }
 
-            ChangementChoixJour(sender, e);
-            RadioButton_Lundi.IsChecked = true;
+                ChangementChoixJour(sender, e);
+                RadioButton_Lundi.IsChecked = true;
+                changementDepuisEnregistrement = true;
+            }
         }
 
         private void NextWeek(object sender, RoutedEventArgs e)
@@ -941,6 +990,7 @@ namespace PlanningMaker
                     planning.Semaines.Add(s);
                     dateSemaine.DataContext = s;
                     selectionSemaine.Text = nrSemaine.ToString();
+                    changementDepuisEnregistrement = true;
                 }
             }
 

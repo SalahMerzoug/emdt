@@ -31,9 +31,9 @@
                              BorderThickness="0" VerticalScrollBarVisibility="Visible" IsEnabled="False"/>
                 </Grid>
             </GroupBox>
-            <TextBlock Margin="0,6,0,0" Name="TextBlokTelecharger" HorizontalAlignment="Center" VerticalAlignment="Top"
-                       MouseEnter="TextBlokTelecharger_MouseEnter" MouseLeave="TextBlokTelecharger_MouseLeave"
-                       MouseLeftButtonDown="TextBlokTelecharger_MouseLeftButtonDown"
+            <TextBlock Margin="0,6,0,0" Name="TextBlockTelecharger" HorizontalAlignment="Center" VerticalAlignment="Top"
+                       MouseEnter="TextBlockTelecharger_MouseEnter" MouseLeave="TextBlockTelecharger_MouseLeave"
+                       MouseLeftButtonDown="TextBlockTelecharger_MouseLeftButtonDown"
                        Visibility="Hidden" IsEnabled="False" Cursor="Hand">
                 <Hyperlink Foreground="Blue">Télécharger la dernière version</Hyperlink>
             </TextBlock>
