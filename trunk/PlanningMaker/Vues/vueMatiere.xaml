@@ -11,7 +11,7 @@
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal">
             <Label Content="Titre" Width="70"/>
-            <TextBox Name="Titre" Text="{Binding Path=Titre}" Width="100"/>
+            <TextBox Name="Titre" Text="{Binding Path=Titre}" Width="170"/>
         </StackPanel>
         <Label Height="10"/>
         <StackPanel Orientation="Horizontal">
