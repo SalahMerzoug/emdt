@@ -41,16 +41,22 @@ namespace PlanningMaker.Vues
 
             if (odp_matiere != null)
                 odp_matiere.ObjectInstance = planning.Matieres;
+            else
+                odp_matiere.ObjectInstance = null;
 
             ObjectDataProvider odp_horaires = this.FindResource("ComboSource_Horaires") as ObjectDataProvider;
 
             if (odp_horaires != null)
                 odp_horaires.ObjectInstance = planning.Horaires;
+            else
+                odp_horaires.ObjectInstance = null;
 
             ObjectDataProvider odp_salles = this.FindResource("ComboSource_Salles") as ObjectDataProvider;
 
             if (odp_horaires != null)
                 odp_salles.ObjectInstance = planning.Salles;
+            else
+                odp_salles.ObjectInstance = null;
 
         }
 
@@ -64,6 +70,8 @@ namespace PlanningMaker.Vues
 
             if (odp_enseignants != null && enseignement.Matiere != null)
                 odp_enseignants.ObjectInstance = enseignement.Matiere.Enseignants;
+            else
+                odp_enseignants.ObjectInstance = null;
 
             Matiere.SelectedItem = enseignement.Matiere;
             Type.SelectedItem = enseignement.Type;
