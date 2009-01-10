@@ -62,7 +62,6 @@
     <Compile Include="Modele\DateValidationRule.cs" />
     <Compile Include="Modele\GroupeValidationRule.cs" />
     <Compile Include="Modele\HoraireValidationRule.cs" />
-    <Compile Include="Modele\MiseAJourThreadData.cs" />
     <Compile Include="Modele\ETypeEnseignements.cs" />
     <Compile Include="Modele\ETypeSalles.cs" />
     <Compile Include="Modele\Print.cs" />

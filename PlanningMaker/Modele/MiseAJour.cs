@@ -1,59 +1,18 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Threading;
-using System.Windows;
 
 namespace PlanningMaker.Modele
 {
     class MiseAJour
     {
-        private SynchronizationContext _context;
         private string loginMAJ;
         private string passMAJ;
 
         public MiseAJour(string login, string pass)
         {
-            // Mémorisation du context
-            _context = SynchronizationContext.Current;
-
             loginMAJ = login;
             passMAJ = pass;
-        }
-
-        public Boolean DoWork(Vues.VueMiseAJour winMAJ)
-        {
-            if (_context != null)
-            {
-                MiseAJourThreadData data = new MiseAJourThreadData();
-                data.FenetreMAJ = winMAJ;
-                // Appel de la méthode via le context
-                _context.Post(Work, data);
-
-                return data.Retour;
-            }
-            else return false;
-        }
-
-        private void Work(Object obj)
-        {
-            MiseAJourThreadData data = obj as MiseAJourThreadData;
-            // Faire le job
-            data.FenetreMAJ.TextBoxContenuResultat.Text = VerifierMAJ();
-            data.FenetreMAJ.ProgBar.Value = 100;
-
-            if (data.FenetreMAJ.TextBoxContenuResultat.Text.Contains("nécessaire"))
-            {
-                data.FenetreMAJ.TextBlokTelecharger.Visibility = Visibility.Visible;
-                data.FenetreMAJ.TextBlokTelecharger.IsEnabled = true;
-            }
-            else
-            {
-                data.FenetreMAJ.TextBlokTelecharger.Visibility = Visibility.Hidden;
-                data.FenetreMAJ.TextBlokTelecharger.IsEnabled = true;
-            }
-
-            data.Retour = true;
         }
 
         public string VerifierMAJ()
