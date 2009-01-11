@@ -27,7 +27,7 @@ namespace PlanningMaker.Modele
         // méthode par défaut
         public void ExecRequetesXPath(string nomFichierXSL, string nomFichierXML)
         {
-            // A cause des # entre les chemins absolu entre XP et Vista, on récupère le chemin à la main !
+            // A cause des # dans les chemins absolus entre XP et Vista, on récupère le chemin à la main !
             // Chemin de l'exécutable
             string exepath = Environment.GetCommandLineArgs()[0];
             // Répertoire de l'exécutable
@@ -39,7 +39,7 @@ namespace PlanningMaker.Modele
             // Charger le fichier de transformation XSL
             xslt.Load(exedir + @"\..\..\Files\" + nomFichierXSL);
           
-            // Charger le fichier à transformer XML
+            // Charger le fichier XML à transformer
             XPathDocument xpathdocument = new XPathDocument(exedir + @"\..\..\Files\" + nomFichierXML);
 
             // Créer le fichier de destination
@@ -56,11 +56,11 @@ namespace PlanningMaker.Modele
                 writer.Close();
 
                 // Affichage
-                MessageBox.Show("Génération des requêtes XPath par défaut: OK");
+                MessageBox.Show("Génération des requêtes XPath par défaut : OK");
                 MainWindow.StartExternWebBrowser(nomFichierXpath);
 
             }
-            catch { MessageBox.Show("Génération des requêtes XPath par défaut: Erreur");}
+            catch { MessageBox.Show("Génération des requêtes XPath par défaut : Erreur");}
 
         }
 
@@ -80,7 +80,7 @@ namespace PlanningMaker.Modele
             // Charger le fichier de transformation XSL
             xslt.Load(exedir + @"\..\..\Files\" + nomFichierXSL);
 
-            // Charger le fichier à transformer XML
+            // Charger le fichier XML à transformer
             
             try
             {
@@ -114,11 +114,11 @@ namespace PlanningMaker.Modele
                 writer.Close();
 
                 // Affichage
-                MessageBox.Show("Génération des requêtes XPath paramétrées: OK");
+                MessageBox.Show("Génération des requêtes XPath paramétrées : OK");
                 MainWindow.StartExternWebBrowser(nomFichierXpath);
 
             }
-            catch { MessageBox.Show("Génération des requêtes XPath paramétrées: Erreur"); }
+            catch { MessageBox.Show("Génération des requêtes XPath paramétrées : Erreur"); }
         }
 
         public static string SaveFileXpath()
