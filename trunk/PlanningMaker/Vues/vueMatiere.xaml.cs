@@ -74,13 +74,20 @@ namespace PlanningMaker.Vues
 
         private void AjouterProf(object sender, RoutedEventArgs e)
         {
-            if(ComboEnseignants.SelectedItem != null && !matiere.Enseignants.Contains(ComboEnseignants.SelectedItem as Enseignant))
-                matiere.Enseignants.Add(ComboEnseignants.SelectedItem as Enseignant);
+            Enseignant enseignant = ComboEnseignants.SelectedItem as Enseignant;
+            if (enseignant != null)
+            {
+                matiere.Enseignants.Add(enseignant);
+                ListeProfs.SelectedItem = enseignant;
+            }
         }
 
         private void AjouterProfPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (matiere != null);
+            if (matiere != null && ComboEnseignants.SelectedItem != null && !matiere.Enseignants.Contains(ComboEnseignants.SelectedItem as Enseignant))
+                e.CanExecute = true;
+            else
+                e.CanExecute = false;
         }
 
         private void SupprimerProf(object sender, RoutedEventArgs e)
@@ -90,7 +97,10 @@ namespace PlanningMaker.Vues
 
         private void SupprimerProfPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true;
+            if (ListeProfs != null && ComboEnseignants.SelectedItem == ListeProfs.SelectedItem)
+                e.CanExecute = true;
+            else
+                e.CanExecute = false;
         }
 
         public void ClearView()
