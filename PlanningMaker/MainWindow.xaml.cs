@@ -55,7 +55,8 @@ namespace PlanningMaker
 
         private void ProposerEnregistrement(object sender, RoutedEventArgs e, string action)
         {
-            if (changementDepuisEnregistrement)
+            //if (changementDepuisEnregistrement)
+            if (planning !=null && planning.HasChanged)
             {
                 MessageBoxResult result = MessageBox.Show("Voulez-vous enregistrer les modifications effectuées avant de " + action + " ?", "PlanningMaker",
                         MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
@@ -121,6 +122,7 @@ namespace PlanningMaker
                 New(sender, e);
                 nomFichier = dialogueO.FileName;
                 planning.Charger(nomFichier);
+                planning.HasChanged = false;
                 MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 

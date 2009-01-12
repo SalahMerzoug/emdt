@@ -7,7 +7,7 @@ namespace PlanningMaker.Modele
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void ObjectChanged(String propertyName)
+        public virtual void ObjectChanged(String propertyName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

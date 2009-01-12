@@ -36,12 +36,21 @@ namespace PlanningMaker.Modele
         {
             titre = "undefined";
             enseignants = new ObservableCollection<Enseignant>();
+            enseignants.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
         }
 
+        
         public Matiere(String titre)
         {
             this.titre = titre;
             enseignants = new ObservableCollection<Enseignant>();
+            enseignants.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+
+        }
+
+        public void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            ObjectChanged("Enseignants");
         }
 
         public override string ToString()
