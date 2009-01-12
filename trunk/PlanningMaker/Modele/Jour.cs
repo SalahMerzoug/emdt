@@ -36,6 +36,12 @@ namespace PlanningMaker.Modele
         public Jour()
         {
             enseignements = new ObservableCollection<Enseignement>();
+            enseignements.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+        }
+
+        public void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            ObjectChanged("Enseignements");
         }
 
         public override string ToString()

@@ -21,6 +21,19 @@ namespace PlanningMaker.Modele
         private ObservableCollection<Salle> salles;
         private ObservableCollection<Semaine> semaines;
 
+        private bool hasChanged;
+
+        public bool HasChanged
+        {
+            get
+            {
+                return hasChanged;
+            }
+            set
+            {
+                hasChanged = value;
+            }
+        }
 
         public EAnnees Annee
         {
@@ -104,21 +117,46 @@ namespace PlanningMaker.Modele
         public Planning()
         {
             promotion = "Undefined";
+
             enseignants = new ObservableCollection<Enseignant>();
+            enseignants.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+
             matieres = new ObservableCollection<Matiere>();
+            matieres.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+
             horaires = new ObservableCollection<Horaire>();
+            horaires.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+
             salles = new ObservableCollection<Salle>();
+            salles.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+
             semaines = new ObservableCollection<Semaine>();
+            semaines.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+        }
+
+        public void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            hasChanged = true;
         }
 
         public Planning(String promotion)
         {
             this.promotion = promotion;
+
             enseignants = new ObservableCollection<Enseignant>();
+            enseignants.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+
             matieres = new ObservableCollection<Matiere>();
+            matieres.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+
             horaires = new ObservableCollection<Horaire>();
+            horaires.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+
             salles = new ObservableCollection<Salle>();
+            salles.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+
             semaines = new ObservableCollection<Semaine>();
+            semaines.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
         }
 
         public void SupprimerEnseignant(Enseignant enseignant)
@@ -602,5 +640,6 @@ namespace PlanningMaker.Modele
             }
             refSalle.Value = "ids" + salles.IndexOf(e.Salle).ToString();
         }
+
     }
 }
