@@ -53,11 +53,11 @@ namespace PlanningMaker
             return stringVersion;
         }
 
-        private void ProposerEnregistrement(object sender, RoutedEventArgs e)
+        private void ProposerEnregistrement(object sender, RoutedEventArgs e, string action)
         {
             if (changementDepuisEnregistrement)
             {
-                MessageBoxResult result = MessageBox.Show("Voulez-vous enregistrer les modifications effectuées ?", "PlanningMaker",
+                MessageBoxResult result = MessageBox.Show("Voulez-vous enregistrer les modifications effectuées avant de " + action + " ?", "PlanningMaker",
                         MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (result == MessageBoxResult.Yes)
                 {
@@ -142,7 +142,7 @@ namespace PlanningMaker
 
         private void Close(object sender, RoutedEventArgs e)
         {
-            ProposerEnregistrement(sender, e);
+            ProposerEnregistrement(sender, e, "fermer");
 
             planning = null;
             nomFichier = null;
@@ -267,7 +267,7 @@ namespace PlanningMaker
         {
             // TODO : choisir quoi voir : image, texte, multi-semaines ?
 
-            ProposerEnregistrement(sender, e);
+            ProposerEnregistrement(sender, e, "lancer l'aperçu");
 
             Print print = new Print("ooo");
             System.Windows.Forms.PrintPreviewDialog printPreviewD = new System.Windows.Forms.PrintPreviewDialog();
@@ -279,7 +279,7 @@ namespace PlanningMaker
         {
             // TODO : choisir quoi imprimer : image, texte, multi-semaines ?
 
-            ProposerEnregistrement(sender, e);
+            ProposerEnregistrement(sender, e, "lancer l'impression");
 
             Print print = new Print("ooo");
             System.Windows.Forms.PrintDialog printD = new System.Windows.Forms.PrintDialog();
@@ -303,7 +303,7 @@ namespace PlanningMaker
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            ProposerEnregistrement(sender, e);
+            ProposerEnregistrement(sender, e, "quitter");
 
             this.Close();
         }
@@ -345,7 +345,7 @@ namespace PlanningMaker
 
         private void MenuItemValiderXML_Click(object sender, RoutedEventArgs e)
         {
-            ProposerEnregistrement(sender, e);
+            ProposerEnregistrement(sender, e, "lancer la validation");
 
             if (OperationSurFichierXMLPossible())
             {
@@ -362,7 +362,7 @@ namespace PlanningMaker
         {
             string nomFichierSVG = SaveFileSVG();
 
-            ProposerEnregistrement(sender, e);
+            ProposerEnregistrement(sender, e, "lancer la transformation");
 
             if (OperationSurFichierXMLPossible() && nomFichierSVG != null)
             {
@@ -385,7 +385,7 @@ namespace PlanningMaker
 
         private void MenuItemRequetesXPath_Click(object sender, RoutedEventArgs e)
         {
-            ProposerEnregistrement(sender, e);
+            ProposerEnregistrement(sender, e, "lancer les requêtes XPath");
 
             RequetesXPath requetesXPath = new RequetesXPath();
             requetesXPath.ExecRequetesXPath("RequetesXPath.xsl", "Semaine37.xml");
