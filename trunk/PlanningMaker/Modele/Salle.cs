@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace PlanningMaker.Modele
 {
     public class Salle : ObservableObject
     {
         private ETypeSalles type;
-
         private String nom;
 
         public virtual String Nom

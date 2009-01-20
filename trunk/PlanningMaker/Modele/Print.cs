@@ -15,7 +15,7 @@ namespace PlanningMaker.Modele
             this._prDoc = new PrintDocument();
             this._prDoc.OriginAtMargins = true;
             this._prDoc.DefaultPageSettings.Landscape = true;
-            this._prDoc.DocumentName = st + " test " + st;
+            this._prDoc.DocumentName = st + " Emploi du temps " + st;
             this._prDoc.BeginPrint += new PrintEventHandler(this.prDoc_BeginPrint);
             this._prDoc.EndPrint += new PrintEventHandler(this.prDoc_EndPrint);
             this._prDoc.PrintPage += new PrintPageEventHandler(this.prDoc_PrintPage);

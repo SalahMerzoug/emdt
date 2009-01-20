@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Collections.ObjectModel;
 
 namespace PlanningMaker.Modele
 {
     public class Semaine : ObservableObject
     {
-
         private int numero;
         private String date;
 

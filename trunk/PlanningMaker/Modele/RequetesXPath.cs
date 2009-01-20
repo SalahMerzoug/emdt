@@ -3,8 +3,6 @@ using System.Windows;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
-using System.Diagnostics;
-using PlanningMaker;
 
 namespace PlanningMaker.Modele
 {

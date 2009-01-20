@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Windows.Forms;
 using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Forms;
+using System.Xml;
 
 namespace PlanningMaker.Modele
 {
@@ -21,6 +19,7 @@ namespace PlanningMaker.Modele
         private ObservableCollection<Salle> salles;
         private ObservableCollection<Semaine> semaines;
 
+        private MainWindow fenetrePrincipale;
         private bool hasChanged;
 
         public bool HasChanged
@@ -32,6 +31,8 @@ namespace PlanningMaker.Modele
             set
             {
                 hasChanged = value;
+                fenetrePrincipale.SetTitle();
+                //MessageBox.Show("Set de hasChanged de planning.");
             }
         }
 
@@ -114,8 +115,9 @@ namespace PlanningMaker.Modele
             }
         }
 
-        public Planning()
+        public Planning(MainWindow fenetre)
         {
+            fenetrePrincipale = fenetre;
             promotion = "Undefined";
 
             enseignants = new ObservableCollection<Enseignant>();
@@ -136,11 +138,12 @@ namespace PlanningMaker.Modele
 
         public void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            hasChanged = true;
+            this.HasChanged = true;
         }
 
-        public Planning(String promotion)
+        public Planning(MainWindow fenetre, String promotion)
         {
+            fenetrePrincipale = fenetre;
             this.promotion = promotion;
 
             enseignants = new ObservableCollection<Enseignant>();

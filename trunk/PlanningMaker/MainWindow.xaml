@@ -5,12 +5,10 @@
     xmlns:r="clr-namespace:PlanningMaker.Modele"
 	x:Class="PlanningMaker.MainWindow"
 	x:Name="Window"
-    Title="Viactisoft PlanningMaker 2008 School Edition"
 	Width="900" Height="650" Background="#FFC0C0C0" WindowStartupLocation="CenterScreen"
     ResizeMode="CanMinimize"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
-	
     <Window.Resources>
        <Style x:Key="TriggerIcone">
             <Style.Triggers>
@@ -193,17 +191,17 @@
                         <Label Content="Semaine" FontSize="20"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="Bouton_PreviousWeek" Width="50" Command="c:PlanningCommands.PreviousWeek">Prev.</Button>
+                        <Button x:Name="Bouton_PreviousWeek" Width="50" Command="c:PlanningCommands.PreviousWeek">Préc.</Button>
                         <Label Width="20"/>
-                        <TextBlock Height="15">Numéro : </TextBlock>
+                        <TextBlock Height="15">Numéro :</TextBlock>
                         <Label Width="10"/>
                         <ComboBox Name="selectionSemaine" Width="50" DisplayMemberPath="Numero" HorizontalContentAlignment="Center" SelectionChanged="selectionSemaine_SelectionChanged" />
                         <Label Width="20"/>
-                        <Button x:Name="Bouton_NextWeek" Width="50" Command="c:PlanningCommands.NextWeek">Next</Button>
+                        <Button x:Name="Bouton_NextWeek" Width="50" Command="c:PlanningCommands.NextWeek">Suiv.</Button>
                     </StackPanel>
                     <Label Height="10"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Height="15">Date : </TextBlock>
+                        <TextBlock Height="15">Date :</TextBlock>
                         <Label Width="10"/>
                         <TextBox Name="dateSemaine" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100" HorizontalAlignment="Center">
                             <TextBox.Text>
@@ -225,7 +223,15 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="Promotion :"/>
                         <Label Width="20"/>
-                        <TextBox x:Name="TextBox_Promotion" Text="{Binding Path=Promotion}" Width="100" HorizontalAlignment="Center"/>
+                        <TextBox x:Name="TextBox_Promotion" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100" HorizontalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="Promotion" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <r:PromotionValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                         <Label Width="20"/>
                         <Label Content="Annee :"/>
                         <Label Width="20"/>
@@ -233,7 +239,15 @@
                         <Label Width="20"/>
                         <Label Content="Division :"/>
                         <Label Width="20"/>
-                        <TextBox x:Name="TextBox_Division" Text="{Binding Path=Division}" Width="100" HorizontalAlignment="Center"/>
+                        <TextBox x:Name="TextBox_Division" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100" HorizontalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="Division" UpdateSourceTrigger="PropertyChanged" >
+                                    <Binding.ValidationRules>
+                                        <r:DivisionValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </StackPanel>
                     <StackPanel Height="5"/>
                     <Separator Height="1"/>

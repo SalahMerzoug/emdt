@@ -45,7 +45,7 @@
             <Label Content="Groupe" Width="80"/>
             <TextBox Name="Groupe" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="140">
                 <TextBox.Text>
-                    <Binding Path="Groupe" UpdateSourceTrigger="PropertyChanged" >
+                    <Binding Path="Groupe" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
                             <f:GroupeValidationRule/>
                         </Binding.ValidationRules>

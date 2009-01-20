@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace PlanningMaker.Modele
 {
     public class Enseignement : ObservableObject
     {
         private ETypeEnseignements type;
-
         private int numeroGroupe;
-
         private Enseignant enseignant;
         private Matiere matiere;
-
         private Horaire plage1;
         private Horaire plage2;
-
         private Salle salle;
 
         public ETypeEnseignements Type
