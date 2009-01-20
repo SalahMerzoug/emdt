@@ -7,9 +7,9 @@ namespace PlanningMaker.Vues
     /// <summary>
     /// Logique d'interaction pour FenetreAPropos.xaml
     /// </summary>
-    public partial class FenetreAPropos : Window
+    public partial class VueAPropos : Window
     {
-        public FenetreAPropos()
+        public VueAPropos()
         {
             InitializeComponent();
             TextVersion.Text = "◈ " + "Version " + MainWindow.getNumeroVersion() + " ◈";

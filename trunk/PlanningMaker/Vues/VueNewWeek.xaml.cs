@@ -9,7 +9,7 @@ namespace PlanningMaker.Vues
     /// <summary>
     /// Logique d'interaction pour FenetreNewWeek.xaml
     /// </summary>
-    public partial class FenetreNewWeek : Window
+    public partial class VueNewWeek : Window
     {
         private Planning planning;
         private Semaine semaine;
@@ -30,7 +30,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public FenetreNewWeek()
+        public VueNewWeek()
         {
             semaine = new Semaine();
             planning = null;

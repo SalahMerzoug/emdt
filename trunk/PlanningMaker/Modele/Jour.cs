@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace PlanningMaker.Modele
 {
@@ -7,7 +8,7 @@ namespace PlanningMaker.Modele
     {
 
         private EJours nom;
-        private ObservableCollection<Enseignement> enseignements;
+        private ObservableNotifiableCollection<Enseignement> enseignements;
 
         public EJours Nom
         {
@@ -32,11 +33,17 @@ namespace PlanningMaker.Modele
 
         public Jour()
         {
-            enseignements = new ObservableCollection<Enseignement>();
-            enseignements.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+            enseignements = new ObservableNotifiableCollection<Enseignement>();
+            enseignements.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            enseignements.ItemPropertyChanged += OnItemPropertyChanged;
         }
 
-        public void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            ObjectChanged("Enseignements");
+        }
+
+        private void OnItemPropertyChanged(object sender, ItemPropertyChangedEventArgs args)
         {
             ObjectChanged("Enseignements");
         }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Xml;
 using System.Windows;
+using System.Collections.Specialized;
 
 namespace PlanningMaker.Modele
 {
@@ -13,11 +14,11 @@ namespace PlanningMaker.Modele
         private EDivisions division;
         private String promotion;
 
-        private ObservableCollection<Enseignant> enseignants;
-        private ObservableCollection<Matiere> matieres;
-        private ObservableCollection<Horaire> horaires;
-        private ObservableCollection<Salle> salles;
-        private ObservableCollection<Semaine> semaines;
+        private ObservableNotifiableCollection<Enseignant> enseignants;
+        private ObservableNotifiableCollection<Matiere> matieres;
+        private ObservableNotifiableCollection<Horaire> horaires;
+        private ObservableNotifiableCollection<Salle> salles;
+        private ObservableNotifiableCollection<Semaine> semaines;
 
         private MainWindow fenetrePrincipale;
         private bool hasChanged;
@@ -45,7 +46,7 @@ namespace PlanningMaker.Modele
             set
             {
                 annee = value;
-                ObjectChanged("Annee");
+                this.HasChanged = true;
             }
         }
 
@@ -58,7 +59,7 @@ namespace PlanningMaker.Modele
             set
             {
                 division = value;
-                ObjectChanged("Division");
+                this.HasChanged = true;
             }
         }
 
@@ -71,7 +72,7 @@ namespace PlanningMaker.Modele
             set
             {
                 promotion = value;
-                ObjectChanged("Promotion");
+                this.HasChanged = true;
             }
         }
 
@@ -120,23 +121,33 @@ namespace PlanningMaker.Modele
             fenetrePrincipale = fenetre;
             promotion = "Undefined";
 
-            enseignants = new ObservableCollection<Enseignant>();
-            enseignants.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+            enseignants = new ObservableNotifiableCollection<Enseignant>();
+            enseignants.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            enseignants.ItemPropertyChanged += OnItemPropertyChanged;
 
-            matieres = new ObservableCollection<Matiere>();
-            matieres.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+            matieres = new ObservableNotifiableCollection<Matiere>();
+            matieres.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            matieres.ItemPropertyChanged += OnItemPropertyChanged;
 
-            horaires = new ObservableCollection<Horaire>();
-            horaires.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+            horaires = new ObservableNotifiableCollection<Horaire>();
+            horaires.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            horaires.ItemPropertyChanged += OnItemPropertyChanged;
 
-            salles = new ObservableCollection<Salle>();
-            salles.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+            salles = new ObservableNotifiableCollection<Salle>();
+            salles.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            salles.ItemPropertyChanged += OnItemPropertyChanged;
 
-            semaines = new ObservableCollection<Semaine>();
-            semaines.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+            semaines = new ObservableNotifiableCollection<Semaine>();
+            semaines.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            semaines.ItemPropertyChanged += OnItemPropertyChanged;
         }
 
-        public void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            this.HasChanged = true;
+        }
+
+        private void OnItemPropertyChanged(object sender, ItemPropertyChangedEventArgs args)
         {
             this.HasChanged = true;
         }
