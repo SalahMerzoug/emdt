@@ -193,17 +193,17 @@
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="Bouton_PreviousWeek" Width="50" Command="c:PlanningCommands.PreviousWeek">Préc.</Button>
                         <Label Width="20"/>
-                        <TextBlock Height="15">Numéro :</TextBlock>
+                        <Label Name="Label_NumSemaine">Numéro :</Label>
                         <Label Width="10"/>
-                        <ComboBox Name="selectionSemaine" Width="50" DisplayMemberPath="Numero" HorizontalContentAlignment="Center" SelectionChanged="ChangementSelectionSemaine" />
+                        <ComboBox Name="ComboBox_NumSemaine" Width="50" DisplayMemberPath="Numero" HorizontalContentAlignment="Center" SelectionChanged="ChangementNumSemaine" />
                         <Label Width="20"/>
                         <Button x:Name="Bouton_NextWeek" Width="50" Command="c:PlanningCommands.NextWeek">Suiv.</Button>
                     </StackPanel>
                     <Label Height="10"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Height="15">Date :</TextBlock>
+                        <Label Name="Label_DateSemaine">Date :</Label>
                         <Label Width="10"/>
-                        <TextBox Name="dateSemaine" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100" HorizontalAlignment="Center">
+                        <TextBox Name="TextBox_DateSemaine" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100" HorizontalAlignment="Center">
                             <TextBox.Text>
                                 <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
@@ -249,9 +249,7 @@
                             </TextBox.Text>
                         </TextBox>
                     </StackPanel>
-                    <StackPanel Height="5"/>
-                    <Separator Height="1"/>
-                    <StackPanel Height="15"/>
+                    <Separator Height="20"/>
                     <StackPanel HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="StackRadioJours">
                             <RadioButton x:Name="RadioButton_Lundi" GroupName="choixJour" Unchecked="ChangementChoixJour">Lundi</RadioButton>
@@ -264,7 +262,7 @@
                             <Label Width="20"/>
                             <RadioButton x:Name="RadioButton_Vendredi" GroupName="choixJour" Unchecked="ChangementChoixJour">Vendredi</RadioButton>
                         </StackPanel>
-                        <StackPanel Height="20"/>
+                        <StackPanel Height="10"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <Grid Width="590" Height="320">
                                 <ListView x:Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement" MouseRightButtonUp="DeselectionEnseignement">
