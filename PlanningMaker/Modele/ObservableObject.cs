@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows;
 
 namespace PlanningMaker.Modele
 {
@@ -8,7 +7,7 @@ namespace PlanningMaker.Modele
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public virtual void ObjectChanged(String propertyName)
+        public void ObjectChanged(String propertyName)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));

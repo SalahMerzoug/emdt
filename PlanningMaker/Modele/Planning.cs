@@ -144,11 +144,13 @@ namespace PlanningMaker.Modele
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.HasChanged = true;
+            MessageBox.Show("CollectionChanged");
         }
 
         private void OnItemPropertyChanged(object sender, ItemPropertyChangedEventArgs args)
         {
             this.HasChanged = true;
+            MessageBox.Show("OnItemPropertyChanged");
         }
 
         public void SupprimerEnseignant(Enseignant enseignant)
