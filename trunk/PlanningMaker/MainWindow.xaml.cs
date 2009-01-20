@@ -130,7 +130,6 @@ namespace PlanningMaker
             vueMatieres.SortDescriptions.Add(new SortDescription("Titre", ListSortDirection.Ascending));
             vueMatiere.setEnseignantsContext(planning.Enseignants);
             listeMatieres.ItemsSource = planning.Matieres;
-
         }
 
         private void Open(object sender, RoutedEventArgs e)
@@ -152,7 +151,6 @@ namespace PlanningMaker
                 // Mise à jour du fichier source pour les requêtes XPath
                 RequetesXPath.NomFichierSemaine = nomFichier;
 
-
                 SetDefaultSemaine();
                 
                 IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
@@ -160,7 +158,7 @@ namespace PlanningMaker
                 {
                     Semaine firstSemaine = enumSemaine.Current as Semaine;
                     ComboBox_NumSemaine.Text = firstSemaine.Numero.ToString();
-                    listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;  
+                    listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;
                 }
             }
             Environment.CurrentDirectory = directory;
