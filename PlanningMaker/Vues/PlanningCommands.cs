@@ -1,47 +1,43 @@
-﻿
+﻿using System.Windows.Input;
+
 namespace PlanningMaker.Vues
 {
     public class PlanningCommands
     {
-        private static System.Windows.Input.RoutedUICommand importer;
-        private static System.Windows.Input.RoutedUICommand exporter;
-        private static System.Windows.Input.RoutedUICommand exit;
-        private static System.Windows.Input.RoutedUICommand ajouterElement;
-        private static System.Windows.Input.RoutedUICommand supprimerElement;
-        private static System.Windows.Input.RoutedUICommand newWeek;
-        private static System.Windows.Input.RoutedUICommand delWeek;
-        private static System.Windows.Input.RoutedUICommand nextWeek;
-        private static System.Windows.Input.RoutedUICommand previousWeek;
-        private static System.Windows.Input.RoutedUICommand ajouterProf;
-        private static System.Windows.Input.RoutedUICommand supprimerProf;
+        private static RoutedUICommand importer;
+        private static RoutedUICommand exporter;
+        private static RoutedUICommand exit;
+        private static RoutedUICommand ajouterElement;
+        private static RoutedUICommand supprimerElement;
+        private static RoutedUICommand newWeek;
+        private static RoutedUICommand delWeek;
+        private static RoutedUICommand nextWeek;
+        private static RoutedUICommand previousWeek;
+        private static RoutedUICommand ajouterProf;
+        private static RoutedUICommand supprimerProf;
+
+        private static RoutedUICommand ok;
+        private static RoutedUICommand cancel;
 
         static PlanningCommands()
         {
-            importer = new System.Windows.Input.RoutedUICommand(
-                "Importer", "Importer", typeof(PlanningCommands));
-            exporter = new System.Windows.Input.RoutedUICommand(
-                "Exporter", "Exporter", typeof(PlanningCommands));
-            exit = new System.Windows.Input.RoutedUICommand(
-                "Exit", "Quitter PlanningMaker 2008", typeof(PlanningCommands));
-            ajouterElement = new System.Windows.Input.RoutedUICommand(
-                "Ajouter", "Ajouter une ressource", typeof(PlanningCommands));
-            supprimerElement = new System.Windows.Input.RoutedUICommand(
-                "Supprimer", "Supprimer une ressource", typeof(PlanningCommands));
-            newWeek = new System.Windows.Input.RoutedUICommand(
-                "Nouvelle semaine", "Ajouter une nouvelle semaine", typeof(PlanningCommands));
-            delWeek = new System.Windows.Input.RoutedUICommand(
-                "Supprimer semaine", "Ajouter une nouvelle semaine", typeof(PlanningCommands));
-            previousWeek = new System.Windows.Input.RoutedUICommand(
-                "Precedent", "Semaine précédente", typeof(PlanningCommands));
-            nextWeek = new System.Windows.Input.RoutedUICommand(
-                "Suivante", "Semaine suivante", typeof(PlanningCommands));
-            ajouterProf = new System.Windows.Input.RoutedUICommand(
-                "Ajouter professeur", "Ajouter professeur", typeof(PlanningCommands));
-            supprimerProf = new System.Windows.Input.RoutedUICommand(
-                "Supprimer professeur", "Supprimer professeur", typeof(PlanningCommands));
+            importer = new RoutedUICommand("Importer", "Importer", typeof(PlanningCommands));
+            exporter = new RoutedUICommand("Exporter", "Exporter", typeof(PlanningCommands));
+            exit = new RoutedUICommand("Exit", "Quitter PlanningMaker 2008", typeof(PlanningCommands));
+            ajouterElement = new RoutedUICommand("Ajouter", "Ajouter une ressource", typeof(PlanningCommands));
+            supprimerElement = new RoutedUICommand("Supprimer", "Supprimer une ressource", typeof(PlanningCommands));
+            newWeek = new RoutedUICommand("Nouvelle semaine", "Ajouter une nouvelle semaine", typeof(PlanningCommands));
+            delWeek = new RoutedUICommand("Supprimer semaine", "Ajouter une nouvelle semaine", typeof(PlanningCommands));
+            previousWeek = new RoutedUICommand("Precedent", "Semaine précédente", typeof(PlanningCommands));
+            nextWeek = new RoutedUICommand("Suivante", "Semaine suivante", typeof(PlanningCommands));
+            ajouterProf = new RoutedUICommand("Ajouter professeur", "Ajouter professeur", typeof(PlanningCommands));
+            supprimerProf = new RoutedUICommand("Supprimer professeur", "Supprimer professeur", typeof(PlanningCommands));
+
+            ok = new RoutedUICommand("OK", "Créer une nouvelle semaine", typeof(PlanningCommands));
+            cancel = new RoutedUICommand("Cancel", "Annuler la création", typeof(PlanningCommands));
         }
 
-        public static System.Windows.Input.RoutedUICommand Importer
+        public static RoutedUICommand Importer
         {
             get
             {
@@ -49,7 +45,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand Exporter
+        public static RoutedUICommand Exporter
         {
             get
             {
@@ -57,7 +53,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand Exit
+        public static RoutedUICommand Exit
         {
             get
             {
@@ -65,7 +61,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand AjouterElement
+        public static RoutedUICommand AjouterElement
         {
             get
             {
@@ -73,7 +69,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand SupprimerElement
+        public static RoutedUICommand SupprimerElement
         {
             get
             {
@@ -81,7 +77,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand NewWeek
+        public static RoutedUICommand NewWeek
         {
             get
             {
@@ -89,7 +85,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand DelWeek
+        public static RoutedUICommand DelWeek
         {
             get
             {
@@ -97,7 +93,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand NextWeek
+        public static RoutedUICommand NextWeek
         {
             get
             {
@@ -105,7 +101,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand PreviousWeek
+        public static RoutedUICommand PreviousWeek
         {
             get
             {
@@ -113,7 +109,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand AjouterProf
+        public static RoutedUICommand AjouterProf
         {
             get
             {
@@ -121,11 +117,28 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public static System.Windows.Input.RoutedUICommand SupprimerProf
+        public static RoutedUICommand SupprimerProf
         {
             get
             {
                 return supprimerProf;
+            }
+        }
+
+
+        public static RoutedUICommand OK
+        {
+            get
+            {
+                return ok;
+            }
+        }
+
+        public static RoutedUICommand Cancel
+        {
+            get
+            {
+                return cancel;
             }
         }
     }

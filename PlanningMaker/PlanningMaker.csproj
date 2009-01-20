@@ -58,6 +58,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modele\ItemPropertyChangedEventArgs.cs" />
+    <Compile Include="Modele\ObservableNotifiableCollection.cs" />
     <Compile Include="Modele\DivisionValidationRule.cs" />
     <Compile Include="Modele\PromotionValidationRule.cs" />
     <Compile Include="Modele\NumeroValidationRule.cs" />
@@ -68,7 +70,6 @@
     <Compile Include="Modele\ETypeSalles.cs" />
     <Compile Include="Modele\Print.cs" />
     <Compile Include="Vues\ListeAnnees.cs" />
-    <Compile Include="Vues\NewWeekCommands.cs" />
     <Compile Include="Vues\VueEnseignement.xaml.cs">
       <DependentUpon>VueEnseignement.xaml</DependentUpon>
     </Compile>
@@ -103,8 +104,8 @@
     <Compile Include="Vues\VueRequetesXPath.xaml.cs">
       <DependentUpon>VueRequetesXPath.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vues\FenetreAPropos.xaml.cs">
-      <DependentUpon>FenetreAPropos.xaml</DependentUpon>
+    <Compile Include="Vues\VueAPropos.xaml.cs">
+      <DependentUpon>VueAPropos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Vues\PlanningCommands.cs" />
     <Compile Include="Vues\VueSalle.xaml.cs">
@@ -116,8 +117,8 @@
     <Compile Include="Vues\VueHoraire.xaml.cs">
       <DependentUpon>VueHoraire.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Vues\FenetreNewWeek.xaml.cs">
-      <DependentUpon>FenetreNewWeek.xaml</DependentUpon>
+    <Compile Include="Vues\VueNewWeek.xaml.cs">
+      <DependentUpon>VueNewWeek.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -139,7 +140,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vues\FenetreAPropos.xaml">
+    <Page Include="Vues\VueAPropos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,7 +156,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Vues\FenetreNewWeek.xaml">
+    <Page Include="Vues\VueNewWeek.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

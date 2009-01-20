@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 using System.Windows;
+using System.Windows.Input;
 using PlanningMaker.Modele;
 
 namespace PlanningMaker.Vues
@@ -70,17 +71,17 @@ namespace PlanningMaker.Vues
             this.Close();
         }
 
-        private void TextBlockTelecharger_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void TextBlockTelecharger_MouseEnter(object sender, MouseEventArgs e)
         {
             TextBlockTelecharger.FontStyle = FontStyles.Italic;
         }
 
-        private void TextBlockTelecharger_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void TextBlockTelecharger_MouseLeave(object sender, MouseEventArgs e)
         {
             TextBlockTelecharger.FontStyle = FontStyles.Normal;
         }
 
-        private void TextBlockTelecharger_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void TextBlockTelecharger_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             System.Diagnostics.Process.Start("http://code.google.com/p/emdt/downloads/list");
         }

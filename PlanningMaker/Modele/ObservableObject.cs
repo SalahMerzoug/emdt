@@ -13,7 +13,6 @@ namespace PlanningMaker.Modele
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-                MessageBox.Show("Mettre le Planning.HasChanged à 'true' : " + propertyName);
             }
         }
     }

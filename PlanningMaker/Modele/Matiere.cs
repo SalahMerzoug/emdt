@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace PlanningMaker.Modele
 {
     public class Matiere : ObservableObject
     {
         private String titre;
-        private ObservableCollection<Enseignant> enseignants;
+        private ObservableNotifiableCollection<Enseignant> enseignants;
 
         public String Titre
         {
@@ -33,20 +34,27 @@ namespace PlanningMaker.Modele
         public Matiere()
         {
             titre = "undefined";
-            enseignants = new ObservableCollection<Enseignant>();
-            enseignants.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+            enseignants = new ObservableNotifiableCollection<Enseignant>();
+            enseignants.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            enseignants.ItemPropertyChanged += OnItemPropertyChanged;
         }
 
         
         public Matiere(String titre)
         {
             this.titre = titre;
-            enseignants = new ObservableCollection<Enseignant>();
-            enseignants.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
+            enseignants = new ObservableNotifiableCollection<Enseignant>();
+            enseignants.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            enseignants.ItemPropertyChanged += OnItemPropertyChanged;
 
         }
 
-        public void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        public void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            ObjectChanged("Enseignants");
+        }
+
+        private void OnItemPropertyChanged(object sender, ItemPropertyChangedEventArgs args)
         {
             ObjectChanged("Enseignants");
         }

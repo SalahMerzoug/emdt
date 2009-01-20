@@ -152,7 +152,8 @@ namespace PlanningMaker
                 // Mise à jour du fichier source pour les requêtes XPath
                 RequetesXPath.NomFichierSemaine = nomFichier;
 
-                RadioButton_Lundi.IsChecked = true;
+
+                SetDefaultRadioJours();
                 
                 IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
                 if (enumSemaine.MoveNext())
@@ -189,6 +190,9 @@ namespace PlanningMaker
             vueHoraire.ClearView();
             vueMatiere.ClearView();
             vueEnseignant.ClearView();
+
+            ClearRadioJours();
+            TabItem_Emploi_du_temps.IsSelected = true;
             TabPanel.IsEnabled = false;
         }
 
@@ -425,7 +429,7 @@ namespace PlanningMaker
 
         private void MenuItemAPropos_Click(object sender, RoutedEventArgs e)
         {
-            Vues.FenetreAPropos fAPropos = new Vues.FenetreAPropos();
+            Vues.VueAPropos fAPropos = new Vues.VueAPropos();
             fAPropos.Owner = this;
             this.Opacity = 0.8;
             fAPropos.ShowDialog();
@@ -938,12 +942,12 @@ namespace PlanningMaker
             }
 
             ChangementChoixJour(sender, e);
-            RadioButton_Lundi.IsChecked = true;
+            SetDefaultRadioJours();
         }
 
         private void NewWeek(object sender, ExecutedRoutedEventArgs e)
         {
-            FenetreNewWeek fNewWeek = new FenetreNewWeek();
+            VueNewWeek fNewWeek = new VueNewWeek();
             fNewWeek.Owner = this;
             fNewWeek.Planning = planning;
             bool? ok = fNewWeek.ShowDialog();
@@ -953,7 +957,7 @@ namespace PlanningMaker
                         MessageBoxButton.OK, MessageBoxImage.Information);
                 selectionSemaine.SelectedItem = fNewWeek.Semaine;
 				ChangementChoixJour(sender, e);
-            	RadioButton_Lundi.IsChecked = true;
+                SetDefaultRadioJours();
             }
             else
             {
@@ -973,7 +977,7 @@ namespace PlanningMaker
                 dateSemaine.DataContext = selectionSemaine.SelectedItem as Semaine;
 
                 ChangementChoixJour(sender, e);
-                RadioButton_Lundi.IsChecked = true;
+                SetDefaultRadioJours();
             }
         }
 
@@ -1006,7 +1010,7 @@ namespace PlanningMaker
             }
 
             ChangementChoixJour(sender, e);
-            RadioButton_Lundi.IsChecked = true;
+            SetDefaultRadioJours();
         }
 
         private void ChangementChoixJour(object sender, RoutedEventArgs e)
@@ -1038,12 +1042,12 @@ namespace PlanningMaker
             else listeEnseignements.ItemsSource = null;
         }
 
-        private void NextWeekPossible(object sender, CanExecuteRoutedEventArgs e)
+        private void NewWeekPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (planning!=null && !(selectionSemaine.Text.Equals("")));
+            e.CanExecute = ((planning != null) && (selectionSemaine.Items.Count <= 52));
         }
 
-        private void PreviousWeekPossible(object sender, CanExecuteRoutedEventArgs e)
+        private void DelNextPreviousWeekPossible(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = ((planning != null) && !(selectionSemaine.Text.Equals("")));
         }
@@ -1057,11 +1061,36 @@ namespace PlanningMaker
                 vueEnseignement.ClearView();
         }
 
-        private void selectionSemaine_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ChangementSelectionSemaine(object sender, SelectionChangedEventArgs e)
         {
             dateSemaine.DataContext = selectionSemaine.SelectedItem as Semaine;
-            ChangementChoixJour(sender, e);
+            if (selectionSemaine.SelectedItem as Semaine != null)
+            {
+                ChangementChoixJour(sender, e);
+                SetDefaultRadioJours();
+            }
+            else
+            {
+                //ClearRadioJours();
+            }
+        }
+
+        private void SetDefaultRadioJours()
+        {
+            StackRadioJours.IsEnabled = true;
+
             RadioButton_Lundi.IsChecked = true;
+        }
+
+        private void ClearRadioJours()
+        {
+            RadioButton_Lundi.IsChecked = false;
+            RadioButton_Mardi.IsChecked = false;
+            RadioButton_Mercredi.IsChecked = false;
+            RadioButton_Jeudi.IsChecked = false;
+            RadioButton_Vendredi.IsChecked = false;
+
+            StackRadioJours.IsEnabled = false;
         }
     }    
 }

@@ -55,10 +55,10 @@
         <CommandBinding Command="ApplicationCommands.Help" Executed="Help"/>
 		<CommandBinding Command="c:PlanningCommands.AjouterElement" Executed="AjouterElement" CanExecute="AjouterElementPossible"/>
         <CommandBinding Command="c:PlanningCommands.SupprimerElement" Executed="SupprimerElement" CanExecute="SupprimerElementPossible"/>
-        <CommandBinding Command="c:PlanningCommands.NewWeek" Executed="NewWeek"/>
-        <CommandBinding Command="c:PlanningCommands.DelWeek" Executed="DelWeek"/>
-        <CommandBinding Command="c:PlanningCommands.NextWeek" Executed="NextWeek" CanExecute="NextWeekPossible"/>
-        <CommandBinding Command="c:PlanningCommands.PreviousWeek" Executed="PreviousWeek" CanExecute="PreviousWeekPossible"/>
+        <CommandBinding Command="c:PlanningCommands.NewWeek" Executed="NewWeek" CanExecute="NewWeekPossible"/>
+        <CommandBinding Command="c:PlanningCommands.DelWeek" Executed="DelWeek" CanExecute="DelNextPreviousWeekPossible"/>
+        <CommandBinding Command="c:PlanningCommands.NextWeek" Executed="NextWeek" CanExecute="DelNextPreviousWeekPossible"/>
+        <CommandBinding Command="c:PlanningCommands.PreviousWeek" Executed="PreviousWeek" CanExecute="DelNextPreviousWeekPossible"/>
     </Window.CommandBindings>
     
     <Grid x:Name="LayoutRoot">
@@ -195,7 +195,7 @@
                         <Label Width="20"/>
                         <TextBlock Height="15">Numéro :</TextBlock>
                         <Label Width="10"/>
-                        <ComboBox Name="selectionSemaine" Width="50" DisplayMemberPath="Numero" HorizontalContentAlignment="Center" SelectionChanged="selectionSemaine_SelectionChanged" />
+                        <ComboBox Name="selectionSemaine" Width="50" DisplayMemberPath="Numero" HorizontalContentAlignment="Center" SelectionChanged="ChangementSelectionSemaine" />
                         <Label Width="20"/>
                         <Button x:Name="Bouton_NextWeek" Width="50" Command="c:PlanningCommands.NextWeek">Suiv.</Button>
                     </StackPanel>
@@ -253,7 +253,7 @@
                     <Separator Height="1"/>
                     <StackPanel Height="15"/>
                     <StackPanel HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="StackRadioJours">
                             <RadioButton x:Name="RadioButton_Lundi" GroupName="choixJour" Unchecked="ChangementChoixJour">Lundi</RadioButton>
                             <Label Width="20"/>
                             <RadioButton x:Name="RadioButton_Mardi" GroupName="choixJour" Unchecked="ChangementChoixJour">Mardi</RadioButton>
