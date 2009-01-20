@@ -977,7 +977,10 @@ namespace PlanningMaker
                 dateSemaine.DataContext = selectionSemaine.SelectedItem as Semaine;
 
                 ChangementChoixJour(sender, e);
-                SetDefaultRadioJours();
+                if (selectionSemaine.SelectedItem as Semaine != null)
+                    SetDefaultRadioJours();
+                else
+                    ClearRadioJours();
             }
         }
 
@@ -1068,10 +1071,6 @@ namespace PlanningMaker
             {
                 ChangementChoixJour(sender, e);
                 SetDefaultRadioJours();
-            }
-            else
-            {
-                //ClearRadioJours();
             }
         }
 
