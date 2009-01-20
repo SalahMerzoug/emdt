@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Windows.Forms;
 using System.Xml;
+using System.Windows;
 
 namespace PlanningMaker.Modele
 {
@@ -32,7 +32,7 @@ namespace PlanningMaker.Modele
             {
                 hasChanged = value;
                 fenetrePrincipale.SetTitle();
-                //MessageBox.Show("Set de hasChanged de planning.");
+                MessageBox.Show("Set de hasChanged de planning.");
             }
         }
 
@@ -139,27 +139,6 @@ namespace PlanningMaker.Modele
         public void CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             this.HasChanged = true;
-        }
-
-        public Planning(MainWindow fenetre, String promotion)
-        {
-            fenetrePrincipale = fenetre;
-            this.promotion = promotion;
-
-            enseignants = new ObservableCollection<Enseignant>();
-            enseignants.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
-
-            matieres = new ObservableCollection<Matiere>();
-            matieres.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
-
-            horaires = new ObservableCollection<Horaire>();
-            horaires.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
-
-            salles = new ObservableCollection<Salle>();
-            salles.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
-
-            semaines = new ObservableCollection<Semaine>();
-            semaines.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(CollectionChanged);
         }
 
         public void SupprimerEnseignant(Enseignant enseignant)
