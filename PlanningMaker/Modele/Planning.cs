@@ -33,7 +33,6 @@ namespace PlanningMaker.Modele
             {
                 hasChanged = value;
                 fenetrePrincipale.SetTitle();
-                MessageBox.Show("Set de hasChanged de planning.");
             }
         }
 

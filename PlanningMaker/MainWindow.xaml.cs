@@ -109,7 +109,7 @@ namespace PlanningMaker
             ICollectionView vueSemaines = CollectionViewSource.GetDefaultView(planning.Semaines);
             vueSemaines.SortDescriptions.Add(new SortDescription("Numero", ListSortDirection.Ascending));
             vueSemaines.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Ascending));
-            selectionSemaine.ItemsSource = planning.Semaines;
+            ComboBox_NumSemaine.ItemsSource = planning.Semaines;
 
             ICollectionView vueEnseignants = CollectionViewSource.GetDefaultView(planning.Enseignants);
             vueEnseignants.SortDescriptions.Add(new SortDescription("Nom", ListSortDirection.Ascending));
@@ -153,13 +153,13 @@ namespace PlanningMaker
                 RequetesXPath.NomFichierSemaine = nomFichier;
 
 
-                SetDefaultRadioJours();
+                SetDefaultSemaine();
                 
                 IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
                 if (enumSemaine.MoveNext())
                 {
                     Semaine firstSemaine = enumSemaine.Current as Semaine;
-                    selectionSemaine.Text = firstSemaine.Numero.ToString();
+                    ComboBox_NumSemaine.Text = firstSemaine.Numero.ToString();
                     listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;  
                 }
             }
@@ -174,7 +174,7 @@ namespace PlanningMaker
             nomFichier = null;
             this.SetTitle();
 
-            selectionSemaine.ItemsSource = null;
+            ComboBox_NumSemaine.ItemsSource = null;
             listeEnseignements.ItemsSource = null;
             ComboBox_Annee.Text = null;
             TextBox_Division.Text = null;
@@ -191,7 +191,7 @@ namespace PlanningMaker
             vueMatiere.ClearView();
             vueEnseignant.ClearView();
 
-            ClearRadioJours();
+            ClearSemaine();
             TabItem_Emploi_du_temps.IsSelected = true;
             TabPanel.IsEnabled = false;
         }
@@ -397,7 +397,7 @@ namespace PlanningMaker
             {
                 string directory = Environment.CurrentDirectory;
                 TransformationXslt transformation = new TransformationXslt();
-                string messageValidation = transformation.TransformerXslt(selectionSemaine.Text, "EdTversSVG-FF.xsl", nomFichier, nomFichierSVG);
+                string messageValidation = transformation.TransformerXslt(ComboBox_NumSemaine.Text, "EdTversSVG-FF.xsl", nomFichier, nomFichierSVG);
                 Environment.CurrentDirectory = directory;
 
                 MessageBox.Show(this, messageValidation, "Transformation XSLT vers SVG");
@@ -449,7 +449,7 @@ namespace PlanningMaker
                 
                 try
                 {
-                    nrSemaine = Int32.Parse(selectionSemaine.Text);
+                    nrSemaine = Int32.Parse(ComboBox_NumSemaine.Text);
                 }
                 catch (FormatException) { }
 
@@ -602,7 +602,7 @@ namespace PlanningMaker
 
                     try
                     {
-                        nrSemaine = Int32.Parse(selectionSemaine.Text);
+                        nrSemaine = Int32.Parse(ComboBox_NumSemaine.Text);
                     }
                     catch (FormatException) { }
 
@@ -915,7 +915,7 @@ namespace PlanningMaker
 
         private void PreviousWeek(object sender, RoutedEventArgs e)
         {
-            Int32 nrSemaine = Int32.Parse(selectionSemaine.Text);
+            Int32 nrSemaine = Int32.Parse(ComboBox_NumSemaine.Text);
             nrSemaine = (nrSemaine-53)%52+52;
             bool semainePresente = false;
             foreach (Semaine s in planning.Semaines)
@@ -923,8 +923,8 @@ namespace PlanningMaker
                 if (s.Numero == nrSemaine)
                 {
                     semainePresente = true;
-                    selectionSemaine.Text = nrSemaine.ToString();
-                    dateSemaine.DataContext = s;
+                    ComboBox_NumSemaine.Text = nrSemaine.ToString();
+                    TextBox_DateSemaine.DataContext = s;
                     break;
                 }
             }
@@ -936,13 +936,13 @@ namespace PlanningMaker
                 {
                     Semaine s = new Semaine(nrSemaine, "1990-12-01");
                     planning.Semaines.Add(s);
-                    dateSemaine.DataContext = s;
-                    selectionSemaine.Text = nrSemaine.ToString();
+                    TextBox_DateSemaine.DataContext = s;
+                    ComboBox_NumSemaine.Text = nrSemaine.ToString();
                 }
             }
 
             ChangementChoixJour(sender, e);
-            SetDefaultRadioJours();
+            SetDefaultSemaine();
         }
 
         private void NewWeek(object sender, ExecutedRoutedEventArgs e)
@@ -955,9 +955,9 @@ namespace PlanningMaker
             {
                 MessageBox.Show("Semaine créée avec succès !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Information);
-                selectionSemaine.SelectedItem = fNewWeek.Semaine;
+                ComboBox_NumSemaine.SelectedItem = fNewWeek.Semaine;
 				ChangementChoixJour(sender, e);
-                SetDefaultRadioJours();
+                SetDefaultSemaine();
             }
             else
             {
@@ -968,25 +968,25 @@ namespace PlanningMaker
 
         private void DelWeek(object sender, ExecutedRoutedEventArgs e)
         {
-            if (selectionSemaine.SelectedItem != null)
+            if (ComboBox_NumSemaine.SelectedItem != null)
             {
-                int position = selectionSemaine.SelectedIndex;
-                planning.Semaines.Remove(selectionSemaine.SelectedItem as Semaine);
+                int position = ComboBox_NumSemaine.SelectedIndex;
+                planning.Semaines.Remove(ComboBox_NumSemaine.SelectedItem as Semaine);
                 if (position == 0) position = 1;
-                selectionSemaine.SelectedIndex = position - 1;
-                dateSemaine.DataContext = selectionSemaine.SelectedItem as Semaine;
+                ComboBox_NumSemaine.SelectedIndex = position - 1;
+                TextBox_DateSemaine.DataContext = ComboBox_NumSemaine.SelectedItem as Semaine;
 
                 ChangementChoixJour(sender, e);
-                if (selectionSemaine.SelectedItem as Semaine != null)
-                    SetDefaultRadioJours();
+                if (ComboBox_NumSemaine.SelectedItem as Semaine != null)
+                    SetDefaultSemaine();
                 else
-                    ClearRadioJours();
+                    ClearSemaine();
             }
         }
 
         private void NextWeek(object sender, RoutedEventArgs e)
         {
-            Int32 nrSemaine = Int32.Parse(selectionSemaine.Text);
+            Int32 nrSemaine = Int32.Parse(ComboBox_NumSemaine.Text);
             nrSemaine = nrSemaine%52 +1;
             bool semainePresente = false;
             foreach (Semaine s in planning.Semaines)
@@ -994,8 +994,8 @@ namespace PlanningMaker
                 if (s.Numero == nrSemaine)
                 {
                     semainePresente = true;
-                    selectionSemaine.Text = nrSemaine.ToString();
-                    dateSemaine.DataContext = s;
+                    ComboBox_NumSemaine.Text = nrSemaine.ToString();
+                    TextBox_DateSemaine.DataContext = s;
                     break;
                 }
             }
@@ -1007,18 +1007,18 @@ namespace PlanningMaker
                 {
                     Semaine s = new Semaine(nrSemaine, "1990-12-01");
                     planning.Semaines.Add(s);
-                    dateSemaine.DataContext = s;
-                    selectionSemaine.Text = nrSemaine.ToString();
+                    TextBox_DateSemaine.DataContext = s;
+                    ComboBox_NumSemaine.Text = nrSemaine.ToString();
                 }
             }
 
             ChangementChoixJour(sender, e);
-            SetDefaultRadioJours();
+            SetDefaultSemaine();
         }
 
         private void ChangementChoixJour(object sender, RoutedEventArgs e)
         {
-            Semaine semaine = selectionSemaine.SelectedItem as Semaine;
+            Semaine semaine = ComboBox_NumSemaine.SelectedItem as Semaine;
             if (semaine != null)
             {
                 if (RadioButton_Lundi.IsChecked == true)
@@ -1047,12 +1047,12 @@ namespace PlanningMaker
 
         private void NewWeekPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ((planning != null) && (selectionSemaine.Items.Count <= 52));
+            e.CanExecute = ((planning != null) && (ComboBox_NumSemaine.Items.Count <= 52));
         }
 
         private void DelNextPreviousWeekPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = ((planning != null) && !(selectionSemaine.Text.Equals("")));
+            e.CanExecute = ((planning != null) && !(ComboBox_NumSemaine.Text.Equals("")));
         }
 
         private void ChangementSelectionEnseignement(object sender, SelectionChangedEventArgs e)
@@ -1064,32 +1064,44 @@ namespace PlanningMaker
                 vueEnseignement.ClearView();
         }
 
-        private void ChangementSelectionSemaine(object sender, SelectionChangedEventArgs e)
+        private void ChangementNumSemaine(object sender, SelectionChangedEventArgs e)
         {
-            dateSemaine.DataContext = selectionSemaine.SelectedItem as Semaine;
-            if (selectionSemaine.SelectedItem as Semaine != null)
+            TextBox_DateSemaine.DataContext = ComboBox_NumSemaine.SelectedItem as Semaine;
+            if (ComboBox_NumSemaine.SelectedItem as Semaine != null)
             {
                 ChangementChoixJour(sender, e);
-                SetDefaultRadioJours();
+                SetDefaultSemaine();
             }
         }
 
-        private void SetDefaultRadioJours()
+        private void SetDefaultSemaine()
         {
-            StackRadioJours.IsEnabled = true;
+            Label_NumSemaine.IsEnabled = true;
+            ComboBox_NumSemaine.IsEnabled = true;
+            Label_DateSemaine.IsEnabled = true;
+            TextBox_DateSemaine.IsEnabled = true;
 
+            StackRadioJours.IsEnabled = true;
             RadioButton_Lundi.IsChecked = true;
+            listeEnseignements.IsEnabled = true;
         }
 
-        private void ClearRadioJours()
+        private void ClearSemaine()
         {
+            Label_NumSemaine.IsEnabled = false;
+            ComboBox_NumSemaine.IsEnabled = false;
+            Label_DateSemaine.IsEnabled = false;
+            TextBox_DateSemaine.IsEnabled = false;
+
+            StackRadioJours.IsEnabled = false;
+
             RadioButton_Lundi.IsChecked = false;
             RadioButton_Mardi.IsChecked = false;
             RadioButton_Mercredi.IsChecked = false;
             RadioButton_Jeudi.IsChecked = false;
             RadioButton_Vendredi.IsChecked = false;
 
-            StackRadioJours.IsEnabled = false;
+            listeEnseignements.IsEnabled = false;
         }
     }    
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace PlanningMaker.Modele
 {
@@ -9,6 +9,7 @@ namespace PlanningMaker.Modele
         private int numero;
         private String date;
 
+        private ObservableNotifiableCollection<Jour> jours;
         private Jour lundi;
         private Jour mardi;
         private Jour mercredi;
@@ -45,12 +46,6 @@ namespace PlanningMaker.Modele
         {
             get
             {
-                Collection<Jour> jours = new Collection<Jour>();
-                jours.Add(lundi);
-                jours.Add(mardi);
-                jours.Add(mercredi);
-                jours.Add(jeudi);
-                jours.Add(vendredi);
                 return jours;
             }
         }
@@ -141,6 +136,15 @@ namespace PlanningMaker.Modele
             mercredi.Nom = EJours.Mercredi;
             jeudi.Nom = EJours.Jeudi;
             vendredi.Nom = EJours.Vendredi;
+
+            jours = new ObservableNotifiableCollection<Jour>();
+            jours.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            jours.ItemPropertyChanged += OnItemPropertyChanged;
+            jours.Add(lundi);
+            jours.Add(mardi);
+            jours.Add(mercredi);
+            jours.Add(jeudi);
+            jours.Add(vendredi);
         }
 
         public Semaine(int numero, String date)
@@ -160,6 +164,25 @@ namespace PlanningMaker.Modele
             mercredi.Nom = EJours.Mercredi;
             jeudi.Nom = EJours.Jeudi;
             vendredi.Nom = EJours.Vendredi;
+
+            jours = new ObservableNotifiableCollection<Jour>();
+            jours.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
+            jours.ItemPropertyChanged += OnItemPropertyChanged;
+            jours.Add(lundi);
+            jours.Add(mardi);
+            jours.Add(mercredi);
+            jours.Add(jeudi);
+            jours.Add(vendredi);
+        }
+
+        public void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            ObjectChanged("Jours");
+        }
+
+        private void OnItemPropertyChanged(object sender, ItemPropertyChangedEventArgs args)
+        {
+            ObjectChanged("Jours");
         }
 
         public override string ToString()
