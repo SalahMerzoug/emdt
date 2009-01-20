@@ -3,12 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using PlanningMaker.Modele;
-using System.Windows.Media;
 using PlanningMaker.Vues;
 
 namespace PlanningMaker
@@ -18,13 +18,15 @@ namespace PlanningMaker
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-        private string nomFichier;
         private Planning planning;
-        private bool changementDepuisEnregistrement = false;
+        private string nomFichier;
+        private string appName;
 
 		public MainWindow()
 		{
 			this.InitializeComponent();
+            this.getAppName();
+            this.SetTitle();
             DataContext = planning;
 
 			// Insert code required on object creation below this point.
@@ -45,18 +47,38 @@ namespace PlanningMaker
             }
         }
 
+        private void getAppName()
+        {
+            object[] attrs1 = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
+            object[] attrs2 = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
+            object[] attrs3 = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
+            string applicationName = ((AssemblyCompanyAttribute)attrs1[0]).Company + " " +
+                ((AssemblyTitleAttribute)attrs2[0]).Title + " " +
+                ((AssemblyDescriptionAttribute)attrs3[0]).Description;
+
+            appName = applicationName;
+        }
+
         public static string getNumeroVersion()
         {
-            Version vrs = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            Version vrs = Assembly.GetExecutingAssembly().GetName().Version;
             string stringVersion = String.Format("{0}.{1}.{2}", vrs.Major, vrs.Minor, vrs.Build);
 
             return stringVersion;
         }
 
+        public void SetTitle()
+        {
+            string nomFichierCourt = (nomFichier == null) ? null : nomFichier.Substring(nomFichier.LastIndexOf(Path.DirectorySeparatorChar)+1);
+            string fileName = (planningExiste() ? ((nomFichier == null) ? "Untitled" : nomFichierCourt) : "");
+            string pChanged = (planningExiste() ? (planning.HasChanged ? "* - " : " - ") : "");
+            
+            Window.Title = fileName + pChanged + appName;
+        }
+
         private void ProposerEnregistrement(object sender, RoutedEventArgs e, string action)
         {
-            //if (changementDepuisEnregistrement)
-            if (planning !=null && planning.HasChanged)
+            if (planningExiste() && planning.HasChanged)
             {
                 MessageBoxResult result = MessageBox.Show("Voulez-vous enregistrer les modifications effectuées avant de " + action + " ?", "PlanningMaker",
                         MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
@@ -75,8 +97,9 @@ namespace PlanningMaker
         {
             Close(sender,e);
 
-            planning = new Planning();
+            planning = new Planning(this);
             DataContext = planning;
+            this.SetTitle();
 
             TabItem_Emploi_du_temps.IsSelected = true;
             TabPanel.IsEnabled = true;
@@ -148,6 +171,7 @@ namespace PlanningMaker
 
             planning = null;
             nomFichier = null;
+            this.SetTitle();
 
             selectionSemaine.ItemsSource = null;
             listeEnseignements.ItemsSource = null;
@@ -161,7 +185,6 @@ namespace PlanningMaker
             listeEnseignants.ItemsSource = null;
             listeEnseignements.ItemsSource = null;
 
-
             vueSalle.ClearView();
             vueHoraire.ClearView();
             vueMatiere.ClearView();
@@ -172,7 +195,7 @@ namespace PlanningMaker
         private void Save(object sender, RoutedEventArgs e)
         {
             planning.Sauver(nomFichier);
-            changementDepuisEnregistrement = false;
+            planning.HasChanged = false;
             MessageBox.Show("Planning sauvegardé avec succès !", "PlanningMaker",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -216,7 +239,7 @@ namespace PlanningMaker
 
         private bool EnrPossible()
         {
-            return planningExiste() && (nomFichier != null) && changementDepuisEnregistrement;
+            return planningExiste() && (nomFichier != null) && planning.HasChanged;
         }
 
         private bool EnrSousPossible()
@@ -489,7 +512,6 @@ namespace PlanningMaker
                 }
 
                 listeEnseignements.SelectedItem = nouvelEnseignement;
-                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Horaires.IsSelected)
             {
@@ -510,7 +532,6 @@ namespace PlanningMaker
                 }
                 planning.Horaires.Add(nouvelHoraire);
                 listeHoraires.SelectedItem = nouvelHoraire;
-                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Enseignants.IsSelected)
             {
@@ -522,7 +543,6 @@ namespace PlanningMaker
                 }
                 planning.Enseignants.Add(nouvelEnseignant);
                 listeEnseignants.SelectedItem = nouvelEnseignant;
-                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Matieres.IsSelected)
             {
@@ -537,7 +557,6 @@ namespace PlanningMaker
                 }
                 planning.Matieres.Add(nouvelleMatiere);
                 listeMatieres.SelectedItem = nouvelleMatiere;
-                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Salles.IsSelected)
             {
@@ -564,7 +583,6 @@ namespace PlanningMaker
                 }
                 planning.Salles.Add(nouvelleSalle);
                 listeSalles.SelectedItem = nouvelleSalle;
-                changementDepuisEnregistrement = true;
             }
         }
 
@@ -620,7 +638,6 @@ namespace PlanningMaker
                         }
                     }
                 }
-                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Horaires.IsSelected)
             {
@@ -629,7 +646,6 @@ namespace PlanningMaker
                 {
                     planning.SupprimerHoraire(horaire);
                 }
-                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Enseignants.IsSelected)
             {
@@ -638,7 +654,6 @@ namespace PlanningMaker
                 {
                     planning.SupprimerEnseignant(enseignant);
                 }
-                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Matieres.IsSelected)
             {
@@ -647,7 +662,6 @@ namespace PlanningMaker
                 {
                     planning.SupprimerMatiere(matiere);
                 }
-                changementDepuisEnregistrement = true;
             }
             else if (TabItem_Salles.IsSelected)
             {
@@ -656,7 +670,6 @@ namespace PlanningMaker
                 {
                     planning.SupprimerSalle(salle);
                 }
-                changementDepuisEnregistrement = true;
             }
         }
 
@@ -892,7 +905,7 @@ namespace PlanningMaker
             }         
             catch (Win32Exception w32ex)
             {
-                MessageBox.Show("Impossible d'ouvrir le navigateur internet Mozilla Firefox (firefox.exe), vérifiez qu'il est bien installé.\nDétails de l'erreur : " + w32ex.Message, "Transformation XSLT");
+                MessageBox.Show("Impossible d'ouvrir le navigateur internet Mozilla Firefox (firefox.exe), vérifiez qu'il est bien installé.\nDétails de l'erreur : " + w32ex.Message, "Ouverture de Firefox");
             }
         }
 
@@ -917,11 +930,10 @@ namespace PlanningMaker
                         MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (result==MessageBoxResult.Yes)
                 {
-                    Semaine s = new Semaine(nrSemaine, "");
+                    Semaine s = new Semaine(nrSemaine, "1990-12-01");
                     planning.Semaines.Add(s);
                     dateSemaine.DataContext = s;
                     selectionSemaine.Text = nrSemaine.ToString();
-                    changementDepuisEnregistrement = true;
                 }
             }
 
@@ -942,7 +954,6 @@ namespace PlanningMaker
                 selectionSemaine.SelectedItem = fNewWeek.Semaine;
 				ChangementChoixJour(sender, e);
             	RadioButton_Lundi.IsChecked = true;
-                changementDepuisEnregistrement = true;
             }
             else
             {
@@ -963,7 +974,6 @@ namespace PlanningMaker
 
                 ChangementChoixJour(sender, e);
                 RadioButton_Lundi.IsChecked = true;
-                changementDepuisEnregistrement = true;
             }
         }
 
@@ -988,11 +998,10 @@ namespace PlanningMaker
                         MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
                 if (result == MessageBoxResult.Yes)
                 {
-                    Semaine s = new Semaine(nrSemaine, "");
+                    Semaine s = new Semaine(nrSemaine, "1990-12-01");
                     planning.Semaines.Add(s);
                     dateSemaine.DataContext = s;
                     selectionSemaine.Text = nrSemaine.ToString();
-                    changementDepuisEnregistrement = true;
                 }
             }
 

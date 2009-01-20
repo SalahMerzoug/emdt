@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace PlanningMaker.Modele
@@ -68,12 +65,12 @@ namespace PlanningMaker.Modele
         }
 
         /// <summary>
-        /// Méthode qui teste si un horaire se suit cet horraire (Importance de l'ordre !).
-        /// Deux horraires se suivent si l'heure de fin  du premier horaire
+        /// Méthode qui teste si un horaire se suit cet horaire (Importance de l'ordre !).
+        /// Deux horaires se suivent si l'heure de fin  du premier horaire
         /// est avant l'heure de début du second horaire avec au plus 15 minutes de battement.
         /// </summary>
-        /// <param name="h">Horraire à tester</param>
-        /// <returns>Renvoie true si les horraires se suivent</returns>
+        /// <param name="h">Horaire à tester</param>
+        /// <returns>Renvoie true si les horaires se suivent</returns>
         public bool EstSuiviPar(Horaire h)
         {
             bool result = false;

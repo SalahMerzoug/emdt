@@ -200,7 +200,7 @@
   </xsd:simpleType>
   <xsd:simpleType name="type-promotion">
     <xsd:restriction base="xsd:string">
-      <xsd:pattern value="[A-Z][a-z]*"/>
+      <xsd:pattern value="[A-Z][a-z]+"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="type-numero">
