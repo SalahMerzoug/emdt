@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows;
 
 namespace PlanningMaker.Modele
 {
@@ -10,7 +11,10 @@ namespace PlanningMaker.Modele
         public virtual void ObjectChanged(String propertyName)
         {
             if (PropertyChanged != null)
+            {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                MessageBox.Show("Mettre le Planning.HasChanged à 'true' : " + propertyName);
+            }
         }
     }
 }

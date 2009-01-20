@@ -64,7 +64,7 @@ namespace PlanningMaker.Modele
             set
             {
                 lundi = value;
-                Lundi.Nom = EJours.Lundi;
+                lundi.Nom = EJours.Lundi;
                 ObjectChanged("Lundi");
             }
         }
