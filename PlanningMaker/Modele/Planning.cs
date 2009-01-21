@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Windows;
 using System.Xml;
 
 namespace PlanningMaker.Modele
