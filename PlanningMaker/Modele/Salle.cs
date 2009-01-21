@@ -35,12 +35,14 @@ namespace PlanningMaker.Modele
 
         public Salle()
         {
-            nom = "undefined";
+            this.nom = "undefined";
+            this.type = ETypeSalles.Amphi;
         }
 
         public Salle(String nom)
         {
             this.nom = nom;
+            this.type = ETypeSalles.Amphi;
         }
 
         public override string ToString()

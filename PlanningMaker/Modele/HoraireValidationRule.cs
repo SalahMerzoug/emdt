@@ -17,8 +17,8 @@ namespace PlanningMaker.Modele
                 return new ValidationResult(false,
                     "Le format de l'heure n'est pas correct ou bien l'heure est saisie n'est pas valide.\n"+
                     "Le format de l'heure doit être le suivant :\n" +
-                    "-si l'heure est inférieure à 10h00 : HhMM (exemple : 7h45)\n"+
-                    "-sinon : HHhMM (exemple 13h30)");
+                    "- si l'heure est inférieure à 10h00 : HhMM (exemple : 7h45)\n"+
+                    "- sinon : HHhMM (exemple 13h30)");
             }
             else
             {

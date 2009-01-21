@@ -517,32 +517,6 @@ namespace PlanningMaker
                     {
                         semaineEnCours.Vendredi.Enseignements.Add(nouvelEnseignement);
                     }
-                    
-                }
-
-                if (listeEnseignements.SelectedIndex == -1)
-                {
-                    nouvelEnseignement.Matiere = vueEnseignement.Matiere.SelectedItem as Matiere;
-                    
-                    String type = vueEnseignement.Type.SelectedItem as String;
-                    if (type != null)
-                    {
-                        if (type.Equals(ETypeEnseignements.TP.ToString()))
-                            nouvelEnseignement.Type = ETypeEnseignements.TP;
-                        else if (type.Equals(ETypeEnseignements.TD.ToString()))
-                            nouvelEnseignement.Type = ETypeEnseignements.TD;
-                        else
-                            nouvelEnseignement.Type = ETypeEnseignements.Cours;
-                    }
-                    else
-                        nouvelEnseignement.Type = ETypeEnseignements.Cours;
-
-                    nouvelEnseignement.Enseignant = vueEnseignement.Enseignant.SelectedItem as Enseignant;
-
-                    nouvelEnseignement.Salle = vueEnseignement.Salle.SelectedItem as Salle;
-
-                    nouvelEnseignement.Horaire1 = vueEnseignement.Horaire1.SelectedItem as Horaire;
-                    nouvelEnseignement.Horaire2 = vueEnseignement.Horaire2.SelectedItem as Horaire;
                 }
 
                 listeEnseignements.SelectedItem = nouvelEnseignement;
@@ -550,58 +524,27 @@ namespace PlanningMaker
             else if (TabItem_Horaires.IsSelected)
             {
                 Horaire nouvelHoraire = new Horaire();
-                vueHoraire.DataContext = nouvelHoraire;
                 planning.Horaires.Add(nouvelHoraire);
                 listeHoraires.SelectedItem = nouvelHoraire;
             }
             else if (TabItem_Enseignants.IsSelected)
             {
-                Enseignant nouvelEnseignant = new Enseignant("", "");
-                if (listeEnseignants.SelectedIndex == -1)
-                {
-                    nouvelEnseignant.Nom = vueEnseignant.nom.Text;
-                    nouvelEnseignant.Prenom = vueEnseignant.prenom.Text;
-                }
+                Enseignant nouvelEnseignant = new Enseignant();
                 planning.Enseignants.Add(nouvelEnseignant);
                 listeEnseignants.SelectedItem = nouvelEnseignant;
             }
             else if (TabItem_Matieres.IsSelected)
             {
-                Matiere nouvelleMatiere = new Matiere("");
+                Matiere nouvelleMatiere = new Matiere();
                 foreach (Enseignant enseignant in vueMatiere.EnseignantsAssocies)
                     nouvelleMatiere.Enseignants.Add(enseignant);
 
-
-                if (listeMatieres.SelectedIndex == -1)
-                {
-                    nouvelleMatiere.Titre = vueMatiere.Titre.Text;
-                }
                 planning.Matieres.Add(nouvelleMatiere);
                 listeMatieres.SelectedItem = nouvelleMatiere;
             }
             else if (TabItem_Salles.IsSelected)
             {
-                Salle nouvelleSalle = new Salle("");
-                nouvelleSalle.Type = ETypeSalles.Amphi;
-                if (listeSalles.SelectedIndex == -1)
-                {
-                    nouvelleSalle.Nom = vueSalle.Nom.Text;
-                    if (vueSalle.Type.SelectedItem != null)
-                    {
-                        if ((vueSalle.Type.SelectedItem as string).Equals("Amphi"))
-                        {
-                            nouvelleSalle.Type = ETypeSalles.Amphi;
-                        }
-                        else
-                        {
-                            nouvelleSalle.Type = ETypeSalles.Labo;
-                        }
-                    }
-                    else
-                    {
-                        nouvelleSalle.Type = ETypeSalles.Amphi;
-                    }
-                }
+                Salle nouvelleSalle = new Salle();
                 planning.Salles.Add(nouvelleSalle);
                 listeSalles.SelectedItem = nouvelleSalle;
             }
