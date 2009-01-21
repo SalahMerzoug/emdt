@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Xml;
-using System.Windows;
 using System.Collections.Specialized;
+using System.Windows;
+using System.Xml;
 
 namespace PlanningMaker.Modele
 {
@@ -144,13 +143,11 @@ namespace PlanningMaker.Modele
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.HasChanged = true;
-            MessageBox.Show("CollectionChanged");
         }
 
         private void OnItemPropertyChanged(object sender, ItemPropertyChangedEventArgs args)
         {
             this.HasChanged = true;
-            MessageBox.Show("OnItemPropertyChanged");
         }
 
         public void SupprimerEnseignant(Enseignant enseignant)
@@ -367,18 +364,23 @@ namespace PlanningMaker.Modele
                         {
                             case "lundi":
                                 semaine.Lundi = jour;
+                                semaine.Jours.Add(semaine.Lundi);
                                 break;
                             case "mardi":
                                 semaine.Mardi = jour;
+                                semaine.Jours.Add(semaine.Mardi);
                                 break;
                             case "mercredi":
                                 semaine.Mercredi = jour;
+                                semaine.Jours.Add(semaine.Mercredi);
                                 break;
                             case "jeudi":
                                 semaine.Jeudi = jour;
+                                semaine.Jours.Add(semaine.Jeudi);
                                 break;
                             case "vendredi":
                                 semaine.Vendredi = jour;
+                                semaine.Jours.Add(semaine.Vendredi);
                                 break;
                         }
                         foreach (XmlNode elementEnseignement in elementJour.SelectNodes("enseignements/enseignement"))
@@ -424,7 +426,7 @@ namespace PlanningMaker.Modele
                             jour.Enseignements.Add(enseignement);
                         }
                     }
-                    Semaines.Add(semaine);
+                    semaines.Add(semaine);
                 }
             }
         }
