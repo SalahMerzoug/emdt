@@ -19,7 +19,6 @@ namespace PlanningMaker.Modele
         private ObservableNotifiableCollection<Salle> salles;
         private ObservableNotifiableCollection<Semaine> semaines;
 
-        private MainWindow fenetrePrincipale;
         private bool hasChanged;
 
         public bool HasChanged
@@ -31,7 +30,6 @@ namespace PlanningMaker.Modele
             set
             {
                 hasChanged = value;
-                fenetrePrincipale.SetTitle();
             }
         }
 
@@ -44,6 +42,7 @@ namespace PlanningMaker.Modele
             set
             {
                 annee = value;
+                ObjectChanged("Annee");
                 this.HasChanged = true;
             }
         }
@@ -57,6 +56,7 @@ namespace PlanningMaker.Modele
             set
             {
                 division = value;
+                ObjectChanged("Division");
                 this.HasChanged = true;
             }
         }
@@ -70,6 +70,7 @@ namespace PlanningMaker.Modele
             set
             {
                 promotion = value;
+                ObjectChanged("Promotion");
                 this.HasChanged = true;
             }
         }
@@ -114,9 +115,8 @@ namespace PlanningMaker.Modele
             }
         }
 
-        public Planning(MainWindow fenetre)
+        public Planning()
         {
-            fenetrePrincipale = fenetre;
             promotion = "Undefined";
 
             enseignants = new ObservableNotifiableCollection<Enseignant>();
@@ -143,11 +143,13 @@ namespace PlanningMaker.Modele
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.HasChanged = true;
+            ObjectChanged("");
         }
 
         private void OnItemPropertyChanged(object sender, ItemPropertyChangedEventArgs args)
         {
             this.HasChanged = true;
+            ObjectChanged("");
         }
 
         public void SupprimerEnseignant(Enseignant enseignant)
@@ -251,35 +253,35 @@ namespace PlanningMaker.Modele
             switch (valueAnnee)
             {
                 case "P1" :
-                    Annee = EAnnees.P1;
+                    annee = EAnnees.P1;
                     break;
                 case "P2" :
-                    Annee = EAnnees.P2;
+                    annee = EAnnees.P2;
                     break;
                 case "I1" :
-                    Annee = EAnnees.I1;
+                    annee = EAnnees.I1;
                     break;
                 case "I2" :
-                    Annee = EAnnees.I2;
+                    annee = EAnnees.I2;
                     break;
                 case "I3" :
-                    Annee = EAnnees.I3;
+                    annee = EAnnees.I3;
                     break;
             }
             string valueDivision = elementPlanning.SelectSingleNode("division/text()").Value;
             switch (valueDivision)
             {
                 case "A":
-                    Division = EDivisions.A;
+                    division = EDivisions.A;
                     break;
                 case "B":
-                    Division = EDivisions.B;
+                    division = EDivisions.B;
                     break;
                 case "C":
-                    Division = EDivisions.C;
+                    division = EDivisions.C;
                     break;
                 case "D":
-                    Division = EDivisions.D;
+                    division = EDivisions.D;
                     break;
             }
             Promotion = elementPlanning.SelectSingleNode("promotion/text()").Value;

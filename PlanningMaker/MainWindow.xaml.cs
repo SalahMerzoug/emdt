@@ -97,7 +97,8 @@ namespace PlanningMaker
         {
             Close(sender,e);
 
-            planning = new Planning(this);
+            planning = new Planning();
+            planning.PropertyChanged += new PropertyChangedEventHandler(Planning_PropertyChanged);
             DataContext = planning;
             this.SetTitle();
 
@@ -132,6 +133,11 @@ namespace PlanningMaker
             listeMatieres.ItemsSource = planning.Matieres;
         }
 
+        private void Planning_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            SetTitle();
+        }
+
         private void Open(object sender, RoutedEventArgs e)
         {
             string directory = Environment.CurrentDirectory;
@@ -145,6 +151,7 @@ namespace PlanningMaker
                 nomFichier = dialogueO.FileName;
                 planning.Charger(nomFichier);
                 planning.HasChanged = false;
+                SetTitle();
                 MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
