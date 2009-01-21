@@ -381,32 +381,42 @@ namespace PlanningMaker
             }
             else
             {
-                MessageBox.Show(this, "Validation impossible", "Validation XMLSchema");
+                MessageBox.Show(this, "Validation impossible : aucun planning enregistré.", "Validation XMLSchema");
             }
         }
 
         private void MenuItemTransfoXSLT_Click(object sender, RoutedEventArgs e)
         {
-            string nomFichierSVG = SaveFileSVG();
+            string messageTransformation = null;
+            string nomFichierSVG = null;
 
             ProposerEnregistrement(sender, e, "lancer la transformation");
 
-            if (OperationSurFichierXMLPossible() && nomFichierSVG != null)
+            if (OperationSurFichierXMLPossible())
             {
-                string directory = Environment.CurrentDirectory;
-                TransformationXslt transformation = new TransformationXslt();
-                string messageValidation = transformation.TransformerXslt(ComboBox_NumSemaine.Text, "EdTversSVG-FF.xsl", nomFichier, nomFichierSVG);
-                Environment.CurrentDirectory = directory;
+                nomFichierSVG = SaveFileSVG();
 
-                MessageBox.Show(this, messageValidation, "Transformation XSLT vers SVG");
-                if (messageValidation.Equals("Transfomation OK."))
+                if (nomFichierSVG != null)
                 {
-                    StartExternWebBrowser(nomFichierSVG);
+                    string directory = Environment.CurrentDirectory;
+                    TransformationXslt transformation = new TransformationXslt();
+                    messageTransformation = transformation.TransformerXslt(ComboBox_NumSemaine.Text, "EdTversSVG-FF.xsl", nomFichier, nomFichierSVG);
+                    Environment.CurrentDirectory = directory;
+                }
+                else
+                {
+                    messageTransformation = "Transformation annulée.";
                 }
             }
             else
             {
-                MessageBox.Show(this, "Transformation impossible", "Transformation XSLT vers SVG");
+                messageTransformation = "Transformation impossible : aucun planning enregistré.";
+            }
+
+            MessageBox.Show(this, messageTransformation, "Transformation XSLT vers SVG");
+            if (messageTransformation.Equals("Transfomation OK."))
+            {
+                StartExternWebBrowser(nomFichierSVG);
             }
         }
 
@@ -414,8 +424,15 @@ namespace PlanningMaker
         {
             ProposerEnregistrement(sender, e, "lancer les requêtes XPath");
 
-            RequetesXPath requetesXPath = new RequetesXPath();
-            requetesXPath.ExecRequetesXPath("RequetesXPath.xsl", "Semaine37.xml");
+            if (OperationSurFichierXMLPossible())
+            {
+                RequetesXPath requetesXPath = new RequetesXPath();
+                requetesXPath.ExecRequetesXPath("RequetesXPath.xsl", "Semaine37.xml");
+            }
+            else
+            {
+                MessageBox.Show(this, "Exécution des requêtes impossible : aucun planning enregistré.", "Requêtes XPath");
+            }
         }
 
         private void MenuItemMAJ_Click(object sender, RoutedEventArgs e)

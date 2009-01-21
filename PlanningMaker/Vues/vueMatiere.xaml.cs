@@ -53,11 +53,6 @@ namespace PlanningMaker.Vues
             ComboEnseignants.ItemsSource = enseignants;
         }
 
-        private void ChangementSelectionUnEnseignant(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void ChangementSelectionProf(object sender, SelectionChangedEventArgs e)
         {
             ComboEnseignants.SelectedItem = ListeProfs.SelectedItem as Enseignant;
@@ -88,7 +83,7 @@ namespace PlanningMaker.Vues
 
         private void SupprimerProfPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            if (ListeProfs != null && ComboEnseignants.SelectedItem == ListeProfs.SelectedItem)
+            if (ListeProfs != null && ComboEnseignants.SelectedItem != null && ComboEnseignants.SelectedItem == ListeProfs.SelectedItem)
                 e.CanExecute = true;
             else
                 e.CanExecute = false;
