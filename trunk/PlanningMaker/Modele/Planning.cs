@@ -41,8 +41,8 @@ namespace PlanningMaker.Modele
             set
             {
                 annee = value;
-                ObjectChanged("Annee");
                 this.HasChanged = true;
+                ObjectChanged("Annee");
             }
         }
 
@@ -55,8 +55,8 @@ namespace PlanningMaker.Modele
             set
             {
                 division = value;
-                ObjectChanged("Division");
                 this.HasChanged = true;
+                ObjectChanged("Division");
             }
         }
 
@@ -69,8 +69,8 @@ namespace PlanningMaker.Modele
             set
             {
                 promotion = value;
-                ObjectChanged("Promotion");
                 this.HasChanged = true;
+                ObjectChanged("Promotion");
             }
         }
 
