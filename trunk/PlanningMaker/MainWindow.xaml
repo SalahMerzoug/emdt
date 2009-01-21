@@ -262,7 +262,7 @@
                         </StackPanel>
                         <StackPanel Height="12"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Grid Width="580" Height="320">
+                            <Grid Width="590" Height="320">
                                 <ListView Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement" MouseRightButtonUp="DeselectionEnseignement">
                                     <ListView.View>
                                         <GridView>
