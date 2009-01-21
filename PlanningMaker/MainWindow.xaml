@@ -4,7 +4,7 @@
 	xmlns:c="clr-namespace:PlanningMaker.Vues"
     xmlns:r="clr-namespace:PlanningMaker.Modele"
 	x:Class="PlanningMaker.MainWindow"
-	Name="Window" Width="900" Height="650" Background="#FFC0C0C0"
+	Name="Window" Width="900" Height="650" Background="Silver"
     ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     
     <Window.Resources>
