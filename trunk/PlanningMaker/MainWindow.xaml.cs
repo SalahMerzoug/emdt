@@ -153,7 +153,6 @@ namespace PlanningMaker
                 {
                     planning.Charger(nomFichier);
                     planning.HasChanged = false;
-                    SetTitle();
                     MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -187,7 +186,6 @@ namespace PlanningMaker
 
             planning = null;
             nomFichier = null;
-            this.SetTitle();
 
             ComboBox_NumSemaine.ItemsSource = null;
             listeEnseignements.ItemsSource = null;
@@ -347,8 +345,6 @@ namespace PlanningMaker
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            ProposerEnregistrement(sender, e, "quitter");
-
             this.Close();
         }
 
@@ -1062,6 +1058,13 @@ namespace PlanningMaker
             RadioButton_Vendredi.IsChecked = false;
 
             listeEnseignements.IsEnabled = false;
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+
+            ProposerEnregistrement(null, null, "quitter");
         }
     }    
 }

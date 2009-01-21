@@ -29,6 +29,7 @@ namespace PlanningMaker.Modele
             set
             {
                 hasChanged = value;
+                ObjectChanged("HasChanged");
             }
         }
 
