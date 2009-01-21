@@ -149,23 +149,33 @@ namespace PlanningMaker
             {
                 New(sender, e);
                 nomFichier = dialogueO.FileName;
-                planning.Charger(nomFichier);
-                planning.HasChanged = false;
-                SetTitle();
-                MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
-                    MessageBoxButton.OK, MessageBoxImage.Information);
-
-                // Mise à jour du fichier source pour les requêtes XPath
-                RequetesXPath.NomFichierSemaine = nomFichier;
-
-                SetDefaultSemaine();
-                
-                IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
-                if (enumSemaine.MoveNext())
+                try
                 {
-                    Semaine firstSemaine = enumSemaine.Current as Semaine;
-                    ComboBox_NumSemaine.Text = firstSemaine.Numero.ToString();
-                    listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;
+                    planning.Charger(nomFichier);
+                    planning.HasChanged = false;
+                    SetTitle();
+                    MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Mise à jour du fichier source pour les requêtes XPath
+                    RequetesXPath.NomFichierSemaine = nomFichier;
+
+                    SetDefaultSemaine();
+
+                    IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
+                    if (enumSemaine.MoveNext())
+                    {
+                        Semaine firstSemaine = enumSemaine.Current as Semaine;
+                        ComboBox_NumSemaine.Text = firstSemaine.Numero.ToString();
+                        listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;
+                    }
+                }
+                catch (Exception)
+                {
+                    planning.HasChanged = false;
+                    Close(sender, e);
+                    MessageBox.Show("Fichier invalide !", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             Environment.CurrentDirectory = directory;
@@ -462,8 +472,6 @@ namespace PlanningMaker
         {
             if (TabItem_Emploi_du_temps.IsSelected)
             {
-                Horaire nouvelHoraire = new Horaire("00h00", "00h00");
-
                 Enseignement nouvelEnseignement = new Enseignement();
                 
                 Semaine semaineEnCours = null;
@@ -542,20 +550,7 @@ namespace PlanningMaker
             else if (TabItem_Horaires.IsSelected)
             {
                 Horaire nouvelHoraire = new Horaire();
-                if (listeHoraires.SelectedIndex == -1)
-                {
-                    nouvelHoraire.Debut = vueHoraire.Debut.Text;
-                    nouvelHoraire.Fin = vueHoraire.Fin.Text;
-                    if (!vueHoraire.Debut.Text.Equals("") && !vueHoraire.Debut.Text.Equals(""))
-                    {
-                        if (Horaire.IsHeureValide(vueHoraire.Debut.Text) &&
-                            Horaire.IsHeureValide(vueHoraire.Fin.Text))
-                        {
-                            nouvelHoraire.Debut = vueHoraire.Debut.Text;
-                            nouvelHoraire.Fin = vueHoraire.Fin.Text;
-                        }
-                    }
-                }
+                vueHoraire.DataContext = nouvelHoraire;
                 planning.Horaires.Add(nouvelHoraire);
                 listeHoraires.SelectedItem = nouvelHoraire;
             }
