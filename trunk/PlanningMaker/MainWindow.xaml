@@ -262,9 +262,9 @@
                             <Label Width="20"/>
                             <RadioButton x:Name="RadioButton_Vendredi" GroupName="choixJour" Unchecked="ChangementChoixJour">Vendredi</RadioButton>
                         </StackPanel>
-                        <StackPanel Height="10"/>
+                        <StackPanel Height="12"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Grid Width="590" Height="320">
+                            <Grid Width="580" Height="320">
                                 <ListView x:Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement" MouseRightButtonUp="DeselectionEnseignement">
                                     <ListView.View>
                                         <GridView>
@@ -333,7 +333,7 @@
                                     </ListView.View>
                                 </ListView>
                             </Grid>
-                            <Grid Width="270" Height="320">
+                            <Grid Width="270" Height="320" Margin="5,0,0,0">
                                 <c:VueEnseignement x:Name="vueEnseignement" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
                         </StackPanel>
