@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using PlanningMaker.Modele;
 using PlanningMaker.Vues;
@@ -16,11 +17,14 @@ namespace PlanningMaker
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+    public partial class MainWindow : Window
 	{
         private Planning planning;
         private string nomFichier;
         private string appName;
+
+        private GridViewColumnHeader colonneCouranteTri = null;
+        private SortAdorner adornerCourantTri = null;
 
 		public MainWindow()
 		{
@@ -30,12 +34,12 @@ namespace PlanningMaker
             DataContext = planning;
 
 			// Insert code required on object creation below this point.
-            MenuItem_Annuler.IsEnabled = false;
+            /*MenuItem_Annuler.IsEnabled = false;
             MenuItem_Rétablir.IsEnabled = false;
             MenuItem_Couper.IsEnabled = false;
             MenuItem_Copier.IsEnabled = false;
             MenuItem_Coller.IsEnabled = false;
-            MenuItem_Supprimer.IsEnabled = false;
+            MenuItem_Supprimer.IsEnabled = false;*/
             MenuItem_Aide.IsEnabled = false;
         }
 
@@ -641,7 +645,33 @@ namespace PlanningMaker
 
         private void SupprimerElementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (planning != null) && (!TabItem_XPath.IsSelected);
+            ListView liste = null;
+            if (TabPanel != null)
+            {
+                if (TabItem_Emploi_du_temps.IsSelected)
+                {
+                    liste = listeEnseignements;
+                }
+                else if (TabItem_Enseignants.IsSelected)
+                {
+                    liste = listeEnseignants;
+                }
+                else if (TabItem_Matieres.IsSelected)
+                {
+                    liste = listeMatieres;
+                }
+                else if (TabItem_Horaires.IsSelected)
+                {
+                    liste = listeHoraires;
+                }
+                else if (TabItem_Salles.IsSelected)
+                {
+                    liste = listeSalles;
+                }
+                e.CanExecute = (planning != null) && (!TabItem_XPath.IsSelected) && (liste.SelectedItem != null);
+            }
+            else
+                e.CanExecute = false;
         }
         
         private void ChangementSelectionHoraire(object sender, SelectionChangedEventArgs e)
@@ -1066,6 +1096,49 @@ namespace PlanningMaker
             base.OnClosing(e);
 
             ProposerEnregistrement(null, null, "quitter");
+        }
+
+        public void SortClick(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = sender as GridViewColumnHeader;
+            String field = column.Tag as String;
+
+            ListView listeTri = null;
+            if (TabItem_Emploi_du_temps.IsSelected)
+            {
+                listeTri = listeEnseignements;
+            }
+            else if (TabItem_Enseignants.IsSelected)
+            {
+                listeTri = listeEnseignants;
+            }
+            else if (TabItem_Matieres.IsSelected)
+            {
+                listeTri = listeMatieres;
+            }
+            else if (TabItem_Horaires.IsSelected)
+            {
+                listeTri = listeHoraires;
+            }
+            else if (TabItem_Salles.IsSelected)
+            {
+                listeTri = listeSalles;
+            }
+
+            if (colonneCouranteTri != null)
+            {
+                AdornerLayer.GetAdornerLayer(colonneCouranteTri).Remove(adornerCourantTri);
+                listeTri.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (colonneCouranteTri == column && adornerCourantTri.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            colonneCouranteTri = column;
+            adornerCourantTri = new SortAdorner(colonneCouranteTri, newDir);
+            AdornerLayer.GetAdornerLayer(colonneCouranteTri).Add(adornerCourantTri);
+            listeTri.Items.SortDescriptions.Add(new SortDescription(field, newDir));
         }
     }    
 }
