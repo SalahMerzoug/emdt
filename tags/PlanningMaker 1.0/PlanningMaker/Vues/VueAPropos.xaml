@@ -1,0 +1,93 @@
+﻿<Window x:Class="PlanningMaker.Vues.VueAPropos"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="A propos" Height="300" Width="260" ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+    MouseEnter="Window_MouseEnter" MouseLeave="Window_MouseLeave">
+	<Window.Resources>
+		<Storyboard x:Key="Storyboard1" x:Name="ST" RepeatBehavior="Forever">
+			<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+				<SplineColorKeyFrame KeyTime="00:00:02" Value="OrangeRed"/>
+				<SplineColorKeyFrame KeyTime="00:00:04" Value="Yellow"/>
+			</ColorAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                <SplineDoubleKeyFrame KeyTime="00:00:02" Value="0.8"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:04" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+                <SplineDoubleKeyFrame KeyTime="00:00:02" Value="5"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:04" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(Shape.Fill).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+				<SplineColorKeyFrame KeyTime="00:00:03" Value="OrangeRed"/>
+				<SplineColorKeyFrame KeyTime="00:00:05" Value="Yellow"/>
+			</ColorAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+				<SplineDoubleKeyFrame KeyTime="00:00:03" Value="0.8"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:05" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="rectangle1" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
+				<SplineDoubleKeyFrame KeyTime="00:00:03" Value="5"/>
+				<SplineDoubleKeyFrame KeyTime="00:00:05" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+	</Window.Resources>
+    <Grid>
+        <DockPanel>
+            <Rectangle DockPanel.Dock="Left" Margin="-50,-30,-40,-40" Width="100" x:Name="rectangle" RenderTransformOrigin="0.5,0.5">
+            	<Rectangle.RenderTransform>
+            		<TransformGroup>
+            			<ScaleTransform ScaleX="1" ScaleY="1"/>
+            			<SkewTransform AngleX="0" AngleY="0"/>
+            			<RotateTransform Angle="0"/>
+            			<TranslateTransform X="0" Y="0"/>
+            		</TransformGroup>
+            	</Rectangle.RenderTransform>
+            	<Rectangle.Fill>
+            		<RadialGradientBrush>
+            			<GradientStop Color="Yellow" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+            		</RadialGradientBrush>
+            	</Rectangle.Fill>
+            </Rectangle>
+            <Rectangle DockPanel.Dock="Right" Margin="-40,-30,-50,-40" Width="100" x:Name="rectangle1" RenderTransformOrigin="0.5,0.5">
+            	<Rectangle.RenderTransform>
+            		<TransformGroup>
+            			<ScaleTransform ScaleX="1" ScaleY="1"/>
+            			<SkewTransform AngleX="0" AngleY="0"/>
+            			<RotateTransform Angle="0"/>
+            			<TranslateTransform X="0" Y="0"/>
+            		</TransformGroup>
+            	</Rectangle.RenderTransform>
+                <Rectangle.Fill>
+                    <RadialGradientBrush>
+                        <GradientStop Color="Yellow" Offset="0"/>
+                        <GradientStop Color="White" Offset="1"/>
+                    </RadialGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+	            <StackPanel Margin="0,10,0,10" HorizontalAlignment="Center" VerticalAlignment="Top">
+	                <TextBlock x:Name="TextTitre" HorizontalAlignment="Center" FontSize="15" FontWeight="Bold" TextDecorations="Underline" Cursor="Hand" MouseEnter="TextBlockTitre_MouseEnter" MouseLeave="TextBlockTitre_MouseLeave" MouseLeftButtonDown="TextBlockTitre_MouseLeftButtonDown">PlanningMaker 2008</TextBlock>
+					<TextBlock x:Name="TextVersion" FontSize="10" FontWeight="Bold" HorizontalAlignment="Center"/>
+	                <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center" TextDecorations="Underline">Mini-projet XML/IHM</TextBlock>
+					<TextBlock HorizontalAlignment="Center">Gestion d’emplois du temps</TextBlock>
+	                <TextBlock HorizontalAlignment="Center">I3 - option SI</TextBlock>
+	                <TextBlock x:Name="TextOBeaudoux" HorizontalAlignment="Center" Cursor="Hand" MouseEnter="TextBlockOBeaudoux_MouseEnter" MouseLeave="TextBlockOBeaudoux_MouseLeave" MouseLeftButtonDown="TextBlockOBeaudoux_MouseLeftButtonDown">Olivier BEAUDOUX</TextBlock>
+					<TextBlock x:Name="TextEseo" HorizontalAlignment="Center" Cursor="Hand" MouseEnter="TextBlockEseo_MouseEnter" MouseLeave="TextBlockEseo_MouseLeave" MouseLeftButtonDown="TextBlockEseo_MouseLeftButtonDown">ESEO</TextBlock>
+	            </StackPanel>
+	            <Separator/>
+	            <TextBlock HorizontalAlignment="Center">2008-2009</TextBlock>
+	            <Separator/>
+	            <StackPanel Margin="10,10,0,10" HorizontalAlignment="Left" VerticalAlignment="Top">
+	                <TextBlock HorizontalAlignment="Left" FontWeight="Bold" FontStyle="Italic">Etudiants :</TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextHDeFleurian" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockHDeFleurian_MouseEnter" MouseLeave="TextBlockHDeFleurian_MouseLeave" MouseLeftButtonDown="TextBlockHDeFleurian_MouseLeftButtonDown">Hubert DE FLEURIAN</TextBlock></TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextMDeniaud" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockMDeniaud_MouseEnter" MouseLeave="TextBlockMDeniaud_MouseLeave" MouseLeftButtonDown="TextBlockMDeniaud_MouseLeftButtonDown">Mathieu DENIAUD</TextBlock></TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextFDenouille" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockFDenouille_MouseEnter" MouseLeave="TextBlockFDenouille_MouseLeave" MouseLeftButtonDown="TextBlockFDenouille_MouseLeftButtonDown">Freddy DENOUILLE</TextBlock></TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextMRuaud" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockMRuaud_MouseEnter" MouseLeave="TextBlockMRuaud_MouseLeave" MouseLeftButtonDown="TextBlockMRuaud_MouseLeftButtonDown">Mathieu RUAUD</TextBlock></TextBlock>
+	                <TextBlock Margin="10,0,0,0" HorizontalAlignment="Left">• <TextBlock x:Name="TextAThomas" HorizontalAlignment="Left" Cursor="Hand" MouseEnter="TextBlockAThomas_MouseEnter" MouseLeave="TextBlockAThomas_MouseLeave" MouseLeftButtonDown="TextBlockAThomas_MouseLeftButtonDown">Alexis THOMAS</TextBlock></TextBlock>
+	            </StackPanel>
+	        </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>

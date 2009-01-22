@@ -1,0 +1,96 @@
+﻿<UserControl x:Class="PlanningMaker.Vues.VueEnseignement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:PlanningMaker.Vues"
+             xmlns:f="clr-namespace:PlanningMaker.Modele">
+
+    <UserControl.Resources>
+        <c:ListeTypeEnseignements x:Key="TypeEnseignement"/>
+        <ObjectDataProvider x:Key="ComboSource_Matieres"/>
+        <ObjectDataProvider x:Key="ComboSource_Enseignants"/>
+        <ObjectDataProvider x:Key="ComboSource_Horaires"/>
+        <ObjectDataProvider x:Key="ComboSource_Salles"/>
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                    Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                    Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <StackPanel Name="LayoutRoot">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Matiere" Width="80"/>
+            <ComboBox Name="Matiere" ItemsSource="{Binding Source={StaticResource ComboSource_Matieres}}" DisplayMemberPath="Titre" Width="140" SelectionChanged="ChangementSelectionMatiere"/>
+        </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Type" Width="80"/>
+            <ComboBox Name="Type" Text="{Binding Path=Type}" ItemsSource="{Binding Source={StaticResource TypeEnseignement}}" Width="140"/>
+        </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Groupe" Width="80"/>
+            <TextBox Name="Groupe" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="140">
+                <TextBox.Text>
+                    <Binding Path="Groupe" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <f:GroupeValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Enseignant" Width="80"/>
+            <ComboBox Name="Enseignant" ItemsSource="{Binding Source={StaticResource ComboSource_Enseignants}}" DisplayMemberPath="Nom" Width="140" SelectionChanged="ChangementSelectionEnseignant"/>
+        </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Salle" Width="80"/>
+            <ComboBox Name="Salle" ItemsSource="{Binding Source={StaticResource ComboSource_Salles}}" DisplayMemberPath="Nom" Width="140" SelectionChanged="ChangementSelectionSalle"/>
+        </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="1er Horaire" Width="80"/>
+            <ComboBox Name="Horaire1" ItemsSource="{Binding Source={StaticResource ComboSource_Horaires}}" Width="140" SelectionChanged="ChangementSelectionHoraire1">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Debut}"/>
+                            <TextBlock Text=" à "/>
+                            <TextBlock Text="{Binding Path=Fin}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+        <Label Height="10"/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="2nd Horaire" Width="80"/>
+            <ComboBox Name="Horaire2" ItemsSource="{Binding Source={StaticResource ComboSource_Horaires}}" Width="140" SelectionChanged="ChangementSelectionHoraire2">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Path=Debut}"/>
+                            <TextBlock Text=" à "/>
+                            <TextBlock Text="{Binding Path=Fin}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label Width="10"/>
+            <Button Width="30" Click="RemoveHoraire2" >Del</Button>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
