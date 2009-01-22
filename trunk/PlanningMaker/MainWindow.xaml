@@ -407,7 +407,7 @@
             </TabItem>
             <TabItem Header="Requêtes XPath" Name="TabItem_XPath">
                 <GroupBox Header="Requêtes XPath" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <c:VueRequetesXPath VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <c:VueRequetesXPath x:Name="vueRequetesXPath" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </GroupBox>
             </TabItem>
         </TabControl>

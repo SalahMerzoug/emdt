@@ -27,5 +27,19 @@ namespace PlanningMaker.Vues
                 champ_id_jour_7.Text);
         }
 
+        public void ClearView()
+        {
+            champ_numSemaine.Text = null;
+            champ_nom_recherche_1.Text = null;
+            champ_id_enseignant_2.Text = null;
+            champ_id_matière_3.Text = null;
+            champ_id_matière_4.Text = null;
+            champ_id_enseignant_5.Text = null;
+            champ_id_salle_6.Text = null;
+            champ_id_jour_6.Text = null;
+            champ_id_enseignant_7.Text = null;
+            champ_id_jour_7.Text = null;
+        }
+
 	}
 }

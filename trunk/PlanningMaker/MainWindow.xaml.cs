@@ -203,6 +203,7 @@ namespace PlanningMaker
             vueHoraire.ClearView();
             vueMatiere.ClearView();
             vueEnseignant.ClearView();
+            vueRequetesXPath.ClearView();
 
             ClearSemaine();
             TabItem_Emploi_du_temps.IsSelected = true;
