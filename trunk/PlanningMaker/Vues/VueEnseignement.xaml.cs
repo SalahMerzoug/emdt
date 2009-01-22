@@ -14,6 +14,7 @@ namespace PlanningMaker.Vues
     public partial class VueEnseignement : UserControl
     {
         private Enseignement enseignement;
+        private Boolean refreshingView;
 
         public Enseignement Enseignement
         {
@@ -26,6 +27,7 @@ namespace PlanningMaker.Vues
         public VueEnseignement()
         {
             InitializeComponent();
+            refreshingView = false;
         }
 
         public void SetPlanningContext(Planning planning)
@@ -50,11 +52,12 @@ namespace PlanningMaker.Vues
                 odp_salles.ObjectInstance = planning.Salles;
             else
                 odp_salles.ObjectInstance = null;
-
         }
 
         public void ChangeEnseignement(Enseignement enseignement)
         {
+            refreshingView = true;
+
             this.enseignement = enseignement;
             DataContext = enseignement;
             IsEnabled = true;
@@ -72,10 +75,14 @@ namespace PlanningMaker.Vues
             Salle.SelectedItem = enseignement.Salle;
             Horaire1.SelectedItem = enseignement.Horaire1;
             Horaire2.SelectedItem = enseignement.Horaire2;
+
+            refreshingView = false;
         }
 
         public void ClearView()
         {
+            refreshingView = false;
+
             enseignement = null;
             DataContext = null;
             IsEnabled = false;
@@ -92,106 +99,123 @@ namespace PlanningMaker.Vues
             Salle.SelectedItem = null;
             Horaire1.SelectedItem = null;
             Horaire2.SelectedItem = null;
+
+            refreshingView = false;
         }
 
         private void ChangementSelectionEnseignant(object sender, SelectionChangedEventArgs e)
         {
-            Enseignant enseignant = Enseignant.SelectedItem as Enseignant;
-            if (enseignant != null && enseignement!=null)
+            if (!refreshingView)
             {
-                enseignement.Enseignant = enseignant;
+                Enseignant enseignant = Enseignant.SelectedItem as Enseignant;
+                if (enseignant != null && enseignement != null)
+                {
+                    enseignement.Enseignant = enseignant;
+                }
             }
         }
 
         private void ChangementSelectionSalle(object sender, SelectionChangedEventArgs e)
         {
-            Salle salle = Salle.SelectedItem as Salle;
-            if (salle != null && enseignement!=null)
+            if (!refreshingView)
             {
-                enseignement.Salle = salle;
+                Salle salle = Salle.SelectedItem as Salle;
+                if (salle != null && enseignement != null)
+                {
+                    enseignement.Salle = salle;
+                }
             }
         }
 
         private void ChangementSelectionMatiere(object sender, SelectionChangedEventArgs e)
         {
-            Matiere matiere = Matiere.SelectedItem as Matiere;
-            if (matiere != null)
+            if (!refreshingView)
             {
-                if (enseignement != null)
-                    enseignement.Matiere = matiere;
+                Matiere matiere = Matiere.SelectedItem as Matiere;
+                if (matiere != null)
+                {
+                    if (enseignement != null)
+                        enseignement.Matiere = matiere;
 
-                ObjectDataProvider odp_enseignants = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
+                    ObjectDataProvider odp_enseignants = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
 
-                if (odp_enseignants != null)
-                    odp_enseignants.ObjectInstance = matiere.Enseignants;
+                    if (odp_enseignants != null)
+                        odp_enseignants.ObjectInstance = matiere.Enseignants;
 
-                Enseignant.SelectedItem = matiere.Enseignants.First();
+                    Enseignant.SelectedItem = matiere.Enseignants.First();
+                }
             }
         }
 
         private void ChangementSelectionHoraire1(object sender, SelectionChangedEventArgs e)
         {
-            Horaire horaire = Horaire1.SelectedItem as Horaire;
-            if (horaire != null && enseignement != null)
+            if (!refreshingView)
             {
-                
-                enseignement.Horaire1 = horaire;
-                if (enseignement.Horaire2 != null)
+                Horaire horaire = Horaire1.SelectedItem as Horaire;
+                if (horaire != null && enseignement != null)
                 {
-                    ObjectDataProvider odp_horaires = this.FindResource("ComboSource_Horaires") as ObjectDataProvider;
 
-                    if (odp_horaires != null)
+                    enseignement.Horaire1 = horaire;
+                    if (enseignement.Horaire2 != null)
                     {
-                        ICollection<Horaire> horaires = odp_horaires.ObjectInstance as ICollection<Horaire>;
-                        if (horaires != null)
+                        ObjectDataProvider odp_horaires = this.FindResource("ComboSource_Horaires") as ObjectDataProvider;
+
+                        if (odp_horaires != null)
                         {
-                            bool estDernierHorraire = true;
-                            foreach (Horaire h in horaires)
+                            ICollection<Horaire> horaires = odp_horaires.ObjectInstance as ICollection<Horaire>;
+                            if (horaires != null)
                             {
-                                if (horaire.EstSuiviPar(h))
+                                bool estDernierHorraire = true;
+                                foreach (Horaire h in horaires)
                                 {
-                                    enseignement.Horaire2 = h;
-                                    estDernierHorraire = false;
-                                    break;
+                                    if (horaire.EstSuiviPar(h))
+                                    {
+                                        enseignement.Horaire2 = h;
+                                        estDernierHorraire = false;
+                                        break;
+                                    }
+                                }
+                                if (estDernierHorraire)
+                                {
+                                    enseignement.Horaire2 = null;
                                 }
                             }
-                            if (estDernierHorraire)
-                            {
+                            else
                                 enseignement.Horaire2 = null;
-                            }
                         }
                         else
                             enseignement.Horaire2 = null;
-                    }
-                    else
-                        enseignement.Horaire2 = null;
 
-                    Horaire2.SelectedItem = enseignement.Horaire2;
+                        Horaire2.SelectedItem = enseignement.Horaire2;
+                    }
                 }
             }
         }
 
         private void ChangementSelectionHoraire2(object sender, SelectionChangedEventArgs e)
         {
-            Horaire horaire = Horaire2.SelectedItem as Horaire;
-            if (horaire != null && enseignement != null)
+            if (!refreshingView)
             {
-                if (horaire != enseignement.Horaire1)
+                Horaire horaire = Horaire2.SelectedItem as Horaire;
+                if (horaire != null && enseignement != null)
                 {
-                    if (enseignement.Horaire1.EstSuiviPar(horaire))
-                        enseignement.Horaire2 = horaire;
+                    if (horaire != enseignement.Horaire1)
+                    {
+                        if (enseignement.Horaire1.EstSuiviPar(horaire))
+                            enseignement.Horaire2 = horaire;
+                        else
+                        {
+                            MessageBox.Show("Les horaires ne se suivent pas !", "PlanningMaker",
+                                MessageBoxButton.OK, MessageBoxImage.Stop);
+                            Horaire2.SelectedItem = enseignement.Horaire2;
+                        }
+                    }
                     else
                     {
-                        MessageBox.Show("Les horaires ne se suivent pas !", "PlanningMaker",
+                        MessageBox.Show("Les horaires sont identiques !", "PlanningMaker",
                             MessageBoxButton.OK, MessageBoxImage.Stop);
                         Horaire2.SelectedItem = enseignement.Horaire2;
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Les horaires sont identiques !", "PlanningMaker",
-                        MessageBoxButton.OK, MessageBoxImage.Stop);
-                    Horaire2.SelectedItem = enseignement.Horaire2;
                 }
             }
         }
