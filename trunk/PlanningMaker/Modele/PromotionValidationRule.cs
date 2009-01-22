@@ -28,9 +28,10 @@ namespace PlanningMaker.Modele
             else
             {
                 return new ValidationResult(false,
-                                "Le nom d'une promotion doit s'écrire\n" +
-                                "- en un seul mot de 2 caractères minimum,\n" +
-                                "- sans chiffre ni caractère spécial.");
+                                "Le nom d'une promotion doit :\n" +
+                                "- commencer par une majuscule,\n" +
+                                "- s'écrire en un seul mot de 2 caractères minimum,\n" +
+                                "- ne contenir aucun chiffre ni caractère spécial.");
             }
         }
     }
