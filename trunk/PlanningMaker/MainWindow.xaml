@@ -44,12 +44,12 @@
         <CommandBinding Command="ApplicationCommands.PrintPreview" Executed="PrintPreview" CanExecute="ApercuPossible"/>
         <CommandBinding Command="ApplicationCommands.Print" Executed="Print" CanExecute="ImprimerPossible"/>
 		<CommandBinding Command="c:PlanningCommands.Exit" Executed="Exit"/>
-        <CommandBinding Command="ApplicationCommands.Undo" Executed="Undo"/>
+        <!--<CommandBinding Command="ApplicationCommands.Undo" Executed="Undo"/>
         <CommandBinding Command="ApplicationCommands.Redo" Executed="Redo"/>
         <CommandBinding Command="ApplicationCommands.Cut" Executed="Cut"/>
         <CommandBinding Command="ApplicationCommands.Copy" Executed="Copy"/>
         <CommandBinding Command="ApplicationCommands.Paste" Executed="Paste"/>
-        <CommandBinding Command="ApplicationCommands.Delete" Executed="Delete"/>
+        <CommandBinding Command="EditingCommands.Delete" Executed="Delete"/>-->
         <CommandBinding Command="ApplicationCommands.Help" Executed="Help"/>
 		<CommandBinding Command="c:PlanningCommands.AjouterElement" Executed="AjouterElement" CanExecute="AjouterElementPossible"/>
         <CommandBinding Command="c:PlanningCommands.SupprimerElement" Executed="SupprimerElement" CanExecute="SupprimerElementPossible"/>
@@ -150,7 +150,7 @@
                         <Image Source="Files\Img\Clipboard_Paste.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Supprimer" Name="MenuItem_Supprimer" Command="ApplicationCommands.Delete">
+                <MenuItem Header="Supprimer" Name="MenuItem_Supprimer" Command="EditingCommands.Delete">
                     <MenuItem.Icon>
                         <Image Source="Files\Img\Trash.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
                     </MenuItem.Icon>
@@ -262,12 +262,13 @@
                         </StackPanel>
                         <StackPanel Height="12"/>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Grid Width="590" Height="320">
+                            <Grid Width="610" Height="320">
                                 <ListView Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement" MouseRightButtonUp="DeselectionEnseignement">
                                     <ListView.View>
                                         <GridView>
                                             <GridView.Columns>
-                                                <GridViewColumn Width="60" Header="H1">
+                                                <GridViewColumn Width="60">
+                                                    <GridViewColumnHeader Tag="Horaire1.Debut" Content="H1"/>
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
                                                             <StackPanel Orientation="Vertical">
@@ -277,7 +278,8 @@
                                                         </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="60" Header="H2">
+                                                <GridViewColumn Width="60">
+                                                    <GridViewColumnHeader Tag="Horaire2.Debut" Content="H2"/>
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
                                                             <StackPanel Orientation="Vertical">
@@ -287,28 +289,17 @@
                                                         </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="50" Header="Type">
-                                                    <GridViewColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <TextBlock Text="{Binding Path=Type}"/>
-                                                        </DataTemplate>
-                                                    </GridViewColumn.CellTemplate>
+                                                <GridViewColumn Width="60" DisplayMemberBinding="{Binding Path=Type}">
+                                                    <GridViewColumnHeader Tag="Type" Content="Type"/>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="40" Header="N°">
-                                                    <GridViewColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <TextBlock Text="{Binding Path=Groupe}"/>
-                                                        </DataTemplate>
-                                                    </GridViewColumn.CellTemplate>
+                                                <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=Groupe}">
+                                                    <GridViewColumnHeader Tag="Groupe" Content="N°"/>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="110" Header="Matière">
-                                                    <GridViewColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <TextBlock Text="{Binding Path=Matiere.Titre}"/>
-                                                        </DataTemplate>
-                                                    </GridViewColumn.CellTemplate>
+                                                <GridViewColumn Width="110" DisplayMemberBinding="{Binding Path=Matiere.Titre}">
+                                                    <GridViewColumnHeader Tag="Matiere.Titre" Content="Matière"/>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="150" Header="Enseignant">
+                                                <GridViewColumn Width="150">
+                                                    <GridViewColumnHeader Tag="Enseignant.Nom" Content="Enseignant"/>
                                                     <GridViewColumn.CellTemplate>
                                                         <DataTemplate>
                                                             <StackPanel Orientation="Horizontal">
@@ -319,19 +310,15 @@
                                                     </DataTemplate>
                                                     </GridViewColumn.CellTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="90" Header="Salle">
-                                                    <GridViewColumn.CellTemplate>
-                                                        <DataTemplate>
-                                                            <TextBlock Text="{Binding Path=Salle.Nom}"/>
-                                                        </DataTemplate>
-                                                    </GridViewColumn.CellTemplate>
+                                                <GridViewColumn Width="90" DisplayMemberBinding="{Binding Path=Salle.Nom}">
+                                                    <GridViewColumnHeader Tag="Salle.Nom" Content="Salle"/>
                                                 </GridViewColumn>
                                             </GridView.Columns>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
                             </Grid>
-                            <Grid Width="270" Height="320" Margin="5,0,0,0">
+                            <Grid Height="320" Margin="5,0,0,0">
                                 <c:VueEnseignement x:Name="vueEnseignement" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                             </Grid>
                         </StackPanel>
@@ -347,8 +334,12 @@
                         <ListView Name="listeEnseignants" SelectionChanged="ChangementSelectionEnseignant" MouseRightButtonUp="DeselectionEnseignant">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="100" Header="Nom" DisplayMemberBinding="{Binding Path=Nom}"/>
-                                    <GridViewColumn Width="100" Header="Prénom" DisplayMemberBinding="{Binding Path=Prenom}"/>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Nom}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Nom" Content="Nom"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Prenom}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Prenom" Content="Prénom"/>
+                                    </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -364,7 +355,9 @@
                         <ListView Name="listeMatieres" SelectionChanged="ChangementSelectionMatiere" MouseRightButtonUp="DeselectionMatiere">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="100" Header="Titre" DisplayMemberBinding="{Binding Path=Titre}"/>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Titre}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Titre" Content="Titre"/>
+                                    </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -380,8 +373,12 @@
                         <ListView Name="listeHoraires" SelectionChanged="ChangementSelectionHoraire" MouseRightButtonUp="DeselectionHoraire">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="100" Header="Début" DisplayMemberBinding="{Binding Path=Debut}"/>
-                                    <GridViewColumn Width="100" Header="Fin" DisplayMemberBinding="{Binding Path=Fin}"/>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Debut}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Debut" Content="Début"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Fin}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Fin" Content="Fin"/>
+                                    </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
@@ -397,8 +394,12 @@
                         <ListView Name="listeSalles" SelectionChanged="ChangementSelectionSalle" MouseRightButtonUp="DeselectionSalle">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Width="100" Header="Nom" DisplayMemberBinding="{Binding Path=Nom}"/>
-                                    <GridViewColumn Width="100" Header="Type" DisplayMemberBinding="{Binding Path=Type}"/>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Nom}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Nom" Content="Nom"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Type}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Type" Content="Type"/>
+                                    </GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>

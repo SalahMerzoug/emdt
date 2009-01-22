@@ -25,14 +25,11 @@
                 <ListView.View>
                     <GridView>
                         <GridView.Columns>
-                            <GridViewColumn Width="80" Header="Nom">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Path=Nom}"/>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
+                            <GridViewColumn Width="80" DisplayMemberBinding="{Binding Path=Nom}">
+                                <GridViewColumnHeader Click="SortClick" Tag="Nom" Content="Nom"/>
                             </GridViewColumn>
-                            <GridViewColumn Width="100" Header="Prénom" DisplayMemberBinding="{Binding Path=Prenom}">
+                            <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Prenom}">
+                                <GridViewColumnHeader Click="SortClick" Tag="Prenom" Content="Prénom"/>
                             </GridViewColumn>
                         </GridView.Columns>
                     </GridView>

@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using PlanningMaker.Modele;
 
@@ -14,6 +17,9 @@ namespace PlanningMaker.Vues
     {
         private Matiere matiere;
         private ICollection<Enseignant> enseignantsAssocies;
+
+        private GridViewColumnHeader colonneCouranteTri = null;
+        private SortAdorner adornerCourantTri = null;
 
         public Matiere Matiere
         {
@@ -99,5 +105,25 @@ namespace PlanningMaker.Vues
             ListeProfs.ItemsSource = null;
         }
 
+        private void SortClick(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader column = sender as GridViewColumnHeader;
+            String field = column.Tag as String;
+
+            if (colonneCouranteTri != null)
+            {
+                AdornerLayer.GetAdornerLayer(colonneCouranteTri).Remove(adornerCourantTri);
+                this.ListeProfs.Items.SortDescriptions.Clear();
+            }
+
+            ListSortDirection newDir = ListSortDirection.Ascending;
+            if (colonneCouranteTri == column && adornerCourantTri.Direction == newDir)
+                newDir = ListSortDirection.Descending;
+
+            colonneCouranteTri = column;
+            adornerCourantTri = new SortAdorner(colonneCouranteTri, newDir);
+            AdornerLayer.GetAdornerLayer(colonneCouranteTri).Add(adornerCourantTri);
+            this.ListeProfs.Items.SortDescriptions.Add(new SortDescription(field, newDir));
+        }
     }
 }
