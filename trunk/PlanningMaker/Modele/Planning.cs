@@ -294,6 +294,7 @@ namespace PlanningMaker.Modele
                 string prenomEnseignant = elementEnseignant.SelectSingleNode("prenom/text()").Value;
                 string nomEnseignant = elementEnseignant.SelectSingleNode("nom/text()").Value;
                 Enseignant enseignant = new Enseignant(nomEnseignant, prenomEnseignant);
+                enseignant.Id = id;
                 dicoEnseignants.Add(id, enseignant);
                 enseignants.Add(enseignant);
             }
@@ -311,6 +312,7 @@ namespace PlanningMaker.Modele
                     matiere.Enseignants.Add(enseignant);
                 }
                 dicoMatieres.Add(id, matiere);
+                matiere.Id = id;
                 matieres.Add(matiere);
             }
             //horaires
@@ -341,6 +343,7 @@ namespace PlanningMaker.Modele
                         salle.Type = ETypeSalles.Amphi;
                         break;
                 }
+                salle.Id = id;
                 dicoSalles.Add(id, salle);
                 salles.Add(salle);
             }

@@ -5,8 +5,21 @@ namespace PlanningMaker.Modele
     public class Enseignant : ObservableObject
     {
 
+        private String id;
         private String nom;
         private String prenom;
+
+        public String Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
 
         public String Nom
         {

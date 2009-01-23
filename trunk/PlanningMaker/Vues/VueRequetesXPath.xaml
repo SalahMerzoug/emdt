@@ -3,40 +3,53 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	x:Class="PlanningMaker.Vues.VueRequetesXPath">
 
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="ComboSource_Matieres"/>
+        <ObjectDataProvider x:Key="ComboSource_Enseignants"/>
+        <ObjectDataProvider x:Key="ComboSource_Salles"/>
+        <DataTemplate x:Key="Affichage_Enseignants">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Path=Nom}"/>
+                <TextBlock Text=" "/>
+                <TextBlock Text="{Binding Path=Prenom}"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    
     <StackPanel x:Name="LayoutRoot">
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Numéro de la semaine ?" Width="350"/>
-            <TextBox Name="champ_numSemaine" Width="100"/>
+            <TextBox Name="champ_numSemaine" Width="140"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Requête 1 : Enseignants dont le nom contient" Width="350"/>
-            <TextBox Name="champ_nom_recherche_1" Width="100"/>
+            <TextBox Name="champ_nom_recherche_1" Width="140" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Requête 2 : Matières enseignées par" Width="350"/>
-            <TextBox Name="champ_id_enseignant_2"  Width="100"/>
+            <ComboBox Name="comboBox_Req2" ItemsSource="{Binding Source={StaticResource ComboSource_Enseignants}}" ItemTemplate="{StaticResource Affichage_Enseignants}" Width="140" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Requête 3 : Professeurs enseignant" Width="350"/>
-            <TextBox Name="champ_id_matière_3" Width="100"/>
+            <ComboBox Name="comboBox_Req3" ItemsSource="{Binding Source={StaticResource ComboSource_Matieres}}" DisplayMemberPath="Titre" Width="140" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5">
-            <Label Content="Requête 4 : Enseignements de la matière avec l'identifiant" Width="350"/>
-            <TextBox Name="champ_id_matière_4" Width="100"/>
+            <Label Content="Requête 4 : Enseignements de la matière" Width="350"/>
+            <ComboBox Name="comboBox_Req4" ItemsSource="{Binding Source={StaticResource ComboSource_Matieres}}" DisplayMemberPath="Titre" Width="140" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Requête 5 : Enseignements de l'enseignant" Width="350"/>
-            <TextBox Name="champ_id_enseignant_5" Width="100"/>
+            <ComboBox Name="comboBox_Req5" ItemsSource="{Binding Source={StaticResource ComboSource_Enseignants}}" ItemTemplate="{StaticResource Affichage_Enseignants}" Width="140" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Requête 6 : Disponibilités de la salle" Width="300"/>
-            <TextBox Name="champ_id_salle_6" Width="100"/>
+            <ComboBox Name="comboBox_Req6" ItemsSource="{Binding Source={StaticResource ComboSource_Salles}}" DisplayMemberPath="Nom" Width="140" />
             <Label Content=" le "/>
             <TextBox Name="champ_id_jour_6" Width="100"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Requête 7 : Disponibilités de l'enseignant" Width="300"/>
-            <TextBox Name="champ_id_enseignant_7" Width="100"/>
+            <ComboBox Name="comboBox_Req7" ItemsSource="{Binding Source={StaticResource ComboSource_Enseignants}}" ItemTemplate="{StaticResource Affichage_Enseignants}" Width="140" />
             <Label Content=" le "/>
             <TextBox Name="champ_id_jour_7" Width="100"/>
         </StackPanel>
