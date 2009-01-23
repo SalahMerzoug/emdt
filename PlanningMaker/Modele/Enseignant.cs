@@ -71,5 +71,10 @@ namespace PlanningMaker.Modele
             else
                 return false;
         }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
