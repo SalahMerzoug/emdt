@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -18,7 +17,7 @@ namespace PlanningMaker.Vues
         public event RoutedEventHandler SuppressionEnseignantEvent;
 
         private Matiere matiere;
-        private ICollection<Enseignant> enseignantsAssocies;
+        private Collection<Enseignant> enseignantsAssocies;
 
         private GridViewColumnHeader colonneCouranteTri = null;
         private SortAdorner adornerCourantTri = null;
@@ -31,7 +30,7 @@ namespace PlanningMaker.Vues
             }
         }
 
-        public ICollection<Enseignant> EnseignantsAssocies
+        public Collection<Enseignant> EnseignantsAssocies
         {
             get
             {
@@ -56,7 +55,7 @@ namespace PlanningMaker.Vues
             IsEnabled = true;
         }
 
-        public void SetEnseignantsContext(ICollection<Enseignant> enseignants)
+        public void SetEnseignantsContext(Collection<Enseignant> enseignants)
         {
             ComboEnseignants.ItemsSource = enseignants;
         }
@@ -71,7 +70,7 @@ namespace PlanningMaker.Vues
             Enseignant enseignant = ComboEnseignants.SelectedItem as Enseignant;
             if (enseignant != null)
             {
-                matiere.Enseignants.Add(enseignant);
+                matiere.Enseignants.Insert(0, enseignant);
                 ListeProfs.SelectedItem = enseignant;
             }
         }
@@ -87,7 +86,7 @@ namespace PlanningMaker.Vues
         private void SupprimerProf(object sender, RoutedEventArgs e)
         {
             matiere.Enseignants.Remove(ListeProfs.SelectedItem as Enseignant);
-            if(SuppressionEnseignantEvent!=null)
+            if(SuppressionEnseignantEvent != null)
                 SuppressionEnseignantEvent(this, new RoutedEventArgs());
         }
 

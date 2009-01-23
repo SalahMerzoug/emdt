@@ -36,7 +36,7 @@ namespace PlanningMaker.Modele
             }
         }
 
-        public ICollection<Enseignant> Enseignants
+        public Collection<Enseignant> Enseignants
         {
             get
             {

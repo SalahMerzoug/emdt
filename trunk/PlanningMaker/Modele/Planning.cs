@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Xml;
-using System.Windows.Forms;
 
 namespace PlanningMaker.Modele
 {
@@ -76,7 +76,7 @@ namespace PlanningMaker.Modele
             }
         }
 
-        public ICollection<Enseignant> Enseignants
+        public Collection<Enseignant> Enseignants
         {
             get
             {
@@ -84,7 +84,7 @@ namespace PlanningMaker.Modele
             }
         }
 
-        public ICollection<Matiere> Matieres
+        public Collection<Matiere> Matieres
         {
             get
             {
@@ -92,7 +92,7 @@ namespace PlanningMaker.Modele
             }
         }
 
-        public ICollection<Horaire> Horaires
+        public Collection<Horaire> Horaires
         {
             get
             {
@@ -100,7 +100,7 @@ namespace PlanningMaker.Modele
             }
         }
 
-        public ICollection<Salle> Salles
+        public Collection<Salle> Salles
         {
             get
             {
@@ -108,7 +108,7 @@ namespace PlanningMaker.Modele
             }
         }
 
-        public ICollection<Semaine> Semaines
+        public Collection<Semaine> Semaines
         {
             get
             {
@@ -144,13 +144,13 @@ namespace PlanningMaker.Modele
         private void CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.HasChanged = true;
-            ObjectChanged("");
+            ObjectChanged("CollectionChanged : " + sender.ToString());
         }
 
         private void OnItemPropertyChanged(object sender, ItemPropertyChangedEventArgs args)
         {
             this.HasChanged = true;
-            ObjectChanged("");
+            ObjectChanged("ItemPropertyChanged : " + sender.ToString());
         }
 
         public void SupprimerEnseignant(Enseignant enseignant)
