@@ -42,23 +42,29 @@ namespace PlanningMaker.Modele
 
             // Créer le fichier de destination
             string nomFichierXpath = SaveFileXpath();
- 
-            // Create the XsltArgumentList.
-            XsltArgumentList xslArg = new XsltArgumentList();
-  
-            try
+
+            if (nomFichierXpath != null)
             {
-                // Transform the file.
-                XmlTextWriter writer = new XmlTextWriter(nomFichierXpath, null);
-                xslt.Transform(xpathdocument, xslArg, writer);
-                writer.Close();
+                // Create the XsltArgumentList.
+                XsltArgumentList xslArg = new XsltArgumentList();
 
-                // Affichage
-                MessageBox.Show("Génération des requêtes XPath par défaut : OK");
-                MainWindow.StartExternWebBrowser(nomFichierXpath);
+                try
+                {
+                    // Transform the file.
+                    XmlTextWriter writer = new XmlTextWriter(nomFichierXpath, null);
+                    xslt.Transform(xpathdocument, xslArg, writer);
+                    writer.Close();
 
+                    // Affichage
+                    MessageBox.Show("Génération des requêtes XPath par défaut : OK");
+                    MainWindow.StartExternWebBrowser(nomFichierXpath);
+
+                }
+                catch
+                {
+                    MessageBox.Show("Génération des requêtes XPath par défaut : Erreur");
+                }
             }
-            catch { MessageBox.Show("Génération des requêtes XPath par défaut : Erreur");}
 
         }
 
@@ -84,45 +90,57 @@ namespace PlanningMaker.Modele
             {
                 XPathDocument test_xpathdocument = new XPathDocument(nomFichierSemaine);
             }
-            catch { MessageBox.Show("Erreur au chargement du document XPath !");}
+            catch
+            { 
+                MessageBox.Show("Erreur au chargement du document XPath !");
+            }
 
             XPathDocument xpathdocument = new XPathDocument(nomFichierSemaine);
             
             // Créer le fichier de destination
             string nomFichierXpath = SaveFileXpath();
 
-            // Create the XsltArgumentList.
-            XsltArgumentList xslArg = new XsltArgumentList();
-            xslArg.AddParam("numSemaine", "", numSemaine);
-            xslArg.AddParam("nom_recherche_1", "", nom_recherche_1);
-            xslArg.AddParam("id_enseignant_2", "", id_enseignant_2);
-            xslArg.AddParam("id_matière_3", "", id_matière_3);
-            xslArg.AddParam("id_matière_4", "", id_matière_4);
-            xslArg.AddParam("id_enseignant_5", "", id_enseignant_5);
-            xslArg.AddParam("id_salle_6", "", id_salle_6);
-            xslArg.AddParam("id_jour_6", "", id_jour_6);
-            xslArg.AddParam("id_enseignant_7", "", id_enseignant_7);
-            xslArg.AddParam("id_jour_7", "", id_jour_7);
-
-            try
+            if (nomFichierXpath != null)
             {
-                // Transform the file.
-                XmlTextWriter writer = new XmlTextWriter(nomFichierXpath, null);
-                xslt.Transform(xpathdocument, xslArg, writer);
-                writer.Close();
 
-                // Affichage
-                MessageBox.Show("Génération des requêtes XPath paramétrées : OK");
-                MainWindow.StartExternWebBrowser(nomFichierXpath);
+                // Create the XsltArgumentList.
+                XsltArgumentList xslArg = new XsltArgumentList();
+                xslArg.AddParam("numSemaine", "", numSemaine);
+                xslArg.AddParam("nom_recherche_1", "", nom_recherche_1);
+                xslArg.AddParam("id_enseignant_2", "", id_enseignant_2);
+                xslArg.AddParam("id_matière_3", "", id_matière_3);
+                xslArg.AddParam("id_matière_4", "", id_matière_4);
+                xslArg.AddParam("id_enseignant_5", "", id_enseignant_5);
+                xslArg.AddParam("id_salle_6", "", id_salle_6);
+                xslArg.AddParam("id_jour_6", "", id_jour_6);
+                xslArg.AddParam("id_enseignant_7", "", id_enseignant_7);
+                xslArg.AddParam("id_jour_7", "", id_jour_7);
 
+                try
+                {
+                    // Transform the file.
+                    XmlTextWriter writer = new XmlTextWriter(nomFichierXpath, null);
+                    xslt.Transform(xpathdocument, xslArg, writer);
+                    writer.Close();
+
+                    // Affichage
+                    MessageBox.Show("Génération des requêtes XPath paramétrées : OK");
+                    MainWindow.StartExternWebBrowser(nomFichierXpath);
+
+                }
+                catch
+                { 
+                    MessageBox.Show("Génération des requêtes XPath paramétrées : Erreur");
+                }
             }
-            catch { MessageBox.Show("Génération des requêtes XPath paramétrées : Erreur"); }
         }
 
         public static string SaveFileXpath()
         {
             string directory = Environment.CurrentDirectory;
             System.Windows.Forms.SaveFileDialog dialogueS = new System.Windows.Forms.SaveFileDialog();
+            dialogueS.AddExtension = true;
+            dialogueS.FileName = "Query_results.html";
             dialogueS.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             dialogueS.Filter = "Fichier HTML (*.html)|*.html";
 
