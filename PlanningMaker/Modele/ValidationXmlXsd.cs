@@ -18,7 +18,7 @@ namespace PlanningMaker.Modele
                 // Add the schema to the collection.
                 sc.Add(null, @"..\..\Files\SchemaEdT.xsd");
 
-                messageValidation = "Validation réussite";
+                messageValidation = "Validation réussie";
 
                 // Set the validation settings.
                 XmlReaderSettings settings = new XmlReaderSettings();
