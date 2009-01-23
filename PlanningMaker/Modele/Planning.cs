@@ -220,6 +220,10 @@ namespace PlanningMaker.Modele
                             e.Horaire1 = e.Horaire2;
                             e.Horaire2 = null;
                         }
+                        else if (e.Horaire2 == horaire)
+                        {
+                            e.Horaire2 = null;
+                        }
                     }
                     foreach (Enseignement e in enseignementsASupprimer)
                     {
