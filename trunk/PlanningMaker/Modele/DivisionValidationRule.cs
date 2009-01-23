@@ -20,14 +20,16 @@ namespace PlanningMaker.Modele
             {
                 return new ValidationResult(true, null);
             }
-
-            if (reg.IsMatch(lettreDivision))
-            {
-                return new ValidationResult(true, null);
-            }
             else
             {
-                return new ValidationResult(false, "Une division doit valoir A, B, C, D ou E.");
+                if (reg.IsMatch(lettreDivision))
+                {
+                    return new ValidationResult(true, null);
+                }
+                else
+                {
+                    return new ValidationResult(false, "Une division doit valoir A, B, C, D ou E.");
+                }
             }
         }
     }

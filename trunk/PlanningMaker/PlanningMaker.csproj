@@ -59,7 +59,6 @@
     <Compile Include="Modele\ItemPropertyChangedEventArgs.cs" />
     <Compile Include="Modele\ObservableNotifiableCollection.cs" />
     <Compile Include="Modele\DivisionValidationRule.cs" />
-    <Compile Include="Modele\PromotionValidationRule.cs" />
     <Compile Include="Modele\NumeroValidationRule.cs" />
     <Compile Include="Modele\DateValidationRule.cs" />
     <Compile Include="Modele\GroupeValidationRule.cs" />

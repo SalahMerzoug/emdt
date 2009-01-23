@@ -43,7 +43,7 @@
     <xsd:sequence>
       <xsd:element name="annee" type="type-annee"/>
       <xsd:element name="division" type="type-division"/>
-      <xsd:element name="promotion" type="type-promotion"/>
+      <xsd:element name="promotion" type="type-string"/>
 	  
       <xsd:element name="enseignants">
         <xsd:complexType>
@@ -51,8 +51,8 @@
             <xsd:element name="enseignant" maxOccurs="unbounded">
               <xsd:complexType>
                 <xsd:sequence>
-                  <xsd:element name="prenom" type="xsd:string" />
-                  <xsd:element name="nom" type="xsd:string" />
+                  <xsd:element name="prenom" type="type-string" />
+                  <xsd:element name="nom" type="type-string" />
                 </xsd:sequence>
                 <xsd:attribute name="id" type="xsd:NCName" />
               </xsd:complexType>
@@ -67,7 +67,7 @@
             <xsd:element name="matiere" maxOccurs="unbounded">
               <xsd:complexType>
                 <xsd:sequence>
-                  <xsd:element name="titre" type="xsd:string" />
+                  <xsd:element name="titre" type="type-string" />
                   <xsd:element name="enseignant" maxOccurs="unbounded">
                     <xsd:complexType>
                       <xsd:attribute name="ref" type="xsd:NCName" />
@@ -103,7 +103,7 @@
             <xsd:element name="salle" maxOccurs="unbounded">
               <xsd:complexType>
                 <xsd:sequence>
-                  <xsd:element name="nom" type="xsd:string" />
+                  <xsd:element name="nom" type="type-string" />
                   <xsd:element name="typeSalle" type="type-salle" />
                 </xsd:sequence>
                 <xsd:attribute name="id" type="xsd:NCName" />
@@ -198,9 +198,9 @@
       <xsd:pattern value="^A|B|C|D|E$"/>
     </xsd:restriction>
   </xsd:simpleType>
-  <xsd:simpleType name="type-promotion">
+  <xsd:simpleType name="type-string">
     <xsd:restriction base="xsd:string">
-      <xsd:pattern value="^[A-Z]\p{Ll}+$"/>
+      <xsd:pattern value="^([A-Z]\p{Ll}+\.?)((-|\s)[A-Z]\p{Ll}+\.?)?$"/>
     </xsd:restriction>
   </xsd:simpleType>
   <xsd:simpleType name="type-numero">

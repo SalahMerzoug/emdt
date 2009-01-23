@@ -225,7 +225,7 @@
                             <TextBox.Text>
                                 <Binding Path="Promotion" UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>
-                                        <r:PromotionValidationRule/>
+                                        <r:StringValidationRule/>
                                     </Binding.ValidationRules>
                                 </Binding>
                             </TextBox.Text>
