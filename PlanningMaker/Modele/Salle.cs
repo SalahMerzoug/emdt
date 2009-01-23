@@ -4,10 +4,23 @@ namespace PlanningMaker.Modele
 {
     public class Salle : ObservableObject
     {
+        private String id;
         private ETypeSalles type;
         private String nom;
 
-        public virtual String Nom
+        public String Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
+
+        public String Nom
         {
             get
             {

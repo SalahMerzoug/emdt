@@ -103,13 +103,16 @@ namespace PlanningMaker
 
             planning = new Planning();
             planning.PropertyChanged += new PropertyChangedEventHandler(Planning_PropertyChanged);
+            
             DataContext = planning;
             this.SetTitle();
 
             TabItem_Emploi_du_temps.IsSelected = true;
             TabPanel.IsEnabled = true;
             vueEnseignement.IsEnabled = false;
+
             vueEnseignement.SetPlanningContext(planning);
+            vueRequetesXPath.SetPlanningContext(planning);
 
             ICollectionView vueSemaines = CollectionViewSource.GetDefaultView(planning.Semaines);
             vueSemaines.SortDescriptions.Add(new SortDescription("Numero", ListSortDirection.Ascending));

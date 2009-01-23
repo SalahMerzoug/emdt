@@ -7,8 +7,21 @@ namespace PlanningMaker.Modele
 {
     public class Matiere : ObservableObject
     {
+        private String id;
         private String titre;
         private ObservableNotifiableCollection<Enseignant> enseignants;
+
+        public String Id
+        {
+            get
+            {
+                return id;
+            }
+            set
+            {
+                id = value;
+            }
+        }
 
         public String Titre
         {
