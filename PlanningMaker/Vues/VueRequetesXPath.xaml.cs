@@ -61,9 +61,9 @@ namespace PlanningMaker.Vues
                 idMatiere_Req4,
                 idEnseignant_Req5,
                 idSalle_Req6,
-                comboBox_JourReq6.Text,
+                comboBox_JourReq6.Text.ToLower(),
                 idEnseignant_Req7,
-                comboBox_JourReq7.Text);
+                comboBox_JourReq7.Text.ToLower());
 
             this.ClearView();
 
