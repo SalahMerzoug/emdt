@@ -181,20 +181,20 @@
 
     <!-- Pour chaque tranche horaire ... -->
     <xsl:for-each select='//horaires/horaire/@id'>
-      <xsl:variable name="horraireDispoOuPas" select="."/>
+      <xsl:variable name="horaireDispoOuPas" select="."/>
       <!-- horaire = horaire indisponible ? ... -->
       <xsl:choose>
-        <xsl:when test="not($horraireDispoOuPas = ( //semaine[numero=$numSemaine]//enseignement[../../nom=$id_jour and salle/@ref=$id_salle]/horaire/@ref ) )">
+        <xsl:when test="not($horaireDispoOuPas = ( //semaine[numero=$numSemaine]//enseignement[../../nom=$id_jour and salle/@ref=$id_salle]/horaire/@ref ) )">
           <font color="green"><b>
               <xsl:value-of select="position()"/>)
-              Disponible à : <xsl:value-of select="//horaires/horaire[@id=$horraireDispoOuPas]"/>
-        </b></font> ( <xsl:value-of select="$horraireDispoOuPas"/> )<BR/>
+              Disponible à : <xsl:value-of select="//horaires/horaire[@id=$horaireDispoOuPas]"/>
+        </b></font> ( <xsl:value-of select="$horaireDispoOuPas"/> )<BR/>
         </xsl:when>
         <xsl:otherwise>
           <font color="red"><b>
               <xsl:value-of select="position()"/>)
-              Indisponible à : <xsl:value-of select="//horaires/horaire[@id=$horraireDispoOuPas]"/>
-        </b></font> ( <xsl:value-of select="$horraireDispoOuPas"/> )<BR/>
+              Indisponible à : <xsl:value-of select="//horaires/horaire[@id=$horaireDispoOuPas]"/>
+        </b></font> ( <xsl:value-of select="$horaireDispoOuPas"/> )<BR/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:for-each>
@@ -216,20 +216,20 @@
     
     <!-- Pour chaque tranche horaire ... -->
     <xsl:for-each select='//horaires/horaire/@id'>
-      <xsl:variable name="horraireDispoOuPas" select="."/>
+      <xsl:variable name="horaireDispoOuPas" select="."/>
       <!-- horaire = horaire indisponible ? ... -->
       <xsl:choose>
-        <xsl:when test="not($horraireDispoOuPas = ( //semaine[numero=$numSemaine]//enseignement[../../nom=$id_jour and (enseignant/@ref=$id_enseignant) or ( not(enseignant) and ( matiere/@ref= $idDéfautProf ) ) ]/horaire/@ref ) )">
+        <xsl:when test="not($horaireDispoOuPas = ( //semaine[numero=$numSemaine]//enseignement[../../nom=$id_jour and (enseignant/@ref=$id_enseignant) or ( not(enseignant) and ( matiere/@ref= $idDéfautProf ) ) ]/horaire/@ref ) )">
           <font color="green"><b>
               <xsl:value-of select="position()"/>)
-              Disponible à : <xsl:value-of select="//horaires/horaire[@id=$horraireDispoOuPas]"/>
-        </b></font> ( <xsl:value-of select="$horraireDispoOuPas"/> )<BR/>
+              Disponible à : <xsl:value-of select="//horaires/horaire[@id=$horaireDispoOuPas]"/>
+        </b></font> ( <xsl:value-of select="$horaireDispoOuPas"/> )<BR/>
         </xsl:when>
         <xsl:otherwise>
           <font color="red"><b>
               <xsl:value-of select="position()"/>)
-              Indisponible : <xsl:value-of select="//horaires/horaire[@id=$horraireDispoOuPas]"/>
-          </b></font> ( <xsl:value-of select="$horraireDispoOuPas"/> )<BR/>
+              Indisponible : <xsl:value-of select="//horaires/horaire[@id=$horaireDispoOuPas]"/>
+          </b></font> ( <xsl:value-of select="$horaireDispoOuPas"/> )<BR/>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:for-each>

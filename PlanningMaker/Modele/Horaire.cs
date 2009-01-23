@@ -36,8 +36,8 @@ namespace PlanningMaker.Modele
 
         public Horaire()
         {
-            this.debut = "0h00";
-            this.fin = "0h00";
+            this.debut = "00h00";
+            this.fin = "00h00";
         }
 
         public Horaire(String debut, String fin)
@@ -53,7 +53,7 @@ namespace PlanningMaker.Modele
 
         public static bool IsHeureValide(string heure)
         {
-            Regex rx = new Regex("^((1?[0-9])|2[0-3])h[0-5][0-9]$");
+            Regex rx = new Regex("^(([0-1][0-9])|2[0-3])h[0-5][0-9]$");
             if (rx.IsMatch(heure))
             {
                 return true;

@@ -681,7 +681,7 @@ namespace PlanningMaker
         {
             Horaire horaire = listeHoraires.SelectedItem as Horaire;
             if (horaire != null)
-                vueHoraire.ChangeHorraire(horaire);
+                vueHoraire.ChangeHoraire(horaire);
             else
                 vueHoraire.ClearView();
         }

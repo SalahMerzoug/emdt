@@ -322,6 +322,8 @@ namespace PlanningMaker.Modele
                 string id = elementHoraire.SelectSingleNode("@id").Value;
                 string debutHoraire = elementHoraire.SelectSingleNode("debut/text()").Value;
                 string finHoraire = elementHoraire.SelectSingleNode("fin/text()").Value;
+                if (debutHoraire.Length == 4) debutHoraire = "0" + debutHoraire;
+                if (finHoraire.Length == 4) finHoraire = "0" + finHoraire;
                 Horaire horaire = new Horaire(debutHoraire, finHoraire);
                 dicoHoraires.Add(id, horaire);
                 horaires.Add(horaire);
@@ -487,6 +489,8 @@ namespace PlanningMaker.Modele
             foreach (Horaire h in horaires)
             {
                 XmlElement horaire = document.CreateElement("horaire");
+                if (h.Debut.StartsWith("0")) h.Debut = h.Debut.Substring(1);
+                if (h.Fin.StartsWith("0")) h.Fin = h.Fin.Substring(1);
                 AjouterHoraire(h, compteurIdHoraire, document, horairesPlanning, horaire);
                 compteurIdHoraire++;
             }
@@ -580,18 +584,21 @@ namespace PlanningMaker.Modele
 
             foreach (Jour j in s.Jours)
             {
-                XmlElement jour = document.CreateElement("jour");
-                XmlElement nom = document.CreateElement("nom");
-                XmlElement enseignements = document.CreateElement("enseignements");
-                semaine.AppendChild(jour);
-                jour.AppendChild(nom);
-                jour.AppendChild(enseignements);
-                nom.AppendChild(document.CreateTextNode(Enum.Format(typeof(EJours), j.Nom, "G").ToLower()));
-                foreach (Enseignement e in j.Enseignements)
-	            {
-                    XmlElement enseignement = document.CreateElement("enseignement");
-                    AjouterEnseignement(e, document, enseignements, enseignement);
-	            }
+                if (j.Enseignements.Count > 0)
+                {
+                    XmlElement jour = document.CreateElement("jour");
+                    XmlElement nom = document.CreateElement("nom");
+                    XmlElement enseignements = document.CreateElement("enseignements");
+                    semaine.AppendChild(jour);
+                    jour.AppendChild(nom);
+                    jour.AppendChild(enseignements);
+                    nom.AppendChild(document.CreateTextNode(Enum.Format(typeof(EJours), j.Nom, "G").ToLower()));
+                    foreach (Enseignement e in j.Enseignements)
+                    {
+                        XmlElement enseignement = document.CreateElement("enseignement");
+                        AjouterEnseignement(e, document, enseignements, enseignement);
+                    }
+                }
             }
         }
 
