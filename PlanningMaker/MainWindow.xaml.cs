@@ -33,6 +33,8 @@ namespace PlanningMaker
             this.SetTitle();
             DataContext = planning;
 
+            vueMatiere.SuppressionEnseignantEvent += new RoutedEventHandler(VueMatiere_SuppressionEnseignantEvent);
+
 			// Insert code required on object creation below this point.
             /*MenuItem_Annuler.IsEnabled = false;
             MenuItem_Rétablir.IsEnabled = false;
@@ -41,6 +43,22 @@ namespace PlanningMaker
             MenuItem_Coller.IsEnabled = false;
             MenuItem_Supprimer.IsEnabled = false;*/
             MenuItem_Aide.IsEnabled = false;
+        }
+
+        private void VueMatiere_SuppressionEnseignantEvent(object sender, RoutedEventArgs e)
+        {
+            foreach (Semaine s in planning.Semaines)
+            {
+                foreach (Jour j in s.Jours)
+                {
+                    foreach (Enseignement enseignement in j.Enseignements)
+                    {
+                        Matiere matiere = enseignement.Matiere;
+                        if (!matiere.Enseignants.Contains(enseignement.Enseignant))
+                            enseignement.Enseignant = null;
+                    }
+                }
+            }
         }
 
         public Planning Planning
@@ -136,7 +154,7 @@ namespace PlanningMaker
 
             ICollectionView vueMatieres = CollectionViewSource.GetDefaultView(planning.Matieres);
             vueMatieres.SortDescriptions.Add(new SortDescription("Titre", ListSortDirection.Ascending));
-            vueMatiere.setEnseignantsContext(planning.Enseignants);
+            vueMatiere.SetEnseignantsContext(planning.Enseignants);
             listeMatieres.ItemsSource = planning.Matieres;
         }
 

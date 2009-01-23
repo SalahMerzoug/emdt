@@ -64,5 +64,12 @@ namespace PlanningMaker.Modele
             return "Enseignant : " + nom + " " + prenom;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj is Enseignant)
+                return id.Equals((obj as Enseignant).id);
+            else
+                return false;
+        }
     }
 }

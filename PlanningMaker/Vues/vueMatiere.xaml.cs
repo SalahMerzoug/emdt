@@ -15,6 +15,8 @@ namespace PlanningMaker.Vues
     /// </summary>
     public partial class VueMatiere : UserControl
     {
+        public event RoutedEventHandler SuppressionEnseignantEvent;
+
         private Matiere matiere;
         private ICollection<Enseignant> enseignantsAssocies;
 
@@ -54,7 +56,7 @@ namespace PlanningMaker.Vues
             IsEnabled = true;
         }
 
-        public void setEnseignantsContext(ICollection<Enseignant> enseignants)
+        public void SetEnseignantsContext(ICollection<Enseignant> enseignants)
         {
             ComboEnseignants.ItemsSource = enseignants;
         }
@@ -85,6 +87,8 @@ namespace PlanningMaker.Vues
         private void SupprimerProf(object sender, RoutedEventArgs e)
         {
             matiere.Enseignants.Remove(ListeProfs.SelectedItem as Enseignant);
+            if(SuppressionEnseignantEvent!=null)
+                SuppressionEnseignantEvent(this, new RoutedEventArgs());
         }
 
         private void SupprimerProfPossible(object sender, CanExecuteRoutedEventArgs e)
