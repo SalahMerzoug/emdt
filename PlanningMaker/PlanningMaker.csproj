@@ -55,6 +55,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Modele\StringValidationRule.cs" />
     <Compile Include="Modele\ItemPropertyChangedEventArgs.cs" />
     <Compile Include="Modele\ObservableNotifiableCollection.cs" />
     <Compile Include="Modele\DivisionValidationRule.cs" />
