@@ -48,7 +48,7 @@ namespace PlanningMaker.Vues
 
             ObjectDataProvider odp_salles = this.FindResource("ComboSource_Salles") as ObjectDataProvider;
 
-            if (odp_horaires != null)
+            if (odp_salles != null)
                 odp_salles.ObjectInstance = planning.Salles;
             else
                 odp_salles.ObjectInstance = null;

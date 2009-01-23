@@ -7,6 +7,7 @@
         <ObjectDataProvider x:Key="ComboSource_Matieres"/>
         <ObjectDataProvider x:Key="ComboSource_Enseignants"/>
         <ObjectDataProvider x:Key="ComboSource_Salles"/>
+        <ObjectDataProvider x:Key="ComboSource_Jours"/>
         <DataTemplate x:Key="Affichage_Enseignants">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{Binding Path=Nom}"/>
@@ -45,13 +46,13 @@
             <Label Content="Requête 6 : Disponibilités de la salle" Width="300"/>
             <ComboBox Name="comboBox_Req6" ItemsSource="{Binding Source={StaticResource ComboSource_Salles}}" DisplayMemberPath="Nom" Width="140" />
             <Label Content=" le "/>
-            <TextBox Name="champ_id_jour_6" Width="100"/>
+            <ComboBox Name="comboBox_JourReq6" ItemsSource="{Binding Source={StaticResource ComboSource_Jours}}" Width="100" />
         </StackPanel>
         <StackPanel Orientation="Horizontal" Margin="5">
             <Label Content="Requête 7 : Disponibilités de l'enseignant" Width="300"/>
             <ComboBox Name="comboBox_Req7" ItemsSource="{Binding Source={StaticResource ComboSource_Enseignants}}" ItemTemplate="{StaticResource Affichage_Enseignants}" Width="140" />
             <Label Content=" le "/>
-            <TextBox Name="champ_id_jour_7" Width="100"/>
+            <ComboBox Name="comboBox_JourReq7" ItemsSource="{Binding Source={StaticResource ComboSource_Jours}}" Width="100" />
         </StackPanel>
         <Button Height="30" Width="70" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,72,5" 
             Name="buttonXPath" IsDefault="True" Click="ButtonXPathClicked">

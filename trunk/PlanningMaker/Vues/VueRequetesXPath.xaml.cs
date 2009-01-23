@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using PlanningMaker.Modele;
 using System.Windows.Data;
 using System;
+using System.Collections.ObjectModel;
 
 namespace PlanningMaker.Vues
 {
@@ -10,7 +11,18 @@ namespace PlanningMaker.Vues
 	{
         public VueRequetesXPath()
 		{
-          InitializeComponent();
+            InitializeComponent();
+
+            ObservableCollection<String> listeJours = new ObservableCollection<String>();
+            foreach(String s in Enum.GetNames(typeof(EJours)))
+                listeJours.Add(s);
+
+            ObjectDataProvider odp_jours = this.FindResource("ComboSource_Jours") as ObjectDataProvider;
+
+            if (odp_jours != null)
+                odp_jours.ObjectInstance = listeJours;
+            else
+                odp_jours.ObjectInstance = null;
 		}
 
         private void ButtonXPathClicked(object sender, RoutedEventArgs e)
@@ -43,9 +55,12 @@ namespace PlanningMaker.Vues
                 idMatiere_Req4,
                 idEnseignant_Req5,
                 idSalle_Req6,
-                champ_id_jour_6.Text,
+                comboBox_JourReq6.Text,
                 idEnseignant_Req7,
-                champ_id_jour_7.Text);
+                comboBox_JourReq7.Text);
+
+            this.ClearView();
+
         }
 
         public void SetPlanningContext(Planning planning)
@@ -57,16 +72,16 @@ namespace PlanningMaker.Vues
             else
                 odp_matiere.ObjectInstance = null;
 
-            ObjectDataProvider odp_horaires = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
+            ObjectDataProvider odp_enseignants = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
 
-            if (odp_horaires != null)
-                odp_horaires.ObjectInstance = planning.Enseignants;
+            if (odp_enseignants != null)
+                odp_enseignants.ObjectInstance = planning.Enseignants;
             else
-                odp_horaires.ObjectInstance = null;
+                odp_enseignants.ObjectInstance = null;
 
             ObjectDataProvider odp_salles = this.FindResource("ComboSource_Salles") as ObjectDataProvider;
 
-            if (odp_horaires != null)
+            if (odp_salles != null)
                 odp_salles.ObjectInstance = planning.Salles;
             else
                 odp_salles.ObjectInstance = null;
@@ -81,9 +96,9 @@ namespace PlanningMaker.Vues
             comboBox_Req4.SelectedItem = null;
             comboBox_Req5.SelectedItem = null;
             comboBox_Req6.SelectedItem = null;
-            champ_id_jour_6.Text = null;
+            comboBox_JourReq6.SelectedItem = null;
             comboBox_Req7.SelectedItem = null;
-            champ_id_jour_7.Text = null;
+            comboBox_JourReq7.SelectedItem = null;
         }
 
 	}
