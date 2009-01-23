@@ -631,6 +631,7 @@ namespace PlanningMaker
                 if (horaire != null)
                 {
                     planning.SupprimerHoraire(horaire);
+                    ChangementSelectionEnseignement(this, null);
                 }
             }
             else if (TabItem_Enseignants.IsSelected)
