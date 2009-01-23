@@ -32,12 +32,12 @@ namespace PlanningMaker.Vues
 
         public void SetPlanningContext(Planning planning)
         {
-            ObjectDataProvider odp_matiere = this.FindResource("ComboSource_Matieres") as ObjectDataProvider;
+            ObjectDataProvider odp_matieres = this.FindResource("ComboSource_Matieres") as ObjectDataProvider;
 
-            if (odp_matiere != null)
-                odp_matiere.ObjectInstance = planning.Matieres;
+            if (odp_matieres != null)
+                odp_matieres.ObjectInstance = planning.Matieres;
             else
-                odp_matiere.ObjectInstance = null;
+                odp_matieres.ObjectInstance = null;
 
             ObjectDataProvider odp_horaires = this.FindResource("ComboSource_Horaires") as ObjectDataProvider;
 
