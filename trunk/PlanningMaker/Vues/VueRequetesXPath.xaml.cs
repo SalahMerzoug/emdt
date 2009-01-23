@@ -23,6 +23,9 @@ namespace PlanningMaker.Vues
                 odp_jours.ObjectInstance = listeJours;
             else
                 odp_jours.ObjectInstance = null;
+
+            comboBox_JourReq6.SelectedIndex = 0;
+            comboBox_JourReq7.SelectedIndex = 0;
 		}
 
         private void ButtonXPathClicked(object sender, RoutedEventArgs e)
@@ -75,6 +78,8 @@ namespace PlanningMaker.Vues
             else
                 odp_semaines.ObjectInstance = null;
 
+            comboBox_Semaine.SelectedIndex = 0;
+
 
             ObjectDataProvider odp_matieres = this.FindResource("ComboSource_Matieres") as ObjectDataProvider;
 
@@ -100,16 +105,17 @@ namespace PlanningMaker.Vues
 
         public void ClearView()
         {
-            comboBox_Semaine.SelectedItem = null;
             champ_nom_recherche_1.Text = null;
             comboBox_Req2.SelectedItem = null;
             comboBox_Req3.SelectedItem = null;
             comboBox_Req4.SelectedItem = null;
             comboBox_Req5.SelectedItem = null;
             comboBox_Req6.SelectedItem = null;
-            comboBox_JourReq6.SelectedItem = null;
             comboBox_Req7.SelectedItem = null;
-            comboBox_JourReq7.SelectedItem = null;
+
+            comboBox_Semaine.SelectedIndex = 0;
+            comboBox_JourReq6.SelectedIndex = 0;
+            comboBox_JourReq7.SelectedIndex = 0;
         }
 
 	}
