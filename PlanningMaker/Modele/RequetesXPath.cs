@@ -56,13 +56,16 @@ namespace PlanningMaker.Modele
                     writer.Close();
 
                     // Affichage
-                    MessageBox.Show("Génération des requêtes XPath par défaut : OK");
+                    MessageBox.Show("Génération des requêtes XPath par défaut réussite", 
+                        "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Information);
+                    
                     MainWindow.StartExternWebBrowser(nomFichierXpath);
 
                 }
                 catch
                 {
-                    MessageBox.Show("Génération des requêtes XPath par défaut : Erreur");
+                    MessageBox.Show("La Génération des requêtes XPath a échoué",
+                        "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
@@ -81,13 +84,11 @@ namespace PlanningMaker.Modele
             // Charger la feuille de style
             XslCompiledTransform xslt = new XslCompiledTransform();
 
-            // Charger le fichier de transformation XSL
-            xslt.Load(exedir + @"\..\..\Files\" + nomFichierXSL);
-
-            // Charger le fichier XML à transformer
-            
             try
             {
+                // Charger le fichier de transformation XSL
+                xslt.Load(exedir + @"\..\..\Files\" + nomFichierXSL);
+                // Charger le fichier XML à transformer
                 XPathDocument test_xpathdocument = new XPathDocument(nomFichierSemaine);
             }
             catch
@@ -124,13 +125,15 @@ namespace PlanningMaker.Modele
                     writer.Close();
 
                     // Affichage
-                    MessageBox.Show("Génération des requêtes XPath paramétrées : OK");
+                    MessageBox.Show("Génération des requêtes XPath paramétrées réussite",
+                        "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Information);
                     MainWindow.StartExternWebBrowser(nomFichierXpath);
 
                 }
                 catch
-                { 
-                    MessageBox.Show("Génération des requêtes XPath paramétrées : Erreur");
+                {
+                    MessageBox.Show("La Génération des requêtes XPath paramétrées a échoué",
+                        "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
