@@ -27,6 +27,9 @@ namespace PlanningMaker.Vues
 
         private void ButtonXPathClicked(object sender, RoutedEventArgs e)
         {
+            Semaine semaine = comboBox_Semaine.SelectedItem as Semaine;
+            String numSemaine = (semaine != null) ? semaine.Numero.ToString() : "";
+
             Enseignant enseignant_Req2 = comboBox_Req2.SelectedItem as Enseignant;
             String idEnseignant_Req2 = (enseignant_Req2 != null) ? enseignant_Req2.Id : "";
 
@@ -47,8 +50,8 @@ namespace PlanningMaker.Vues
 
             RequetesXPath requetesXPath = new RequetesXPath();
             
-            requetesXPath.ExecRequetesXPath("RequetesXPath.xsl", "Semaine37.xml", 
-                champ_numSemaine.Text,
+            requetesXPath.ExecRequetesXPath("RequetesXPath.xsl", "Semaine37.xml",
+                numSemaine,
                 champ_nom_recherche_1.Text,
                 idEnseignant_Req2,
                 idMatiere_Req3,
@@ -65,12 +68,20 @@ namespace PlanningMaker.Vues
 
         public void SetPlanningContext(Planning planning)
         {
-            ObjectDataProvider odp_matiere = this.FindResource("ComboSource_Matieres") as ObjectDataProvider;
+            ObjectDataProvider odp_semaines = this.FindResource("ComboSource_Semaines") as ObjectDataProvider;
 
-            if (odp_matiere != null)
-                odp_matiere.ObjectInstance = planning.Matieres;
+            if (odp_semaines != null)
+                odp_semaines.ObjectInstance = planning.Semaines;
             else
-                odp_matiere.ObjectInstance = null;
+                odp_semaines.ObjectInstance = null;
+
+
+            ObjectDataProvider odp_matieres = this.FindResource("ComboSource_Matieres") as ObjectDataProvider;
+
+            if (odp_matieres != null)
+                odp_matieres.ObjectInstance = planning.Matieres;
+            else
+                odp_matieres.ObjectInstance = null;
 
             ObjectDataProvider odp_enseignants = this.FindResource("ComboSource_Enseignants") as ObjectDataProvider;
 
@@ -89,7 +100,7 @@ namespace PlanningMaker.Vues
 
         public void ClearView()
         {
-            champ_numSemaine.Text = null;
+            comboBox_Semaine.SelectedItem = null;
             champ_nom_recherche_1.Text = null;
             comboBox_Req2.SelectedItem = null;
             comboBox_Req3.SelectedItem = null;
