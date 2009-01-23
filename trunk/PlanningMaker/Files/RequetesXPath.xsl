@@ -149,7 +149,7 @@
 
         <tr>
           <th width='200'>Jour</th>
-          <th width='200'>Enseigant</th>
+          <th width='200'>Enseignant</th>
           <th width='200'>Horaire 1</th>
           <th width='200'>Horaire 2</th>
         </tr>
@@ -167,7 +167,9 @@
             </xsl:if>
             <xsl:variable name="idEnseignant" select="enseignant/@ref"/>
             <td>
-              <xsl:value-of select="//enseignant[@id=$idEnseignant]"/>
+              <xsl:value-of select="//enseignant[@id=$idEnseignant]/nom"/>
+              &#160;
+              <xsl:value-of select="//enseignant[@id=$idEnseignant]/prenom"/>
             </td>
             <!-- on affiche tous les horaires associés à l'enseignement -->
             <xsl:for-each select='horaire/@ref'>
