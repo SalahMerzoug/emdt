@@ -14,7 +14,8 @@ namespace PlanningMaker.Modele
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             string nomPromotion = value as string;
-            Regex reg = new Regex("^[A-Z][a-z]+$");
+            //  Ll = Letter, Lowercase (accents inclus)
+            Regex reg = new Regex(@"^[A-Z]\p{Ll}+$");
 
             if (nomPromotion == null)
             {
