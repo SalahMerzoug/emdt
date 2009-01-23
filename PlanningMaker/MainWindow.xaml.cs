@@ -416,17 +416,18 @@ namespace PlanningMaker
             if (OperationSurFichierXMLPossible())
             {
                 ValidationXmlXsd validation = new ValidationXmlXsd();
-                MessageBox.Show(this, validation.ValiderFichierXml(nomFichier), "Validation XMLSchema");
+                MessageBox.Show(validation.ValiderFichierXml(nomFichier), "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show(this, "Validation impossible : aucun planning enregistré.", "Validation XMLSchema");
+                MessageBox.Show("La Validation a échoué car aucun planning n'est enregistré !", "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 
         private void MenuItemTransfoXSLT_Click(object sender, RoutedEventArgs e)
         {
             string messageTransformation = null;
+            MessageBoxImage imageBox = MessageBoxImage.Information;
             string nomFichierSVG = null;
 
             ProposerEnregistrement(sender, e, "lancer la transformation");
@@ -444,16 +445,19 @@ namespace PlanningMaker
                 }
                 else
                 {
-                    messageTransformation = "Transformation annulée.";
-                }
+                    messageTransformation = "Transformation annulée !";
+                    imageBox = MessageBoxImage.Error;
+;                }
             }
             else
             {
-                messageTransformation = "Transformation impossible : aucun planning enregistré.";
+                messageTransformation = "La transformation est impossible car le planning n'est pas enregistré !";
+                imageBox = MessageBoxImage.Exclamation;
             }
 
-            MessageBox.Show(this, messageTransformation, "Transformation XSLT vers SVG");
-            if (messageTransformation.Equals("Transfomation OK."))
+            MessageBox.Show(messageTransformation, "Planning Maker", MessageBoxButton.OK, imageBox);
+
+            if (imageBox.Equals(MessageBoxImage.Information))
             {
                 StartExternWebBrowser(nomFichierSVG);
             }
