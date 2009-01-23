@@ -23,10 +23,10 @@ namespace PlanningMaker.Vues
             InitializeComponent();
 		}
 
-        public void ChangeHorraire(Horaire horraire)
+        public void ChangeHoraire(Horaire horaire)
         {
-            this.horaire = horraire;
-            DataContext = horraire;
+            this.horaire = horaire;
+            DataContext = horaire;
             IsEnabled = true;
         }
 

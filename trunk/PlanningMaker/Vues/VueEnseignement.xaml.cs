@@ -165,17 +165,17 @@ namespace PlanningMaker.Vues
                             ICollection<Horaire> horaires = odp_horaires.ObjectInstance as ICollection<Horaire>;
                             if (horaires != null)
                             {
-                                bool estDernierHorraire = true;
+                                bool estDernierHoraire = true;
                                 foreach (Horaire h in horaires)
                                 {
                                     if (horaire.EstSuiviPar(h))
                                     {
                                         enseignement.Horaire2 = h;
-                                        estDernierHorraire = false;
+                                        estDernierHoraire = false;
                                         break;
                                     }
                                 }
-                                if (estDernierHorraire)
+                                if (estDernierHoraire)
                                 {
                                     enseignement.Horaire2 = null;
                                 }

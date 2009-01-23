@@ -1,451 +1,437 @@
-<?xml version="1.0" encoding="ISO-8859-15"?>
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="EdTversSVG.xsl" type="text/xsl" version="1.0"?>
 <emploi-du-temps>
-  <annee>P1</annee>
-  <division>B</division>
-  <promotion>Zeeman</promotion>
-  <enseignants>
-    <enseignant id="idp0">
-      <prenom>Gerard</prenom>
-      <nom>Tourret</nom>
-    </enseignant>
-    <enseignant id="idp1">
-      <prenom>Jean-Yves</prenom>
-      <nom>Fougere</nom>
-    </enseignant>
-    <enseignant id="idp2">
-      <prenom>Olivier</prenom>
-      <nom>Beaudoux</nom>
-    </enseignant>
-    <enseignant id="idp3">
-      <prenom>Jean-Luc</prenom>
-      <nom>Curilla</nom>
-    </enseignant>
-    <enseignant id="idp4">
-      <prenom>Marie-Hélène</prenom>
-      <nom>Gilles</nom>
-    </enseignant>
-    <enseignant id="idp5">
-      <prenom>Karine</prenom>
-      <nom>Drouet</nom>
-    </enseignant>
-  </enseignants>
-  <matieres>
-    <matiere id="idm0">
-      <titre>Francais</titre>
-      <enseignant ref="idp4" />
-    </matiere>
-    <matiere id="idm1">
-      <titre>Mathematiques</titre>
-      <enseignant ref="idp1" />
-    </matiere>
-    <matiere id="idm2">
-      <titre>Sc. Physiques</titre>
-      <enseignant ref="idp0" />
-    </matiere>
-    <matiere id="idm3">
-      <titre>Anglais</titre>
-      <enseignant ref="idp5" />
-    </matiere>
-    <matiere id="idm4">
-      <titre>Informatique</titre>
-      <enseignant ref="idp2" />
-      <enseignant ref="idp1" />
-    </matiere>
-    <matiere id="idm5">
-      <titre>Sc. Ingenieur</titre>
-      <enseignant ref="idp3" />
-    </matiere>
-  </matieres>
-  <horaires>
-    <horaire id="idh0">
-      <debut>8h00</debut>
-      <fin>8h55</fin>
-    </horaire>
-    <horaire id="idh1">
-      <debut>8h55</debut>
-      <fin>9h50</fin>
-    </horaire>
-    <horaire id="idh2">
-      <debut>10h05</debut>
-      <fin>11h00</fin>
-    </horaire>
-    <horaire id="idh3">
-      <debut>11h00</debut>
-      <fin>11h55</fin>
-    </horaire>
-    <horaire id="idh4">
-      <debut>13h30</debut>
-      <fin>14h25</fin>
-    </horaire>
-    <horaire id="idh5">
-      <debut>14h25</debut>
-      <fin>15h20</fin>
-    </horaire>
-    <horaire id="idh6">
-      <debut>15h35</debut>
-      <fin>16h30</fin>
-    </horaire>
-    <horaire id="idh7">
-      <debut>16h30</debut>
-      <fin>17h25</fin>
-    </horaire>
-  </horaires>
-  <salles>
-    <salle id="ids0">
-      <nom>Langevin</nom>
-      <typeSalle>Amphi</typeSalle>
-    </salle>
-    <salle id="ids1">
-      <nom>Tesla</nom>
-      <typeSalle>Labo</typeSalle>
-    </salle>
-    <salle id="ids2">
-      <nom>Langues</nom>
-      <typeSalle>Labo</typeSalle>
-    </salle>
-    <salle id="ids3">
-      <nom>Planck</nom>
-      <typeSalle>Amphi</typeSalle>
-    </salle>
-    <salle id="ids4">
-      <nom>Shakespeare</nom>
-      <typeSalle>Amphi</typeSalle>
-    </salle>
-    <salle id="ids5">
-      <nom>Descartes</nom>
-      <typeSalle>Labo</typeSalle>
-    </salle>
-    <salle id="ids6">
-      <nom>Joule</nom>
-      <typeSalle>Amphi</typeSalle>
-    </salle>
-  </salles>
-  <semaines>
-    <semaine>
-      <numero>37</numero>
-      <date>2008-09-06</date>
-      <jour>
-        <nom>lundi</nom>
-        <enseignements />
-      </jour>
-      <jour>
-        <nom>mardi</nom>
-        <enseignements />
-      </jour>
-      <jour>
-        <nom>mercredi</nom>
-        <enseignements />
-      </jour>
-      <jour>
-        <nom>jeudi</nom>
-        <enseignements />
-      </jour>
-      <jour>
-        <nom>vendredi</nom>
-        <enseignements />
-      </jour>
-      <jour>
-        <nom>lundi</nom>
-        <enseignements>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh0" />
-            <horaire ref="idh1" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh2" />
-            <horaire ref="idh3" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm4" />
-            <horaire ref="idh6" />
-            <horaire ref="idh7" />
-            <salle ref="ids1" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm4" />
-            <horaire ref="idh4" />
-            <horaire ref="idh5" />
-            <salle ref="ids1" />
-          </enseignement>
-          <enseignement>
-            <type>TP</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh4" />
-            <horaire ref="idh5" />
-            <salle ref="ids3" />
-          </enseignement>
-          <enseignement>
-            <type>TP</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh6" />
-            <horaire ref="idh7" />
-            <salle ref="ids3" />
-          </enseignement>
-        </enseignements>
-      </jour>
-      <jour>
-        <nom>mardi</nom>
-        <enseignements>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh0" />
-            <horaire ref="idh1" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp3" />
-            <matiere ref="idm5" />
-            <horaire ref="idh2" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp5" />
-            <matiere ref="idm3" />
-            <horaire ref="idh2" />
-            <salle ref="ids2" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp5" />
-            <matiere ref="idm3" />
-            <horaire ref="idh3" />
-            <salle ref="ids2" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp3" />
-            <matiere ref="idm5" />
-            <horaire ref="idh3" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TP</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp3" />
-            <matiere ref="idm5" />
-            <horaire ref="idh4" />
-            <horaire ref="idh5" />
-            <salle ref="ids5" />
-          </enseignement>
-          <enseignement>
-            <type>TP</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh6" />
-            <horaire ref="idh7" />
-            <salle ref="ids3" />
-          </enseignement>
-          <enseignement>
-            <type>TP</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh4" />
-            <horaire ref="idh5" />
-            <salle ref="ids3" />
-          </enseignement>
-          <enseignement>
-            <type>TP</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp3" />
-            <matiere ref="idm5" />
-            <horaire ref="idh6" />
-            <horaire ref="idh7" />
-            <salle ref="ids5" />
-          </enseignement>
-        </enseignements>
-      </jour>
-      <jour>
-        <nom>mercredi</nom>
-        <enseignements>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh1" />
-            <horaire ref="idh2" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh3" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp3" />
-            <matiere ref="idm5" />
-            <horaire ref="idh4" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh5" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh6" />
-            <salle ref="ids0" />
-          </enseignement>
-        </enseignements>
-      </jour>
-      <jour>
-        <nom>jeudi</nom>
-        <enseignements>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp4" />
-            <matiere ref="idm0" />
-            <horaire ref="idh0" />
-            <horaire ref="idh1" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh2" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>COURS</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp5" />
-            <matiere ref="idm3" />
-            <horaire ref="idh3" />
-            <salle ref="ids4" />
-          </enseignement>
-          <enseignement>
-            <type>COURS</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp5" />
-            <matiere ref="idm3" />
-            <horaire ref="idh2" />
-            <salle ref="ids4" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh3" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh4" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh5" />
-            <salle ref="ids6" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh6" />
-            <salle ref="ids6" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh5" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh6" />
-            <salle ref="ids0" />
-          </enseignement>
-        </enseignements>
-      </jour>
-      <jour>
-        <nom>vendredi</nom>
-        <enseignements>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp1" />
-            <matiere ref="idm1" />
-            <horaire ref="idh0" />
-            <horaire ref="idh1" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>COURS</type>
-            <enseignant ref="idp0" />
-            <matiere ref="idm2" />
-            <horaire ref="idh2" />
-            <horaire ref="idh3" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>1</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm4" />
-            <horaire ref="idh4" />
-            <salle ref="ids0" />
-          </enseignement>
-          <enseignement>
-            <type>TD</type>
-            <numeroGroupe>2</numeroGroupe>
-            <enseignant ref="idp1" />
-            <matiere ref="idm4" />
-            <horaire ref="idh5" />
-            <salle ref="ids0" />
-          </enseignement>
-        </enseignements>
-      </jour>
-    </semaine>
-  </semaines>
+	
+	<annee>P1</annee>
+	<division>B</division>
+	<promotion>Zeeman</promotion>
+	
+	<enseignants>
+		<enseignant id='gtourret'>
+			<prenom>Gerard</prenom>	
+			<nom>Tourret</nom>
+		</enseignant>
+		<enseignant id='jfougere'>
+			<prenom>Jean-Yves</prenom>	
+			<nom>Fougere</nom>
+		</enseignant>
+		<enseignant id='obeaudoux'>
+			<prenom>Olivier</prenom>	
+			<nom>Beaudoux</nom>
+		</enseignant>
+		<enseignant id='jcurilla'>
+			<prenom>Jean-Luc</prenom>	
+			<nom>Curilla</nom>
+		</enseignant>
+		<enseignant id='mgilles'>
+			<prenom>Marie-HÃ©lÃšne</prenom>	
+			<nom>Gilles</nom>
+		</enseignant>
+		<enseignant id='kdrouet'>
+			<prenom>Karine</prenom>	
+			<nom>Drouet</nom>
+		</enseignant>
+	</enseignants>
+
+	<matieres>
+		<matiere id='francais'>
+			<titre>Francais</titre>
+			<enseignant ref='mgilles'/>
+		</matiere>
+		<matiere id='maths'>
+			<titre>Mathematiques</titre>
+			<enseignant ref='jfougere'/>
+		</matiere>
+		<matiere id='physiques'>
+			<titre>Sc. Physiques</titre>
+			<enseignant ref='gtourret'/>
+		</matiere>
+		<matiere id='anglais'>
+			<titre>Anglais</titre>
+			<enseignant ref='kdrouet'/>
+		</matiere>
+		<matiere id='info'>
+			<titre>Informatique</titre>
+			<enseignant ref='obeaudoux'/>
+		</matiere>
+		<matiere id='si'>
+			<titre>Sc. Ingenieur</titre>
+			<enseignant ref='jcurilla'/>
+		</matiere>
+	</matieres>
+
+	<horaires>
+		<horaire id='h08-09'>
+			<debut>8h00</debut>
+			<fin>8h55</fin>
+		</horaire>
+		<horaire id='h09-10'>
+			<debut>8h55</debut>
+			<fin>9h50</fin>
+		</horaire>
+		<horaire id='h10-11'>
+			<debut>10h05</debut>
+			<fin>11h00</fin>
+		</horaire>
+		<horaire id='h11-12'>
+			<debut>11h00</debut>
+			<fin>11h55</fin>
+		</horaire>
+		<horaire id='h13-14'>
+			<debut>13h30</debut>
+			<fin>14h25</fin>
+		</horaire>
+		<horaire id='h14-15'>
+			<debut>14h25</debut>
+			<fin>15h20</fin>
+		</horaire>
+		<horaire id='h15-16'>
+			<debut>15h35</debut>
+			<fin>16h30</fin>
+		</horaire>
+		<horaire id='h16-17'>
+			<debut>16h30</debut>
+			<fin>17h25</fin>
+		</horaire>
+	</horaires>
+
+	<salles>
+		<salle id='langevin'>
+			<nom>Langevin</nom>
+			<typeSalle>Amphi</typeSalle>
+		</salle>
+		<salle id='tesla'>
+			<nom>Tesla</nom>
+			<typeSalle>Labo</typeSalle>
+		</salle>
+		<salle id='langues'>
+			<nom>Langues</nom>
+			<typeSalle>Labo</typeSalle>
+		</salle>
+		<salle id='planck'>
+			<nom>Planck</nom>
+			<typeSalle>Amphi</typeSalle>
+		</salle>
+		<salle id='shakespeare'>
+			<nom>Shakespeare</nom>
+			<typeSalle>Amphi</typeSalle>
+		</salle>
+		<salle id='descartes'>
+			<nom>Descartes</nom>
+			<typeSalle>Labo</typeSalle>
+		</salle>
+		<salle id='joule'>
+			<nom>Joule</nom>
+			<typeSalle>Amphi</typeSalle>
+		</salle>
+	</salles>
+
+	<semaines>
+		<semaine>
+			<numero>37</numero>
+			<date>2008-09-06</date>
+			<jour>
+				<nom>lundi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h08-09'/>
+						<horaire ref='h09-10'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h10-11'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='info'/>
+						<horaire ref='h15-16'/>
+						<horaire ref='h16-17'/>
+						<salle ref='tesla'/>
+						</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='info'/>
+						<horaire ref='h13-14'/>
+						<horaire ref='h14-15'/>
+						<salle ref='tesla'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h13-14'/>
+						<horaire ref='h14-15'/>
+						<salle ref='planck'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h15-16'/>
+						<horaire ref='h16-17'/>
+						<salle ref='planck'/>
+					</enseignement>
+				</enseignements>
+			</jour>
+			<jour>
+				<nom>mardi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h08-09'/>
+						<horaire ref='h09-10'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h10-11'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='kdrouet'/>
+						<matiere ref='anglais'/>
+						<horaire ref='h10-11'/>
+						<salle ref='langues'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='kdrouet'/>
+						<matiere ref='anglais'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langues'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h13-14'/>
+						<horaire ref='h14-15'/>
+						<salle ref='descartes'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h15-16'/>
+						<horaire ref='h16-17'/>
+						<salle ref='planck'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h13-14'/>
+						<horaire ref='h14-15'/>
+						<salle ref='planck'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h15-16'/>
+						<horaire ref='h16-17'/>
+						<salle ref='descartes'/>
+					</enseignement>
+				</enseignements>
+			</jour>	
+			<jour>
+				<nom>mercredi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h09-10'/>
+						<horaire ref='h10-11'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h13-14'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h14-15'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h15-16'/>
+						<salle ref='langevin'/>
+					</enseignement>
+				</enseignements>
+			</jour>	
+			<jour>
+				<nom>jeudi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='mgilles'/>
+						<matiere ref='francais'/>
+						<horaire ref='h08-09'/>
+						<horaire ref='h09-10'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h10-11'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='kdrouet'/>
+						<matiere ref='anglais'/>
+						<horaire ref='h11-12'/>
+						<salle ref='shakespeare'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='kdrouet'/>
+						<matiere ref='anglais'/>
+						<horaire ref='h10-11'/>
+						<salle ref='shakespeare'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h13-14'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h14-15'/>
+						<salle ref='joule'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h15-16'/>
+						<salle ref='joule'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h14-15'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h15-16'/>
+						<salle ref='langevin'/>
+					</enseignement>
+				</enseignements>
+			</jour>	
+			<jour>
+				<nom>vendredi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h08-09'/>
+						<horaire ref='h09-10'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h10-11'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='info'/>
+						<horaire ref='h13-14'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='info'/>
+						<horaire ref='h14-15'/>
+						<salle ref='langevin'/>
+					</enseignement>
+				</enseignements>
+			</jour>	
+		</semaine>
+	</semaines>
 </emploi-du-temps>
