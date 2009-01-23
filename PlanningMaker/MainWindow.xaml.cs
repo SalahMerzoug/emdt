@@ -125,7 +125,6 @@ namespace PlanningMaker
             DataContext = planning;
             this.SetTitle();
 
-            TabItem_Emploi_du_temps.IsSelected = true;
             TabPanel.IsEnabled = true;
             vueEnseignement.IsEnabled = false;
 
@@ -525,53 +524,52 @@ namespace PlanningMaker
                 {
                     if (RadioButton_Lundi.IsChecked == true)
                     {
-                        semaineEnCours.Lundi.Enseignements.Add(nouvelEnseignement);
+                        semaineEnCours.Lundi.Enseignements.Insert(0, nouvelEnseignement);
                     }
                     else if (RadioButton_Mardi.IsChecked == true)
                     {
-                        semaineEnCours.Mardi.Enseignements.Add(nouvelEnseignement);
+                        semaineEnCours.Mardi.Enseignements.Insert(0, nouvelEnseignement);
                     }
                     else if (RadioButton_Mercredi.IsChecked == true)
                     {
-                        semaineEnCours.Mercredi.Enseignements.Add(nouvelEnseignement);
+                        semaineEnCours.Mercredi.Enseignements.Insert(0, nouvelEnseignement);
                     }
                     else if (RadioButton_Jeudi.IsChecked == true)
                     {
-                        semaineEnCours.Jeudi.Enseignements.Add(nouvelEnseignement);
+                        semaineEnCours.Jeudi.Enseignements.Insert(0, nouvelEnseignement);
                     }
                     else if (RadioButton_Vendredi.IsChecked == true)
                     {
-                        semaineEnCours.Vendredi.Enseignements.Add(nouvelEnseignement);
+                        semaineEnCours.Vendredi.Enseignements.Insert(0, nouvelEnseignement);
                     }
                 }
-
                 listeEnseignements.SelectedItem = nouvelEnseignement;
             }
             else if (TabItem_Horaires.IsSelected)
             {
                 Horaire nouvelHoraire = new Horaire();
-                planning.Horaires.Add(nouvelHoraire);
+                planning.Horaires.Insert(0, nouvelHoraire);
                 listeHoraires.SelectedItem = nouvelHoraire;
             }
             else if (TabItem_Enseignants.IsSelected)
             {
                 Enseignant nouvelEnseignant = new Enseignant();
-                planning.Enseignants.Add(nouvelEnseignant);
+                planning.Enseignants.Insert(0, nouvelEnseignant);
                 listeEnseignants.SelectedItem = nouvelEnseignant;
             }
             else if (TabItem_Matieres.IsSelected)
             {
                 Matiere nouvelleMatiere = new Matiere();
                 foreach (Enseignant enseignant in vueMatiere.EnseignantsAssocies)
-                    nouvelleMatiere.Enseignants.Add(enseignant);
+                    nouvelleMatiere.Enseignants.Insert(0, enseignant);
 
-                planning.Matieres.Add(nouvelleMatiere);
+                planning.Matieres.Insert(0, nouvelleMatiere);
                 listeMatieres.SelectedItem = nouvelleMatiere;
             }
             else if (TabItem_Salles.IsSelected)
             {
                 Salle nouvelleSalle = new Salle();
-                planning.Salles.Add(nouvelleSalle);
+                planning.Salles.Insert(0, nouvelleSalle);
                 listeSalles.SelectedItem = nouvelleSalle;
             }
         }
@@ -635,7 +633,6 @@ namespace PlanningMaker
                 if (horaire != null)
                 {
                     planning.SupprimerHoraire(horaire);
-                    ChangementSelectionEnseignement(this, null);
                 }
             }
             else if (TabItem_Enseignants.IsSelected)

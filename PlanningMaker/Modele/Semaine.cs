@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 namespace PlanningMaker.Modele
@@ -42,7 +42,7 @@ namespace PlanningMaker.Modele
             }
         }
 
-        public ICollection<Jour> Jours
+        public Collection<Jour> Jours
         {
             get
             {

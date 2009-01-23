@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -163,7 +163,7 @@ namespace PlanningMaker.Vues
 
                         if (odp_horaires != null)
                         {
-                            ICollection<Horaire> horaires = odp_horaires.ObjectInstance as ICollection<Horaire>;
+                            Collection<Horaire> horaires = odp_horaires.ObjectInstance as Collection<Horaire>;
                             if (horaires != null)
                             {
                                 bool estDernierHoraire = true;

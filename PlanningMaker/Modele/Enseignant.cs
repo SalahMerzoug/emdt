@@ -63,6 +63,5 @@ namespace PlanningMaker.Modele
         {
             return "Enseignant : " + nom + " " + prenom;
         }
-
     }
 }
