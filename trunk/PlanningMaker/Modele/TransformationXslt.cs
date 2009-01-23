@@ -25,11 +25,11 @@ namespace PlanningMaker.Modele
                 xslt.Transform(xpathdocument, xslArg, writer);
                 writer.Close();
 
-                messageValidation = "Transfomation OK.";
+                messageValidation = "Transfomation OK";
             }
             catch (Exception e)
             {
-                messageValidation = "Erreur ayant interrompu la transformation : " + e.Message + ".";
+                messageValidation = "Erreur ayant interrompu la transformation\n: " + e.Message + ".";
             }
 
             return messageValidation;

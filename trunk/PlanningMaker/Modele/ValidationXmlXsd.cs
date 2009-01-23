@@ -18,7 +18,7 @@ namespace PlanningMaker.Modele
                 // Add the schema to the collection.
                 sc.Add(null, @"..\..\Files\SchemaEdT.xsd");
 
-                messageValidation = "Validation OK.";
+                messageValidation = "Validation réussite";
 
                 // Set the validation settings.
                 XmlReaderSettings settings = new XmlReaderSettings();
@@ -34,7 +34,7 @@ namespace PlanningMaker.Modele
             }
             catch (Exception e)
             {
-                messageValidation = "Erreur ayant interrompu la validation : " + e.Message;
+                messageValidation = "Erreur ayant interrompu la validation :\n" + e.Message;
             }
 
             return messageValidation;
@@ -43,7 +43,7 @@ namespace PlanningMaker.Modele
         // Display any validation errors.
         private void ValidationCallBack(object sender, ValidationEventArgs e)
         {
-            messageValidation = "Echec de la validation : " + e.Message;
+            messageValidation = "Echec de la validation :\n" + e.Message;
         }
     }
 }
