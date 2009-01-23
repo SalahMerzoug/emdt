@@ -53,6 +53,7 @@
 		<matiere id='info'>
 			<titre>Informatique</titre>
 			<enseignant ref='obeaudoux'/>
+			<enseignant ref='jfougere'/>
 		</matiere>
 		<matiere id='si'>
 			<titre>Sc. Ingenieur</titre>
