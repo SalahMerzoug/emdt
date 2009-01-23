@@ -420,7 +420,7 @@ namespace PlanningMaker
             }
             else
             {
-                MessageBox.Show("La Validation a échoué car aucun planning n'est enregistré !", "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("La validation est impossible car le planning n'est pas enregistré !", "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
         }
 

@@ -56,7 +56,7 @@ namespace PlanningMaker.Modele
                     writer.Close();
 
                     // Affichage
-                    MessageBox.Show("Génération des requêtes XPath par défaut réussite", 
+                    MessageBox.Show("Génération des requêtes XPath par défaut réussie", 
                         "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Information);
                     
                     MainWindow.StartExternWebBrowser(nomFichierXpath);
@@ -64,7 +64,7 @@ namespace PlanningMaker.Modele
                 }
                 catch
                 {
-                    MessageBox.Show("La Génération des requêtes XPath a échoué",
+                    MessageBox.Show("La génération des requêtes XPath a échoué",
                         "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -125,7 +125,7 @@ namespace PlanningMaker.Modele
                     writer.Close();
 
                     // Affichage
-                    MessageBox.Show("Génération des requêtes XPath paramétrées réussite",
+                    MessageBox.Show("Génération des requêtes XPath paramétrées réussie",
                         "Planning Maker", MessageBoxButton.OK, MessageBoxImage.Information);
                     MainWindow.StartExternWebBrowser(nomFichierXpath);
 
