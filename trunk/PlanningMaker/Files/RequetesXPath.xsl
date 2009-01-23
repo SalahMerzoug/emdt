@@ -167,9 +167,7 @@
             </xsl:if>
             <xsl:variable name="idEnseignant" select="enseignant/@ref"/>
             <td>
-              <xsl:value-of select="//enseignant[@id=$idEnseignant]/nom"/>
-              &#160;
-              <xsl:value-of select="//enseignant[@id=$idEnseignant]/prenom"/>
+              <xsl:value-of select="//enseignant[@id=$idEnseignant]/nom"/>&#160;<xsl:value-of select="//enseignant[@id=$idEnseignant]/prenom"/>
             </td>
             <!-- on affiche tous les horaires associés à l'enseignement -->
             <xsl:for-each select='horaire/@ref'>
