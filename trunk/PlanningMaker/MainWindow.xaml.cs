@@ -353,7 +353,7 @@ namespace PlanningMaker
             this.Close();
         }
 
-        private void Undo(object sender, RoutedEventArgs e)
+        /*private void Undo(object sender, RoutedEventArgs e)
         {
             // TODO
         }
@@ -381,7 +381,7 @@ namespace PlanningMaker
         private void Delete(object sender, RoutedEventArgs e)
         {
             // TODO
-        }
+        }*/
 
         private void Help(object sender, RoutedEventArgs e)
         {
