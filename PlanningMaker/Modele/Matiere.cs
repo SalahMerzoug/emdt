@@ -46,7 +46,7 @@ namespace PlanningMaker.Modele
 
         public Matiere()
         {
-            this.titre = "undefined";
+            this.titre = "Undefined";
             enseignants = new ObservableNotifiableCollection<Enseignant>();
             enseignants.CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChanged);
             enseignants.ItemPropertyChanged += OnItemPropertyChanged;

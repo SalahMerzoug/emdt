@@ -48,7 +48,7 @@ namespace PlanningMaker.Modele
 
         public Salle()
         {
-            this.nom = "undefined";
+            this.nom = "Undefined";
             this.type = ETypeSalles.Amphi;
         }
 

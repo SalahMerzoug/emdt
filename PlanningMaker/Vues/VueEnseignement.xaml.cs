@@ -142,7 +142,7 @@ namespace PlanningMaker.Vues
                     if (odp_enseignants != null)
                         odp_enseignants.ObjectInstance = matiere.Enseignants;
 
-                    Enseignant.SelectedItem = matiere.Enseignants.First();
+                    if (matiere.Enseignants.Count > 0) Enseignant.SelectedItem = matiere.Enseignants.First();
                 }
             }
         }

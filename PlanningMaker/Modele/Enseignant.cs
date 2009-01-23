@@ -49,8 +49,8 @@ namespace PlanningMaker.Modele
 
         public Enseignant()
         {
-            this.nom = "undefined";
-            this.prenom = "undefined";
+            this.nom = "Undefined";
+            this.prenom = "Undefined";
         }
 
         public Enseignant(String nom, String prenom)
