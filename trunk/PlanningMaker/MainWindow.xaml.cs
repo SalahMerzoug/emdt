@@ -633,6 +633,11 @@ namespace PlanningMaker
                 if (horaire != null)
                 {
                     planning.SupprimerHoraire(horaire);
+                    Enseignement enseignement = listeEnseignements.SelectedItem as Enseignement;
+                    if (enseignement != null)
+                    {
+                        vueEnseignement.ChangeEnseignement(enseignement);
+                    }
                 }
             }
             else if (TabItem_Enseignants.IsSelected)
