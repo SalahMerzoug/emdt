@@ -81,7 +81,7 @@ namespace PlanningMaker.Vues
 
         public void ClearView()
         {
-            refreshingView = false;
+            refreshingView = true;
 
             enseignement = null;
             DataContext = null;
