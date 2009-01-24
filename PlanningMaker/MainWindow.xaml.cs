@@ -177,8 +177,11 @@ namespace PlanningMaker
                 {
                     planning.Charger(nomFichier);
                     planning.HasChanged = false;
+
                     MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
                         MessageBoxButton.OK, MessageBoxImage.Information);
+                    // correctif de fortune (Vista) : l'onglet sélectionné étant revenu à celui d'avant Open...
+                    TabPanel.SelectedItem = TabItem_Emploi_du_temps;
 
                     // Mise à jour du fichier source pour les requêtes XPath
                     RequetesXPath.NomFichierSemaine = nomFichier;
