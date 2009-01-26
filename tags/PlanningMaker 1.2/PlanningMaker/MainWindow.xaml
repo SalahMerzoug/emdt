@@ -1,0 +1,420 @@
+﻿<Window
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:c="clr-namespace:PlanningMaker.Vues"
+    xmlns:r="clr-namespace:PlanningMaker.Modele"
+	x:Class="PlanningMaker.MainWindow"
+	Name="Window" Width="900" Height="650" Background="Silver"
+    ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    
+    <Window.Resources>
+       <Style x:Key="TriggerIcone">
+            <Style.Triggers>
+                <Trigger Property="MenuItem.IsEnabled" Value="false">
+                    <Setter Property="Image.Opacity" Value="0.4"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                    Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                    Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <c:ListeAnnees x:Key="Annees"/>
+    </Window.Resources>
+    
+	<Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.New" Executed="New"/>
+		<CommandBinding Command="ApplicationCommands.Open" Executed="Open"/>
+        <CommandBinding Command="ApplicationCommands.Close" Executed="Close" CanExecute="FermeturePossible"/>
+        <CommandBinding Command="ApplicationCommands.Save" Executed="Save" CanExecute="EnregistrementPossible"/>
+        <CommandBinding Command="ApplicationCommands.SaveAs" Executed="SaveAs" CanExecute="EnregistrementSousPossible"/>
+        <CommandBinding Command="c:PlanningCommands.Importer" Executed="Importer"/>
+        <CommandBinding Command="c:PlanningCommands.Exporter" Executed="Exporter" CanExecute="ExporterPossible"/>
+        <CommandBinding Command="ApplicationCommands.PrintPreview" Executed="PrintPreview" CanExecute="ApercuPossible"/>
+        <CommandBinding Command="ApplicationCommands.Print" Executed="Print" CanExecute="ImprimerPossible"/>
+		<CommandBinding Command="c:PlanningCommands.Exit" Executed="Exit"/>
+        <!--<CommandBinding Command="ApplicationCommands.Undo" Executed="Undo"/>
+        <CommandBinding Command="ApplicationCommands.Redo" Executed="Redo"/>
+        <CommandBinding Command="ApplicationCommands.Cut" Executed="Cut"/>
+        <CommandBinding Command="ApplicationCommands.Copy" Executed="Copy"/>
+        <CommandBinding Command="ApplicationCommands.Paste" Executed="Paste"/>
+        <CommandBinding Command="EditingCommands.Delete" Executed="Delete"/>-->
+        <CommandBinding Command="ApplicationCommands.Help" Executed="Help"/>
+		<CommandBinding Command="c:PlanningCommands.AjouterElement" Executed="AjouterElement" CanExecute="AjouterElementPossible"/>
+        <CommandBinding Command="c:PlanningCommands.SupprimerElement" Executed="SupprimerElement" CanExecute="SupprimerElementPossible"/>
+        <CommandBinding Command="c:PlanningCommands.NewWeek" Executed="NewWeek" CanExecute="NewWeekPossible"/>
+        <CommandBinding Command="c:PlanningCommands.DelWeek" Executed="DelWeek" CanExecute="DelNextPreviousWeekPossible"/>
+        <CommandBinding Command="c:PlanningCommands.NextWeek" Executed="NextWeek" CanExecute="DelNextPreviousWeekPossible"/>
+        <CommandBinding Command="c:PlanningCommands.PreviousWeek" Executed="PreviousWeek" CanExecute="DelNextPreviousWeekPossible"/>
+    </Window.CommandBindings>
+    
+    <Grid Name="LayoutRoot">
+		<Menu VerticalAlignment="Top" Height="20" BorderBrush="{DynamicResource {x:Static SystemColors.MenuBarBrushKey}}">
+			<Menu.Background>
+				<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+					<GradientStop Color="#FF000000" Offset="1"/>
+					<GradientStop Color="#FFCCCCCC" Offset="0.898"/>
+				</LinearGradientBrush>
+			</Menu.Background>
+			<MenuItem Header="Fichier" Name="MenuItem_Fichier" Height="20">
+                <MenuItem Header="Nouveau" Name="MenuItem_Nouveau" Command="ApplicationCommands.New">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Document_New.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+				<MenuItem Header="Ouvrir" Name="MenuItem_Ouvrir" Command="ApplicationCommands.Open">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Folder2.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Fermer" Name="MenuItem_Fermer" Command="ApplicationCommands.Close">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Cancel.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+				<Separator/>
+				<MenuItem Header="Enregistrer" Name="MenuItem_Enr" Command="ApplicationCommands.Save">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Save.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+				<MenuItem Header="Enregistrer sous..." Name="MenuItem_EnrSous" Command="ApplicationCommands.SaveAs">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Save.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+				<Separator/>
+                <MenuItem Header="Importer" Name="MenuItem_Imp" Command="c:PlanningCommands.Importer">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Go_In.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Exporter" Name="MenuItem_Exp" Command="c:PlanningCommands.Exporter">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Go_Out.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Aperçu" Name="MenuItem_Apercu" Command="ApplicationCommands.PrintPreview">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Screen.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Imprimer" Name="MenuItem_Imprimer" Command="ApplicationCommands.Print">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Printer.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+				<MenuItem Header="Quitter" Name="MenuItem_Quitter" Command="c:PlanningCommands.Exit">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Standby.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+			</MenuItem>
+            <MenuItem Header="Edition" Name="MenuItem_Edition" Height="20">
+                <MenuItem Header="Annuler" Name="MenuItem_Annuler" Command="ApplicationCommands.Undo">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Player_Previous.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Rétablir" Name="MenuItem_Rétablir" Command="ApplicationCommands.Redo">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Player_Next.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Couper" Name="MenuItem_Couper" Command="ApplicationCommands.Cut">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Clipboard_Cut.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Copier" Name="MenuItem_Copier" Command="ApplicationCommands.Copy">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Clipboard_Copy.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Coller" Name="MenuItem_Coller" Command="ApplicationCommands.Paste">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Clipboard_Paste.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Supprimer" Name="MenuItem_Supprimer" Command="EditingCommands.Delete">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Trash.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Outils" Name="MenuItem_Outils" Height="20">
+                <MenuItem Header="Validation XMLSchema" Name="MenuItem_Validat" Click="MenuItemValiderXML_Click"/>
+                <MenuItem Header="Transformations XSLT" Name="MenuItem_Transfo" Click="MenuItemTransfoXSLT_Click"/>
+                <MenuItem Header="Requêtes XPath" Name="MenuItem_RequetesXPath" Click="MenuItemRequetesXPath_Click"/>
+            </MenuItem>
+            <MenuItem Header="?" Name="MenuItem_PointDInterro" Height="20">
+                <MenuItem Header="Aide" Name="MenuItem_Aide" Command="ApplicationCommands.Help">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Question.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Mettre à jour" Name="MenuItem_Maj" Click="MenuItemMAJ_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Globe.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="A propos" Name="MenuItem_Apropos" Click="MenuItemAPropos_Click">
+                    <MenuItem.Icon>
+                        <Image Source="Files\Img\Home.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+		</Menu>
+        
+		<TabControl Margin="0,20,0,25" IsSynchronizedWithCurrentItem="True" Name="TabPanel" IsEnabled="False">
+            <TabItem Header="Emploi du temps" Name="TabItem_Emploi_du_temps">
+                <StackPanel>
+                    <StackPanel HorizontalAlignment="Center">
+                        <Label Content="Semaine" FontSize="20"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="Bouton_PreviousWeek" Width="50" Command="c:PlanningCommands.PreviousWeek">Préc.</Button>
+                        <Label Width="20"/>
+                        <Label Name="Label_NumSemaine">Numéro :</Label>
+                        <Label Width="10"/>
+                        <ComboBox Name="ComboBox_NumSemaine" Width="50" DisplayMemberPath="Numero" HorizontalContentAlignment="Center" SelectionChanged="ChangementNumSemaine" />
+                        <Label Width="20"/>
+                        <Button Name="Bouton_NextWeek" Width="50" Command="c:PlanningCommands.NextWeek">Suiv.</Button>
+                    </StackPanel>
+                    <Label Height="10"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Name="Label_DateSemaine">Date :</Label>
+                        <Label Width="10"/>
+                        <TextBox Name="TextBox_DateSemaine" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100" HorizontalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <r:DateValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <Label Height="10"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="Bouton_NewWeek" Width="120" Command="c:PlanningCommands.NewWeek" IsDefault="True">Nouvelle semaine</Button>
+                        <Label Width="10"/>
+                        <Button Name="Bouton_DelWeek" Width="120" Command="c:PlanningCommands.DelWeek">Supprimer semaine</Button>
+                    </StackPanel>
+                    <StackPanel Height="10"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Promotion :"/>
+                        <Label Width="20"/>
+                        <TextBox Name="TextBox_Promotion" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100" HorizontalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="Promotion" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <r:StringValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                        <Label Width="20"/>
+                        <Label Content="Annee :"/>
+                        <Label Width="20"/>
+                        <ComboBox Name="ComboBox_Annee" Text="{Binding Path=Annee}" ItemsSource="{Binding Source={StaticResource Annees}}" Width="100" HorizontalAlignment="Center"/>
+                        <Label Width="20"/>
+                        <Label Content="Division :"/>
+                        <Label Width="20"/>
+                        <TextBox Name="TextBox_Division" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100" HorizontalAlignment="Center">
+                            <TextBox.Text>
+                                <Binding Path="Division" UpdateSourceTrigger="PropertyChanged" >
+                                    <Binding.ValidationRules>
+                                        <r:DivisionValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <Separator Height="20"/>
+                    <StackPanel HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Name="StackRadioJours">
+                            <RadioButton Name="RadioButton_Lundi" GroupName="choixJour" Unchecked="ChangementChoixJour">Lundi</RadioButton>
+                            <Label Width="20"/>
+                            <RadioButton Name="RadioButton_Mardi" GroupName="choixJour" Unchecked="ChangementChoixJour">Mardi</RadioButton>
+                            <Label Width="20"/>
+                            <RadioButton Name="RadioButton_Mercredi" GroupName="choixJour" Unchecked="ChangementChoixJour">Mercredi</RadioButton>
+                            <Label Width="20"/>
+                            <RadioButton Name="RadioButton_Jeudi" GroupName="choixJour" Unchecked="ChangementChoixJour">Jeudi</RadioButton>
+                            <Label Width="20"/>
+                            <RadioButton Name="RadioButton_Vendredi" GroupName="choixJour" Unchecked="ChangementChoixJour">Vendredi</RadioButton>
+                        </StackPanel>
+                        <StackPanel Height="12"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Grid Width="610" Height="320">
+                                <ListView Name="listeEnseignements" SelectionChanged="ChangementSelectionEnseignement" MouseRightButtonUp="DeselectionEnseignement">
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridView.Columns>
+                                                <GridViewColumn Width="60">
+                                                    <GridViewColumnHeader Tag="Horaire1.Debut" Content="H1"/>
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Vertical">
+                                                                <TextBlock Text="{Binding Path=Horaire1.Debut}"/>
+                                                                <TextBlock Text="{Binding Path=Horaire1.Fin}"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="60">
+                                                    <GridViewColumnHeader Tag="Horaire2.Debut" Content="H2"/>
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Vertical">
+                                                                <TextBlock Text="{Binding Path=Horaire2.Debut}"/>
+                                                                <TextBlock Text="{Binding Path=Horaire2.Fin}"/>
+                                                            </StackPanel>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="60" DisplayMemberBinding="{Binding Path=Type}">
+                                                    <GridViewColumnHeader Tag="Type" Content="Type"/>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="50" DisplayMemberBinding="{Binding Path=Groupe}">
+                                                    <GridViewColumnHeader Tag="Groupe" Content="N°"/>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="110" DisplayMemberBinding="{Binding Path=Matiere.Titre}">
+                                                    <GridViewColumnHeader Tag="Matiere.Titre" Content="Matière"/>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="150">
+                                                    <GridViewColumnHeader Tag="Enseignant.Nom" Content="Enseignant"/>
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <TextBlock Text="{Binding Path=Enseignant.Nom}"/>
+                                                                <TextBlock Text=" "/>
+                                                                <TextBlock Text="{Binding Path=Enseignant.Prenom}"/>
+                                                            </StackPanel>
+                                                    </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+                                                <GridViewColumn Width="90" DisplayMemberBinding="{Binding Path=Salle.Nom}">
+                                                    <GridViewColumnHeader Tag="Salle.Nom" Content="Salle"/>
+                                                </GridViewColumn>
+                                            </GridView.Columns>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </Grid>
+                            <Grid Height="320" Margin="5,0,0,0">
+                                <c:VueEnseignement x:Name="vueEnseignement" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Enseignants" Name="TabItem_Enseignants" KeyUp="ValidationEnseignant">
+                <DockPanel>
+                    <Grid Width="260">
+                        <c:VueEnseignant x:Name="vueEnseignant" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                    </Grid>
+                    <Grid Width="530">
+                        <ListView Name="listeEnseignants" SelectionChanged="ChangementSelectionEnseignant" MouseRightButtonUp="DeselectionEnseignant">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Nom}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Nom" Content="Nom"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Prenom}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Prenom" Content="Prénom"/>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </DockPanel>
+            </TabItem>
+			<TabItem Header="Matières" Name="TabItem_Matieres" KeyUp="ValidationMatiere">
+				<DockPanel>
+                    <Grid Width="260">
+                        <c:VueMatiere x:Name="vueMatiere" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Width="530">
+                        <ListView Name="listeMatieres" SelectionChanged="ChangementSelectionMatiere" MouseRightButtonUp="DeselectionMatiere">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Titre}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Titre" Content="Titre"/>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </DockPanel>
+			</TabItem>
+			<TabItem Header="Horaires" Name="TabItem_Horaires" DataContext="{Binding Path=Horaires}" KeyUp="ValidationHoraire">
+                <DockPanel>
+                <Grid Width="260">
+                    <c:VueHoraire x:Name="vueHoraire" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Grid>
+                <Grid Width="530">
+                        <ListView Name="listeHoraires" SelectionChanged="ChangementSelectionHoraire" MouseRightButtonUp="DeselectionHoraire">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Debut}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Debut" Content="Début"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Fin}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Fin" Content="Fin"/>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </DockPanel>
+            </TabItem>
+			<TabItem Header="Salles" Name="TabItem_Salles" KeyUp="ValidationSalle">
+                <DockPanel>
+                    <Grid Width="260">
+                        <c:VueSalle x:Name="vueSalle" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Width="530">
+                        <ListView Name="listeSalles" SelectionChanged="ChangementSelectionSalle" MouseRightButtonUp="DeselectionSalle">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Nom}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Nom" Content="Nom"/>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding Path=Type}">
+                                        <GridViewColumnHeader Click="SortClick" Tag="Type" Content="Type"/>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </DockPanel>
+            </TabItem>
+            <TabItem Header="Requêtes XPath" Name="TabItem_XPath">
+                <GroupBox Header="Requêtes XPath" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <c:VueRequetesXPath x:Name="vueRequetesXPath" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </GroupBox>
+            </TabItem>
+        </TabControl>
+		<ToolBar Name="BarreOutils" VerticalAlignment="Bottom" Margin="0,0,0,-1">
+			<Button Command="c:PlanningCommands.AjouterElement">Ajouter</Button>
+            <Button Command="c:PlanningCommands.SupprimerElement">Supprimer</Button>
+		</ToolBar>
+	</Grid>
+</Window>

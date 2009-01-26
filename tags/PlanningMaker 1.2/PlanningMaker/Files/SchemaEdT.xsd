@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="iso-8859-15"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Element et type RACINES -->
+  <xsd:element name="emploi-du-temps" type="EmploiDT">
+    <!-- Contrainte d'UNICITE -->
+    <xsd:key name="id-enseignant">
+      <xsd:selector xpath="./enseignants/enseignant"/>
+      <xsd:field xpath="@id"/>
+    </xsd:key>
+    <xsd:key name="id-matiere">
+      <xsd:selector xpath="./matieres/matiere"/>
+      <xsd:field xpath="@id"/>
+    </xsd:key>
+    <xsd:key name="id-horaire">
+      <xsd:selector xpath="./horaires/horaire"/>
+      <xsd:field xpath="@id"/>
+    </xsd:key>
+    <xsd:key name="id-salle">
+      <xsd:selector xpath="./salles/salle"/>
+      <xsd:field xpath="@id"/>
+    </xsd:key>
+    <!-- Contrainte de REFERENCES -->
+    <xsd:keyref name="ref-enseignant" refer="id-enseignant">
+      <xsd:selector xpath="./matieres/matiere/enseignant|./semaines/semaine/jour/enseignements/enseignement/enseignant"/>
+      <xsd:field xpath="@ref"/>
+    </xsd:keyref>
+    <xsd:keyref name="ref-matiere" refer="id-matiere">
+      <xsd:selector xpath="./semaines/semaine/jour/enseignements/enseignement/matiere"/>
+      <xsd:field xpath="@ref"/>
+    </xsd:keyref>
+    <xsd:keyref name="ref-horaire" refer="id-horaire">
+      <xsd:selector xpath="./semaines/semaine/jour/enseignements/enseignement/horaire"/>
+      <xsd:field xpath="@ref"/>
+    </xsd:keyref>
+    <xsd:keyref name="ref-salle" refer="id-salle">
+      <xsd:selector xpath="./semaines/semaine/jour/enseignements/enseignement/salle"/>
+      <xsd:field xpath="@ref"/>
+    </xsd:keyref>
+  </xsd:element>
+  
+  <xsd:complexType name="EmploiDT">
+    <xsd:sequence>
+      <xsd:element name="annee" type="type-annee"/>
+      <xsd:element name="division" type="type-division"/>
+      <xsd:element name="promotion" type="type-string"/>
+	  
+      <xsd:element name="enseignants">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="enseignant" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="prenom" type="type-string" />
+                  <xsd:element name="nom" type="type-string" />
+                </xsd:sequence>
+                <xsd:attribute name="id" type="xsd:NCName" />
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="matieres">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="matiere" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="titre" type="type-string" />
+                  <xsd:element name="enseignant" maxOccurs="unbounded">
+                    <xsd:complexType>
+                      <xsd:attribute name="ref" type="xsd:NCName" />
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+                <xsd:attribute name="id" type="xsd:NCName" />
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="horaires">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="horaire" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="debut" type="type-horaire" />
+                  <xsd:element name="fin" type="type-horaire" />
+                </xsd:sequence>
+                <xsd:attribute name="id" type="xsd:NCName" />
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+
+      <xsd:element name="salles">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="salle" maxOccurs="unbounded">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="nom" type="type-string" />
+                  <xsd:element name="typeSalle" type="type-salle" />
+                </xsd:sequence>
+                <xsd:attribute name="id" type="xsd:NCName" />
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      
+      <xsd:element name="semaines">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="semaine" maxOccurs="52">
+              <xsd:complexType>
+                <xsd:sequence>
+                  <xsd:element name="numero" type="type-numero"/>
+                  <xsd:element name="date" type="xsd:date"/>
+                  <xsd:element name="jour" minOccurs="0" maxOccurs="5">
+                    <xsd:complexType>
+                      <xsd:sequence>
+                        <xsd:element name="nom" type="type-nom-jour"/>
+                        <xsd:element name="enseignements">
+                          <xsd:complexType>
+                            <xsd:sequence>
+                              <xsd:element name="enseignement" minOccurs="0" maxOccurs="unbounded">
+                                <xsd:complexType>
+                                  <xsd:sequence>
+                                    <xsd:element name="type" type="type-type"/>
+                                    <xsd:element name="numeroGroupe" type="type-numero-groupe" minOccurs="0"/>
+                                    <xsd:element name="enseignant">
+                                      <xsd:complexType>
+                                        <xsd:attribute name="ref" type="xsd:NCName"/>
+                                      </xsd:complexType>
+                                    </xsd:element>
+                                    <xsd:element name="matiere">
+                                      <xsd:complexType>
+                                        <xsd:attribute name="ref" type="xsd:NCName"/>
+                                      </xsd:complexType>
+                                    </xsd:element>
+                                    <xsd:element name="horaire" maxOccurs="2">
+                                      <xsd:complexType>
+                                        <xsd:attribute name="ref" type="xsd:NCName"/>
+                                      </xsd:complexType>
+                                    </xsd:element>
+                                    <xsd:element name="salle">
+                                      <xsd:complexType>
+                                        <xsd:attribute name="ref" type="xsd:NCName"/>
+                                      </xsd:complexType>
+                                    </xsd:element>
+                                  </xsd:sequence>
+                                </xsd:complexType>
+                              </xsd:element>
+                            </xsd:sequence>
+                          </xsd:complexType>
+                        </xsd:element>
+                      </xsd:sequence>
+                    </xsd:complexType>
+                  </xsd:element>
+                </xsd:sequence>
+              </xsd:complexType>
+            </xsd:element>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:sequence>
+  </xsd:complexType>
+
+  <!-- DERIVATIONS par EXTENSION -->
+  <!-- vide -->
+
+  <!-- DERIVATIONS par RESTRICTION -->
+  <!-- vide -->
+
+  <!-- FACETTES -->
+  <xsd:simpleType name="type-horaire">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="^((1?[0-9])|2[0-3])h[0-5][0-9]$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="type-salle">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="^Labo|Amphi$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="type-annee">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="^(P[1-2])|(I[1-3])$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="type-division">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="^A|B|C|D|E$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="type-string">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="^([A-Z]\p{Ll}+\.?)((-|\s)[A-Z]\p{Ll}+\.?)?$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="type-numero">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="^([1-9])|([1-4][0-9])|(5[0-2])$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="type-nom-jour">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="^lundi|mardi|mercredi|jeudi|vendredi|samedi|dimanche$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="type-type">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="^COURS|TD|TP$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="type-numero-groupe">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="^1|2$"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

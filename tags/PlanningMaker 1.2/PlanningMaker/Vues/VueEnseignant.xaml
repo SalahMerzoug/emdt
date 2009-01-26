@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="PlanningMaker.Vues.VueEnseignant"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:r="clr-namespace:PlanningMaker.Modele">
+
+    <UserControl.Resources>
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                    Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                    Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel x:Name="LayoutRoot">
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Nom" Width="70"/>
+            <TextBox Name="nom" Width="100" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}">
+                <TextBox.Text>
+                    <Binding Path="Nom" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <r:StringValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+        <Label/>
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Prénom" Width="70"/>
+            <TextBox Name="prenom" Width="100" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}">
+                <TextBox.Text>
+                    <Binding Path="Prenom" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <r:StringValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

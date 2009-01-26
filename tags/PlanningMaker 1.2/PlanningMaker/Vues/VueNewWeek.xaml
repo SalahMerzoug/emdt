@@ -1,0 +1,71 @@
+﻿<Window x:Class="PlanningMaker.Vues.VueNewWeek"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:PlanningMaker.Vues"
+    xmlns:r="clr-namespace:PlanningMaker.Modele"  
+    Title="Ajout d'une semaine"
+    Background="#FFC0C0C0"
+    SizeToContent="WidthAndHeight"
+    WindowStartupLocation="CenterOwner" ShowInTaskbar="False"
+    ResizeMode="CanMinimize">
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="c:PlanningCommands.OK" Executed="OkCommand" CanExecute="OkCommandPossible"/>
+        <CommandBinding Command="c:PlanningCommands.Cancel" Executed="CancelCommand"/>
+    </Window.CommandBindings>
+    
+    <Window.Resources>
+        <ControlTemplate x:Key="validationTemplate">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="20">!</TextBlock>
+                <AdornedElementPlaceholder/>
+            </DockPanel>
+        </ControlTemplate>
+        <Style x:Key="textBoxInError" TargetType="{x:Type TextBox}">
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="true">
+                    <Setter Property="ToolTip"
+                    Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                    Path=(Validation.Errors)[0].ErrorContent}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10">
+            <Label Height="10"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="N° de la semaine" Width="125" />
+                <TextBox x:Name="Numero" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100">
+                    <TextBox.Text>
+                        <Binding Path="Numero" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <r:NumeroValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <Label Height="10"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Date du premier jour" Width="125" />
+                <TextBox x:Name="Date" Validation.ErrorTemplate="{StaticResource validationTemplate}" Style="{StaticResource textBoxInError}" Width="100">
+                    <TextBox.Text>
+                        <Binding Path="Date" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <r:DateValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <Label Height="20"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="OK" Height="30" Width="60" Command="c:PlanningCommands.OK" IsDefault="True">OK</Button>
+                <Label Width="20"/>
+                <Button x:Name="Annuler" Height="30" Width="60" Command="c:PlanningCommands.Cancel">Annuler</Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,229 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DefaultClrNameSpace>PlanningMaker</DefaultClrNameSpace>
+    <AssemblyName>PlanningMaker</AssemblyName>
+    <RootNamespace>PlanningMaker</RootNamespace>
+    <ApplicationVersion>1.0.0.*</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <AlwaysCompileMarkupFilesInSeparateDomain>false</AlwaysCompileMarkupFilesInSeparateDomain>
+    <ExpressionBlendCreationVersion>2.1.1535.0</ExpressionBlendCreationVersion>
+    <ProjectGuid>{29519A65-86BB-4236-BDCC-54039A7479FE}</ProjectGuid>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OutputType>WinExe</OutputType>
+    <ApplicationIcon>Application.ico</ApplicationIcon>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modele\StringValidationRule.cs" />
+    <Compile Include="Modele\ItemPropertyChangedEventArgs.cs" />
+    <Compile Include="Modele\ObservableNotifiableCollection.cs" />
+    <Compile Include="Modele\DivisionValidationRule.cs" />
+    <Compile Include="Modele\NumeroValidationRule.cs" />
+    <Compile Include="Modele\DateValidationRule.cs" />
+    <Compile Include="Modele\GroupeValidationRule.cs" />
+    <Compile Include="Modele\HoraireValidationRule.cs" />
+    <Compile Include="Modele\ETypeEnseignements.cs" />
+    <Compile Include="Modele\ETypeSalles.cs" />
+    <Compile Include="Modele\Print.cs" />
+    <Compile Include="Modele\SortAdorner.cs" />
+    <Compile Include="Vues\ListeAnnees.cs" />
+    <Compile Include="Vues\VueEnseignement.xaml.cs">
+      <DependentUpon>VueEnseignement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\ListeTypeEnseignements.cs" />
+    <Compile Include="Vues\ListeTypeSalles.cs" />
+    <Compile Include="Modele\RequetesXPath.cs" />
+    <Compile Include="Modele\EAnnees.cs" />
+    <Compile Include="Modele\EDivisions.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Modele\Enseignement.cs" />
+    <Compile Include="Modele\Jour.cs" />
+    <Compile Include="Modele\EJours.cs" />
+    <Compile Include="Modele\Enseignant.cs" />
+    <Compile Include="Modele\Horaire.cs" />
+    <Compile Include="Modele\Matiere.cs" />
+    <Compile Include="Modele\MiseAJour.cs" />
+    <Compile Include="Modele\ObservableObject.cs" />
+    <Compile Include="Modele\Planning.cs" />
+    <Compile Include="Modele\Salle.cs" />
+    <Compile Include="Modele\Semaine.cs" />
+    <Compile Include="Modele\TransformationXslt.cs" />
+    <Compile Include="Modele\ValidationXmlXsd.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vues\VueMatiere.xaml.cs">
+      <DependentUpon>VueMatiere.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\VueMiseAJour.xaml.cs">
+      <DependentUpon>VueMiseAJour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\VueRequetesXPath.xaml.cs">
+      <DependentUpon>VueRequetesXPath.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\VueAPropos.xaml.cs">
+      <DependentUpon>VueAPropos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\PlanningCommands.cs" />
+    <Compile Include="Vues\VueSalle.xaml.cs">
+      <DependentUpon>VueSalle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\VueEnseignant.xaml.cs">
+      <DependentUpon>VueEnseignant.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\VueHoraire.xaml.cs">
+      <DependentUpon>VueHoraire.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Vues\VueNewWeek.xaml.cs">
+      <DependentUpon>VueNewWeek.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vues\VueEnseignement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vues\VueMatiere.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\VueMiseAJour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\VueRequetesXPath.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vues\VueAPropos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\VueSalle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\VueEnseignant.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Vues\VueHoraire.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Vues\VueNewWeek.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Semaine37.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Files\SchemaEdT.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\EdTversSVG-IE.xsl" />
+    <Resource Include="Files\Fonctions.xsl" />
+    <Resource Include="Files\ModelesSVG.xsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\RequetesXPath.xsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\EdTversSVG-FF.xsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\XPath.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Clipboard_Copy.ico" />
+    <Resource Include="Files\Img\Clipboard_Cut.ico" />
+    <Resource Include="Files\Img\Clipboard_Paste.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Cancel.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Document_New.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Go_In.ico" />
+    <Resource Include="Files\Img\Go_Out.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Printer.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Save.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Trash.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Standby.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Player_Next.ico" />
+    <Resource Include="Files\Img\Player_Previous.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Question.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Screen.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Home.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Globe.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Files\Img\Folder2.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

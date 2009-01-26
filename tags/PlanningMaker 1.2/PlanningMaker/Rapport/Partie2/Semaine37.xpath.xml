@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="RequetesXPath.xsl" type="text/xsl" version="1.0"?>
+<emploi-du-temps>
+	
+	<annee>P1</annee>
+	<division>B</division>
+	<promotion>Zeeman</promotion>
+	
+	<enseignants>
+		<enseignant id='gtourret'>
+			<prenom>Gerard</prenom>	
+			<nom>Tourret</nom>
+		</enseignant>
+		<enseignant id='jfougere'>
+			<prenom>Jean-Yves</prenom>	
+			<nom>Fougere</nom>
+		</enseignant>
+		<enseignant id='obeaudoux'>
+			<prenom>Olivier</prenom>	
+			<nom>Beaudoux</nom>
+		</enseignant>
+		<enseignant id='jcurilla'>
+			<prenom>Jean-Luc</prenom>	
+			<nom>Curilla</nom>
+		</enseignant>
+		<enseignant id='mgilles'>
+			<prenom>Marie-Hélène</prenom>	
+			<nom>Gilles</nom>
+		</enseignant>
+		<enseignant id='kdrouet'>
+			<prenom>Karine</prenom>	
+			<nom>Drouet</nom>
+		</enseignant>
+	</enseignants>
+
+	<matieres>
+		<matiere id='francais'>
+			<titre>Francais</titre>
+			<enseignant ref='mgilles'/>
+		</matiere>
+		<matiere id='maths'>
+			<titre>Mathematiques</titre>
+			<enseignant ref='jfougere'/>
+		</matiere>
+		<matiere id='physiques'>
+			<titre>Sc. Physiques</titre>
+			<enseignant ref='gtourret'/>
+		</matiere>
+		<matiere id='anglais'>
+			<titre>Anglais</titre>
+			<enseignant ref='kdrouet'/>
+		</matiere>
+		<matiere id='info'>
+			<titre>Informatique</titre>
+			<enseignant ref='obeaudoux'/>
+			<enseignant ref='jfougere'/>
+		</matiere>
+		<matiere id='si'>
+			<titre>Sc. Ingenieur</titre>
+			<enseignant ref='jcurilla'/>
+		</matiere>
+	</matieres>
+
+	<horaires>
+		<horaire id='h08-09'>
+			<debut>8h00</debut>
+			<fin>8h55</fin>
+		</horaire>
+		<horaire id='h09-10'>
+			<debut>8h55</debut>
+			<fin>9h50</fin>
+		</horaire>
+		<horaire id='h10-11'>
+			<debut>10h05</debut>
+			<fin>11h00</fin>
+		</horaire>
+		<horaire id='h11-12'>
+			<debut>11h00</debut>
+			<fin>11h55</fin>
+		</horaire>
+		<horaire id='h13-14'>
+			<debut>13h30</debut>
+			<fin>14h25</fin>
+		</horaire>
+		<horaire id='h14-15'>
+			<debut>14h25</debut>
+			<fin>15h20</fin>
+		</horaire>
+		<horaire id='h15-16'>
+			<debut>15h35</debut>
+			<fin>16h30</fin>
+		</horaire>
+		<horaire id='h16-17'>
+			<debut>16h30</debut>
+			<fin>17h25</fin>
+		</horaire>
+	</horaires>
+
+	<salles>
+		<salle id='langevin'>
+			<nom>Langevin</nom>
+			<typeSalle>Amphi</typeSalle>
+		</salle>
+		<salle id='tesla'>
+			<nom>Tesla</nom>
+			<typeSalle>Labo</typeSalle>
+		</salle>
+		<salle id='langues'>
+			<nom>Langues</nom>
+			<typeSalle>Labo</typeSalle>
+		</salle>
+		<salle id='planck'>
+			<nom>Planck</nom>
+			<typeSalle>Amphi</typeSalle>
+		</salle>
+		<salle id='shakespeare'>
+			<nom>Shakespeare</nom>
+			<typeSalle>Amphi</typeSalle>
+		</salle>
+		<salle id='descartes'>
+			<nom>Descartes</nom>
+			<typeSalle>Labo</typeSalle>
+		</salle>
+		<salle id='joule'>
+			<nom>Joule</nom>
+			<typeSalle>Amphi</typeSalle>
+		</salle>
+	</salles>
+
+	<semaines>
+		<semaine>
+			<numero>37</numero>
+			<date>2008-09-06</date>
+			<jour>
+				<nom>lundi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h08-09'/>
+						<horaire ref='h09-10'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h10-11'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='info'/>
+						<horaire ref='h15-16'/>
+						<horaire ref='h16-17'/>
+						<salle ref='tesla'/>
+						</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='info'/>
+						<horaire ref='h13-14'/>
+						<horaire ref='h14-15'/>
+						<salle ref='tesla'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h13-14'/>
+						<horaire ref='h14-15'/>
+						<salle ref='planck'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h15-16'/>
+						<horaire ref='h16-17'/>
+						<salle ref='planck'/>
+					</enseignement>
+				</enseignements>
+			</jour>
+			<jour>
+				<nom>mardi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h08-09'/>
+						<horaire ref='h09-10'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h10-11'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='kdrouet'/>
+						<matiere ref='anglais'/>
+						<horaire ref='h10-11'/>
+						<salle ref='langues'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='kdrouet'/>
+						<matiere ref='anglais'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langues'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h13-14'/>
+						<horaire ref='h14-15'/>
+						<salle ref='descartes'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h15-16'/>
+						<horaire ref='h16-17'/>
+						<salle ref='planck'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h13-14'/>
+						<horaire ref='h14-15'/>
+						<salle ref='planck'/>
+					</enseignement>
+					<enseignement>
+						<type>TP</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h15-16'/>
+						<horaire ref='h16-17'/>
+						<salle ref='descartes'/>
+					</enseignement>
+				</enseignements>
+			</jour>	
+			<jour>
+				<nom>mercredi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h09-10'/>
+						<horaire ref='h10-11'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jcurilla'/>
+						<matiere ref='si'/>
+						<horaire ref='h13-14'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h14-15'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h15-16'/>
+						<salle ref='langevin'/>
+					</enseignement>
+				</enseignements>
+			</jour>	
+			<jour>
+				<nom>jeudi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='mgilles'/>
+						<matiere ref='francais'/>
+						<horaire ref='h08-09'/>
+						<horaire ref='h09-10'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h10-11'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='kdrouet'/>
+						<matiere ref='anglais'/>
+						<horaire ref='h11-12'/>
+						<salle ref='shakespeare'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='kdrouet'/>
+						<matiere ref='anglais'/>
+						<horaire ref='h10-11'/>
+						<salle ref='shakespeare'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h13-14'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h14-15'/>
+						<salle ref='joule'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h15-16'/>
+						<salle ref='joule'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h14-15'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h15-16'/>
+						<salle ref='langevin'/>
+					</enseignement>
+				</enseignements>
+			</jour>	
+			<jour>
+				<nom>vendredi</nom>
+				<enseignements>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='jfougere'/>
+						<matiere ref='maths'/>
+						<horaire ref='h08-09'/>
+						<horaire ref='h09-10'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>COURS</type>
+						<enseignant ref='gtourret'/>
+						<matiere ref='physiques'/>
+						<horaire ref='h10-11'/>
+						<horaire ref='h11-12'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>1</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='info'/>
+						<horaire ref='h13-14'/>
+						<salle ref='langevin'/>
+					</enseignement>
+					<enseignement>
+						<type>TD</type>
+						<numeroGroupe>2</numeroGroupe>
+						<enseignant ref='jfougere'/>
+						<matiere ref='info'/>
+						<horaire ref='h14-15'/>
+						<salle ref='langevin'/>
+					</enseignement>
+				</enseignements>
+			</jour>	
+		</semaine>
+	</semaines>
+</emploi-du-temps>
