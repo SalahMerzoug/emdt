@@ -1,10 +1,10 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.IO;
+using System.Text;
 using System.Xml;
 
 namespace PlanningMaker.Modele
@@ -260,8 +260,8 @@ namespace PlanningMaker.Modele
             {
                 // ecriture de l'entête du iCalendar
                 writer.WriteLine("BEGIN:VCALENDAR");
-                writer.WriteLine("VERSION:2.0");
                 writer.WriteLine("PRODID:-//Viactisoft//PlanningMaker 2008//FR");
+                writer.WriteLine("VERSION:2.0");
                 // description du planning dans une entrée VJOURNAL
                 writer.WriteLine("BEGIN:VJOURNAL");
                 writer.WriteLine("CATEGORY:Planning");
@@ -284,7 +284,7 @@ namespace PlanningMaker.Modele
                     writer.WriteLine("END:VJOURNAL");
                     foreach (Enseignement enseignement in semaine.Lundi.Enseignements)
                     {
-                        EnseignementToICalender(writer, semaine, EJours.Lundi, enseignement);
+                        EnseignementToICalendar(writer, semaine, EJours.Lundi, enseignement);
                     }
                     // signalement du mardi par une entrée VJOURNAL
                     writer.WriteLine("BEGIN:VJOURNAL");
@@ -293,7 +293,7 @@ namespace PlanningMaker.Modele
                     writer.WriteLine("END:VJOURNAL");
                     foreach (Enseignement enseignement in semaine.Mardi.Enseignements)
                     {
-                        EnseignementToICalender(writer, semaine, EJours.Mardi, enseignement);
+                        EnseignementToICalendar(writer, semaine, EJours.Mardi, enseignement);
                     }
                     // signalement du mercredi par une entrée VJOURNAL
                     writer.WriteLine("BEGIN:VJOURNAL");
@@ -302,7 +302,7 @@ namespace PlanningMaker.Modele
                     writer.WriteLine("END:VJOURNAL");
                     foreach (Enseignement enseignement in semaine.Mercredi.Enseignements)
                     {
-                        EnseignementToICalender(writer, semaine, EJours.Mercredi, enseignement);
+                        EnseignementToICalendar(writer, semaine, EJours.Mercredi, enseignement);
                     }
                     // signalement du jeudi par une entrée VJOURNAL
                     writer.WriteLine("BEGIN:VJOURNAL");
@@ -311,7 +311,7 @@ namespace PlanningMaker.Modele
                     writer.WriteLine("END:VJOURNAL");
                     foreach (Enseignement enseignement in semaine.Jeudi.Enseignements)
                     {
-                        EnseignementToICalender(writer, semaine, EJours.Jeudi, enseignement);
+                        EnseignementToICalendar(writer, semaine, EJours.Jeudi, enseignement);
                     }
                     // signalement du vendredi par une entrée VJOURNAL
                     writer.WriteLine("BEGIN:VJOURNAL");
@@ -320,7 +320,7 @@ namespace PlanningMaker.Modele
                     writer.WriteLine("END:VJOURNAL");
                     foreach (Enseignement enseignement in semaine.Vendredi.Enseignements)
                     {
-                        EnseignementToICalender(writer, semaine, EJours.Vendredi, enseignement);
+                        EnseignementToICalendar(writer, semaine, EJours.Vendredi, enseignement);
                     }
                 }
                 // ecriture de la fin du iCalendar
@@ -333,16 +333,16 @@ namespace PlanningMaker.Modele
 
         }
 
-        private void EnseignementToICalender(StreamWriter writer, Semaine semaine, EJours jour, Enseignement enseignement)
+        private void EnseignementToICalendar(StreamWriter writer, Semaine semaine, EJours jour, Enseignement enseignement)
         {
             writer.WriteLine("BEGIN:VEVENT");
-            writer.WriteLine("DTSTART:" + DateJour(semaine.Date, jour) + HeureEnseignementDebut(enseignement.Horaire1));
+            writer.WriteLine("DTSTART:" + DateJour(semaine.Date, jour) + HeureEnseignementExp(enseignement.Horaire1, true));
             Horaire horaireFin = null;
             if (enseignement.Horaire2 == null)
                 horaireFin = enseignement.Horaire1;
             else
                 horaireFin = enseignement.Horaire2;
-            writer.WriteLine("DTEND:" + DateJour(semaine.Date, jour) + HeureEnseignementFin(horaireFin));
+            writer.WriteLine("DTEND:" + DateJour(semaine.Date, jour) + HeureEnseignementExp(horaireFin, false));
             writer.WriteLine("SUMMARY:" + enseignement.Matiere.Titre);
             writer.WriteLine("LOCATION:" + enseignement.Salle.Type + " " + enseignement.Salle.Nom);
             writer.WriteLine("CATEGORIES:" + enseignement.Type + " " + enseignement.Groupe.ToString());
@@ -368,20 +368,10 @@ namespace PlanningMaker.Modele
             return dateJour;
         }
 
-        private string HeureEnseignementDebut(Horaire horaire)
+        private string HeureEnseignementExp(Horaire horaire, bool horaireDebut)
         {
-            string[] strHoraire = horaire.Debut.Split('h');
-            int heure = Int32.Parse(strHoraire[0]);
-            int minutes = Int32.Parse(strHoraire[1]);
-            return (heure < 10 ? "0" + heure.ToString() : heure.ToString()) + minutes.ToString() + "00Z";
-        }
-
-        private string HeureEnseignementFin(Horaire horaire)
-        {
-            string[] strHoraire = horaire.Fin.Split('h');
-            int heure = Int32.Parse(strHoraire[0]);
-            int minutes = Int32.Parse(strHoraire[1]);
-            return (heure < 10 ? "0" + heure.ToString() : heure.ToString()) + minutes.ToString() + "00Z";
+            string[] strHoraire = horaireDebut ? horaire.Debut.Split('h') : horaire.Fin.Split('h');
+            return strHoraire[0] + strHoraire[1] + "00Z";
         }
 
         private string AjoutJour(string dateDebutSemaine, int ajout)
@@ -544,8 +534,6 @@ namespace PlanningMaker.Modele
                             string strHoraireDebut = line.Substring(line.IndexOf(':') + 1);
                             string horaireDebut = strHoraireDebut.Substring(strHoraireDebut.IndexOf('T') + 1);
                             string heure = horaireDebut.Substring(0, 2);
-                            if (heure[0] == '0')
-                                heure = heure[1].ToString();
                             string minutes = horaireDebut.Substring(2, 2);
                             currentHoraire = new Horaire();
                             currentHoraire.Debut = heure + "h" + minutes;
@@ -555,8 +543,6 @@ namespace PlanningMaker.Modele
                             string strHoraireFin = line.Substring(line.IndexOf(':'));
                             string horaireFin = strHoraireFin.Substring(strHoraireFin.IndexOf('T') + 1, 4);
                             string heure = horaireFin.Substring(0, 2);
-                            if (heure[0] == '0')
-                                heure = heure[1].ToString();
                             string minutes = horaireFin.Substring(2, 2);
                             currentHoraire.Fin = heure + "h" + minutes;
                             Horaire horaireExiste = null;
@@ -742,8 +728,8 @@ namespace PlanningMaker.Modele
                     Enseignant enseignant = dicoEnseignants[idEnseignant];
                     matiere.Enseignants.Add(enseignant);
                 }
-                dicoMatieres.Add(id, matiere);
                 matiere.Id = id;
+                dicoMatieres.Add(id, matiere);
                 matieres.Add(matiere);
             }
             //horaires
@@ -1080,6 +1066,5 @@ namespace PlanningMaker.Modele
             }
             refSalle.Value = "ids" + salles.IndexOf(e.Salle).ToString();
         }
-
     }
 }

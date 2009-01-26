@@ -45,22 +45,6 @@ namespace PlanningMaker
             MenuItem_Aide.IsEnabled = false;
         }
 
-        private void VueMatiere_SuppressionEnseignantEvent(object sender, RoutedEventArgs e)
-        {
-            foreach (Semaine s in planning.Semaines)
-            {
-                foreach (Jour j in s.Jours)
-                {
-                    foreach (Enseignement enseignement in j.Enseignements)
-                    {
-                        Matiere matiere = enseignement.Matiere;
-                        if (!matiere.Enseignants.Contains(enseignement.Enseignant))
-                            enseignement.Enseignant = null;
-                    }
-                }
-            }
-        }
-
         public Planning Planning
         { 
             get
@@ -178,14 +162,6 @@ namespace PlanningMaker
                     planning.Charger(nomFichier);
                     planning.HasChanged = false;
 
-                    MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
-                        MessageBoxButton.OK, MessageBoxImage.Information);
-                    // correctif de fortune (Vista) : l'onglet sélectionné étant revenu à celui d'avant Open...
-                    TabPanel.SelectedItem = TabItem_Emploi_du_temps;
-
-                    // Mise à jour du fichier source pour les requêtes XPath
-                    RequetesXPath.NomFichierSemaine = nomFichier;
-
                     SetDefaultSemaine();
 
                     IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
@@ -195,6 +171,15 @@ namespace PlanningMaker
                         ComboBox_NumSemaine.Text = firstSemaine.Numero.ToString();
                         listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;
                     }
+
+                    // Mise à jour du fichier source pour les requêtes XPath
+                    RequetesXPath.NomFichierSemaine = nomFichier;
+
+
+                    MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    // correctif de fortune pour Vista : l'onglet sélectionné revient dans sa position d'avant Open dans cas précis
+                    TabPanel.SelectedItem = TabItem_Emploi_du_temps;
                 }
                 catch (Exception)
                 {
@@ -326,8 +311,6 @@ namespace PlanningMaker
                         else
                         {
                             planning.HasChanged = false;
-                            MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
-                                    MessageBoxButton.OK, MessageBoxImage.Information);
 
                             SetDefaultSemaine();
 
@@ -338,6 +321,12 @@ namespace PlanningMaker
                                 ComboBox_NumSemaine.Text = firstSemaine.Numero.ToString();
                                 listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;
                             }
+                            
+                            
+                            MessageBox.Show("Planning importé avec succès dans l'application !", "PlanningMaker",
+                                    MessageBoxButton.OK, MessageBoxImage.Information);
+                            // correctif de fortune (Vista) : l'onglet sélectionné étant revenu à celui d'avant Importer...
+                            TabPanel.SelectedItem = TabItem_Emploi_du_temps;
                         }
                     }
                     catch (Exception)
@@ -361,8 +350,13 @@ namespace PlanningMaker
 
             if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                ProposerEnregistrement(sender, e, "lancer l'export");
                 if (dialogueS.FileName.Contains(".ics"))
+                {
                     planning.ExporterICalendar(dialogueS.FileName);
+                    MessageBox.Show("Planning exporté avec succès !", "PlanningMaker",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             Environment.CurrentDirectory = directory;
         }
@@ -710,7 +704,7 @@ namespace PlanningMaker
 
         private void AjouterElementPossible(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = (planning!=null) && (!TabItem_XPath.IsSelected);
+            e.CanExecute = (planning != null) && (!TabItem_XPath.IsSelected);
         }
 
         private void SupprimerElementPossible(object sender, CanExecuteRoutedEventArgs e)
@@ -1159,6 +1153,22 @@ namespace PlanningMaker
             RadioButton_Vendredi.IsChecked = false;
 
             listeEnseignements.IsEnabled = false;
+        }
+
+        private void VueMatiere_SuppressionEnseignantEvent(object sender, RoutedEventArgs e)
+        {
+            foreach (Semaine s in planning.Semaines)
+            {
+                foreach (Jour j in s.Jours)
+                {
+                    foreach (Enseignement enseignement in j.Enseignements)
+                    {
+                        Matiere matiere = enseignement.Matiere;
+                        if (!matiere.Enseignants.Contains(enseignement.Enseignant))
+                            enseignement.Enseignant = null;
+                    }
+                }
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
