@@ -100,7 +100,7 @@
                         <Image Source="Files\Img\Go_In.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Exporter" Name="MenuItem_exp" Command="c:PlanningCommands.Exporter">
+                <MenuItem Header="Exporter" Name="MenuItem_Exp" Command="c:PlanningCommands.Exporter">
                     <MenuItem.Icon>
                         <Image Source="Files\Img\Go_Out.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
                     </MenuItem.Icon>
@@ -161,7 +161,7 @@
                 <MenuItem Header="Transformations XSLT" Name="MenuItem_Transfo" Click="MenuItemTransfoXSLT_Click"/>
                 <MenuItem Header="Requêtes XPath" Name="MenuItem_RequetesXPath" Click="MenuItemRequetesXPath_Click"/>
             </MenuItem>
-            <MenuItem Header="?" Name="MenuItem_pointDInterro" Height="20">
+            <MenuItem Header="?" Name="MenuItem_PointDInterro" Height="20">
                 <MenuItem Header="Aide" Name="MenuItem_Aide" Command="ApplicationCommands.Help">
                     <MenuItem.Icon>
                         <Image Source="Files\Img\Question.ico" Width="16" Style="{StaticResource TriggerIcone}"/>
