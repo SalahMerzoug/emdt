@@ -308,9 +308,48 @@ namespace PlanningMaker
 
             if (dialogueO.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                nomFichier = dialogueO.FileName;
-                // TODO : traitements en fonction de l'import choisi
+                New(sender, e);
+                
+                if (dialogueO.FileName.Contains(".ics")){
+                    try
+                    {
+                        bool success = planning.ImporterICalendar(dialogueO.FileName);
+                        if (!success)
+                        {
+                            MessageBoxResult res = MessageBox.Show("Le fichier iCalendar ne contient pas de planning valide. Voulez-vous créer un nouveau planning ?", "PlanningMaker",
+                                    MessageBoxButton.YesNo, MessageBoxImage.Error);
+                            if (res == MessageBoxResult.Yes)
+                                New(sender, e);
+                            else
+                                Close(sender, e);
+                        }
+                        else
+                        {
+                            planning.HasChanged = false;
+                            MessageBox.Show("Fichier chargé avec succès dans l'application !", "PlanningMaker",
+                                    MessageBoxButton.OK, MessageBoxImage.Information);
+
+                            SetDefaultSemaine();
+
+                            IEnumerator<Semaine> enumSemaine = planning.Semaines.GetEnumerator();
+                            if (enumSemaine.MoveNext())
+                            {
+                                Semaine firstSemaine = enumSemaine.Current as Semaine;
+                                ComboBox_NumSemaine.Text = firstSemaine.Numero.ToString();
+                                listeEnseignements.ItemsSource = firstSemaine.Lundi.Enseignements;
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        planning.HasChanged = false;
+                        Close(sender, e);
+                        MessageBox.Show("Fichier invalide !", "PlanningMaker",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                }
             }
+            Environment.CurrentDirectory = directory;
         }
 
         private void Exporter(object sender, RoutedEventArgs e)
@@ -322,8 +361,8 @@ namespace PlanningMaker
 
             if (dialogueS.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                nomFichier = dialogueS.FileName;
-                // TODO : traitements en fonction de l'export choisi
+                if (dialogueS.FileName.Contains(".ics"))
+                    planning.ExporterICalendar(dialogueS.FileName);
             }
             Environment.CurrentDirectory = directory;
         }
