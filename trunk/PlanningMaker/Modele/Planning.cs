@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -247,6 +249,431 @@ namespace PlanningMaker.Modele
                     }
                 }
             }
+        }
+
+        public void ExporterICalendar(string nomFichier)
+        {
+            StreamWriter writer = new StreamWriter(nomFichier, false, Encoding.UTF8);
+            // TODO : définir type MIME 'text/calendar'
+            writer.NewLine = "\r\n";
+            try
+            {
+                // ecriture de l'entête du iCalendar
+                writer.WriteLine("BEGIN:VCALENDAR");
+                writer.WriteLine("VERSION:2.0");
+                writer.WriteLine("PRODID:-//Viactisoft//PlanningMaker 2008//FR");
+                // description du planning dans une entrée VJOURNAL
+                writer.WriteLine("BEGIN:VJOURNAL");
+                writer.WriteLine("CATEGORY:Planning");
+                writer.WriteLine("DESCRIPTION:" + this.promotion + "-" + this.annee + "-" + this.division);
+                writer.WriteLine("END:VJOURNAL");
+                // ecriture des enseignements
+                foreach (Semaine semaine in semaines)
+                {
+                    string dateSemaine = semaine.Date;
+                    // signalement d'un début de semaine par une entrée VJOURNAL
+                    writer.WriteLine("BEGIN:VJOURNAL");
+                    writer.WriteLine("CATEGORY:Semaine");
+                    writer.WriteLine("DESCRIPTION:" + semaine.Numero.ToString());
+                    writer.WriteLine("DTSTAMP:" + AjoutJour(semaine.Date, 0) + "T000000Z");
+                    writer.WriteLine("END:VJOURNAL");
+                    // signalement du lundi par une entrée VJOURNAL
+                    writer.WriteLine("BEGIN:VJOURNAL");
+                    writer.WriteLine("CATEGORY:Jour");
+                    writer.WriteLine("DESCRIPTION:Lundi");
+                    writer.WriteLine("END:VJOURNAL");
+                    foreach (Enseignement enseignement in semaine.Lundi.Enseignements)
+                    {
+                        EnseignementToICalender(writer, semaine, EJours.Lundi, enseignement);
+                    }
+                    // signalement du mardi par une entrée VJOURNAL
+                    writer.WriteLine("BEGIN:VJOURNAL");
+                    writer.WriteLine("CATEGORY:Jour");
+                    writer.WriteLine("DESCRIPTION:Mardi");
+                    writer.WriteLine("END:VJOURNAL");
+                    foreach (Enseignement enseignement in semaine.Mardi.Enseignements)
+                    {
+                        EnseignementToICalender(writer, semaine, EJours.Mardi, enseignement);
+                    }
+                    // signalement du mercredi par une entrée VJOURNAL
+                    writer.WriteLine("BEGIN:VJOURNAL");
+                    writer.WriteLine("CATEGORY:Jour");
+                    writer.WriteLine("DESCRIPTION:Mercredi");
+                    writer.WriteLine("END:VJOURNAL");
+                    foreach (Enseignement enseignement in semaine.Mercredi.Enseignements)
+                    {
+                        EnseignementToICalender(writer, semaine, EJours.Mercredi, enseignement);
+                    }
+                    // signalement du jeudi par une entrée VJOURNAL
+                    writer.WriteLine("BEGIN:VJOURNAL");
+                    writer.WriteLine("CATEGORY:Jour");
+                    writer.WriteLine("DESCRIPTION:Jeudi");
+                    writer.WriteLine("END:VJOURNAL");
+                    foreach (Enseignement enseignement in semaine.Jeudi.Enseignements)
+                    {
+                        EnseignementToICalender(writer, semaine, EJours.Jeudi, enseignement);
+                    }
+                    // signalement du vendredi par une entrée VJOURNAL
+                    writer.WriteLine("BEGIN:VJOURNAL");
+                    writer.WriteLine("CATEGORY:Jour");
+                    writer.WriteLine("DESCRIPTION:Vendredi");
+                    writer.WriteLine("END:VJOURNAL");
+                    foreach (Enseignement enseignement in semaine.Vendredi.Enseignements)
+                    {
+                        EnseignementToICalender(writer, semaine, EJours.Vendredi, enseignement);
+                    }
+                }
+                // ecriture de la fin du iCalendar
+                writer.WriteLine("END:VCALENDAR");
+            }
+            finally
+            {
+                writer.Close();
+            }
+
+        }
+
+        private void EnseignementToICalender(StreamWriter writer, Semaine semaine, EJours jour, Enseignement enseignement)
+        {
+            writer.WriteLine("BEGIN:VEVENT");
+            writer.WriteLine("DTSTART:" + DateJour(semaine.Date, jour) + HeureEnseignementDebut(enseignement.Horaire1));
+            Horaire horaireFin = null;
+            if (enseignement.Horaire2 == null)
+                horaireFin = enseignement.Horaire1;
+            else
+                horaireFin = enseignement.Horaire2;
+            writer.WriteLine("DTEND:" + DateJour(semaine.Date, jour) + HeureEnseignementFin(horaireFin));
+            writer.WriteLine("SUMMARY:" + enseignement.Matiere.Titre);
+            writer.WriteLine("LOCATION:" + enseignement.Salle.Type + " " + enseignement.Salle.Nom);
+            writer.WriteLine("CATEGORIES:" + enseignement.Type + " " + enseignement.Groupe.ToString());
+            writer.WriteLine("DESCRIPTION:" + enseignement.Enseignant.Prenom + " " + enseignement.Enseignant.Nom);
+            writer.WriteLine("END:VEVENT");
+        }
+
+        private string DateJour(string dateDebutSemaine, EJours jourSemaine)
+        {
+            int ajoutJour = 0;
+            if (jourSemaine.Equals(EJours.Lundi))
+                ajoutJour = 0;
+            else if (jourSemaine.Equals(EJours.Mardi))
+                ajoutJour = 1;
+            else if (jourSemaine.Equals(EJours.Mercredi))
+                ajoutJour = 2;
+            else if (jourSemaine.Equals(EJours.Jeudi))
+                ajoutJour = 3;
+            else if (jourSemaine.Equals(EJours.Vendredi))
+                ajoutJour = 4;
+            string dateJour = AjoutJour(dateDebutSemaine, ajoutJour);
+            dateJour += "T";
+            return dateJour;
+        }
+
+        private string HeureEnseignementDebut(Horaire horaire)
+        {
+            string[] strHoraire = horaire.Debut.Split('h');
+            int heure = Int32.Parse(strHoraire[0]);
+            int minutes = Int32.Parse(strHoraire[1]);
+            return (heure < 10 ? "0" + heure.ToString() : heure.ToString()) + minutes.ToString() + "00Z";
+        }
+
+        private string HeureEnseignementFin(Horaire horaire)
+        {
+            string[] strHoraire = horaire.Fin.Split('h');
+            int heure = Int32.Parse(strHoraire[0]);
+            int minutes = Int32.Parse(strHoraire[1]);
+            return (heure < 10 ? "0" + heure.ToString() : heure.ToString()) + minutes.ToString() + "00Z";
+        }
+
+        private string AjoutJour(string dateDebutSemaine, int ajout)
+        {
+            string[] strDate = dateDebutSemaine.Split('-');
+            int annee = Int32.Parse(strDate[0]);
+            int mois = Int32.Parse(strDate[1]);
+            int jour = Int32.Parse(strDate[2]);
+            DateTime date = new DateTime(annee, mois, jour);
+            date = date.AddDays(ajout);
+            annee = date.Year;
+            mois = date.Month;
+            jour = date.Day;
+            return annee.ToString() + (mois < 10 ? "0" + mois.ToString() : mois.ToString()) +
+                    (jour < 10 ? "0" + jour.ToString() : jour.ToString());
+        }
+
+        public bool ImporterICalendar(string nomFichier)
+        {
+            StreamReader reader = new StreamReader(nomFichier, Encoding.UTF8);
+            bool inJournal = false;
+            bool inEvent = false;
+            string currentCategorie = "";
+            Semaine currentSemaine = null;
+            Enseignement currentEnseignement = null;
+            Jour currentJour = null;
+            Horaire currentHoraire = null;
+            string line = null;
+            while ((line = reader.ReadLine()) != null)
+            {
+                if (line.StartsWith("PRODID:"))
+                {
+                    string strProdId = line.Substring(line.IndexOf(':')+1);
+                    if (!strProdId.Equals("-//Viactisoft//PlanningMaker 2008//FR"))
+                    {
+                        return false;
+                    }
+                }
+                else if (line.Equals("BEGIN:VCALENDAR")) { }
+                else if (line.Equals("END:VCALENDAR")) { }
+                else if (line.Equals("BEGIN:VJOURNAL"))
+                {
+                    inJournal = true;
+                }
+                else if (line.Equals("END:VJOURNAL"))
+                {
+                    inJournal = false;
+                }
+                else if (line.Equals("BEGIN:VEVENT"))
+                {
+                    inEvent = true;
+                    currentEnseignement = new Enseignement();
+                }
+                else if (line.Equals("END:VEVENT"))
+                {
+                    inEvent = false;
+                    currentJour.Enseignements.Add(currentEnseignement);
+                }
+                else
+                {
+                    if (inJournal)
+                    {
+                        if (line.Equals("CATEGORY:Planning"))
+                            currentCategorie = "Planning";
+                        else if (line.Equals("CATEGORY:Semaine"))
+                            currentCategorie = "Semaine";
+                        else if (line.Equals("CATEGORY:Jour"))
+                            currentCategorie = "Jour";
+                        else if (line.StartsWith("DESCRIPTION:"))
+                        {
+                            if (currentCategorie == "Planning")
+                            {
+                                string strPlanning = line.Substring(line.IndexOf(':') + 1);
+                                string[] infos = strPlanning.Split('-');
+                                promotion = infos[0];
+                                switch (infos[1])
+                                {
+                                    case "P1":
+                                        annee = EAnnees.P1;
+                                        break;
+                                    case "P2":
+                                        annee = EAnnees.P2;
+                                        break;
+                                    case "I1":
+                                        annee = EAnnees.I1;
+                                        break;
+                                    case "I2":
+                                        annee = EAnnees.I2;
+                                        break;
+                                    case "I3":
+                                        annee = EAnnees.I3;
+                                        break;
+                                }
+                                switch (infos[2])
+                                {
+                                    case "A":
+                                        division = EDivisions.A;
+                                        break;
+                                    case "B":
+                                        division = EDivisions.B;
+                                        break;
+                                    case "C":
+                                        division = EDivisions.C;
+                                        break;
+                                    case "D":
+                                        division = EDivisions.D;
+                                        break;
+                                }
+                            }
+                            else if (currentCategorie == "Semaine")
+                            {
+                                string strSemaine = line.Substring(line.IndexOf(':') + 1);
+                                int numero = Int32.Parse(strSemaine);
+                                currentSemaine = new Semaine();
+                                currentSemaine.Numero = numero;
+                                semaines.Add(currentSemaine);
+                            }
+                            else if (currentCategorie == "Jour")
+                            {
+                                string strJour = line.Substring(line.IndexOf(':') + 1);
+                                currentJour = new Jour();
+                                switch (strJour)
+                                {
+                                    case "Lundi":
+                                        currentSemaine.Lundi = currentJour;
+                                        currentSemaine.Jours.Add(currentSemaine.Lundi);
+                                        break;
+                                    case "Mardi":
+                                        currentSemaine.Mardi = currentJour;
+                                        currentSemaine.Jours.Add(currentSemaine.Mardi);
+                                        break;
+                                    case "Mercredi":
+                                        currentSemaine.Mercredi = currentJour;
+                                        currentSemaine.Jours.Add(currentSemaine.Mercredi);
+                                        break;
+                                    case "Jeudi":
+                                        currentSemaine.Jeudi = currentJour;
+                                        currentSemaine.Jours.Add(currentSemaine.Jeudi);
+                                        break;
+                                    case "Vendredi":
+                                        currentSemaine.Vendredi = currentJour;
+                                        currentSemaine.Jours.Add(currentSemaine.Vendredi);
+                                        break;
+                                }
+                            }
+                        }
+                        else if (line.StartsWith("DTSTAMP:"))
+                        {
+                            string strSemaineDate = line.Substring(line.IndexOf(':') + 1);
+                            string strAnnee = strSemaineDate.Substring(0, 4);
+                            string strMois = strSemaineDate.Substring(4, 2);
+                            string strJour = strSemaineDate.Substring(6, 2);
+                            currentSemaine.Date = strAnnee + "-" + strMois + "-" + strJour;
+                        }
+                    }
+                    else if (inEvent)
+                    {
+                        if (line.StartsWith("DTSTART:"))
+                        {
+                            string strHoraireDebut = line.Substring(line.IndexOf(':') + 1);
+                            string horaireDebut = strHoraireDebut.Substring(strHoraireDebut.IndexOf('T') + 1);
+                            string heure = horaireDebut.Substring(0, 2);
+                            if (heure[0] == '0')
+                                heure = heure[1].ToString();
+                            string minutes = horaireDebut.Substring(2, 2);
+                            currentHoraire = new Horaire();
+                            currentHoraire.Debut = heure + "h" + minutes;
+                        }
+                        else if (line.StartsWith("DTEND:"))
+                        {
+                            string strHoraireFin = line.Substring(line.IndexOf(':'));
+                            string horaireFin = strHoraireFin.Substring(strHoraireFin.IndexOf('T') + 1, 4);
+                            string heure = horaireFin.Substring(0, 2);
+                            if (heure[0] == '0')
+                                heure = heure[1].ToString();
+                            string minutes = horaireFin.Substring(2, 2);
+                            currentHoraire.Fin = heure + "h" + minutes;
+                            Horaire horaireExiste = null;
+                            foreach (Horaire horaire in horaires)
+                                if (horaire.Debut.Equals(currentHoraire.Debut) &&
+                                        horaire.Fin.Equals(currentHoraire.Fin))
+                                {
+                                    horaireExiste = horaire;
+                                    break;
+                                }
+                            if (horaireExiste == null)
+                            {
+                                horaireExiste = currentHoraire;
+                                horaires.Add(horaireExiste);
+                            }
+                            currentEnseignement.Horaire1 = currentHoraire;
+                        }
+                        else if (line.StartsWith("SUMMARY:"))
+                        {
+                            string strMatiere = line.Substring(line.IndexOf(':') + 1);
+                            Matiere matiereExiste = null;
+                            foreach (Matiere matiere in matieres)
+                                if (matiere.Titre.Equals(strMatiere))
+                                {
+                                    matiereExiste = matiere;
+                                    break;
+                                }
+                            if (matiereExiste == null)
+                            {
+                                matiereExiste = new Matiere(strMatiere);
+                                matieres.Add(matiereExiste);
+                            }
+                            currentEnseignement.Matiere = matiereExiste;
+                        }
+                        else if (line.StartsWith("LOCATION:"))
+                        {
+                            string strSalle = line.Substring(line.IndexOf(':') + 1);
+                            string[] infosSalle = strSalle.Split(' ');
+                            ETypeSalles type = ETypeSalles.Amphi;
+                            switch (infosSalle[0])
+                            {
+                                case "Labo":
+                                    type = ETypeSalles.Labo;
+                                    break;
+                                case "Amphi":
+                                    type = ETypeSalles.Amphi;
+                                    break;
+                            }
+                            Salle salleExiste = null;
+                            foreach (Salle salle in salles)
+                                if (salle.Nom.Equals(infosSalle[1]) &&
+                                        salle.Type == type)
+                                {
+                                    salleExiste = salle;
+                                    break;
+                                }
+                            if (salleExiste == null)
+                            {
+                                salleExiste = new Salle(infosSalle[1]);
+                                salleExiste.Type = type;
+                                salles.Add(salleExiste);
+                            }
+                            currentEnseignement.Salle = salleExiste;
+                        }
+                        else if (line.StartsWith("CATEGORIES:"))
+                        {
+                            string strEnseignement = line.Substring(line.IndexOf(':') + 1);
+                            string[] infosEnseignement = strEnseignement.Split(' ');
+                            switch (infosEnseignement[0])
+                            {
+                                case "COURS":
+                                    currentEnseignement.Type = ETypeEnseignements.Cours;
+                                    break;
+                                case "TD":
+                                    currentEnseignement.Type = ETypeEnseignements.TD;
+                                    break;
+                                case "TP":
+                                    currentEnseignement.Type = ETypeEnseignements.TP;
+                                    break;
+                            }
+                            currentEnseignement.Groupe = Int32.Parse(infosEnseignement[1]);
+                        }
+                        else if (line.StartsWith("DESCRIPTION:"))
+                        {
+                            string strEnseignant = line.Substring(line.IndexOf(':') + 1);
+                            string[] infosEnseignant = strEnseignant.Split(' ');
+                            Enseignant enseignantExiste = null;
+                            foreach (Enseignant enseignant in enseignants)
+                                if (enseignant.Nom.Equals(infosEnseignant[1]) &&
+                                        enseignant.Prenom.Equals(infosEnseignant[0]))
+                                {
+                                    enseignantExiste = enseignant;
+                                    break;
+                                }
+                            if (enseignantExiste == null)
+                            {
+                                enseignantExiste = new Enseignant(infosEnseignant[1], infosEnseignant[0]);
+                                enseignants.Add(enseignantExiste);
+                            }
+                            currentEnseignement.Enseignant = enseignantExiste;
+                            Enseignant enseignantMatiereExiste = null;
+                            foreach (Enseignant enseignant in currentEnseignement.Matiere.Enseignants)
+                                if (enseignant.Nom.Equals(infosEnseignant[1]) &&
+                                        enseignant.Prenom.Equals(infosEnseignant[0]))
+                                {
+                                    enseignantMatiereExiste = enseignant;
+                                    break;
+                                }
+                            if (enseignantMatiereExiste == null)
+                            {
+                                currentEnseignement.Matiere.Enseignants.Add(currentEnseignement.Enseignant);
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public void Charger(string nomFichier)
