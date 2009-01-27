@@ -590,6 +590,7 @@ namespace PlanningMaker
             else if (TabItem_Enseignants.IsSelected)
             {
                 Enseignant nouvelEnseignant = new Enseignant();
+                nouvelEnseignant.Id = "idp" + planning.Enseignants.Count.ToString();
                 planning.Enseignants.Insert(0, nouvelEnseignant);
                 listeEnseignants.SelectedItem = nouvelEnseignant;
             }
@@ -598,13 +599,14 @@ namespace PlanningMaker
                 Matiere nouvelleMatiere = new Matiere();
                 foreach (Enseignant enseignant in vueMatiere.EnseignantsAssocies)
                     nouvelleMatiere.Enseignants.Insert(0, enseignant);
-
+                nouvelleMatiere.Id = "idm" + planning.Matieres.Count.ToString();
                 planning.Matieres.Insert(0, nouvelleMatiere);
                 listeMatieres.SelectedItem = nouvelleMatiere;
             }
             else if (TabItem_Salles.IsSelected)
             {
                 Salle nouvelleSalle = new Salle();
+                nouvelleSalle.Id = "ids" + planning.Matieres.Count.ToString();
                 planning.Salles.Insert(0, nouvelleSalle);
                 listeSalles.SelectedItem = nouvelleSalle;
             }
