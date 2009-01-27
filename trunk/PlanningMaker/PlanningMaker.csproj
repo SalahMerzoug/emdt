@@ -164,6 +164,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Files\SchemaEdT.xsd" />
+    <None Include="Rapport\Partie1\SchemaEdT.xsd" />
+    <None Include="Rapport\Partie3\Vignettes.svg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Files\EdTversSVG-IE.xsl" />
@@ -224,6 +226,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Files\Img\Folder2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Rapport\Partie1\Semaine37.xml" />
+    <Resource Include="Rapport\Partie2\RequetesXPath.xsl" />
+    <Resource Include="Rapport\Partie2\Semaine37.xpath.xml" />
+    <Resource Include="Rapport\Partie3\EdTversSVG.xsl" />
+    <Resource Include="Rapport\Partie3\Fonctions.xsl" />
+    <Resource Include="Rapport\Partie3\ModelesSVG.xsl" />
+    <Resource Include="Rapport\Partie3\Semaine37.svg.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
