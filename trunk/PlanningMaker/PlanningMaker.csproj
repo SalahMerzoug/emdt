@@ -168,7 +168,6 @@
     <None Include="Rapport\Partie3\Vignettes.svg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Files\EdTversSVG-IE.xsl" />
     <Resource Include="Files\Fonctions.xsl" />
     <Resource Include="Files\ModelesSVG.xsl" />
   </ItemGroup>
