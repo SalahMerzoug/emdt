@@ -1,0 +1,1 @@
+Création et visualisation d'un emploi du temps à l'aide de fichiers XML, d'un modèle XMLSchema et d'une transformation XSLT.
